@@ -1,9 +1,9 @@
 export const SITE = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
-  author: "Sat Naing",
-  profile: "https://satnaing.dev/",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
-  title: "AstroPaper",
+  website: "https://blog.rebeccapowell.com/", // replace this with your deployed domain
+  author: "Rebecca powell",
+  profile: "https://rebeccapowell.com/",
+  desc: "the home of tech evangelista rebecca powell.",
+  title: "rebecca/powell",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
@@ -17,3 +17,10 @@ export const SITE = {
     appendFilePath: true,
   },
 } as const;
+
+export const LOGO_IMAGE = {
+  enable: true,
+  svg: true,
+  width: 216,
+  height: 46,
+};

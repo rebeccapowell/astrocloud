@@ -6,6 +6,9 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import IconBluesky from "@/assets/icons/brand-bluesky.svg";
+import IconStackoverflow from "@/assets/icons/brand-stackoverflow.svg";
+import IconMastodon from "@/assets/icons/brand-mastodon.svg";
 import { SITE } from "@/config";
 
 export const LOCALE = {
@@ -16,21 +19,27 @@ export const LOCALE = {
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://github.com/rebeccapowell",
     linkTitle: ` ${SITE.title} on Github`,
     icon: IconGitHub,
   },
   {
-    name: "X",
-    href: "https://x.com/username",
-    linkTitle: `${SITE.title} on X`,
-    icon: IconBrandX,
+    name: "Blueksy",
+    href: "https://x.com/junto",
+    linkTitle: `${SITE.title} on Bluesky`,
+    icon: IconBluesky,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/username/",
+    href: "https://www.linkedin.com/in/rebeccapowell/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
+  },
+  {
+    name: "StackOverflow",
+    href: "https://stackoverflow.com/users/119624/rebecca",
+    linkTitle: `${SITE.title} on Stackoverflow`,
+    icon: IconStackoverflow,
   },
   {
     name: "Mail",
@@ -78,3 +87,10 @@ export const SHARE_LINKS = [
     icon: IconMail,
   },
 ] as const;
+
+export const LOGO_IMAGE = {
+  enable: true,
+  svg: true,
+  width: 216,
+  height: 46,
+} as const;
