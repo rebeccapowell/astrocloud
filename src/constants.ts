@@ -25,13 +25,19 @@ export const SOCIALS = [
   },
   {
     name: "Blueksy",
-    href: "https://x.com/junto",
+    href: "https://bsky.app/profile/flowstar.bsky.social",
     linkTitle: `${SITE.title} on Bluesky`,
     icon: IconBluesky,
   },
   {
+    name: "Mastodon",
+    href: "https://mastodon.social/@flowsta",
+    linkTitle: `${SITE.title} on Bluesky`,
+    icon: IconMastodon,
+  },
+  {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/rebeccapowell/",
+    href: "https://www.linkedin.com/in/rebeccampowell/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
   },
@@ -43,7 +49,7 @@ export const SOCIALS = [
   },
   {
     name: "Mail",
-    href: "mailto:yourmail@gmail.com",
+    href: "mailto:tiler-bobcat-5z@icloud.com",
     linkTitle: `Send an email to ${SITE.title}`,
     icon: IconMail,
   },

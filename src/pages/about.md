@@ -20,7 +20,7 @@ B2B energy commodities market.</p>
     <p>The views expressed are my own personal opinions.</p>
   </div>
   <div class="sm:col-span-2 flex justify-end">
-    <img src="/dev.svg" class="w-1/2 sm:w-full" alt="coding dev illustration">
+    <img src="/assets/me_crop.png" class="w-1/2 sm:w-full" alt="coding dev illustration">
   </div>
 </div>
 
@@ -35,10 +35,16 @@ My broad knowledge of internet technology allows me to deep dive into specialist
 
 Ultimately, I am passionate about what I do and I strive to approach every project with a can-do attitude. I believe that by working together and utilizing the latest technological innovations, we can create transformative solutions that help businesses thrive in the digital age.
 
+Over the past few years, I have transitioned into managing software development teams specializing in Microsoft Dynamics solutions, seamlessly integrated with Azure infrastructure (AKS) and frontend applications built with React and GraphQL. My primary focus is on guiding teams to successful project delivery, mentoring team members, fostering strong leadership, and creating a supportive and inclusive work environment.
+
+I am adept at collaborating with both product and business teams in English and German, and I have extensive experience working in agile environments, whether following Scrum, Kanban, or Scrumban methodologies. Additionally, I hold a certified qualification in Kanban System Design and have completed multiple leadership training programs.
+
 ## My Experience
 For the last twenty years, I have worked for IT solutions providers, primarily in the insurance, banking and finance sectors.
 
 Over the years, I have worked with clients ranging from large well-known corporations to small independent companies and startups.
+
+![historical partners and projects](/assets/posts/historical-clients.png)
 
 - BP Amoco
 - Taylor Nelson Sofres
@@ -72,4 +78,62 @@ I understand the various models, patterns and architectures and their benefits a
 I’ve developed a number of productionized applications that utilize the popular CQRS patterns and eventing using RabbitMq and MassTransit as well as NServiceBus and MSMQ. I was an early adopter of ServiceStack and have a StackOverflow profile that puts me in the top 3%.
 
 TLDR – I build resilient event driven cloud based architectures using a modern and performant technology stack.
+
+## Passion for Integration
+In addition to my technical skills, I also bring a strong commitment to customer satisfaction to every project I work on. I believe that communication and collaboration are key to delivering successful software, and I work closely with my clients to ensure that their needs are met at every stage of the development process. Whether you’re looking for a one-off project or a long-term partner for your software development needs, I am ready to help.
+
+## Customer Feedback
+> Rebecca proved on every occasion that she can quickly assimilate customer business issues and apply practical and pragmatic development experience to create innovative solutions.
+An excellent programmer and systems expert – easy to work with and very dedicated.
+
+Director – Apex Interactive (2004-2005)
+
+## My Core Competencies
+Whilst I have a general broad overview of internet technology, it is these three elements that I specialize in:
+
+### REST APIs
+Building APIs that other developers want to use is key to encouraging the use of your platform. Getting it wrong can cost you customers and sales. Developers trial your service before recommending it, so it’s worth getting it right!
+
+### Azure Cloud Computing
+Taking advantage of the cloud is key to modern software development for enterprise businesses. Cloud computing and especially serverless architectures allow your business to pay for what it needs and no more.
+
+### Data Integrations
+Connecting enterprise customers for data interchange is challenging to get right. From classic XML web services, to SOAP and WCF, I’ve connected various complex data workflows together using resilient and dependable interfaces. 
+
+## Work Experience
+**LichtBlick SE** - 2022-Present
+I now work for LichtBlick and manage the B2B development teams as a software Engineering Team lead, focused primarily on the internal infrastructure integrations using Azure serverless technology. The focus is on building resilient applications and integrations at scale for the number 1 100% renewable energy supplier in Germany.
+
+**EDM Group & Restore Plc** - 2016-2022
+After an acquisition I continued to work on a insurance SaaS application, as well as mortgage automated income verification technology for Nationwide Bank, Royal bank of Scotland and Lloyds TSB. I also worked on the Mercedes car lease return mobile app and the AVIS Group MDMS supplier portal.
+
+**Adactus Ltd** - 2005-2016
+I developed back-office ASP.NET applications for the insurance, finance and banking sectors, a SaaS application for managing insurance claims, integrated with insurers and third parties. I also worked on the RAC website designing their mobile maps app.
+(now 3 Rocks)
+
+**Consultant & Contracting** - 2000-2004
+For several years I worked on various short term contracts for well known brands such as Burberry, British Gas, BP Amoco, Schlumberger, Unilever, Reuters, Visteon and TNS Global. Solutions provided using ASP (Classic VBScript) and then into ASP.NET.
+
+**Dell Computer Corporation** - 1998-2000
+Primary maintainer of the Service & Support website for the whole of Dell EMEA. With support for 12 languages and 18 regions, it has helped millions of Dell customers with online technical documentation, service tag lookups and driver downloads.
+
+## Recommendations
+Some kind feedback I’ve had from clients and colleagues:
+
+>Rebecca finds solutions for whatever problems are thrown at her. Over the last five years, Rebecca has helped my company to provide an online IT application that meets our customers needs as well as our users needs.
+>Always helpful, always sharp and time and time again has come up with the right result. A pleasure to call as I know the solution I’m stumbling for is only on the other end of the phoneline.
+
+Long term client
+
+>Having worked with Rebecca for over 7 years it is clear that she is a very competent developer who I trust to deliver whatever requirements that get thrown at her. Becca has key problem solving skills and the ability to lead investigations into new technical areas. Becca’s communication skills, both written and verbal, are excellent which has led her to become an important customer facing resource in the development team.
+
+Colleague from Adactus and EDM
+
+>Rebecca is a highly motivated and focused individual with in-depth knowledge across a multitude of technologies and methodologies. Committed to delivering the best possible solutions for customers, always going above and beyond to deliver high-quality on-time. Having worked with Rebecca for over 10 years, I continue to be impressed with her enterprise in finding innovative solutions to challenges she’s faced with. Rebecca’s ability to quickly learn and become fluent with new technology is phenomenal and she’s a formidable asset within any software development team.
+
+Long term colleage from Dell and Adactus
+
+
+
+
 
