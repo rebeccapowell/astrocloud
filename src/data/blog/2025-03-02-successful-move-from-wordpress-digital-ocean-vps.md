@@ -97,3 +97,10 @@ Specifically with regards to performance:
 
 I hope this guide helps you in your own migration journey. If you have any questions or need further assistance, feel free to reach out. Happy blogging!
 
+### References
+- [Configuring Astro automatic build and deployments to Cloudflare Pages via Github](https://docs.astro.build/en/guides/deploy/cloudflare/)
+- [Configuring email addresses in Cloudflare](https://developers.cloudflare.com/email-routing/setup/email-routing-addresses/)
+- [Branding Icons](https://tabler.io/icons/icon/brand-mastodon) for Social Media Apps
+- [Logo Maker](https://looka.com/) - Hint: make the logo and take a screenshot. Then upload it [here](https://studio.creativefabrica.com/vectorizer/) to create an SVG out of the image.
+- [Source code](https://github.com/rebeccapowell/astrocloud) for this website.
+
