@@ -1,7 +1,7 @@
 ---
 id: 10000
 title: 'Integrating Giscus Comments in AstroPaper v5'
-pubDatetime: 2025-03-02T12:00:00+01:00
+pubDatetime: 2025-03-02T16:00:00+01:00
 author: rebecca
 layout: '../layouts/BlogPost.astro'
 guid: 'https://rebecca-powell.com/?p=10000'
