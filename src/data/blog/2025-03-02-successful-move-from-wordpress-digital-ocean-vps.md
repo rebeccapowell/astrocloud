@@ -37,7 +37,7 @@ I've been a customer of Digital Ocean for about ten years, initially running an 
 ### New Setup: Cloudflare Pages and Astro SSG
 
 #### Pros:
-- **Cost**: Free tier available on Cloudflare Pages.
+- **Cost**: Free tier available on [Cloudflare Pages](https://pages.cloudflare.com/).
 - **Performance**: Fast load times with Cloudflare's global CDN and Astro's static site generation.
 - **Security**: Built-in SSL and DDoS protection from Cloudflare.
 - **Ease of Deployment**: GitHub integration for seamless deployment.
@@ -49,7 +49,7 @@ I've been a customer of Digital Ocean for about ten years, initially running an 
 
 ### Step 1: Cloudflare Pages
 
-Cloudflare Pages is a JAMstack platform for frontend developers to collaborate and deploy websites. It offers several benefits over a traditional VPS setup:
+[Cloudflare Pages](https://pages.cloudflare.com/) is a JAMstack platform for frontend developers to collaborate and deploy websites. It offers several benefits over a traditional VPS setup:
 
 - **Ease of Deployment**: With GitHub integration, you can deploy your site by simply pushing changes to your repository.
 - **Performance**: Cloudflare's global CDN ensures fast load times for your site.
@@ -58,16 +58,16 @@ Cloudflare Pages is a JAMstack platform for frontend developers to collaborate a
 
 ### Step 2: Cloudflare Domains
 
-Using Cloudflare for domain management offers several advantages:
+Using [Cloudflare](https://www.cloudflare.com/) for domain management offers several advantages:
 
 - **DNS Management**: Cloudflare's DNS is fast and reliable.
 - **SSL/TLS**: Easily manage SSL certificates.
 - **Security**: Protect your site with Cloudflare's security features.
-- **Cost**: CloudFlare charge for domains and renewals at cost.
+- **Cost**: Cloudflare charges for domains and renewals at cost.
 
 ### Step 3: Astro
 
-Astro is a modern static site generator that offers several benefits over WordPress:
+[Astro](https://astro.build/) is a modern static site generator that offers several benefits over WordPress:
 
 - **Performance**: Astro generates static HTML, resulting in fast load times.
 - **Simplicity**: No need for a database or server-side code.
@@ -76,7 +76,7 @@ Astro is a modern static site generator that offers several benefits over WordPr
 
 ### Step 4: Integrating Giscus for Comments
 
-Giscus is a comments system powered by GitHub Discussions. It integrates seamlessly with Astro and offers several benefits:
+[Giscus](https://giscus.app/) is a comments system powered by GitHub Discussions. It integrates seamlessly with Astro and offers several benefits:
 
 - **GitHub Integration**: Uses GitHub Discussions for comments.
 - **Moderation**: Manage comments through GitHub.
