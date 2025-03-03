@@ -3,16 +3,11 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-5 gap-6 items-center">
-  <div class="sm:col-span-3">
-    <p>This is my personal space on the internet. I've been around tech development, especially Microsoft tech development since the mid-ninties. I've seen the ecosystem grow and mature over that time.</p>
-    <p>I worked on lots of different projects after spending 20 years contracting. I now work for a green energy company based in Hamburg, managing two technical development teams focused on the B2B energy commodities market.</p>
-    <p>The views expressed are my own personal opinions.</p>
-  </div>
-  <div class="sm:col-span-2 flex justify-end">
-    <img src="/assets/me_crop.png" class="w-1/2 sm:w-full" alt="coding dev illustration">
-  </div>
-</div>
+This is my personal space on the internet. I've been around tech development, especially Microsoft tech development since the mid-ninties. I've seen the ecosystem grow and mature over that time.
+
+I worked on lots of different projects after spending 20 years contracting. I now work for a green energy company based in Hamburg, managing two technical development teams focused on the B2B energy commodities market.
+
+The views expressed are my own personal opinions.
 
 ## My Background
 With over 25 years of experience in Microsoft platform development, I've had the opportunity to witness the evolution of .NET since its inception. Staying updated with technological advancements has always been a priority for me, and I strive to remain informed and engaged in the industry.
