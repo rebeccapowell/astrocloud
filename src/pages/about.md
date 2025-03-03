@@ -3,20 +3,10 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-<!-- This is my personal space on the internet. I've been around tech developer, especially Microsoft
-tech development since the mid-ninties. I've seen the ecosystem grow and mature over that time.
-
-I worked on lots of different projects after spending 20 years contracting. I now work for a
-green energy company based in Hamburg, managing two technical development teams focused on the
-B2B energy commodities market.  -->
-
 <div class="grid grid-cols-1 sm:grid-cols-5 gap-6 items-center">
   <div class="sm:col-span-3">
-    <p>This is my personal space on the internet. I've been around tech developer, especially Microsoft
-tech development since the mid-ninties. I've seen the ecosystem grow and mature over that time.</p>
-    <p>I worked on lots of different projects after spending 20 years contracting. I now work for a
-green energy company based in Hamburg, managing two technical development teams focused on the
-B2B energy commodities market.</p>
+    <p>This is my personal space on the internet. I've been around tech development, especially Microsoft tech development since the mid-ninties. I've seen the ecosystem grow and mature over that time.</p>
+    <p>I worked on lots of different projects after spending 20 years contracting. I now work for a green energy company based in Hamburg, managing two technical development teams focused on the B2B energy commodities market.</p>
     <p>The views expressed are my own personal opinions.</p>
   </div>
   <div class="sm:col-span-2 flex justify-end">
@@ -25,15 +15,15 @@ B2B energy commodities market.</p>
 </div>
 
 ## My Background
-As a seasoned software engineer with over 25 years of experience in Microsoft platform development, I have had the privilege of witnessing the evolution of .NET since its inception. My experience has taught me the value of staying on the cutting edge of technological advancements, and I have made a point to remain informed and engaged in the industry.
+With over 25 years of experience in Microsoft platform development, I've had the opportunity to witness the evolution of .NET since its inception. Staying updated with technological advancements has always been a priority for me, and I strive to remain informed and engaged in the industry.
 
-I also have extensive experience working on electronic integration projects with SOAP and REST. Over the years, I have gained a deep understanding of the intricacies and nuances involved in developing and implementing these technologies. Whether it’s designing and developing custom APIs or integrating with existing systems, I have a proven track record of success in delivering seamless, efficient, and secure electronic integrations.
+I have extensive experience working on electronic integration projects with SOAP and REST. Over the years, I've developed a deep understanding of the intricacies involved in developing and implementing these technologies. Whether it’s designing and developing custom APIs or integrating with existing systems, I have a proven track record of delivering seamless, efficient, and secure electronic integrations.
 
-One of my greatest strengths is my ability to function as an experienced Agile team member. I understand the importance of clear communication and collaboration, and I have honed my skills to be able to navigate even the most complex development projects with ease. In addition, I am highly organized and can quickly adapt to changing requirements, ensuring that all deadlines are met with accuracy and efficiency.
+One of my strengths is my ability to function effectively as an Agile team member. I understand the importance of clear communication and collaboration, and I have honed my skills to navigate even the most complex development projects. Additionally, I am highly organized and can quickly adapt to changing requirements, ensuring that all deadlines are met with accuracy and efficiency.
 
-My broad knowledge of internet technology allows me to deep dive into specialist subjects with ease, making me a valuable asset to any project. From web development to cloud computing and beyond, I have the expertise and insight necessary to deliver top-quality results.
+My broad knowledge of internet technology allows me to dive into specialist subjects with ease, making me a valuable asset to any project. From web development to cloud computing and beyond, I have the expertise and insight necessary to deliver top-quality results.
 
-Ultimately, I am passionate about what I do and I strive to approach every project with a can-do attitude. I believe that by working together and utilizing the latest technological innovations, we can create transformative solutions that help businesses thrive in the digital age.
+Ultimately, I am passionate about what I do and strive to approach every project with a positive attitude. I believe that by working together and utilizing the latest technological innovations, we can create transformative solutions that help businesses thrive in the digital age.
 
 Over the past few years, I have transitioned into managing software development teams specializing in Microsoft Dynamics solutions, seamlessly integrated with Azure infrastructure (AKS) and frontend applications built with React and GraphQL. My primary focus is on guiding teams to successful project delivery, mentoring team members, fostering strong leadership, and creating a supportive and inclusive work environment.
 
