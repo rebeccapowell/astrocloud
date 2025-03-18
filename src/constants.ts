@@ -25,7 +25,7 @@ export const SOCIALS = [
   },
   {
     name: "Blueksy",
-    href: "https://bsky.app/profile/flowstar.bsky.social",
+    href: "https://bsky.app/profile/rebecca-powell.com",
     linkTitle: `${SITE.title} on Bluesky`,
     icon: IconBluesky,
   },
