@@ -1,6 +1,6 @@
 ---
 id: 10001
-title: 'Deploying .NET application to Coolify'
+title: 'Deploying .NET applications to Coolify'
 pubDatetime: 2025-03-17T17:45:00+01:00
 author: rebecca
 layout: '../layouts/BlogPost.astro'
@@ -45,7 +45,7 @@ Installing Coolify on a Hetzner VPS is out of scope of this article, but if you'
 
 ### Creating a Simple .NET Project
 
-I'm a fan of JetBrains Rider at home, although it's Visual Studio out of choice at work, so jump over to JetBrains and grab yourself a free license for non-commercial use. I then make sure I've got the latest .NET SDKs installed (my last update here on my private laptop was .NET 6, so I installed .NET 8 then .NET 9). Then restart Rider and create a .NET 9 minimal API project (just make sure No Controllers is set) and choose to add Docker support. This article isn't about creating the .NET project. You can just clone the repo if you want to run it yourself.
+I'm a fan of JetBrains Rider at home, although it's Visual Studio out of choice at work, so jump over to JetBrains and grab yourself a free license for non-commercial use. I then make sure I've got the latest .NET SDKs installed (my last update here on my private laptop was .NET 6, so I installed .NET 8 then .NET 9). Then restart Rider and create a .NET 9 minimal API project (just make sure No Controllers is set) and choose to add Docker support. This article isn't about creating the .NET project. You can just [clone the repo](https://github.com/rebeccapowell/blog-demo-api) if you want to run it yourself.
 
 I wanted to test out some of my own NuGet packages that have .NET Standard support, since I haven't done that for a while and chose the quieter UK tax UTR number validator and generator. I created two endpoints (one for each function) and then deleted the standard weather service, added the forwarded headers since I knew this was going behind a proxy. I also added the new [Microsoft.Extensions.OpenApi](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-9.0) and [Scalar](https://davecallan.com/install-scalar-dotnet-9/) as a replacement for the now defunct Swashbuckle Swagger UI in .NET 9.
 
