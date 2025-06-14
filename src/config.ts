@@ -1,7 +1,7 @@
 export const SITE = {
-  website: "https://rebeccapowell.com/", // replace this with your deployed domain
+  website: "https://rebecca-powell.com/", // replace this with your deployed domain
   author: "Rebecca powell",
-  profile: "https://rebeccapowell.com/",
+  profile: "https://rebecca-powell.com/",
   desc: "the home of tech evangelista rebecca powell.",
   title: "rebecca powell",
   ogImage: "astropaper-og.jpg",
