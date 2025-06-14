@@ -35,6 +35,9 @@ importers:
       astro:
         specifier: ^5.9.2
         version: 5.9.2(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.0)
+      astro-social-share:
+        specifier: ^2.2.0
+        version: 2.2.0
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -1357,6 +1360,9 @@ packages:
   astro-eslint-parser@1.2.1:
     resolution: {integrity: sha512-3oqANMjrvJ+IE5pwlUWsH/4UztmYf/GTL0HPUkWnYBNAHiGVGrOh2EbegxS5niAwlO0w9dRYk0CkCPlJcu8c3Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  astro-social-share@2.2.0:
+    resolution: {integrity: sha512-Z5ebhO6Yw4GLggw7wsTahdpS0f4pf/XuVjQlBpWZ0zyt0cKaVrlG/+u6RzrzN9B2t27wxp90XiosZNwvBZqA+Q==}
 
   astro@5.9.2:
     resolution: {integrity: sha512-K/zZlQOWMpamfLDOls5jvG7lrsjH1gkk3ESRZyZDCkVBtKHMF4LbjwCicm/iBb3mX3V/PerqRYzLbOy3/4JLCQ==}
@@ -4427,6 +4433,8 @@ snapshots:
       semver: 7.7.1
     transitivePeerDependencies:
       - supports-color
+
+  astro-social-share@2.2.0: {}
 
   astro@5.9.2(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(typescript@5.8.3)(yaml@2.7.0):
     dependencies:
