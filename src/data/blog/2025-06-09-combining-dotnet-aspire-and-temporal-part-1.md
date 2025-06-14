@@ -68,12 +68,12 @@ Temporal is a durable execution engine designed to make writing fault-tolerant, 
 
 Temporal can be run in two primary ways:
 
- * As a managed cloud service (Temporal Cloud)
- * As a self-hosted cluster, which involves:
-    - The Temporal Server itself
-    - A datastore (e.g., PostgreSQL, MySQL, or Cassandra)
-    - The Web UI for managing workflows
-    - Optional components like ElasticSearch for visibility
+- As a managed cloud service (Temporal Cloud)
+- As a self-hosted cluster, which involves:
+  - The Temporal Server itself
+  - A datastore (e.g., PostgreSQL, MySQL, or Cassandra)
+  - The Web UI for managing workflows
+  - Optional components like ElasticSearch for visibility
 
 For development, the Temporal CLI provides a simplified temporal server start-dev mode that spins up a minimal instance of the server, UI, and database — perfect for local testing.
 
@@ -263,9 +263,9 @@ I mentioned earlier that Temporal can be self-hosted, and this article uses that
 
 We could use Aspire to pull in the specific containers, which include:
 
- * The Temporal Server
- * The Temporal Admin UI
- * A datastore such as Postgres or Cassandra
+- The Temporal Server
+- The Temporal Admin UI
+- A datastore such as Postgres or Cassandra
 
 ### Developer Temporal options
 
@@ -305,7 +305,7 @@ We can also open up our UI (using Swagger UI) and kick off some API requests to 
 
 ![API - Swagger - Start Request](/assets/posts/aspire-api-swagger-start-request.png)
 
-We get a response from the API that includes the workflow ID. 
+We get a response from the API that includes the workflow ID.
 
 ![API - Swagger - Start Response](/assets/posts/aspire-swagger-api-start-response.png)
 
