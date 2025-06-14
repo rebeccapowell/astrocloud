@@ -1,20 +1,20 @@
 ---
 id: 767
-title: 'WCF JSON Serialization error with DateTime.MinVal and UTC'
+title: "WCF JSON Serialization error with DateTime.MinVal and UTC"
 pubDatetime: 2011-09-02T15:51:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=767'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=767"
 slug: 2011-09-02-wcf-json-serialization-error-with-datetime-minval-and-utc
 description: An overview of a WCF JSON serialization error with DateTime.MinVal and UTC, and a solution to fix the issue by specifying the DateTimeKind as UTC.
 categories:
-    - work
+  - work
 tags:
-    - datetime
-    - json
-    - microsoft
-    - minvalue
-    - wcf
+  - datetime
+  - json
+  - microsoft
+  - minvalue
+  - wcf
 ---
 
 I came across the following error today in a WCF JSON web service:

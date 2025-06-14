@@ -1,18 +1,18 @@
 ---
 id: 3692
-title: 'Exploring the Traits of Exceptional Developers'
+title: "Exploring the Traits of Exceptional Developers"
 pubDatetime: 2023-06-07T22:25:46+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=3692'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=3692"
 slug: 2023-06-07-exploring-the-traits-of-exceptional-developers
 image: /images/wp-content/uploads/2023/06/pexels-photo-2873277.jpeg
 description: An exploration of the qualities that define exceptional developers, including T-shaped skills, continuous learning, problem-solving, and the ability to switch between big-picture thinking and detailed focus.
 categories:
-    - development
-    - technology
+  - development
+  - technology
 tags:
-    - development
+  - development
 featured: true
 ---
 

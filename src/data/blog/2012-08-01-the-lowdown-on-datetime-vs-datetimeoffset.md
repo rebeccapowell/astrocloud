@@ -1,19 +1,19 @@
 ---
 id: 150
-title: 'The lowdown on DateTime vs DateTimeOffset'
+title: "The lowdown on DateTime vs DateTimeOffset"
 pubDatetime: 2012-08-01T14:52:01+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=150'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=150"
 slug: 2012-08-01-the-lowdown-on-datetime-vs-datetimeoffset
 description: An explanation of the differences between DateTime and DateTimeOffset in .NET, highlighting the advantages of using DateTimeOffset for timezone-aware date and time handling.
 categories:
-    - work
+  - work
 tags:
-    - .net
-    - datetime
-    - offset
-    - timezones
+  - .net
+  - datetime
+  - offset
+  - timezones
 format: quote
 ---
 

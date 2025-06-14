@@ -1,18 +1,18 @@
 ---
 id: 802
-title: 'C# vs VB.NET - My choice and why'
+title: "C# vs VB.NET - My choice and why"
 pubDatetime: 2004-01-24T16:08:56+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=802'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=802"
 slug: 2004-01-24-csharp-vs-vb.net-my-choice-and-why
 description: A comparison of C# and VB.NET, highlighting the reasons for choosing C# over VB.NET, including its certification, powerful features, less verbose syntax, and XML code documentation.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - vb.net
-    - c#
+  - asp.net
+  - vb.net
+  - c#
 ---
 
 I have been asked today by a client "why C# over VB.NET". I already had previously looked at this dilemma, and had to make a decision either way, but today I needed to provide valid reasons. The answer is C#!!

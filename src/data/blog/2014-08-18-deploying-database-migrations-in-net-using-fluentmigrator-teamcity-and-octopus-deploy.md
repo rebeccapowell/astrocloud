@@ -1,11 +1,10 @@
 ---
-
 id: 2671
-title: 'Deploying Database Migrations in .NET Using FluentMigrator, TeamCity, and Octopus Deploy'
+title: "Deploying Database Migrations in .NET Using FluentMigrator, TeamCity, and Octopus Deploy"
 pubDatetime: 2014-08-18T10:30:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2671'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2671"
 slug: 2014-08-18-deploying-database-migrations-in-net-using-fluentmigrator-teamcity-and-octopus-deploy
 description: A practical guide to database migrations in .NET using FluentMigrator, covering challenges with existing databases, deployment strategies with Octopus Deploy and TeamCity, and overcoming migration complexities. This post provides insights into automation, version control, and structured schema changes for efficient database management.
 categories:
@@ -25,7 +24,6 @@ tags:
   - schema
   - sql
   - table
-
 ---
 
 A while back I wanted to set up [database migrations](http://en.wikipedia.org/wiki/Data_migration) on a .NET project I was working on. I had previously been using [Roundhouse](https://github.com/chucknorris/roundhouse) but I have to be honest, I didn't like it.
@@ -102,4 +100,3 @@ function Main ()
 My `$OctopusEnvironmentName` matches my tags, ensuring that each environment deployment runs the correct database migrations. The `Database.Migrations` project is selected from the NuGet feed server.
 
 Deployment solved!
-

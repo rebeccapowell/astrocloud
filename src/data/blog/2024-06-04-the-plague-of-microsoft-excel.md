@@ -1,18 +1,18 @@
 ---
 id: 3705
-title: 'The Plague of Microsoft Excel'
+title: "The Plague of Microsoft Excel"
 pubDatetime: 2024-06-04T06:53:25+01:00
 author: rebecca
-excerpt: 'Discover the hidden costs of Microsoft Excel in business environments, where its convenience often leads to inefficiencies and process complications. We explore signs of Excel overuse and suggest ways for organizations to identify and rectify these issues.'
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=3705'
+excerpt: "Discover the hidden costs of Microsoft Excel in business environments, where its convenience often leads to inefficiencies and process complications. We explore signs of Excel overuse and suggest ways for organizations to identify and rectify these issues."
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=3705"
 slug: 2024-06-04-the-plague-of-microsoft-excel
 image: /images/wp-content/uploads/2024/06/img_4549-1.jpg
 description: An exploration of the hidden costs and inefficiencies caused by the overuse of Microsoft Excel in business environments, with recommendations for identifying and addressing these issues.
 categories:
-    - business
-    - technology
-    - work
+  - business
+  - technology
+  - work
 ---
 
 Microsoft Excel is a staple in organizations of all sizes, spreading through office corridors with the ubiquity of a contagious element. Its widespread adoption is understandable: Excel is user-friendly and powerful from a business user's perspective, enabling them to get tasks done without relying on technical teams. Yet, this convenience is often a double-edged sword. Like a short-term remedy that fails to address underlying ailments, Excel offers immediate relief but fosters long-term complications.

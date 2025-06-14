@@ -1,26 +1,26 @@
 ---
 id: 771
-title: 'Supporting the WS-I Basic Profile Password Digest in a WCF client proxy'
+title: "Supporting the WS-I Basic Profile Password Digest in a WCF client proxy"
 pubDatetime: 2010-11-16T16:31:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=771'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=771"
 slug: 2010-11-16-supporting-the-ws-i-basic-profile-password-digest-in-a-wcf-client-proxy
 description: An overview of how to use the message inspector and custom behaviors to implement the WS-I Basic Profile Password Digest in a WCF client proxy, including a detailed guide and code examples.
 categories:
-    - work
+  - work
 tags:
-    - axis2
-    - digest
-    - featured
-    - hashed
-    - password
-    - security
-    - soap
-    - usernametoken
-    - wcf
-    - WS-I
-    - wse
+  - axis2
+  - digest
+  - featured
+  - hashed
+  - password
+  - security
+  - soap
+  - usernametoken
+  - wcf
+  - WS-I
+  - wse
 featured: true
 ---
 

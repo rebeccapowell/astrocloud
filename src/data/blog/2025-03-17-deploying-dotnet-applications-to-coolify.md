@@ -1,10 +1,10 @@
 ---
 id: 10001
-title: 'Deploying .NET applications to Coolify'
+title: "Deploying .NET applications to Coolify"
 pubDatetime: 2025-03-17T17:45:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=10000'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=10000"
 slug: 2025-03-17-deploying-dotnet-applications-to-coolify
 description: A step-by-step guide on migrating from WordPress on Digital Ocean VPS to Cloudflare Pages and Astro SSG, including integrating Giscus comments and other benefits.
 featured: true
@@ -195,7 +195,7 @@ app.Run();
 ```
 
 ### References
+
 - [Coolify and Hetzner](https://prototypr.io/note/coolify-hetzner-serverless)
 - [Coolify Crash Course](https://youtu.be/taJlPG82Ucw?si=BY_g2DfVWBsyFKmj)
 - [Coolify and Cloudflare](https://ananthanandanan.vercel.app/blog/setting-up-coolify-with-a-custom-domain-and-ssl-certificates-using-traefik-and-cloudflare-a-comprehensive-guide)
-

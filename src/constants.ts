@@ -107,5 +107,5 @@ export const GISCUS: GiscusProps = {
   reactionsEnabled: "0",
   emitMetadata: "0",
   inputPosition: "bottom",
-  loading: "lazy"
+  loading: "lazy",
 } as const;

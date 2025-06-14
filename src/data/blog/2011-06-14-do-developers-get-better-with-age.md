@@ -1,18 +1,18 @@
 ---
 id: 592
-title: 'Do developers get better with age?'
+title: "Do developers get better with age?"
 pubDatetime: 2011-06-14T08:43:16+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=592'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=592"
 slug: 2011-06-14-do-developers-get-better-with-age
 description: An exploration of whether developers get better with age, considering the constant evolution of technology and the benefits of experience and continuous learning.
 categories:
-    - work
+  - work
 tags:
-    - age
-    - developers
-    - value
+  - age
+  - developers
+  - value
 format: quote
 ---
 

@@ -1,19 +1,19 @@
 ---
 id: 782
-title: 'ASP.NET Tip: If your DropDownList items are lost on postback'
+title: "ASP.NET Tip: If your DropDownList items are lost on postback"
 pubDatetime: 2010-04-28T19:55:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=782'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=782"
 slug: 2010-04-28-asp-net-tip-if-your-dropdownlist-items-are-lost-on-postback
 description: A tip for ASP.NET developers on how to handle DropDownList items being lost on postback by understanding the behavior of EnableViewState.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - dropdownlist
-    - postback
-    - webforms
+  - asp.net
+  - dropdownlist
+  - postback
+  - webforms
 ---
 
 This might seem obvious but it had me stumped for a while. Most ASP.NET programmers should know that if you set `EnableViewState` to false on a DropDownList, the items that were bound to that control will not be persisted on postback. What you might forget (as I did) is that if your DropDownList (or any other DataBound control for that matter) is held within another control (such as a Panel) that has view state disabled, then it also applies to anything contained within that control.
@@ -51,3 +51,4 @@ Here is an example to illustrate the issue and the solution:
     </form>
 </body>
 </html>
+```

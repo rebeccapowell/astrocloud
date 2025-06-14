@@ -3,16 +3,16 @@ id: 117
 title: 'Why you should never say "click here" in anchor text'
 pubDatetime: 2012-09-29T12:53:50+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=117'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=117"
 slug: 2012-09-29-why-you-should-never-say-click-here-in-anchor-text
 description: An explanation of why using 'click here' in anchor text is detrimental to user experience, and the benefits of using more descriptive anchor text.
 categories:
-    - work
+  - work
 tags:
-    - design
-    - interface
-    - ux
+  - design
+  - interface
+  - ux
 format: quote
 ---
 

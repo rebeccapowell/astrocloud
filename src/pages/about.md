@@ -10,6 +10,7 @@ I worked on lots of different projects after spending 20 years contracting. I no
 The views expressed are my own personal opinions.
 
 ## My Background
+
 With over 25 years of experience in Microsoft platform development, I've had the opportunity to witness the evolution of .NET since its inception. Staying updated with technological advancements has always been a priority for me, and I strive to remain informed and engaged in the industry.
 
 I have extensive experience working on electronic integration projects with SOAP and REST. Over the years, I've developed a deep understanding of the intricacies involved in developing and implementing these technologies. Whether it’s designing and developing custom APIs or integrating with existing systems, I have a proven track record of delivering seamless, efficient, and secure electronic integrations.
@@ -25,6 +26,7 @@ Over the past few years, I have transitioned into managing software development 
 I am adept at collaborating with both product and business teams in English and German, and I have extensive experience working in agile environments, whether following Scrum, Kanban, or Scrumban methodologies. Additionally, I hold a certified qualification in Kanban System Design and have completed multiple leadership training programs.
 
 ## My Experience
+
 For the last twenty years, I have worked for IT solutions providers, primarily in the insurance, banking and finance sectors.
 
 Over the years, I have worked with clients ranging from large well-known corporations to small independent companies and startups.
@@ -65,27 +67,34 @@ I’ve developed a number of productionized applications that utilize the popula
 TLDR – I build resilient event driven cloud based architectures using a modern and performant technology stack.
 
 ## Passion for Integration
+
 In addition to my technical skills, I also bring a strong commitment to customer satisfaction to every project I work on. I believe that communication and collaboration are key to delivering successful software, and I work closely with my clients to ensure that their needs are met at every stage of the development process. Whether you’re looking for a one-off project or a long-term partner for your software development needs, I am ready to help.
 
 ## Customer Feedback
+
 > Rebecca proved on every occasion that she can quickly assimilate customer business issues and apply practical and pragmatic development experience to create innovative solutions.
-An excellent programmer and systems expert – easy to work with and very dedicated.
+> An excellent programmer and systems expert – easy to work with and very dedicated.
 
 Director – Apex Interactive (2004-2005)
 
 ## My Core Competencies
+
 Whilst I have a general broad overview of internet technology, it is these three elements that I specialize in:
 
 ### REST APIs
+
 Building APIs that other developers want to use is key to encouraging the use of your platform. Getting it wrong can cost you customers and sales. Developers trial your service before recommending it, so it’s worth getting it right!
 
 ### Azure Cloud Computing
+
 Taking advantage of the cloud is key to modern software development for enterprise businesses. Cloud computing and especially serverless architectures allow your business to pay for what it needs and no more.
 
 ### Data Integrations
-Connecting enterprise customers for data interchange is challenging to get right. From classic XML web services, to SOAP and WCF, I’ve connected various complex data workflows together using resilient and dependable interfaces. 
+
+Connecting enterprise customers for data interchange is challenging to get right. From classic XML web services, to SOAP and WCF, I’ve connected various complex data workflows together using resilient and dependable interfaces.
 
 ## Work Experience
+
 **LichtBlick SE** - 2022-Present
 I now work for LichtBlick and manage the B2B development teams as a software Engineering Team lead, focused primarily on the internal infrastructure integrations using Azure serverless technology. The focus is on building resilient applications and integrations at scale for the number 1 100% renewable energy supplier in Germany.
 
@@ -103,22 +112,18 @@ For several years I worked on various short term contracts for well known brands
 Primary maintainer of the Service & Support website for the whole of Dell EMEA. With support for 12 languages and 18 regions, it has helped millions of Dell customers with online technical documentation, service tag lookups and driver downloads.
 
 ## Recommendations
+
 Some kind feedback I’ve had from clients and colleagues:
 
->Rebecca finds solutions for whatever problems are thrown at her. Over the last five years, Rebecca has helped my company to provide an online IT application that meets our customers needs as well as our users needs.
->Always helpful, always sharp and time and time again has come up with the right result. A pleasure to call as I know the solution I’m stumbling for is only on the other end of the phoneline.
+> Rebecca finds solutions for whatever problems are thrown at her. Over the last five years, Rebecca has helped my company to provide an online IT application that meets our customers needs as well as our users needs.
+> Always helpful, always sharp and time and time again has come up with the right result. A pleasure to call as I know the solution I’m stumbling for is only on the other end of the phoneline.
 
 Long term client
 
->Having worked with Rebecca for over 7 years it is clear that she is a very competent developer who I trust to deliver whatever requirements that get thrown at her. Becca has key problem solving skills and the ability to lead investigations into new technical areas. Becca’s communication skills, both written and verbal, are excellent which has led her to become an important customer facing resource in the development team.
+> Having worked with Rebecca for over 7 years it is clear that she is a very competent developer who I trust to deliver whatever requirements that get thrown at her. Becca has key problem solving skills and the ability to lead investigations into new technical areas. Becca’s communication skills, both written and verbal, are excellent which has led her to become an important customer facing resource in the development team.
 
 Colleague from Adactus and EDM
 
->Rebecca is a highly motivated and focused individual with in-depth knowledge across a multitude of technologies and methodologies. Committed to delivering the best possible solutions for customers, always going above and beyond to deliver high-quality on-time. Having worked with Rebecca for over 10 years, I continue to be impressed with her enterprise in finding innovative solutions to challenges she’s faced with. Rebecca’s ability to quickly learn and become fluent with new technology is phenomenal and she’s a formidable asset within any software development team.
+> Rebecca is a highly motivated and focused individual with in-depth knowledge across a multitude of technologies and methodologies. Committed to delivering the best possible solutions for customers, always going above and beyond to deliver high-quality on-time. Having worked with Rebecca for over 10 years, I continue to be impressed with her enterprise in finding innovative solutions to challenges she’s faced with. Rebecca’s ability to quickly learn and become fluent with new technology is phenomenal and she’s a formidable asset within any software development team.
 
 Long term colleage from Dell and Adactus
-
-
-
-
-

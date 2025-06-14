@@ -1,19 +1,19 @@
 ---
 id: 3062
-title: 'NServiceBus problems with RavenDb'
+title: "NServiceBus problems with RavenDb"
 pubDatetime: 2015-11-11T11:16:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=3062'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=3062"
 slug: 2015-11-11-nservicebus-problems-with-ravendb
 description: Troubleshooting NServiceBus and RavenDb issues in a .NET application, including solutions for GUID formatting errors and corrupted performance counters after a Windows 10 update.
 categories:
-    - work
+  - work
 tags:
-    - error
-    - nservicebus
-    - perf
-    - ravendb
+  - error
+  - nservicebus
+  - perf
+  - ravendb
 ---
 
 I work on a .NET application that uses NServiceBus. Under the hood, NServiceBus uses RavenDb for persisting data and state. I hadn't needed to work on this part of the application for a while, but today I needed to get NServiceBus up and running again.
@@ -21,7 +21,7 @@ I work on a .NET application that uses NServiceBus. Under the hood, NServiceBus 
 Unfortunately it wouldn't work. NServiceBus kept crashing out with the error:
 
 ```bash
-Exception when starting endpoint, error has been logged. 
+Exception when starting endpoint, error has been logged.
 Reason: Guid should contain 32 digits with 4 dashes (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).
 ```
 
@@ -37,7 +37,7 @@ raven.server.exe -install
 There was also another error being raised internally:
 
 ```bash
-NServiceBus performance counter for Critical Time not set up correctly. 
+NServiceBus performance counter for Critical Time not set up correctly.
 Please run the NServiceBus infrastructure installers to rectify this problem
 ```
 

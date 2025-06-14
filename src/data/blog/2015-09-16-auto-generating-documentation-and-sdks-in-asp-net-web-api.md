@@ -1,21 +1,21 @@
 ---
 id: 3038
-title: 'Auto-generating documentation and SDKs in ASP.NET Web API'
+title: "Auto-generating documentation and SDKs in ASP.NET Web API"
 pubDatetime: 2015-09-16T17:00:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=3038'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=3038"
 slug: 2015-09-16-auto-generating-documentation-and-sdks-in-asp-net-web-api
 description: Discusses the benefits and methods of auto-generating documentation and SDKs for ASP.NET Web API using tools like Swagger and AutoRest.
 categories:
-    - work
+  - work
 tags:
-    - api
-    - 'api explorer'
-    - asp.net
-    - sdk
-    - swagger
-    - 'web api'
+  - api
+  - "api explorer"
+  - asp.net
+  - sdk
+  - swagger
+  - "web api"
 ---
 
 Whilst I am a big fan of ServiceStack for building REST APIs, it switched last year from a free open-source tool to a licensed business model. For small open source projects without a commercial backer, it means that we have to take a second look at ASP.NET Web API, Microsoft's own offering.
@@ -49,48 +49,56 @@ The AutoRest source code and documentation can be found on [GitHub](https://gith
 ### Generating a .NET SDK
 
 1. Install AutoRest:
-    ```bash
-    npm install -g autorest
-    ```
+
+   ```bash
+   npm install -g autorest
+   ```
 
 2. Generate the .NET SDK:
-    ```bash
-    autorest --input-file=swagger.json --csharp --output-folder=./GeneratedSDKs/NetSdk
-    ```
+
+   ```bash
+   autorest --input-file=swagger.json --csharp --output-folder=./GeneratedSDKs/NetSdk
+   ```
 
 3. Use the generated .NET SDK:
-    ```csharp
-    using System;
-    using GeneratedSDKs.NetSdk;
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var client = new MyApiClient(new Uri("https://api.example.com"));
-            var result = client.GetSomeDataAsync().Result;
-            Console.WriteLine(result);
-        }
-    }
-    ```
+   ```csharp
+   using System;
+   using GeneratedSDKs.NetSdk;
+
+   class Program
+   {
+       static void Main(string[] args)
+       {
+           var client = new MyApiClient(new Uri("https://api.example.com"));
+           var result = client.GetSomeDataAsync().Result;
+           Console.WriteLine(result);
+       }
+   }
+   ```
 
 ### Generating a Node.js SDK
 
 1. Generate the Node.js SDK:
-    ```bash
-    autorest --input-file=swagger.json --nodejs --output-folder=./GeneratedSDKs/NodeSdk
-    ```
+
+   ```bash
+   autorest --input-file=swagger.json --nodejs --output-folder=./GeneratedSDKs/NodeSdk
+   ```
 
 2. Use the generated Node.js SDK:
-    ```javascript
-    const { MyApiClient } = require('./GeneratedSDKs/NodeSdk');
 
-    const client = new MyApiClient('https://api.example.com');
-    client.getSomeData().then(result => {
-        console.log(result);
-    }).catch(err => {
-        console.error(err);
-    });
-    ```
+   ```javascript
+   const { MyApiClient } = require("./GeneratedSDKs/NodeSdk");
+
+   const client = new MyApiClient("https://api.example.com");
+   client
+     .getSomeData()
+     .then(result => {
+       console.log(result);
+     })
+     .catch(err => {
+       console.error(err);
+     });
+   ```
 
 By following these steps, you can easily generate SDKs for .NET and Node.js using AutoRest and integrate them into your applications to interact with your ASP.NET Web API.

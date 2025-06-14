@@ -1,20 +1,20 @@
 ---
 id: 332
-title: 'Bing Maps has a SOAP Search service'
+title: "Bing Maps has a SOAP Search service"
 pubDatetime: 2012-03-15T12:36:46+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=332'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=332"
 slug: 2012-03-15-bing-maps-has-a-soap-search-service
 description: An overview of the SOAP-based search service provided by Bing Maps, discussing its limitations and referencing a detailed explanation by Alastair Aitchison.
 categories:
-    - work
+  - work
 tags:
-    - api
-    - bing
-    - maps
-    - search
-    - soap
+  - api
+  - bing
+  - maps
+  - search
+  - soap
 format: quote
 ---
 
