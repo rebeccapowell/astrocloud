@@ -4,7 +4,7 @@ import Main from "@/layouts/Main.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Card from "@/components/Card";
+import Card from "@/components/Card.astro";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
 import { SITE } from "@/config";
 
@@ -29,8 +29,6 @@ const months = [
   "November",
   "December",
 ];
-
-const backUrl = SITE.showBackButton ? `?from=${Astro.url.pathname}` : "/";
 ---
 
 <Layout title={`Archives | ${SITE.title}`}>
@@ -71,11 +69,8 @@ const backUrl = SITE.showBackButton ? `?from=${Astro.url.pathname}` : "/";
                             new Date(a.data.pubDatetime).getTime() / 1000
                           )
                       )
-                      .map(({ data, id }) => (
-                        <Card
-                          href={`/posts/${id}${backUrl}`}
-                          frontmatter={data}
-                        />
+                      .map(data => (
+                        <Card {...data} />
                       ))}
                   </ul>
                 </div>
@@ -84,6 +79,5 @@ const backUrl = SITE.showBackButton ? `?from=${Astro.url.pathname}` : "/";
         ))
     }
   </Main>
-
   <Footer />
 </Layout>

@@ -5,7 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
-import Card from "@/components/Card";
+import Card from "@/components/Card.astro";
 import Hr from "@/components/Hr.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconRss from "@/assets/icons/IconRss.svg";
@@ -22,10 +22,10 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
 <Layout>
   <Header />
-  <main id="main-content">
+  <main id="main-content" data-layout="index">
     <section id="hero" class="pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        welcome
+        Mingalaba
       </h1>
       <a
         target="_blank"
@@ -37,7 +37,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <IconRss
           width={20}
           height={20}
-          class="scale-125 stroke-accent stroke-3"
+          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
         />
         <span class="sr-only">RSS Feed</span>
       </a>
@@ -50,10 +50,10 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         Welcome to my space on the web where I write about the tech topics that interest me.
       </p>
       <p class="mt-2">
-        Check out my
+        Read the blog posts or check
         <LinkButton
           class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="/posts"
+          href="https://github.com/satnaing/astro-paper#readme"
         >
         blog posts
         </LinkButton> reaching back to when I started my blogging journey in 2003.
@@ -62,7 +62,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         // only display if at least one social link is enabled
         SOCIALS.length > 0 && (
           <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="mr-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
             <Socials />
           </div>
         )
@@ -77,12 +77,8 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <section id="featured" class="pt-12 pb-6">
             <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
             <ul>
-              {featuredPosts.map(({ data, id }) => (
-                <Card
-                  href={`/posts/${id}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
+              {featuredPosts.map(data => (
+                <Card variant="h3" {...data} />
               ))}
             </ul>
           </section>
@@ -97,14 +93,8 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
             {recentPosts.map(
-              ({ data, id }, index) =>
-                index < SITE.postPerIndex && (
-                  <Card
-                    href={`/posts/${id}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
+              (data, index) =>
+                index < SITE.postPerIndex && <Card variant="h3" {...data} />
             )}
           </ul>
         </section>
@@ -114,9 +104,19 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
     <div class="my-8 text-center">
       <LinkButton href="/posts/">
         All Posts
-        <IconArrowRight class="inline-block" />
+        <IconArrowRight class="inline-block rtl:-rotate-180" />
       </LinkButton>
     </div>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset?.layout;
+    if (indexLayout) {
+      sessionStorage.setItem("backUrl", "/");
+    }
+  });
+</script>
