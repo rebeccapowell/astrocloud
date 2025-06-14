@@ -1,7 +1,7 @@
 ---
 author: Sat Naing
-pubDatetime: 2000-09-23T04:58:53Z
-modDatetime: 2000-10-14T09:27:28.605Z
+pubDatetime: 2000-01-30T15:57:52.737Z
+modDatetime: 2000-01-30T15:57:52.737Z
 title: How to configure AstroPaper theme
 slug: how-to-configure-astropaper-theme
 featured: false
@@ -18,151 +18,182 @@ AstroPaper is a highly customizable Astro blog theme. With AstroPaper, you can c
 
 ## Configuring SITE
 
-The important configurations lies in `src/config.ts` file. Within that file, you'll see the `SITE` object where you can specify your website's main configurations.
+The important configurations resides in `src/config.ts` file. Within that file, you'll see the `SITE` object where you can specify your website's main configurations.
 
 During development, it's okay to leave `SITE.website` empty. But in production mode, you should specify your deployed url in `SITE.website` option since this will be used for canonical URL, social card URL etc.. which are important for SEO.
 
-```js
-// file: src/config.ts
+```js file=src/config.ts
 export const SITE = {
-  website: "https://astro-paper.pages.dev/",
+  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
   author: "Sat Naing",
+  profile: "https://satnaing.dev/",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "AstroPaper",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
-  postPerPage: 3,
+  postPerIndex: 4,
+  postPerPage: 4,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: true,
+  showBackButton: true, // show back button in post detail
   editPost: {
-    url: "https://github.com/satnaing/astro-paper/edit/main/src/content/blog",
+    enabled: true,
     text: "Suggest Changes",
-    appendFilePath: true,
+    url: "https://github.com/satnaing/astro-paper/edit/main/",
   },
-};
+  dynamicOgImage: true, // enable automatic dynamic og-image generation
+  dir: "ltr", // "rtl" | "auto"
+  lang: "en", // html lang code. Set this empty and default will be "en"
+  timezone: "Asia/Bangkok", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+} as const;
 ```
 
 Here are SITE configuration options
 
-| Options               | Description                                                                                                                                                                                                                                                                                                                                        |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `website`             | Your deployed website url                                                                                                                                                                                                                                                                                                                          |
-| `author`              | Your name                                                                                                                                                                                                                                                                                                                                          |
-| `desc`                | Your site description. Useful for SEO and social media sharing.                                                                                                                                                                                                                                                                                    |
-| `title`               | Your site name                                                                                                                                                                                                                                                                                                                                     |
-| `ogImage`             | Your default OG image for the site. Useful for social media sharing. OG images can be an external image url or they can be placed under `/public` directory.                                                                                                                                                                                       |
-| `lightAndDarkMode`    | Enable or disable `light & dark mode` for the website. If disabled, primary color scheme will be used. This option is enabled by default.                                                                                                                                                                                                          |
-| `postPerIndex`        | The number of posts to be displayed at the home page under `Recent` section.                                                                                                                                                                                                                                                                       |
-| `postPerPage`         | You can specify how many posts will be displayed in each posts page. (eg: if you set SITE.postPerPage to 3, each page will only show 3 posts per page)                                                                                                                                                                                             |
-| `scheduledPostMargin` | In Production mode, posts with a future `pubDatetime` will not be visible. However, if a post's `pubDatetime` is within the next 15 minutes, it will be visible. You can set `scheduledPostMargin` if you don't like the default 15 minutes margin.                                                                                                |
-| `showArchives`        | Determines whether to display the `Archives` menu (positioned between the `About` and `Search` menus) and its corresponding page on the site. This option is set to `true` by default.                                                                                                                                                             |
-| `editPost`            | This option allows users to suggest changes to a blog post by providing an edit link under blog post titles. This feature can be disabled by removing it from the `SITE` config. You can also set `appendFilePath` to `true` to automatically append the file path of the post to the url, directing users to the specific post they wish to edit. |
+| Options               | Description                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `website`             | Your deployed website URL                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `author`              | Your name                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `profile`             | Your personal/portfolio website URL which is used for better SEO. Put `null` or empty string `""` if you don't have any.                                                                                                                                                                                                                                                                                                          |
+| `desc`                | Your site description. Useful for SEO and social media sharing.                                                                                                                                                                                                                                                                                                                                                                   |
+| `title`               | Your site name                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `ogImage`             | Your default OG image for the site. Useful for social media sharing. OG images can be an external image URL or they can be placed under `/public` directory.                                                                                                                                                                                                                                                                      |
+| `lightAndDarkMode`    | Enable or disable `light & dark mode` for the website. If disabled, primary color scheme will be used. This option is enabled by default.                                                                                                                                                                                                                                                                                         |
+| `postPerIndex`        | The number of posts to be displayed at the home page under `Recent` section.                                                                                                                                                                                                                                                                                                                                                      |
+| `postPerPage`         | You can specify how many posts will be displayed in each posts page. (eg: if you set `SITE.postPerPage` to 3, each page will only show 3 posts per page)                                                                                                                                                                                                                                                                          |
+| `scheduledPostMargin` | In Production mode, posts with a future `pubDatetime` will not be visible. However, if a post's `pubDatetime` is within the next 15 minutes, it will be visible. You can set `scheduledPostMargin` if you don't like the default 15 minutes margin.                                                                                                                                                                               |
+| `showArchives`        | Determines whether to display the `Archives` menu (positioned between the `About` and `Search` menus) and its corresponding page on the site. This option is set to `true` by default.                                                                                                                                                                                                                                            |
+| `showBackButton`      | Determines whether to display the `Go back` button in each blog post.                                                                                                                                                                                                                                                                                                                                                             |
+| `editPost`            | This option allows users to suggest changes to a blog post by providing an edit link under blog post titles. This feature can be disabled by setting `SITE.editPost.enabled` to `false`.                                                                                                                                                                                                                                          |
+| `dynamicOgImage`      | This option controls whether to [generate dynamic og-image](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/) if no `ogImage` is specified in the blog post frontmatter. If you have many blog posts, you might want to disable this feature. See the [trade-off](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/#trade-off) for more details. |
+| `dir`                 | Specifies the text direction of the entire blog. Used as [HTML dir attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/dir) in `<html dir="ltr">`. Supported values: `ltr` \| `rtl` \| `auto`                                                                                                                                                                                                |
+| `lang`                | Used as HTML ISO Language code in `<html lang"en">`. Default is `en`.                                                                                                                                                                                                                                                                                                                                                             |
+| `timezone`            | This option allows you to specify your timezone using the [IANA format](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Setting this ensures consistent timestamps across your localhost and deployed site, eliminating time differences.                                                                                                                                                                          |
 
-## Configuring locale
+## Update layout width
 
-You can configure the default locale used for the build (e.g., date format in the post page), and for the rendering in browsers (e.g., date format in the search page)
+The default `max-width` for the entire blog is `768px` (`max-w-3xl`). If you'd like to change it, you can easily update the `max-w-app` utility in your `global.css`. For instance:
 
-```js
-// file: src/config.ts
-export const LOCALE = {
-  lang: "en", // html lang code. Set this empty and default will be "en"
-  langTag: ["en-EN"], // BCP 47 Language Tags. Set this empty [] to use the environment default
-} as const;
+```css file=src/styles/global.css
+@utility max-w-app {
+  /* [!code --:1] */
+  @apply max-w-3xl;
+  /* [!code ++:1] */
+  @apply max-w-4xl xl:max-w-5xl;
+}
 ```
 
-`LOCALE.lang` will be used as HTML ISO Language code in `<html lang="en">`. If you don't specify this, default fallback will be set to `en`.
-`LOCALE.langTag` is used as [datetime locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString#locales). For this, you can specify an array of locales for fallback languages. Leave `LOCALE.langTag` empty `[]` to use the environment default at _build-_ and _run-time_.
+You can explore more `max-width` values in the [Tailwind CSS docs](https://tailwindcss.com/docs/max-width).
 
 ## Configuring logo or title
 
-You can specify site's title or logo image in `src/config.ts` file.
+Prior to AstroPaper v5, you can update your site name/logo in `LOGO_IMAGE` object inside `src/config.ts` file. However, in AstroPaper v5, this option has been removed in favor of Astro's built-in SVG and Image components.
 
 ![An arrow pointing at the website logo](https://res.cloudinary.com/noezectz/v1663911318/astro-paper/AstroPaper-logo-config_goff5l.png)
 
-```js
-// file: src/config.ts
-export const LOGO_IMAGE = {
-  enable: false,
-  svg: true,
-  width: 216,
-  height: 46,
-};
-```
+There are 3 options you can do:
 
-If you specify `LOGO_IMAGE.enable` => `false`, AstroPaper will automatically convert `SITE.title` to the main site text logo.
+### Option 1: SITE title text
 
-If you specify `LOGO_IMAGE.enable` => `true`, AstroPaper will use the logo image as the site's main logo.
+This is the easiest option. You just have to update `SITE.title` in `src/config.ts` file.
 
-You have to specify `logo.png` or `logo.svg` under `/public/assets` directory. Currently, only svg and png image file formats are supported. (**_Important!_** _logo name has to be logo.png or logo.svg)_
+### Option 2: Astro's SVG component
 
-If your logo image is png file format, you have to set `LOGO_IMAGE.svg` => `false`.
+You might want to use this option if you want to use an SVG logo.
 
-It is recommended that you specify width and height of your logo image. You can do that by setting `LOGO_IMAGE.width` _and_ `LOGO_IMAGE.height`
+- First add an SVG inside `src/assets` directory. (eg: `src/assets/dummy-logo.svg`)
+- Then import that SVG inside `Header.astro`
+
+  ```astro file=src/components/Header.astro
+  ---
+  // ...
+  import DummyLogo from "@/assets/dummy-logo.svg";
+  ---
+  ```
+
+- Finally, replace `{SITE.title}` with imported logo.
+
+  ```html
+  <a
+    href="/"
+    class="absolute py-1 text-left text-2xl leading-7 font-semibold whitespace-nowrap sm:static"
+  >
+    <DummyLogo class="scale-75 dark:invert" />
+    <!-- {SITE.title} -->
+  </a>
+  ```
+
+The best part of this approach is that you can customize your SVG styles as needed. In the example above, you can see how the SVG logo color can be inverted in dark mode.
+
+### Option 3: Astro's Image component
+
+If your logo is an image but not SVG, you can use Astro's Image component.
+
+- Add your logo inside `src/assets` directory. (eg: `src/assets/dummy-logo.png`)
+- Import `Image` and your logo in `Header.astro`
+
+  ```astro file=src/components/Header.astro
+  ---
+  // ...
+  import { Image } from "astro:assets";
+  import dummyLogo from "@/assets/dummy-logo.png";
+  ---
+  ```
+
+- Then, replace `{SITE.title}` with imported logo.
+
+  ```html
+  <a
+    href="/"
+    class="absolute py-1 text-left text-2xl leading-7 font-semibold whitespace-nowrap sm:static"
+  >
+    <image src="{dummyLogo}" alt="Dummy Blog" class="dark:invert" />
+    <!-- {SITE.title} -->
+  </a>
+  ```
+
+With this approach, you can still adjust your image's appearance using CSS classes. However, this might not always fit what you want. If you need to display different logo images based on light or dark mode, check how light/dark icons are handled inside the `Header.astro` component.
 
 ## Configuring social links
 
-You can configure your own social links along with its icons.
+![An arrow pointing at social link icons](https://github.com/user-attachments/assets/8b895400-d088-442f-881b-02d2443e00cf)
 
-![An arrow pointing at social link icons](https://res.cloudinary.com/noezectz/v1663914759/astro-paper/astro-paper-socials_tkcjgq.png)
+You can configure social links in `SOCIALS` object inside `constants.ts`.
 
-Currently 20 social icons are supported. (Github, LinkedIn, Facebook etc.)
-
-You can specify and enable certain social links in hero section and footer. To do this, go to `/src/config.ts` and then you'll find `SOCIALS` array of object.
-
-```js
-// file: src/config.ts
-export const SOCIALS: SocialObjects = [
+```ts file=src/constants.ts
+export const SOCIALS = [
   {
     name: "Github",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: ` ${SITE.title} on Github`,
-    active: true,
+    icon: IconGitHub,
   },
   {
-    name: "Facebook",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Facebook`,
-    active: true,
+    name: "X",
+    href: "https://x.com/username",
+    linkTitle: `${SITE.title} on X`,
+    icon: IconBrandX,
   },
   {
-    name: "Instagram",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: `${SITE.title} on Instagram`,
-    active: true,
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/username/",
+    linkTitle: `${SITE.title} on LinkedIn`,
+    icon: IconLinkedin,
   },
-  ...
-]
-```
-
-You have to set specific social link to `active: true` in order to appear your social links in hero and footer section. Then, you also have to specify your social link in `href` property.
-
-For instance, if I want to make my Github appear, I'll make it like this.
-
-```js
-export const SOCIALS: SocialObjects = [
   {
-    name: "Github",
-    href: "https://github.com/satnaing", // update account link
-    linkTitle: `${SITE.title} on Github`, // this text will appear on hover and VoiceOver
-    active: true, // makre sure to set active to true
-  }
-  ...
-]
+    name: "Mail",
+    href: "mailto:yourmail@gmail.com",
+    linkTitle: `Send an email to ${SITE.title}`,
+    icon: IconMail,
+  },
+] as const;
 ```
 
-Another thing to note is that you can specify the `linkTitle` in the object. This text will display when hovering on the social icon link. Besides, this will improve accessibility and SEO. AstroPaper provides default link title values; but you can replace them with your own texts.
+## Configuring share links
 
-For example,
+You can configure share links in `SHARE_LINKS` object inside `src/constants.ts`.
 
-```js
-linkTitle: `${SITE.title} on Twitter`,
-```
-
-to
-
-```js
-linkTitle: `Follow ${SITE.title} on Twitter`;
-```
+![An arrow pointing at share link icons](https://github.com/user-attachments/assets/4f930b68-b625-45df-8c41-e076dd2b838e)
 
 ## Conclusion
 

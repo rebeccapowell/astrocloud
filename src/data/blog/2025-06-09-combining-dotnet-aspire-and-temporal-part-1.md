@@ -7,7 +7,8 @@ layout: '../layouts/BlogPost.astro'
 guid: 'https://rebecca-powell.com/?p=10000'
 slug: 2025-06-09-combining-dotnet-aspire-and-temporal-part-1
 description: Part 1 of a multi-part blog series on Temporal with .NET Aspire.
-featured: true
+featured: false
+draft: true
 categories:
   - work
 tags:
@@ -42,12 +43,18 @@ TemporalAspireDemo/
 ├── Worker/                # Executes workflows and activities
 ├── Workflows/             # Reusable workflow/activity definitions
 ├── ServiceDefaults/       # Shared OpenTelemetry config
-├── .k8s/                  # Aspirate-generated K8s manifests
 ```
+
+### Durable Workflow Execution
+Let's talk about durable workflow execution and how it came to be. Since I've started my career in tech in the last millenium and building resilient systems has been a focus for me for some time, I've been lucky enough to have seen the progression.
+
+This has come in 5 key waves, or paradigm shifts if you will. You can read more about this in the [primer article](/posts/2025-06-09-the-five-waves-of-distributed-resilience).
+
+This article starts to explore that from a developer implementation perspective.
 
 ### Workflow Basics
 
-We’ll use a very simple `SimpleWorkflow`:
+We’ll use a very simple `SimpleWorkflow` in this first iteration:
 
 ```csharp
 public class SimpleWorkflow : WorkflowDefinition

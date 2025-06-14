@@ -1,21 +1,51 @@
 import Giscus, { type Theme } from "@giscus/react";
+import { GISCUS } from "@/constants";
 import { useEffect, useState } from "react";
-import { GISCUS } from "../config.ts";
 
-export default function Comments() {
-  const [theme, setTheme] = useState<Theme>("light");
+interface CommentsProps {
+  lightTheme?: Theme;
+  darkTheme?: Theme;
+}
+
+export default function Comments({
+  lightTheme = "light",
+  darkTheme = "dark",
+}: CommentsProps) {
+  const [theme, setTheme] = useState(() => {
+    const currentTheme = localStorage.getItem("theme");
+    const browserTheme = window.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+
+    return currentTheme || browserTheme;
+  });
 
   useEffect(() => {
-    if (typeof window !== "undefined") { // Ensure client-side execution
-      const storedTheme = localStorage.getItem("theme");
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      setTheme(storedTheme || systemTheme);
-    }
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = ({ matches }: MediaQueryListEvent) => {
+      setTheme(matches ? "dark" : "light");
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    const themeButton = document.querySelector("#theme-btn");
+    const handleClick = () => {
+      setTheme(prevTheme => (prevTheme === "dark" ? "light" : "dark"));
+    };
+
+    themeButton?.addEventListener("click", handleClick);
+
+    return () => themeButton?.removeEventListener("click", handleClick);
   }, []);
 
   return (
     <div className="mt-8">
-      <Giscus theme={theme} {...GISCUS} />
+      <Giscus theme={theme === "light" ? lightTheme : darkTheme} {...GISCUS} />
     </div>
   );
 }

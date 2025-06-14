@@ -1,13 +1,14 @@
 ---
 id: 10001
-title: 'Combining .NET Aspire with Temporal - Part 1'
+title: 'Combining .NET Aspire with Temporal - Part 2'
 pubDatetime: 2025-06-09T17:45:00+01:00
 author: rebecca
 layout: '../layouts/BlogPost.astro'
 guid: 'https://rebecca-powell.com/?p=10000'
-slug: 2025-06-09-combining-dotnet-aspire-and-temporal-part-1
-description: Part 1 of a multi-part blog series on Temporal with .NET Aspire.
-featured: true
+slug: 2025-06-09-combining-dotnet-aspire-and-temporal-part-2
+description: Part 2 of a multi-part blog series on Temporal with .NET Aspire.
+featured: false
+draft: true
 categories:
   - work
 tags:

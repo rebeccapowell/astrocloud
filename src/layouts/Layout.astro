@@ -1,10 +1,8 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
-import { LOCALE } from "@/constants";
 import "@/styles/global.css";
-
-const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface Props {
   title?: string;
@@ -23,14 +21,14 @@ const {
   author = SITE.author,
   profile = SITE.profile,
   description = SITE.desc,
-  ogImage = SITE.ogImage,
+  ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
 } = Astro.props;
 
-const socialImageURL = new URL(ogImage ?? SITE.ogImage ?? "og.png", Astro.url);
+const socialImageURL = new URL(ogImage, Astro.url);
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -43,7 +41,7 @@ const structuredData = {
     {
       "@type": "Person",
       name: `${author}`,
-      url: `${profile}`,
+      ...(profile && { url: profile }),
     },
   ],
 };
@@ -51,7 +49,8 @@ const structuredData = {
 
 <!doctype html>
 <html
-  lang=`${LOCALE.lang ?? "en"}`
+  dir={SITE.dir}
+  lang=`${SITE.lang ?? "en"}`
   class={`${scrollSmooth && "scroll-smooth"}`}
 >
   <head>
@@ -121,17 +120,17 @@ const structuredData = {
       // If PUBLIC_GOOGLE_SITE_VERIFICATION is set in the environment variable,
       // include google-site-verification tag in the heading
       // Learn more: https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag
-      googleSiteVerification && (
+      PUBLIC_GOOGLE_SITE_VERIFICATION && (
         <meta
           name="google-site-verification"
-          content={googleSiteVerification}
+          content={PUBLIC_GOOGLE_SITE_VERIFICATION}
         />
       )
     }
 
     <ClientRouter />
 
-    <script is:inline src="/toggle-theme.js" async></script>
+    <script is:inline src="/toggle-theme.js"></script>
   </head>
   <body>
     <slot />

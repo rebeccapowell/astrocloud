@@ -151,6 +151,49 @@ I hope this guide helps you to have you own play around with Coolify and .NET!
 
 If you're interested in a follow up to this using docker-compose for a multi-app deployment then let me know in the comments. If you have feedback or questions then also feel free to drop me a comment.
 
+### Update...
+
+My colleague David noticed some oddities around my configuration. I also wanted to add health checks (internal) so that Coolify can detect if the container is unhealthy.
+
+The Dockerfile now exposes the following ports:
+
+```bash
+EXPOSE 4317 # application
+EXPOSE 4318 # health checks
+```
+
+we then place the following in the final stages of the docker build pipelines:
+
+```bash
+# override the stadard 8080 and use a separate port for internal healthchecks
+ENV ASPNETCORE_URLS=http://0.0.0.0:4317;http://0.0.0.0:4318
+
+# coolify picks this up
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD curl --fail http://localhost:4318/healthz || exit
+
+ENTRYPOINT ["dotnet", "Blog-Demo-Api.dll"]
+```
+
+Finally we alter the `Progam.cs` to support healthchecks and quite specifically make sure that the health checks endpoint only responds on port 4318:
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOpenApi();
+
+// add this line
+builder.Services.AddHealthChecks();
+
+var app = builder.Build();
+
+//......
+
+// add the line
+app.MapHealthChecks("/healthz").RequireHost("*:4318");
+
+app.Run();
+```
+
 ### References
 - [Coolify and Hetzner](https://prototypr.io/note/coolify-hetzner-serverless)
 - [Coolify Crash Course](https://youtu.be/taJlPG82Ucw?si=BY_g2DfVWBsyFKmj)

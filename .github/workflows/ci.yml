@@ -1,5 +1,8 @@
 name: CI
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     types:
@@ -26,7 +29,7 @@ jobs:
       - name: "📦 Install pnpm"
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.11.1
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4

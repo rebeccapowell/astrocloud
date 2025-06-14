@@ -5,7 +5,7 @@ import Main from "@/layouts/Main.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Card from "@/components/Card";
+import Card from "@/components/Card.astro";
 import Pagination from "@/components/Pagination.astro";
 import getUniqueTags from "@/utils/getUniqueTags";
 import getPostsByTag from "@/utils/getPostsByTag";
@@ -29,8 +29,6 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 const params = Astro.params;
 const { tag } = params;
 const { page, tagName } = Astro.props;
-
-const backUrl = SITE.showBackButton ? `?from=${Astro.url.pathname}` : "/";
 ---
 
 <Layout title={`Tag: ${tagName} | ${SITE.title}`}>
@@ -42,11 +40,7 @@ const backUrl = SITE.showBackButton ? `?from=${Astro.url.pathname}` : "/";
   >
     <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
     <ul>
-      {
-        page.data.map(({ data, id }) => (
-          <Card href={`/posts/${id}${backUrl}`} frontmatter={data} />
-        ))
-      }
+      {page.data.map(data => <Card {...data} />)}
     </ul>
   </Main>
 

@@ -1,6 +1,7 @@
 ---
 author: Sat Naing
-pubDatetime: 2000-12-28T04:59:04.866Z
+pubDatetime: 2000-01-30T15:57:52.737Z
+modDatetime: 2000-01-30T15:57:52.737Z
 title: Dynamic OG image generation in AstroPaper blog posts
 slug: dynamic-og-image-generation-in-astropaper-blog-posts
 featured: false
@@ -45,9 +46,7 @@ Dynamic OG image of AstroPaper includes _the blog post title_, _author name_ and
 
 Titles with non-latin characters won't display properly out of the box. To resolve this, we have to replace `fontsConfig` inside `loadGoogleFont.ts` with your preferred font.
 
-```ts
-// file: loadGoogleFont.ts
-
+```ts file=src/utils/loadGoogleFont.ts
 async function loadGoogleFonts(
   text: string
 ): Promise<
@@ -74,11 +73,19 @@ async function loadGoogleFonts(
       style: "normal",
     },
   ];
-  // other codes
+  // ...
 }
 ```
 
 > Check out [this PR](https://github.com/satnaing/astro-paper/pull/318) for more info.
+
+## Trade-off
+
+While this is a nice feature to have, there's a trade-off. Each OG image takes roughly one second to generate. This might not be noticeable at first, but as the number of blog posts grows, you might want to disable this feature. Since every OG image takes time to generate, having many of them will increase the build time linearly.
+
+For example: If one OG image takes one second to generate, then 60 images will take around one minute, and 600 images will take approximately 10 minutes. This can significantly impact build times as your content scales.
+
+Related issue: [#428](https://github.com/satnaing/astro-paper/issues/428)
 
 ## Limitations
 
