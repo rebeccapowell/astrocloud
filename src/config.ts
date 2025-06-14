@@ -3,7 +3,7 @@ export const SITE = {
   author: "Rebecca powell",
   profile: "https://rebeccapowell.com/",
   desc: "the home of tech evangelista rebecca powell.",
-  title: "rebecca🟅powell",
+  title: "rebecca powell",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
