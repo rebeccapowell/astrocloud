@@ -1,14 +1,14 @@
 ---
 id: 10001
 title: "Combining .NET Aspire with Temporal - Part 1"
-pubDatetime: 2025-06-09T17:45:00+01:00
+pubDatetime: 2025-06-15T01:27:00+01:00
 author: rebecca
 layout: "../layouts/BlogPost.astro"
 guid: "https://rebecca-powell.com/?p=10000"
 slug: 2025-06-09-combining-dotnet-aspire-and-temporal-part-1
 description: Part 1 of a multi-part blog series on Temporal with .NET Aspire.
 featured: false
-draft: true
+draft: false
 categories:
   - work
 tags:
@@ -39,7 +39,7 @@ In this post, I will kick off a multi-part series on building and deploying a re
 
 ```text
 TemporalAspireDemo/
-├── AppHost/                # Aspire app host
+├── AppHost/               # Aspire app host
 ├── Api/                   # Minimal API to trigger workflows
 ├── Worker/                # Executes workflows and activities
 ├── Workflows/             # Reusable workflow/activity definitions
@@ -54,29 +54,103 @@ This has come in 5 key waves, or paradigm shifts if you will. You can read more 
 
 This article starts to explore that from a developer implementation perspective.
 
-### Workflow Basics
+### .NET Aspire Introduction
 
-We’ll use a very simple `SimpleWorkflow` in this first iteration:
+[.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) is a new opinionated stack for building cloud-native .NET applications, spearheaded by [David Fowler](https://medium.com/@davidfowl) and the ASP.NET team at Microsoft. It focuses on solving the orchestration complexity that comes with modern distributed applications — helping developers manage service composition, local development environments, diagnostics, and deployment.
+
+Aspire introduces a developer-first model for composing microservices, background workers, and dependencies like Postgres or Redis through a unified AppHost and dashboard experience. It shines especially during local-first development — where spinning up a full stack of services becomes a single dotnet run away.
+
+As it evolves, Aspire aims to become the default entry point for .NET developers building modern, observable, production-ready applications that span multiple services, environments, and cloud providers.
+
+### Temporal Introduction
+
+Temporal is a durable execution engine designed to make writing fault-tolerant, long-running workflows feel like writing simple code. It handles retries, state persistence, timeouts, and failures behind the scenes — allowing developers to focus on logic, not infrastructure.
+
+Temporal can be run in two primary ways:
+
+- As a managed cloud service (Temporal Cloud)
+- As a self-hosted cluster, which involves:
+  - The Temporal Server itself
+  - A datastore (e.g., PostgreSQL, MySQL, or Cassandra)
+  - The Web UI for managing workflows
+  - Optional components like ElasticSearch for visibility
+
+For development, the Temporal CLI provides a simplified temporal server start-dev mode that spins up a minimal instance of the server, UI, and database — perfect for local testing.
+
+Temporal is ideal for coordinating microservices, handling retries across failures, modeling complex business processes, or anything that needs distributed reliability as a first-class concern.
+
+### Temporal Workflow Basics
+
+We’ll use a simple `SimpleWorkflow` in this first iteration that has two activities, and between each is a condition that waits for a signal to continue:
 
 ```csharp
-public class SimpleWorkflow : WorkflowDefinition
+[Workflow]
+public class SimpleWorkflow
 {
-    [WorkflowRun]
-    public async Task RunAsync()
+    private bool _continueWorkflow;
+
+    [WorkflowSignal]
+    public Task Continue()
     {
-        Console.WriteLine("Running workflow");
-        await Task.Delay(1000);
+        _continueWorkflow = true;
+        return Task.CompletedTask;
+    }
+
+    [WorkflowRun]
+    public async Task<string> RunAsync(string input)
+    {
+        Workflow.Logger.LogInformation("Workflow started with input: {input}", input);
+
+        var result = await Workflow.ExecuteActivityAsync<Activities, string>(
+            a => a.SimulateWork(input),
+            new ActivityOptions { StartToCloseTimeout = TimeSpan.FromSeconds(120) });
+
+        Workflow.Logger.LogInformation("Waiting for continue signal...");
+        await Workflow.WaitConditionAsync(() => _continueWorkflow);
+
+        var final = await Workflow.ExecuteActivityAsync<Activities, string>(
+            a => a.FinalizeWork(result),
+            new ActivityOptions { StartToCloseTimeout = TimeSpan.FromSeconds(120) });
+
+        Workflow.Logger.LogInformation("Workflow completed.");
+        return final;
     }
 }
 ```
 
-And an activity:
+We have two simple activities:
 
 ```csharp
-public class Activities
+[Activity]
+public async Task<string> SimulateWork(string input)
 {
-    [Activity]
-    public string Greet(string name) => $"Hello, {name}!";
+    ActivityExecutionContext.Current.Logger.LogInformation("Activity running with input: {input}", input);
+
+    var sw = System.Diagnostics.Stopwatch.StartNew();
+    await Task.Delay(1000, ActivityExecutionContext.Current.CancellationToken);
+    sw.Stop();
+
+    _metrics.ActivityDurationMs.Record(sw.Elapsed.TotalMilliseconds);
+
+    ActivityExecutionContext.Current.Logger.LogInformation("Activity completed.");
+
+    return $"Processed: {input}";
+}
+
+[Activity]
+public async Task<string> FinalizeWork(string input)
+{
+    ActivityExecutionContext.Current.Logger.LogInformation("Final activity running with input: {input}", input);
+
+    var sw = System.Diagnostics.Stopwatch.StartNew();
+    await Task.Delay(1000, ActivityExecutionContext.Current.CancellationToken);
+    sw.Stop();
+
+    _metrics.ActivityDurationMs.Record(sw.Elapsed.TotalMilliseconds);
+
+    ActivityExecutionContext.Current.Logger.LogInformation("Final activity completed.");
+
+    return $"Finalized: {input}";
 }
 ```
 
@@ -85,10 +159,17 @@ public class Activities
 Add OpenTelemetry support here to keep things DRY:
 
 ```csharp
-builder.AddServiceDefaults(
-    metrics => metrics.AddMeter("WorkflowMetrics"),
-    tracing => tracing.AddSource("Temporal.Client", "Temporal.Workflow", "Temporal.Activity")
-);
+public class WorkflowMetrics
+{
+	public Counter<long> StartedCount { get; }
+	public Histogram<double> ActivityDurationMs { get; }
+
+	public WorkflowMetrics(Meter meter)
+	{
+		StartedCount = meter.CreateCounter<long>("workflow.started.count");
+		ActivityDurationMs = meter.CreateHistogram<double>("workflow.activity.duration.ms");
+	}
+}
 ```
 
 ---
@@ -114,6 +195,9 @@ builder.Services
     .AddWorkflow<SimpleWorkflow>()
     .AddScopedActivities<Activities>();
 
+builder.AddProject<Api>("api").WithReference(temporal);
+builder.AddProject<Worker>("worker").WithReference(temporal);
+
 builder.Build().Run();
 ```
 
@@ -122,21 +206,74 @@ builder.Build().Run();
 The API exposes a `/workflow/start` endpoint that triggers workflows:
 
 ```csharp
-app.MapPost("/workflow/start", async (ITemporalClient client) =>
-{
-    var result = await client.ExecuteWorkflowAsync<SimpleWorkflow, string>(x => x.RunAsync(),
-        new WorkflowOptions("my-task-queue")
-        {
-            Id = $"workflow-{Guid.NewGuid()}"
-        });
+public record WorkflowStartResponse(string WorkflowId);
 
-    return Results.Ok(result);
-});
+app.MapPost("/start/{message}", async (
+        [FromRoute] string message,
+        ITemporalClient client,
+        WorkflowMetrics metrics) =>
+{
+        metrics.StartedCount.Add(1);
+
+        var workflowId = $"simple-workflow-{Guid.NewGuid()}";
+        await client.StartWorkflowAsync(
+                (SimpleWorkflow wf) => wf.RunAsync(message),
+                new WorkflowOptions(workflowId, Constants.TaskQueue));
+
+        var response = new WorkflowStartResponse(workflowId);
+        return TypedResults.Ok(response);
+})
+.WithName("StartWorkflow")
+.WithOpenApi();
 ```
 
-### 🧪 Local AppHost Configuration
+A singal to send it the notification to continue:
 
-Use `AddTemporalServerContainer` to add a lightweight Temporal dev server with Aspire:
+```csharp
+app.MapPost("/signal/{workflowId}", async ([FromRoute] string workflowId, ITemporalClient client) =>
+{
+        var handle = client.GetWorkflowHandle(workflowId);
+        await handle.SignalAsync<SimpleWorkflow>(wf => wf.Continue());
+        return TypedResults.Ok();
+})
+.WithName("SignalWorkflow")
+.WithOpenApi();
+```
+
+And finally an endpoint to collect the results:
+
+```csharp
+public record WorkflowResultResponse(string Result);
+
+app.MapGet("/result/{workflowId}", async ([FromRoute] string workflowId, ITemporalClient client) =>
+{
+        var handle = client.GetWorkflowHandle(workflowId);
+        var result = await handle.GetResultAsync<string>();
+        return TypedResults.Ok(new WorkflowResultResponse(result));
+})
+.WithName("WorkflowResult")
+.WithOpenApi();
+```
+
+With those in place our API endpoints and Temporal workflows are in place. Let's move on to our Aspire AppHost.
+
+### Local AppHost Configuration
+
+I mentioned earlier that Temporal can be self-hosted, and this article uses that in a special form.
+
+We could use Aspire to pull in the specific containers, which include:
+
+- The Temporal Server
+- The Temporal Admin UI
+- A datastore such as Postgres or Cassandra
+
+### Developer Temporal options
+
+However, for anyone that has less than 16GB of RAM, your machine is going to struggle running Rider or worse, Visual Studiop 2022, Docker Desktop / Rancher / Podman for container support and these three containers.
+
+Help is at hand. Temporal also offer a dev server and Temporal CLI. This runs a cut down container with all three components supported. Even better, there is an [Aspire Temporal extension](https://github.com/InfinityFlowApp/aspire-temporal) that provides this as a [container](https://github.com/InfinityFlowApp/aspire-temporal/blob/8bdd63b60da4ea9530bc766d7e1d58ccebd0973c/src/InfinityFlow.Aspire.Temporal/TemporalServerContainerBuilderExtensions.cs#L39). This is way more lightweight than running Temporal Server, Temporal UI and Postgres on your local machine. Compared to the CLI which doesn't plug well into the Aspire framework, this is a perfect balance for Aspire led development (git-pull-f5-development) and the separation of concerns for deployment, especially if you already have a Temporal self hosted or cloud instance.
+
+So, let's use `AddTemporalServerContainer` to add a lightweight Temporal dev server with Aspire:
 
 ```csharp
 // using Infinity.Aspire.Temporal
@@ -147,19 +284,65 @@ var temporal = await builder.AddTemporalServerContainer("temporal", b => b
     .WithUiPort(8233)
     .WithLogLevel(LogLevel.Info));
 
+// this will be useful later for our Aspirate output
 temporal.PublishAsConnectionString();
 
 builder.AddProject<Api>("api").WithReference(temporal);
 builder.AddProject<Worker>("worker").WithReference(temporal);
 ```
 
-### Developer Temporal options
+### Demo Walkthrough
 
-Temporal provide a developer CLI but also a [combined container for local development](https://github.com/InfinityFlowApp/aspire-temporal/blob/main/src/InfinityFlow.Aspire.Temporal/TemporalServerContainerBuilderExtensions.cs#L39), which is what we are using here via [an easy to use Aspire AppHost BuGet package](https://github.com/InfinityFlowApp/aspire-temporal). This is more lightweight than running Temporal Server, Temporal UI and Postgres on your local machine. Compared to the CLI which doesn't plug well into the Aspire framework, this is a perfect balance for Aspire led development (git-pull-f5-development) and the separation of concerns for deployment, especially if you already have a Temporal self hosted or cloud instance.
+Running the AppHost first loads the Aspire dashboard and lists all of the resources in your distributed application:
+
+![Aspire Dashboard - Resources](/assets/posts/aspire-dashboard.png)
+
+We can open up the Temporal UI and see the workflows running or run in this namespace (currently none):
+
+![Temporal Dashboard - Wrokflows](/assets/posts/temporal-ui-empty.png)
+
+We can also open up our UI (using Swagger UI) and kick off some API requests to move this demo on. Let's start by sending a message:
+
+![API - Swagger - Start Request](/assets/posts/aspire-api-swagger-start-request.png)
+
+We get a response from the API that includes the workflow ID.
+
+![API - Swagger - Start Response](/assets/posts/aspire-swagger-api-start-response.png)
+
+We'll need this to signal this workflow:
+
+![API - Swagger - Signal](/assets/posts/aspire-api-signal.png)
+
+And finally we will retrieve the final result of the workflow:
+
+![API - Swagger - Final Result](/assets/posts/aspire-api-finalize.png)
+
+Returning to the Temporal UI we can we there is now a workflow instance that has run:
+
+![Temporal Dashboard - Workflow list](/assets/posts/aspire-temporal-ui-workflow-list.png)
+
+And we can click on that workflow instance and see how it run and what payloads were sent and output:
+
+![Temporal Dashboard - Workflow complete](/assets/posts/aspire-ui-workflow-complete.png)
+
+Back to the Aspire Dashboard and it gives us all the OTEL information we need as distributed traces. This is one of the killer features of Aspire. No longer do you have to deploy your application to test your OTEL based Azure Monitor, DataDog, Honeycomb, New Relic, Sentry or Dynatrace, and use use costly SaaS resources. You can see exactly how your OTEL based applications work locally using the Aspire logging, tracing, and metrics from your applications.
+
+![Aspire - Traces](/assets/posts/aspire-dashboard-distributed-traces.png)
+
+It even supports your custom metrics:
+
+![Aspire - Traces](/assets/posts/aspire-dashboard-custom-metrics-api.png)
 
 ### Gotchas
 
-- **Trimming must be disabled** for Temporal SDK compatibility: `PublishTrimmed` causes issues due to P/Invoke.
-- Default `.dockerignore` and `Dockerfile` templates may omit required files—manually fix paths.
-- Use non-root container user (`USER $APP_UID`) for security.
-- Alpine is not supported by Temporal SDK due to musl/GLIBC incompatibilities.
+- Nothing of note
+
+### Next steps
+
+My next steps will be to look to deploy the Aspire distributed application to k8s. Since I don't want to use cloud based resources that cost me money, I'm going to use a k8s cluster locally - yes that's possible and I'm going to show you how to generate the helm charts, install the required components and deploy it.
+
+### Feedback
+
+If you want to provide feedback then leave a comment, or if you see a typo or error, then add a pull request via the suggest changes link above!
+
+Full source code is coming...

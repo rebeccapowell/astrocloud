@@ -28,7 +28,7 @@ Here is an example to illustrate the issue and the solution:
 
 ### ASPX Page
 
-```aspx
+```csharp
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication1._Default" %>
 
 <!DOCTYPE html>
