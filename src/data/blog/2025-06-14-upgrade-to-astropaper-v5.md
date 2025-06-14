@@ -1,9 +1,9 @@
 ---
 author: Rebecca
 pubDatetime: 2025-06-14T12:00:00.000Z
-title: Upgrading AstroPaper from v4 to v5: What You Need to Know
+title: Upgrading AstroPaper from v4 to v5 - What You Need to Know
 slug: "upgrade-astropaper-v5"
-featured: true
+featured: false
 tags:
   - release
   - upgrade
