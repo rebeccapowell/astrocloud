@@ -1,18 +1,18 @@
 ---
 id: 2439
-title: 'Golden rules for building better software'
+title: "Golden rules for building better software"
 pubDatetime: 2015-05-28T14:20:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2439'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2439"
 slug: 2015-05-28-golden-rules-for-building-better-software
 description: A comprehensive guide to best practices in web development, covering design/UI, graphics/charts, HTML/JavaScript, data handling, site setup, server configuration, and general process.
 categories:
-    - work
+  - work
 tags:
-    - advice
-    - 'best practice'
-    - guidance
+  - advice
+  - "best practice"
+  - guidance
 ---
 
 # Principles for making things for the web
@@ -39,7 +39,7 @@ I manage to abide by some of these things some of the time.
 - Text should be text, not text in an image.
 - Make it clear that clickable things are clickable. They should have `cursor: pointer`, have hover states, and if they're text, they should be distinct from other text.
 - Avoid lightbox modals if possible.
-- Don't make your location-based app *require* a user's location. Be prepared for them to say no. More generally, if you have a very personalized app, think about what interesting things you can show someone who doesn't want to get personal.
+- Don't make your location-based app _require_ a user's location. Be prepared for them to say no. More generally, if you have a very personalized app, think about what interesting things you can show someone who doesn't want to get personal.
 - Don't give someone 20 equally interesting things to do right off the bat. Give them a more focused presentation upfront before turning them loose.
 - Small multiples reflow easily.
 - Web design is not a contest to see who can have the fewest empty pixels. Whitespace is a valuable asset for focusing a user's attention. Let things breathe.
@@ -107,11 +107,11 @@ $sidebar.html("instead");
 - Beware the four C's of working with text data: character encoding, capitalization, curly quotes, and cwhitespace.
 
 ```javascript
-"Côte d'Ivoire" //damn it
-"Cote d’Ivoire" //crap
-"cote d'ivoire" //whoops
-"Côte d'Ivoire " //what the?
-"Ivory Coast" //COME ON
+"Côte d'Ivoire"; //damn it
+"Cote d’Ivoire"; //crap
+"cote d'ivoire"; //whoops
+"Côte d'Ivoire "; //what the?
+"Ivory Coast"; //COME ON
 ```
 
 ## Site setup

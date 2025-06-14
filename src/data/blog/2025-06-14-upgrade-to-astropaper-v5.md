@@ -24,24 +24,29 @@ AstroPaper v5 is here, bringing full support for Astro v5 and a host of improvem
 ## Key Changes in v5
 
 ### 1. Astro v5 Compatibility
+
 - The codebase and dependencies are now fully compatible with Astro v5.
 - Removed deprecated or obsolete config flags (e.g., `experimental: { svg: true }`).
 - Updated integrations and plugins for v5 support.
 
 ### 2. Image & Asset Handling
+
 - New `experimentalLayout: "constrained"` and `responsiveImages: true` for better image performance.
 - Improved asset organization and new images/icons added.
 
 ### 3. Content & Slug Management
+
 - Continued use of Astro's built-in `slug` for blog posts (introduced in v4, now standard).
 - More robust handling of content collections and release notes.
 
 ### 4. Component & Layout Updates
+
 - Refactored and modernized components (e.g., `BackButton.astro`, `BackToTopButton.astro`).
 - New and improved icons, layouts, and utility functions.
 - Deprecated or removed old React-based components in favor of Astro components.
 
 ### 5. Dependency & Config Updates
+
 - Updated `package.json`, lockfiles, and Node.js version for compatibility.
 - Cleaned up and modernized `astro.config.ts` and other config files.
 
@@ -55,6 +60,7 @@ AstroPaper v5 is here, bringing full support for Astro v5 and a host of improvem
 6. **Push and Deploy:** Once everything works, push your changes and redeploy your site.
 
 ## Notable Breaking Changes
+
 - The `experimental: { svg: true }` flag is no longer needed and should be removed.
 - Some components have been renamed, removed, or refactored (e.g., React `.tsx` components replaced with `.astro`).
 - Icon import paths may have changed; update as needed.
@@ -65,64 +71,76 @@ AstroPaper v5 is here, bringing full support for Astro v5 and a host of improvem
 Here are some helpful git commands to streamline your upgrade process:
 
 ### 1. Add the upstream repository (if not already added)
+
 ```powershell
 git remote add upstream https://github.com/satnaing/astro-paper.git
 git fetch upstream
 ```
 
 ### 2. Create a backup branch before merging
+
 ```powershell
 git checkout -b pre-merge-backup
 ```
 
 ### 3. Create a new branch for the merge
+
 ```powershell
 git checkout -b merge-astro-paper
 ```
 
 ### 4. Merge upstream changes
+
 ```powershell
 git merge upstream/main
 ```
 
 ### 5. See which files have conflicts
+
 ```powershell
 git status
 ```
 
 ### 6. Mark resolved files as resolved
+
 ```powershell
 git add <filename>
 ```
 
 ### 7. For deleted files you want to keep deleted
+
 ```powershell
 git rm <filename>
 ```
 
 ### 8. For files you want to keep their version (theirs)
+
 ```powershell
 git checkout --theirs <filename>
 git add <filename>
 ```
 
 ### 9. For files you want to keep your version (ours)
+
 ```powershell
 git checkout --ours <filename>
 git add <filename>
 ```
 
 ### 10. Commit the merge after resolving all conflicts
+
 ```powershell
 git commit -m "Merge upstream AstroPaper v5 and resolve conflicts"
 ```
 
 ### 11. Push your merge branch
+
 ```powershell
 git push origin merge-astro-paper
 ```
 
 ### 12. Remove the upstream remote if you no longer need it
+
 ```powershell
 git remote remove upstream
 ```

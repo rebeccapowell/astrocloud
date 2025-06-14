@@ -1,19 +1,19 @@
 ---
 id: 765
-title: 'ComponentArt 2008 ASP.NET Ajax controls display problem in .NET 4.0'
+title: "ComponentArt 2008 ASP.NET Ajax controls display problem in .NET 4.0"
 pubDatetime: 2011-10-14T09:39:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=765'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=765"
 slug: 2011-10-14-componentart-2008-asp-net-ajax-controls-display-problem-in-net-4-0
 description: An overview of a display problem with ComponentArt 2008 ASP.NET Ajax controls in .NET 4.0, and a solution to fix the issue by modifying the web.config file.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - 'component art'
-    - web.ui
-    - webforms
+  - asp.net
+  - "component art"
+  - web.ui
+  - webforms
 ---
 
 We have recently upgraded an ASP.NET web application from .NET 2.0 to .NET 4.0. We have several grids and other controls using the ComponentArt 2008 Web.UI suite. After upgrading we noticed that the grids were not displaying any data and the paging controls were missing. It took a while to find the problem.
@@ -30,3 +30,4 @@ The solution can be seen in [this ComponentArt forum post](http://www.componenta
         <pages controlRenderingCompatibilityVersion="3.5" clientIDMode="AutoID"/>
     </system.web>
 </configuration>
+```

@@ -1,22 +1,22 @@
 ---
 id: 770
-title: 'Change the color of a transparent PNG image icon on the fly using ASP.NET MVC'
+title: "Change the color of a transparent PNG image icon on the fly using ASP.NET MVC"
 pubDatetime: 2011-01-13T11:33:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=770'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=770"
 slug: 2011-01-13-change-the-color-of-a-transparent-png-image-icon-on-the-fly-using-asp-net-mvc
 description: An overview of using a ColorMatrix to transform the non-transparent pixels of a PNG image on the fly using ASP.NET MVC, including a detailed guide and code examples.
 categories:
-    - work
+  - work
 tags:
-    - actionresult
-    - asp.net
-    - icon
-    - image
-    - mvc
-    - png
-    - transparent
+  - actionresult
+  - asp.net
+  - icon
+  - image
+  - mvc
+  - png
+  - transparent
 ---
 
 How to use a `ColorMatrix` to transform the non-transparent pixels of a PNG image on the fly using ASP.NET MVC2. Take any gray-scale transparent PNG image and apply any known system color to it and then stream it to the HTTP Response stream on the fly.
@@ -45,12 +45,12 @@ A `ColorMatrix` and its use in color transformations is described rather well by
 
 To apply the color transformation we need a [ColorMatrix](http://msdn.microsoft.com/en-us/library/system.drawing.imaging.colormatrix.aspx) that will take the RGB elements of the required [Color](http://msdn.microsoft.com/en-us/library/system.drawing.color.aspx), and transform the existing pixels to those values. Our resulting [ColorMatrix](http://msdn.microsoft.com/en-us/library/system.drawing.imaging.colormatrix.aspx) looks something like that shown below:
 
-| 0 | 0 | 0 | 0 | 0 |
-|---|---|---|---|---|
-| 0 | 0 | 0 | 0 | 0 |
-| 0 | 0 | 0 | 0 | 0 |
-| 0 | 0 | 0 | 1 | 0 |
-| R | G | B | 0 | 1 |
+| 0   | 0   | 0   | 0   | 0   |
+| --- | --- | --- | --- | --- |
+| 0   | 0   | 0   | 0   | 0   |
+| 0   | 0   | 0   | 0   | 0   |
+| 0   | 0   | 0   | 1   | 0   |
+| R   | G   | B   | 0   | 1   |
 
 ## Coding the ColorMatrix
 

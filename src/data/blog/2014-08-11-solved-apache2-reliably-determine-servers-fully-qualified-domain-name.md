@@ -1,20 +1,20 @@
 ---
 id: 2645
-title: 'SOLVED - apache2: Could not reliably determine the server''s fully qualified domain name'
+title: "SOLVED - apache2: Could not reliably determine the server's fully qualified domain name"
 pubDatetime: 2014-08-11T09:22:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2645'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2645"
 slug: 2014-08-11-solved-apache2-reliably-determine-servers-fully-qualified-domain-name
 description: A solution to the Apache2 error "Could not reliably determine the server's fully qualified domain name," including steps to configure ServerName and correct the hosts file on a Digital Ocean VPS with VirtualMin.
 categories:
-    - work
+  - work
 tags:
-    - apache2
-    - server
-    - configuration
-    - troubleshooting
-    - virtualmin
+  - apache2
+  - server
+  - configuration
+  - troubleshooting
+  - virtualmin
 ---
 
 This has been annoying me for a while. I have a Digital Ocean VPS (droplet) running Ubuntu. This provides me with some email accounts and a couple of WordPress sites.
@@ -22,8 +22,8 @@ This has been annoying me for a while. I have a Digital Ocean VPS (droplet) runn
 I've been receiving this error for a few weeks since I setup VirtualMin:
 
 ```bash
-AH00558: apache2: Could not reliably determine the server's 
-fully qualified domain name, using blah.com. Set the 'ServerName' 
+AH00558: apache2: Could not reliably determine the server's
+fully qualified domain name, using blah.com. Set the 'ServerName'
 directive globally to suppress this message
 ```
 

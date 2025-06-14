@@ -1,19 +1,19 @@
 ---
 id: 583
-title: 'BCrypt and ASP.net MVC'
+title: "BCrypt and ASP.net MVC"
 pubDatetime: 2011-07-01T08:27:06+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=583'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=583"
 slug: 2011-07-01-bcrypt-and-asp-net-mvc
 description: An overview of using BCrypt for password hashing in ASP.NET MVC applications, highlighting its advantages for secure password storage.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - bcrypt
-    - mvc
-    - security
+  - asp.net
+  - bcrypt
+  - mvc
+  - security
 format: quote
 ---
 

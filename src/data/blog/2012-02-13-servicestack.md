@@ -3,19 +3,19 @@ id: 401
 title: ServiceStack
 pubDatetime: 2012-02-13T14:59:56+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=401'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=401"
 slug: 2012-02-13-servicestack
 description: An overview of ServiceStack, a modern alternative to WCF, highlighting its advantages for building high-performance, scalable REST and RPC web services.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - mono
-    - 'open source'
-    - servicestack
-    - wcf
-    - 'web api'
+  - asp.net
+  - mono
+  - "open source"
+  - servicestack
+  - wcf
+  - "web api"
 format: quote
 ---
 

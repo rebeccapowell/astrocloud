@@ -1,17 +1,17 @@
 ---
 id: 322
-title: 'Never rewrite code from scratch'
+title: "Never rewrite code from scratch"
 pubDatetime: 2012-04-06T11:25:18+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=322'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=322"
 slug: 2012-04-06-never-rewrite-code-from-scratch
 description: An explanation of why rewriting code from scratch is a strategic mistake, and the benefits of using the Strangler Pattern for refactoring and improving existing codebases.
 categories:
-    - work
+  - work
 tags:
-    - coding
-    - tips
+  - coding
+  - tips
 format: quote
 ---
 

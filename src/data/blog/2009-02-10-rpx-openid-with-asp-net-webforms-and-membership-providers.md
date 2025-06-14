@@ -1,11 +1,10 @@
 ---
-
 id: 800
-title: 'RPX OpenID with ASP.NET Webforms and Membership Providers'
+title: "RPX OpenID with ASP.NET Webforms and Membership Providers"
 pubDatetime: 2009-02-10T21:15:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=800'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=800"
 slug: 2009-02-10-rpx-openid-with-asp-net-webforms-and-membership-providers'
 description: Exploring the integration of RPX, an OpenID consolidator, with ASP.NET Webforms and Membership Providers. This guide covers implementation steps, handling authentication tokens, and mapping OpenID users to an existing database.
 categories:
@@ -16,7 +15,6 @@ tags:
   - openid
   - rpxnow
   - webforms
-
 ---
 
 This evening I started playing around with [RPX](https://rpxnow.com/), the OpenID consolidator from [JanRain](http://www.janrain.com/). I hit a few hurdles along the way, and I thought I would share a little of those experiences with others trying out RPX.
@@ -70,7 +68,7 @@ protected void Page_Load(object sender, EventArgs e)
         WebClient client = new WebClient();
         client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
         string response = client.UploadString("https://rpxnow.com/api/v2/auth_info", postData);
-        
+
         // Parse response and extract user details
         dynamic jsonResponse = JsonConvert.DeserializeObject(response);
         if (jsonResponse["stat"] == "ok")
@@ -78,7 +76,7 @@ protected void Page_Load(object sender, EventArgs e)
             string identifier = jsonResponse["profile"]["identifier"].ToString();
             string email = jsonResponse["profile"]["email"]?.ToString();
             string displayName = jsonResponse["profile"]["displayName"]?.ToString();
-            
+
             // Implement user handling logic here
         }
     }

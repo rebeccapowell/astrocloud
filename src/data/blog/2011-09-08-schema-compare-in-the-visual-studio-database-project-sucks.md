@@ -1,19 +1,19 @@
 ---
 id: 766
-title: 'Schema Compare in the Visual Studio Database Project sucks'
+title: "Schema Compare in the Visual Studio Database Project sucks"
 pubDatetime: 2011-09-08T12:31:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=766'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=766"
 slug: 2011-09-08-schema-compare-in-the-visual-studio-database-project-sucks
 description: An overview of the frustrations with the Schema Compare feature in Visual Studio 2010's Database Project, and suggestions for improving the tool.
 categories:
-    - work
+  - work
 tags:
-    - 'database project'
-    - microsoft
-    - 'schema compare'
-    - 'visual studio'
+  - "database project"
+  - microsoft
+  - "schema compare"
+  - "visual studio"
 ---
 
 Visual Studio 2010 has a very cool Database Project type, which is not supported by all [Visual Studio editions](http://www.microsoft.com/visualstudio/en-us/products), but it is certainly included in Ultimate and Premium. One of the features is a [Schema Compare](http://msdn.microsoft.com/en-us/library/aa833435.aspx), which allows you to compare two database schemas against each other, shows you the differences and then allows you to update the target schema from the source. Those two schemas could be held in actual databases, or in the database project itself. This means that you can compare an existing installation and generate a schema difference script to upgrade one installation to match the other - in other words, great for doing deployment upgrades!

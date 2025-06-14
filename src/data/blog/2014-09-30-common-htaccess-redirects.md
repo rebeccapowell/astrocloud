@@ -1,18 +1,18 @@
 ---
 id: 2723
-title: 'Common .htaccess Redirects'
+title: "Common .htaccess Redirects"
 pubDatetime: 2014-09-30T06:11:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2723'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2723"
 slug: 2014-09-30-common-htaccess-redirects
 description: A comprehensive guide to common .htaccess redirects, including examples for single pages, entire sites, subfolders, and advanced redirection techniques using mod_rewrite.
 categories:
-    - work
+  - work
 tags:
-    - htaccess
-    - rewrite
-    - rule
+  - htaccess
+  - rewrite
+  - rule
 ---
 
 I've recently been [redirecting one website content to another](http://stackoverflow.com/questions/4181606/htaccess-301-redirect-path-and-all-child-paths). Here are some useful common .htaccess file redirects.
@@ -143,4 +143,5 @@ RewriteCond %{REQUEST_URI}/ blog
 RewriteRule ^(.*) http://www.somewhere.com/%{REQUEST_URI} [R=302,NC]
 RewriteRule ^(.*) http://www.somewhere.com/blog/%{REQUEST_URI} [R=302,NC]
 ```
+
 Source: https://gist.github.com/ScottPhillips/1721489

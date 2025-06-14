@@ -1,10 +1,10 @@
 ---
 id: 10001
-title: 'Combining .NET Aspire with Temporal - Part 2'
+title: "Combining .NET Aspire with Temporal - Part 2"
 pubDatetime: 2025-06-09T17:45:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=10000'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=10000"
 slug: 2025-06-09-combining-dotnet-aspire-and-temporal-part-2
 description: Part 2 of a multi-part blog series on Temporal with .NET Aspire.
 featured: false
@@ -19,6 +19,7 @@ tags:
 ---
 
 ## Building a Distributed Workflow App with .NET Aspire and Temporal
+
 ### Part 1: Architecting a Temporal-based Workflow App with .NET Aspire
 
 In this post, I will kick off a multi-part series on building and deploying a resilient, distributed workflow-powered example application using [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/overview) and [Temporal.io](https://temporal.io/). I will cover local development with Aspire's AppHost and containerized services, move into Kubernetes deployments with autoscaling, and integrate full observability using OpenTelemetry. In part two of this series I'll cover payload and encryption codecs in Temporal and deployments of this entire application to a local k8s cluster.
@@ -26,10 +27,10 @@ In this post, I will kick off a multi-part series on building and deploying a re
 ### Goals
 
 - Set up .NET Aspire
-- Orchestrate workflows using Temporal.    
-- Build API endpoints that trigger workflows.    
-- Run a dedicated worker to execute activities.    
-- Observe logs, traces, and metrics via Aspire.    
+- Orchestrate workflows using Temporal.
+- Build API endpoints that trigger workflows.
+- Run a dedicated worker to execute activities.
+- Observe logs, traces, and metrics via Aspire.
 - Enable smooth local-first development.
 
 ---
@@ -146,11 +147,12 @@ builder.AddProject<Worker>("worker").WithReference(temporal);
 ```
 
 ### Developer Temporal options
+
 Temporal provide a developer CLI but also a [combined container for local development](https://github.com/InfinityFlowApp/aspire-temporal/blob/main/src/InfinityFlow.Aspire.Temporal/TemporalServerContainerBuilderExtensions.cs#L39), which is what we are using here via [an easy to use Aspire AppHost BuGet package](https://github.com/InfinityFlowApp/aspire-temporal). This is more lightweight than running Temporal Server, Temporal UI and Postgres on your local machine. Compared to the CLI which doesn't plug well into the Aspire framework, this is a perfect balance for Aspire led development (git-pull-f5-development) and the separation of concerns for deployment, especially if you already have a Temporal self hosted or cloud instance.
 
 ### Gotchas
 
-- **Trimming must be disabled** for Temporal SDK compatibility: `PublishTrimmed` causes issues due to P/Invoke.    
-- Default `.dockerignore` and `Dockerfile` templates may omit required files—manually fix paths.    
-- Use non-root container user (`USER $APP_UID`) for security.    
+- **Trimming must be disabled** for Temporal SDK compatibility: `PublishTrimmed` causes issues due to P/Invoke.
+- Default `.dockerignore` and `Dockerfile` templates may omit required files—manually fix paths.
+- Use non-root container user (`USER $APP_UID`) for security.
 - Alpine is not supported by Temporal SDK due to musl/GLIBC incompatibilities.

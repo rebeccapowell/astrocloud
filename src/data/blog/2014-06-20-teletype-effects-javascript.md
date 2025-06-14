@@ -1,20 +1,20 @@
 ---
 id: 1429
-title: 'Teletype effects in JavaScript'
+title: "Teletype effects in JavaScript"
 pubDatetime: 2014-06-20T09:10:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=1429'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=1429"
 slug: 2014-06-20-teletype-effects-javascript
 description: An exploration of implementing teletype effects in JavaScript, including references to jQuery plugins and a live example on jsFiddle.
 categories:
-    - work
+  - work
 tags:
-    - effects
-    - example
-    - javascript
-    - 'jquery. plugin'
-    - teletype
+  - effects
+  - example
+  - javascript
+  - "jquery. plugin"
+  - teletype
 ---
 
 For some reason the nerd in me really likes teletype effects. Maybe it that old school factor that I like.

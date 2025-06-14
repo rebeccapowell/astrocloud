@@ -1,20 +1,20 @@
 ---
 id: 1165
-title: 'Request-Acknowledge-Poll as a service design pattern'
+title: "Request-Acknowledge-Poll as a service design pattern"
 pubDatetime: 2013-04-10T14:40:41+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/request-acknowledge-is-a-service-design-pattern/'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/request-acknowledge-is-a-service-design-pattern/"
 slug: 2013-04-10-request-acknowledge-poll-as-a-service-design-pattern
 description: An explanation of the Request/Acknowledge service design pattern, including variations like Request/Acknowledge/Poll and Request/Acknowledge/Callback, and their implementation in reducing temporal coupling.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - nservicebus
-    - MassTransit
-    - polling
-    - webapi
+  - asp.net
+  - nservicebus
+  - MassTransit
+  - polling
+  - webapi
 format: quote
 ---
 
@@ -121,19 +121,22 @@ public class ClaimCreatedConsumer : IConsumer<ClaimCreated>
 ```
 
 ## Idempotency and Polling
+
 In this example, idempotency is ensured by allowing the client to pass in the GUID themselves. If the GUID is not provided, the server generates one. The client can poll the status of the claim processing by querying the endpoint with the GUID. If the processing is not yet complete, the endpoint returns a 404 Not Found status. Once the processing is finished, the endpoint returns the processed data with a 200 OK status.
 
 ## Downsides of the Request/Acknowledge/Poll Pattern
+
 While the Request/Acknowledge/Poll pattern has its advantages, it also comes with some downsides:
 
 1. **Client Complexity**: Implementing resilient HTTP clients to handle polling can be challenging. Clients need to manage the polling interval, handle potential timeouts, and ensure they do not overwhelm the server with too many requests.
 2. **Increased Load on Server**: Polling can lead to increased load on the server, especially if many clients are polling frequently. This can be mitigated by implementing exponential backoff strategies or using a push-based notification system.
 3. **Latency**: There is an inherent latency in the polling mechanism. Clients may not receive the status update immediately after the task is completed, depending on the polling interval.
 4. **Resource Management**: The server needs to manage and store the state of each task, which can consume resources. Proper resource management and cleanup mechanisms need to be in place to handle this.
-   
+
 Despite these downsides, the Request/Acknowledge/Poll pattern remains a useful approach for handling long-running tasks in a decoupled and scalable manner.
 
 ## Alternative Patterns
+
 1. **Request/Response**: In this pattern, the client sends a request and waits for the server to process it and send back a response. This is suitable for short-lived tasks but can lead to blocking and increased latency for long-running tasks.
 
 2. **Request/Callback**: The client sends a request and provides a callback URL. The server processes the request and sends the result to the callback URL once the processing is complete. This reduces the need for polling but requires the client to have an endpoint to receive the callback.
@@ -148,4 +151,4 @@ Each of these patterns has its own advantages and trade-offs. The choice of patt
 
 ## Conclusion
 
-This pattern allows the client to remain in control of retrieving status information as needed, reducing temporal coupling and improving the overall efficiency of the system. 
+This pattern allows the client to remain in control of retrieving status information as needed, reducing temporal coupling and improving the overall efficiency of the system.

@@ -1,26 +1,26 @@
 ---
 id: 1537
-title: 'How I setup my Digital Ocean droplet with ZPanel and configured the DKIM and SPF records'
+title: "How I setup my Digital Ocean droplet with ZPanel and configured the DKIM and SPF records"
 pubDatetime: 2014-01-19T10:52:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=1537'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=1537"
 slug: 2014-01-19-setup-digital-ocean-droplet-zpanel-configured-dkim-spf-records
 fsb_social_facebook:
-    - '0'
+  - "0"
 description: A detailed guide on setting up a Digital Ocean droplet with ZPanel, and configuring DKIM and SPF records for email authentication, including securing the server and installing Spam Assassin.
 categories:
-    - work
+  - work
 tags:
-    - 'digital ocean'
-    - dkim
-    - dns
-    - droplet
-    - hosting
-    - spf
-    - ubuntu
-    - vps
-    - zpanel
+  - "digital ocean"
+  - dkim
+  - dns
+  - droplet
+  - hosting
+  - spf
+  - ubuntu
+  - vps
+  - zpanel
 ---
 
 I've recently been getting to grips with Digital Ocean's VPS offering; what DO lovingly refer to as "droplets". My plan was to be able to move a bunch of low traffic websites, both personal and for customers, to a Linux based environment. I also wanted to install an easy to use web hosting control panel, and I didn't want to pay much for it.

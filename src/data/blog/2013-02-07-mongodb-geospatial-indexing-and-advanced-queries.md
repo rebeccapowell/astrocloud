@@ -1,20 +1,20 @@
 ---
 id: 10
-title: 'MongoDB - Geospatial Indexing and Advanced Queries'
+title: "MongoDB - Geospatial Indexing and Advanced Queries"
 pubDatetime: 2013-02-07T14:00:28+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=10'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=10"
 slug: 2013-02-07-mongodb-geospatial-indexing-and-advanced-queries
 description: An overview of MongoDB's geospatial indexing and advanced queries, highlighting its advantages over traditional MySQL algorithms for geospatial data.
 categories:
-    - work
+  - work
 tags:
-    - advanced
-    - geospatial
-    - indexing
-    - mongodb
-    - queries
+  - advanced
+  - geospatial
+  - indexing
+  - mongodb
+  - queries
 format: quote
 ---
 

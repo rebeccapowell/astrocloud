@@ -1,19 +1,19 @@
 ---
 id: 2717
-title: 'Text to UML Diagrams - Online tools'
+title: "Text to UML Diagrams - Online tools"
 pubDatetime: 2013-07-11T13:00:24+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/text-to-uml-diagrams-online-tools/'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/text-to-uml-diagrams-online-tools/"
 slug: 2013-07-11-text-to-uml-diagrams-online-tools
 description: An introduction to text-based tools for creating UML diagrams, highlighting SVG-Sequence-Diagram, js-sequence-diagrams, and websequencediagrams.com, with an example of a request-poll-response style architecture.
 categories:
-    - work
+  - work
 tags:
-    - diagram
-    - online
-    - tools
-    - uml
+  - diagram
+  - online
+  - tools
+  - uml
 ---
 
 I came across two great tools for creating UML diagrams. Traditionally I’ve used Visio, which is cumbersome and awkward to use. You need to click, drag, right-click, left-click, god-knows-click to get anywhere.

@@ -1,27 +1,27 @@
 ---
 id: 2593
-title: 'Command prompt here in Explorer Vista, Windows 7 and Windows 8'
+title: "Command prompt here in Explorer Vista, Windows 7 and Windows 8"
 pubDatetime: 2014-05-12T10:27:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2593'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2593"
 slug: 2014-05-12-command-prompt-explorer-vista-windows-7-windows-8
 description: A guide on opening a command prompt from Windows Explorer in Vista, Windows 7, and Windows 8, including adding a Visual Studio Command Prompt to the context menu and using Git Bash for Unix-like tools.a command prompt from Windows Explorer in Vista, Windows 7, and Windows 8, including adding a Visual Studio Command Prompt to the context menu and using Git Bash for Unix-like tools.
 categories:
-    - work
+  - work
 tags:
-    - bash
-    - command
-    - git
-    - prompt
-    - unix
-    - 'visual studio'
-    - 'visual studio 2012'
-    - 'visual studio 2013'
-    - windows
-    - 'windows 7'
-    - 'windows 8'
-    - 'windows vista'
+  - bash
+  - command
+  - git
+  - prompt
+  - unix
+  - "visual studio"
+  - "visual studio 2012"
+  - "visual studio 2013"
+  - windows
+  - "windows 7"
+  - "windows 8"
+  - "windows vista"
 ---
 
 As a developer, the ability to open a command prompt from within Explorer in the current folder, or selected folder is really useful. The alternative is to navigate using "cd whatever". Well, not so obviously, Windows versions since Vista have a neat little feature that allows you to open up a command window from a selected folder from within Windows Explorer.bility to open a command prompt from within Explorer in the current folder, or selected folder is really useful. The alternative is to navigate using "cd whatever". Well, not so obviously, Windows versions since Vista have a neat little feature that allows you to open up a command window from a selected folder from within Windows Explorer.
