@@ -1,19 +1,19 @@
 ---
 id: 2332
-title: 'Fix Internet Explorer prompts to save JSON response when uploading files'
+title: "Fix Internet Explorer prompts to save JSON response when uploading files"
 pubDatetime: 2014-02-13T13:08:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2332'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2332"
 slug: 2014-02-13-fix-internet-explorer-prompts-save-json-response-uploading-files
 description: A guide to fixing the issue where Internet Explorer prompts to save JSON responses when uploading files via AJAX, including a solution for modifying HTTP headers in ASP.NET MVC.
 categories:
-    - work
+  - work
 tags:
-    - bug
-    - 'internet explorer'
-    - json
-    - problem
+  - bug
+  - "internet explorer"
+  - json
+  - problem
 ---
 
 <!-- wp:paragraph -->
@@ -25,12 +25,14 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:code {"backgroundColor":"black"} -->
+
 ```bash
 POST http://localhost:9999/customer/ HTTP/1.1
 Accept: text/html, application/xhtml+xml, */*
 Content-Type: multipart/form-data; boundary=---------------------------7de3581a151560
 .......removed irrelevant lines.......
 ```
+
 <!-- /wp:code -->
 
 <!-- wp:paragraph -->
@@ -38,6 +40,7 @@ Content-Type: multipart/form-data; boundary=---------------------------7de3581a1
 <!-- /wp:paragraph -->
 
 <!-- wp:code {"backgroundColor":"black"} -->
+
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
@@ -45,6 +48,7 @@ Content-Type: application/json; charset=utf-8
 
 {"customerId":1003}
 ```
+
 <!-- /wp:code -->
 
 <!-- wp:paragraph -->
@@ -52,12 +56,14 @@ Content-Type: application/json; charset=utf-8
 <!-- /wp:paragraph -->
 
 <!-- wp:code {"backgroundColor":"black"} -->
+
 ```bash
 POST http://localhost:9999/customer/edit/1003 HTTP/1.1
 Accept: application/json, text/javascript, */*; q=0.01
 Content-Type: application/x-www-form-urlencoded
 .......removed irrelevant lines.......
 ```
+
 <!-- /wp:code -->
 
 <!-- wp:paragraph -->
@@ -65,6 +71,7 @@ Content-Type: application/x-www-form-urlencoded
 <!-- /wp:paragraph -->
 
 <!-- wp:code {"backgroundColor":"black"} -->
+
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
@@ -72,6 +79,7 @@ Content-Type: application/json; charset=utf-8
 
 {"Success":true}
 ```
+
 <!-- /wp:code -->
 
 <!-- wp:paragraph -->
@@ -79,6 +87,7 @@ Content-Type: application/json; charset=utf-8
 <!-- /wp:paragraph -->
 
 <!-- wp:code {"backgroundColor":"black"} -->
+
 ```c#
 protected new JsonResult Json(object data) {
     if (this.Request.AcceptTypes == null) {
@@ -90,6 +99,7 @@ protected new JsonResult Json(object data) {
         base.Json(data) : base.Json(data, "text/plain");
 }
 ```
+
 <!-- /wp:code -->
 
 <!-- wp:paragraph -->

@@ -1,18 +1,18 @@
 ---
 id: 215
-title: 'The right algorithm for user ratings'
+title: "The right algorithm for user ratings"
 pubDatetime: 2012-07-06T10:59:04+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=215'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=215"
 slug: 2012-07-06-the-right-algorithm-for-user-ratings
 description: An explanation of the correct algorithm for sorting user ratings, highlighting the use of the Wilson score confidence interval for accurate ranking.
 categories:
-    - work
+  - work
 tags:
-    - algorithms
-    - development
-    - ratings
+  - algorithms
+  - development
+  - ratings
 format: quote
 ---
 
@@ -31,6 +31,7 @@ Here is a simple example of how to implement the Wilson score confidence interva
 1. **Calculate the Wilson score**: The Wilson score interval is used to calculate the lower bound of the confidence interval for a Bernoulli parameter. This helps in ranking items based on user ratings more accurately.
 
 2. **Parameters**:
+
    - `p`: The proportion of positive ratings.
    - `n`: The total number of ratings.
    - `z`: The z-score for the desired confidence level (e.g., 1.96 for 95% confidence).
@@ -83,6 +84,7 @@ Wilson Score: 0.7137658827880908
 ```
 
 ## Explanation of the Code
+
 1. **Rating Class**: This class contains properties for positive ratings and total ratings. It also includes a method to calculate the Wilson score.
 2. **CalculateWilsonScore Method**: This method calculates the Wilson score using the formula provided. It returns 0 if there are no ratings.
 3. **Main Method**: This method creates an instance of the Rating class, sets the positive and total ratings, and calculates the Wilson score. The result is printed to the console.

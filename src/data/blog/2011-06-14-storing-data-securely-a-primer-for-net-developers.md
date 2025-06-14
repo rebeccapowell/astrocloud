@@ -1,20 +1,20 @@
 ---
 id: 593
-title: 'Storing data securely - A primer for .NET developers'
+title: "Storing data securely - A primer for .NET developers"
 pubDatetime: 2011-06-14T08:28:41+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=593'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=593"
 slug: 2011-06-14-storing-data-securely-a-primer-for-net-developers
 description: An overview of the importance of cryptography in computer systems, highlighting common pitfalls and best practices for .NET developers to securely store data.
 categories:
-    - work
+  - work
 tags:
-    - cryptography
-    - data
-    - encryption
-    - security
-    - storage
+  - cryptography
+  - data
+  - encryption
+  - security
+  - storage
 format: quote
 ---
 

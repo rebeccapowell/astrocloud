@@ -1,19 +1,19 @@
 ---
 id: 802
-title: 'ASP.NET - Disabling the submit button to prevent double submissions'
+title: "ASP.NET - Disabling the submit button to prevent double submissions"
 pubDatetime: 2009-01-21T15:38:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=802'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=802"
 slug: 2009-01-21-asp-net-disabling-the-submit-button-to-prevent-double-submissions
 description: A solution for preventing double submissions in ASP.NET applications by creating a custom button that disables itself upon being clicked.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - disable
-    - double
-    - submit
+  - asp.net
+  - disable
+  - double
+  - submit
 ---
 
 If a user clicks on a form submit button and the page response is slow, the user may often re-click that button. Because the original request has already been submitted, you may find that the user has made a double submission. In e-commerce sites, the double submission of a credit card payment may be very unpopular with your customers.

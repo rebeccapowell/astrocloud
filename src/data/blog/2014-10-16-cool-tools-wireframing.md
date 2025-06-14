@@ -1,17 +1,17 @@
 ---
 id: 2736
-title: 'Cool tools for wireframing'
+title: "Cool tools for wireframing"
 pubDatetime: 2014-10-16T20:05:10+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2736'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2736"
 slug: 2014-10-16-cool-tools-wireframing
 description: An overview of tools for wireframing and prototyping, including Axure RP and Balsamiq Mockups, highlighting their features and benefits for design and collaboration.
 categories:
-    - work
+  - work
 tags:
-    - tools
-    - wireframes
+  - tools
+  - wireframes
 ---
 
 Axure RP gives you the wireframing, prototyping and documentation tools needed to make informed design choices, persuade any skeptics, and document your design... and maybe win a few fans along the way. Choose the Standard edition for prototyping or go Pro to add documentation and collaboration features.

@@ -1,21 +1,21 @@
 ---
 id: 1462
-title: 'A simple lightweight HTTP Request Library'
+title: "A simple lightweight HTTP Request Library"
 pubDatetime: 2014-02-01T09:43:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=1462'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=1462"
 slug: 2014-02-01-simple-lightweight-http-request-library
 fsb_social_facebook:
-    - '0'
+  - "0"
 description: An introduction to Unirest, a lightweight HTTP request library for .NET, including examples of basic POST requests and an overview of its features.
 categories:
-    - work
+  - work
 tags:
-    - .net
-    - client
-    - http
-    - rest
+  - .net
+  - client
+  - http
+  - rest
 ---
 
 Unirest is a set of lightweight HTTP libraries available in multiple languages. This is a port of the Java library to .NET.

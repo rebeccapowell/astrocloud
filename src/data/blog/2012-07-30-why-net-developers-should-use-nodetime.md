@@ -1,20 +1,20 @@
 ---
 id: 155
-title: 'Why .NET developers should use NodaTime'
+title: "Why .NET developers should use NodaTime"
 pubDatetime: 2012-07-30T14:52:49+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=155'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=155"
 slug: 2012-07-30-why-net-developers-should-use-nodetime
 description: An explanation of the benefits of using NodaTime for date and time handling in .NET applications, highlighting its advantages over the .NET date and time API.
 categories:
-    - work
+  - work
 tags:
-    - .net
-    - datetime
-    - offsets
-    - timezones
-    - utc
+  - .net
+  - datetime
+  - offsets
+  - timezones
+  - utc
 format: quote
 ---
 

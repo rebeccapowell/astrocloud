@@ -1,28 +1,28 @@
 ---
 id: 2758
-title: 'VirtualMin, SSL Perfect Forward Secrecy and StartSSL'
+title: "VirtualMin, SSL Perfect Forward Secrecy and StartSSL"
 pubDatetime: 2014-11-18T22:56:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2758'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2758"
 slug: 2014-11-18-virtualmin-ssl-perfect-forward-secrecy-startssl
 description: A detailed guide on setting up SSL with Perfect Forward Secrecy using VirtualMin and StartSSL, including configuration tips and security best practices.
 categories:
-    - work
+  - work
 tags:
-    - certificate
-    - eff
-    - encryption
-    - https
-    - pem
-    - secure
-    - sha1
-    - sha2
-    - ssl
-    - startcom
-    - startssl
-    - virtualmin
-    - webmin
+  - certificate
+  - eff
+  - encryption
+  - https
+  - pem
+  - secure
+  - sha1
+  - sha2
+  - ssl
+  - startcom
+  - startssl
+  - virtualmin
+  - webmin
 ---
 
 I've recently been setting this website up to use SSL. To do so I used a couple of great guides and tools on the internet. I got my [SSL certificate for free from StartSSL](https://www.startssl.com/). I found [the guide by Eric Mill](https://konklone.com/post/switch-to-https-now-for-free) invaluable to working through the relatively poor UI that StartSSL has to gain the free certificate.

@@ -1,19 +1,19 @@
 ---
 id: 451
-title: 'Automate site deployments with TeamCity'
+title: "Automate site deployments with TeamCity"
 pubDatetime: 2011-11-23T11:39:54+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=451'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=451"
 slug: 2011-11-23-automate-site-deployments-with-teamcity
 description: An overview of automating site deployments with TeamCity, highlighting the benefits of continuous delivery and deployment automation.
 categories:
-    - work
+  - work
 tags:
-    - automation
-    - 'continuous delivery'
-    - deployment
-    - teamcity
+  - automation
+  - "continuous delivery"
+  - deployment
+  - teamcity
 format: quote
 ---
 
@@ -47,3 +47,4 @@ Here is an example of a simple TeamCity configuration for deploying a web applic
 1. **Build Step**: Compile the application
    ```bash
    msbuild MyWebApp.sln /p:Configuration=Release
+   ```

@@ -1,23 +1,23 @@
 ---
 id: 2651
-title: 'Powershell Power - Moving large amounts of files to the cloud'
+title: "Powershell Power - Moving large amounts of files to the cloud"
 pubDatetime: 2014-08-10T19:25:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=2651'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=2651"
 slug: 2014-08-10-powershell-power-moving-large-amounts-files-cloud
 description: A detailed guide on using Powershell and .NET to transfer large amounts of files to the cloud, including challenges faced and solutions implemented for efficient file migration and database updates.
 categories:
-    - work
+  - work
 tags:
-    - cloud
-    - files
-    - github
-    - hack
-    - json
-    - powershell
-    - rackspace
-    - zip
+  - cloud
+  - files
+  - github
+  - hack
+  - json
+  - powershell
+  - rackspace
+  - zip
 featured: true
 ---
 

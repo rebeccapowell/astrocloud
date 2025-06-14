@@ -1,19 +1,19 @@
 ---
 id: 3682
-title: 'Is Bob C. Smith the same person as Robert Charles Smith? A conversation with OpenAI Chat GPT'
+title: "Is Bob C. Smith the same person as Robert Charles Smith? A conversation with OpenAI Chat GPT"
 pubDatetime: 2023-04-03T21:00:28+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=3682'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=3682"
 slug: 2023-04-03-is-bob-c-smith-the-same-person-as-robert-charles-smith-a-conversation-with-openai-chat-gpt
 description: An exploration of name matching challenges in automated systems, discussing fuzzy matching algorithms and machine learning techniques, with insights from a conversation with OpenAI's ChatGPT.
 categories:
-    - development
+  - development
 tags:
-    - algorithm
-    - chatgpt
-    - fuzzy
-    - openai
+  - algorithm
+  - chatgpt
+  - fuzzy
+  - openai
 ---
 
 A couple of years ago I worked on a system that performed automated income verification for banks processing mortgage applications. The process was relatively simple:

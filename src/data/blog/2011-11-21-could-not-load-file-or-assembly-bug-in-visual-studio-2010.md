@@ -1,18 +1,18 @@
 ---
 id: 761
-title: 'Could not load file or assembly bug in Visual Studio 2010'
+title: "Could not load file or assembly bug in Visual Studio 2010"
 pubDatetime: 2011-11-21T14:48:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=761'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=761"
 slug: 2011-11-21-could-not-load-file-or-assembly-bug-in-visual-studio-2010
 description: An overview of a bug in Visual Studio 2010 where the Copy Local setting on a referenced DLL is not honored, and a solution to fix the issue.
 categories:
-    - work
+  - work
 tags:
-    - asp.net
-    - bug
-    - 'visual studio'
+  - asp.net
+  - bug
+  - "visual studio"
 format: quote
 ---
 
@@ -39,4 +39,4 @@ Following the simple step above sets it correctly, which is then honored by MsBu
 
 A nasty bug. By default the Copy Local should be set to False in the properties window, since the build treats it as such.
 
-To reiterate: To fix, change the **Copy Local** property to **False** then *save* your project. Then revert to **True** and *save* the project again.
+To reiterate: To fix, change the **Copy Local** property to **False** then _save_ your project. Then revert to **True** and _save_ the project again.

@@ -1,18 +1,18 @@
 ---
 id: 759
-title: 'Warning: The HTML5 Data Attribute is case sensitive'
+title: "Warning: The HTML5 Data Attribute is case sensitive"
 pubDatetime: 2012-03-14T09:33:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=759'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=759"
 slug: 2012-03-14-warning-the-html5-data-attribute-is-case-sensitive
 description: An explanation of why the HTML5 data attribute is case-sensitive, highlighting a specific issue with uppercase letters and providing a solution based on the HTML5 specification.
 categories:
-    - work
+  - work
 tags:
-    - 'case sensitive'
-    - 'data attribute'
-    - html5
+  - "case sensitive"
+  - "data attribute"
+  - html5
 ---
 
 I came across a nice little problem today. I wanted to use the HTML5 data attribute with jQuery. You can add any kind of data as attributes to any DOM element, using the prefix `data-`.
@@ -20,7 +20,7 @@ I came across a nice little problem today. I wanted to use the HTML5 data attrib
 You can then use that data client side using JavaScript, which is handy for lots of different situations. Today I could not get this to work. My attribute was named so:
 
 ```javascript
-data-projectUrl
+data - projectUrl;
 ```
 
 **After a lot of frustration, the issue was resolved as caused by the upper case U in Url. The specification does not allow this, unless it follows a hyphen.**

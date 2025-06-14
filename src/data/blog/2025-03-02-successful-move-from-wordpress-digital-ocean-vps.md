@@ -1,10 +1,10 @@
 ---
 id: 10001
-title: 'Moving from WordPress on Digital Ocean VPS to Cloudflare Pages and Astro SSG'
+title: "Moving from WordPress on Digital Ocean VPS to Cloudflare Pages and Astro SSG"
 pubDatetime: 2025-03-02T17:45:00+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=10000'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=10000"
 slug: 2025-03-02-moving-from-digital-ocean-to-cloudflare-pages
 description: A step-by-step guide on migrating from WordPress on Digital Ocean VPS to Cloudflare Pages and Astro SSG, including integrating Giscus comments and other benefits.
 featured: true
@@ -24,11 +24,13 @@ I've been a customer of Digital Ocean for about ten years, initially running an 
 ### Old Setup: WordPress on Digital Ocean VPS
 
 #### Pros:
+
 - **Control**: Full control over the server environment.
 - **Flexibility**: Ability to install and configure any software.
 - **Familiarity**: Long-term use and familiarity with WordPress.
 
 #### Cons:
+
 - **Cost**: Approximately $20 per month for the VPS.
 - **Maintenance**: Regular updates and maintenance required for the server and WordPress.
 - **Security**: Constant need to monitor and secure the server.
@@ -37,6 +39,7 @@ I've been a customer of Digital Ocean for about ten years, initially running an 
 ### New Setup: Cloudflare Pages and Astro SSG
 
 #### Pros:
+
 - **Cost**: Free tier available on [Cloudflare Pages](https://pages.cloudflare.com/).
 - **Performance**: Fast load times with Cloudflare's global CDN and Astro's static site generation.
 - **Security**: Built-in SSL and DDoS protection from Cloudflare.
@@ -44,6 +47,7 @@ I've been a customer of Digital Ocean for about ten years, initially running an 
 - **Simplicity**: No need for a database or server-side code with Astro.
 
 #### Cons:
+
 - **Learning Curve**: Initial learning curve for Astro and Cloudflare Pages.
 - **Customization**: Limited to static site capabilities (though Astro is highly flexible).
 
@@ -98,9 +102,9 @@ Specifically with regards to performance:
 I hope this guide helps you in your own migration journey. If you have any questions or need further assistance, feel free to reach out. Happy blogging!
 
 ### References
+
 - [Configuring Astro automatic build and deployments to Cloudflare Pages via Github](https://docs.astro.build/en/guides/deploy/cloudflare/)
 - [Configuring email addresses in Cloudflare](https://developers.cloudflare.com/email-routing/setup/email-routing-addresses/)
 - [Branding Icons](https://tabler.io/icons/icon/brand-mastodon) for Social Media Apps
 - [Logo Maker](https://looka.com/) - Hint: make the logo and take a screenshot. Then upload it [here](https://studio.creativefabrica.com/vectorizer/) to create an SVG out of the image.
 - [Source code](https://github.com/rebeccapowell/astrocloud) for this website.
-

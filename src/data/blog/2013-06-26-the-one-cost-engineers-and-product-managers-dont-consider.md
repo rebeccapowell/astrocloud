@@ -1,20 +1,20 @@
 ---
 id: 2718
-title: 'The one cost engineers and product managers don’t consider'
+title: "The one cost engineers and product managers don’t consider"
 pubDatetime: 2013-06-26T13:00:20+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/embrace-simplicity-in-your-engineering-the-best/'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/embrace-simplicity-in-your-engineering-the-best/"
 slug: 2013-06-26-the-one-cost-engineers-and-product-managers-dont-consider
 description: Emphasizes the importance of simplicity in engineering, arguing that simpler code is more valuable to an organization and advocating for a focus on efficiency over complexity.
 categories:
-    - work
+  - work
 tags:
-    - complexity
-    - development
-    - ethos
-    - kiss
-    - simplicity
+  - complexity
+  - development
+  - ethos
+  - kiss
+  - simplicity
 format: quote
 ---
 

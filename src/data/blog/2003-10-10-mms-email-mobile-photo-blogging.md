@@ -1,20 +1,20 @@
 ---
 id: 802
-title: 'MMS Email Photo Blogging'
+title: "MMS Email Photo Blogging"
 pubDatetime: 2003-10-10T17:22:52+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=802'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=802"
 slug: 2003-10-10-mms-email-mobile-photo-blogging
 description: A guide on how to automatically pick up MMS emails, extract the images, and post them as a "moblog" using ASP.NET, including POP3 integration, scheduling, and displaying images.
 categories:
-    - work
+  - work
 tags:
-    - asp
-    - pop3
-    - mms
-    - mobile
-    - blogging
+  - asp
+  - pop3
+  - mms
+  - mobile
+  - blogging
 ---
 
 A couple of weeks ago I talked about my new Nokia 7250i and its ability to send MMS via email. I wanted to automatically pick up those emails, extract the images and post them as a "moblog". I have now completed most of the code to do this, and felt that it would be nice of me to share some of the code to help others do the same.

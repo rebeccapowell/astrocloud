@@ -1,18 +1,18 @@
 ---
 id: 802
-title: 'Creating a PowerPoint presentation on-the-fly using a design template'
+title: "Creating a PowerPoint presentation on-the-fly using a design template"
 pubDatetime: 2003-10-08T17:22:52+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: 'https://rebecca-powell.com/?p=802'
+layout: "../layouts/BlogPost.astro"
+guid: "https://rebecca-powell.com/?p=802"
 slug: 2003-10-08-creating-a-presentation-on-the-fly-using-a-design-template
 description: A guide on how to automate the creation of PowerPoint presentations using ASP (classic), including using a design template, updating the title, copying slides, and saving the presentation to the server.
 categories:
-    - work
+  - work
 tags:
-    - asp
-    - powerpoint
-    - create
+  - asp
+  - powerpoint
+  - create
 ---
 
 Automating PowerPoint is not pretty, nor is it clever! Microsoft Office applications were not designed to be used as automation objects, but with a bit of persistence - they can be. Why would you want to do this though? Who would need to generate out PowerPoint files on the fly?
@@ -56,7 +56,7 @@ With ppt.ActiveWindow.Selection.TextRange
      .Underline = 0
      .BaselineOffset = 0
      .AutoRotateNumbers = 0
-     .Color.SchemeColor = 2 
+     .Color.SchemeColor = 2
    End With
 End With
 ppt.ActiveWindow.Selection.Unselect

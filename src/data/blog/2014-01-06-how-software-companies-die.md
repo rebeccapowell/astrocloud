@@ -1,11 +1,10 @@
 ---
-
 id: 1571
-title: 'How Software Companies Die'
+title: "How Software Companies Die"
 pubDatetime: 2014-01-06T10:26:06+01:00
 author: rebecca
-layout: '../layouts/BlogPost.astro'
-guid: '[https://rebecca-powell.com/?p=1571](https://rebecca-powell.com/?p=1571)'
+layout: "../layouts/BlogPost.astro"
+guid: "[https://rebecca-powell.com/?p=1571](https://rebecca-powell.com/?p=1571)"
 slug: 2014-01-06-how-software-companies-die'
 description: A humorous and insightful look at how software companies thrive and eventually decline, based on Orson Scott Card's analogy of programmers as domesticated bees and the inevitable corporate shift from innovation to bureaucracy.
 categories:
@@ -15,7 +14,6 @@ tags:
   - management
   - programmers
   - software
-
 ---
 
 > Here's the secret that every successful software company is based on:
@@ -66,7 +64,6 @@ Got to get some better packaging. Yeah, that's it.
 
 ---
 
-Yes, it's from Orson Scott Card, the Hugo and Nebula award-winning author of *Ender's Game*, *Speaker for the Dead*, *Lost Boys*, the *Alvin Maker* series, and many other novels.
+Yes, it's from Orson Scott Card, the Hugo and Nebula award-winning author of _Ender's Game_, _Speaker for the Dead_, _Lost Boys_, the _Alvin Maker_ series, and many other novels.
 
 Via [How Software Companies Die](http://www.cs.cmu.edu/~chuck/jokepg/joke_19970213_01.txt).
-
