@@ -1,7 +1,7 @@
 ---
 id: 10001
 title: "Combining .NET Aspire with Temporal - Part 1"
-pubDatetime: 2025-06-15T01:27:00+01:00
+pubDatetime: 2025-06-15T00:27:00+01:00
 author: rebecca
 layout: "../layouts/BlogPost.astro"
 guid: "https://rebecca-powell.com/?p=10000"
