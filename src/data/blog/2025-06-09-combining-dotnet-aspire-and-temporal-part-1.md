@@ -56,7 +56,7 @@ This article starts to explore that from a developer implementation perspective.
 
 ### .NET Aspire Introduction
 
-[.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) is a new opinionated stack for building cloud-native .NET applications, spearheaded by [David Fowler](https://medium.com/@davidfowl) and the ASP.NET team at Microsoft. It focuses on solving the orchestration complexity that comes with modern distributed applications — helping developers manage service composition, local development environments, diagnostics, and deployment.
+[.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/) is a new opinionated stack for building cloud-native .NET applications, spearheaded by [David Fowler](https://medium.com/@davidfowl) and the ASP.NET team at Microsoft. It focuses on solving the orchestration complexity that comes with modern distributed applications, namely helping developers manage service composition, local development environments, diagnostics, and deployment.
 
 Aspire introduces a developer-first model for composing microservices, background workers, and dependencies like Postgres or Redis through a unified AppHost and dashboard experience. It shines especially during local-first development — where spinning up a full stack of services becomes a single dotnet run away.
 
@@ -66,12 +66,12 @@ As it evolves, Aspire aims to become the default entry point for .NET developers
 
 Temporal is a durable execution engine designed to make writing fault-tolerant, long-running workflows feel like writing simple code. It handles retries, state persistence, timeouts, and failures behind the scenes — allowing developers to focus on logic, not infrastructure.
 
-Temporal can be run in two primary ways:
+Temporal can be run in production in two primary ways:
 
 - As a managed cloud service (Temporal Cloud)
 - As a self-hosted cluster, which involves:
   - The Temporal Server itself
-  - A datastore (e.g., PostgreSQL, MySQL, or Cassandra)
+  - A datastore (e.g. PostgreSQL or Cassandra)
   - The Web UI for managing workflows
   - Optional components like ElasticSearch for visibility
 
@@ -227,7 +227,7 @@ app.MapPost("/start/{message}", async (
 .WithOpenApi();
 ```
 
-A singal to send it the notification to continue:
+A signal to send it the notification to continue:
 
 ```csharp
 app.MapPost("/signal/{workflowId}", async ([FromRoute] string workflowId, ITemporalClient client) =>
@@ -269,9 +269,11 @@ We could use Aspire to pull in the specific containers, which include:
 
 ### Developer Temporal options
 
-However, for anyone that has less than 16GB of RAM, your machine is going to struggle running Rider or worse, Visual Studiop 2022, Docker Desktop / Rancher / Podman for container support and these three containers.
+However, for anyone that has less than 16GB of RAM, your machine is going to struggle running Rider (or worse, Visual Studiop 2022), with Docker Desktop / Rancher / Podman for container support, and these three containers.
 
-Help is at hand. Temporal also offer a dev server and Temporal CLI. This runs a cut down container with all three components supported. Even better, there is an [Aspire Temporal extension](https://github.com/InfinityFlowApp/aspire-temporal) that provides this as a [container](https://github.com/InfinityFlowApp/aspire-temporal/blob/8bdd63b60da4ea9530bc766d7e1d58ccebd0973c/src/InfinityFlow.Aspire.Temporal/TemporalServerContainerBuilderExtensions.cs#L39). This is way more lightweight than running Temporal Server, Temporal UI and Postgres on your local machine. Compared to the CLI which doesn't plug well into the Aspire framework, this is a perfect balance for Aspire led development (git-pull-f5-development) and the separation of concerns for deployment, especially if you already have a Temporal self hosted or cloud instance.
+Help is at hand. Temporal also offer a dev server and Temporal CLI. This runs a cut down container with all three components supported. However running the CLI dev server as an executable isn't helpful with Aspire because it would be a dependency that can't be easily referenced in service discovery.
+
+Even better, there is an [Aspire Temporal extension](https://github.com/InfinityFlowApp/aspire-temporal) that provides this as a [container](https://github.com/InfinityFlowApp/aspire-temporal/blob/8bdd63b60da4ea9530bc766d7e1d58ccebd0973c/src/InfinityFlow.Aspire.Temporal/TemporalServerContainerBuilderExtensions.cs#L39). This is way more lightweight than running Temporal Server, Temporal UI and Postgres on your local machine. Compared to the CLI which doesn't plug well into the Aspire framework, this is a perfect balance for Aspire led development (git-pull-f5-development) and the separation of concerns for deployment, especially if you already have a Temporal self hosted or cloud instance.
 
 So, let's use `AddTemporalServerContainer` to add a lightweight Temporal dev server with Aspire:
 
@@ -290,6 +292,34 @@ temporal.PublishAsConnectionString();
 builder.AddProject<Api>("api").WithReference(temporal);
 builder.AddProject<Worker>("worker").WithReference(temporal);
 ```
+
+### External API References (Temporal Cloud)
+
+Aspire is missing external API references presently. There have been a few [attempts](https://github.com/wertzui/Aspire.Hosting.ExternalEndpoint) to provide something towards it from the community but it's currently a gap from the Aspire team that is being [tracked](https://github.com/CommunityToolkit/Aspire/issues/312) (see: [dotnet/aspire#3108](https://github.com/dotnet/aspire/issues/3108)
+[dotnet/aspire#2311](https://github.com/dotnet/aspire/issues/2311)). For our use case we'd need something like this (top of my head):
+
+```csharp
+IResourceBuilder<TemporalServerResource> temporal;
+if (builder.Environment.IsDevelopment())
+{
+	temporal = await builder.AddTemporalServerContainer("temporal", b => b
+		.WithPort(7233)
+		.WithHttpPort(7234)
+		.WithMetricsPort(7235)
+		.WithUiPort(8233)
+		.WithLogLevel(LogLevel.Info)
+	);
+}
+else
+{
+    // this won't work
+	temporal = builder.AddExternalEndpoint("temporal", "my-namespace.my-account.tmprl.cloud:7233")
+		.WithGrpcHealthCheck("etc");
+}
+temporal.PublishAsConnectionString();
+```
+
+I'm going to forget about that for the moment and focus on the self host option. If anyone from the Temporal .NET SDK team want to contribute the cloud support to .NET Aspire community then I'm sure it would be very welcome.
 
 ### Demo Walkthrough
 
@@ -325,7 +355,7 @@ And we can click on that workflow instance and see how it run and what payloads 
 
 ![Temporal Dashboard - Workflow complete](/assets/posts/aspire-ui-workflow-complete.png)
 
-Back to the Aspire Dashboard and it gives us all the OTEL information we need as distributed traces. This is one of the killer features of Aspire. No longer do you have to deploy your application to test your OTEL based Azure Monitor, DataDog, Honeycomb, New Relic, Sentry or Dynatrace, and use use costly SaaS resources. You can see exactly how your OTEL based applications work locally using the Aspire logging, tracing, and metrics from your applications.
+Back to the Aspire Dashboard and it gives us all the OTEL information we need as distributed traces. This is one of the killer features of Aspire. No longer do you have to deploy your application to test your OTEL based DataDog integration (or whichever SaaS application monitoring solution you use), since this uses costly SaaS resources, might not even be allowed by your ops team from a local instance, and otherwise forced into an annoying _code-deploy-test-code_ cycle. You can see exactly how your OTEL based applications work locally using the Aspire logging, tracing, and metrics from your applications locally, and that rocks.
 
 ![Aspire - Traces](/assets/posts/aspire-dashboard-distributed-traces.png)
 
@@ -339,10 +369,10 @@ It even supports your custom metrics:
 
 ### Next steps
 
-My next steps will be to look to deploy the Aspire distributed application to k8s. Since I don't want to use cloud based resources that cost me money, I'm going to use a k8s cluster locally - yes that's possible and I'm going to show you how to generate the helm charts, install the required components and deploy it.
+My next steps will be show you [how to deploy the Aspire distributed application to k8s in part 2](/posts/2025-06-15-combining-dotnet-aspire-and-temporal-part-2). Since I don't want to use cloud based resources that cost me money, I'm going to use a k8s cluster locally - yes that's possible. I'm going to show you how to generate the helm charts, install the required components and deploy it using kubectl.
 
 ### Feedback
 
-If you want to provide feedback then leave a comment, or if you see a typo or error, then add a pull request via the suggest changes link above!
+If you want to provide feedback then leave a comment, or if you see a typo or error, then add a pull request via the suggest changes!
 
 Full source code is coming...
