@@ -331,43 +331,43 @@ Let's follow this through.
 
 First we see the new containers added from the first demo. I've also included Redis Commander so we can take a look at the values in the databsse via a UI.
 
-![aspire dashboard](/public/assets/posts/aspire-three-dashboard.png)
+![aspire dashboard](/assets/posts/aspire-three-dashboard.png)
 
 Next we open the Swagger end point and kick off the first workflow:
 
-![start workflow 1](/public/assets/posts/aspire-three-start-1.png)
+![start workflow 1](/assets/posts/aspire-three-start-1.png)
 
 Now we roll the keys over to a new active key:
 
-![swagger roll keys](/public/assets/posts/aspire-three-roll.png)
+![swagger roll keys](/assets/posts/aspire-three-roll.png)
 
 And we can see these two keys in Redis:
 
-![redis commander keys](/public/assets/posts/aspire-three-roll-redis.png)
+![redis commander keys](/assets/posts/aspire-three-roll-redis.png)
 
 Now with a new more recent key we start the second workflow:
 
-![start worflow 2](/public/assets/posts/aspire-three-start-2.png)
+![start worflow 2](/assets/posts/aspire-three-start-2.png)
 
 Now we can signal and finalize both workflows that are currently open:
 
-![workflows open state](/public/assets/posts/aspire-three-temporal-workflows-list-state.png)
+![workflows open state](/assets/posts/aspire-three-temporal-workflows-list-state.png)
 
 We then have both workflows finished and we can see the full traces in th Aspire Dashboard:
 
-![distributed trace](/public/assets/posts/aspire-three-distributed-trace.png)
+![distributed trace](/assets/posts/aspire-three-distributed-trace.png)
 
 We now we see the elegance of how Temporal designed their platform. In the following example we see for a single workflow instance the payloads for the request and the response are encrypted with two different keys:
 
-![start worflow 2](/public/assets/posts/aspire-three-two-keys.png)
+![start worflow 2](/assets/posts/aspire-three-two-keys.png)
 
 But now we want to decrypt the payloads in the Temporal UI. For that we need to hook in our codec endpoint, and Temporal offers this per namespace, perfect for multiple teams, or multiple application suites in one team that want namespace isolation. First we need to open the codec server settings (top right corner in the UI), which show this drop in modal, where we enter our API endpoint:
 
-![start worflow 2](/public/assets/posts/aspire-three-codec-set.png)
+![start worflow 2](/assets/posts/aspire-three-codec-set.png)
 
 When you refresh the page you see the decrypted payload state and you can see the requests over XHR. This is why CORS is important to make sure that only the right URLs can access it over XHR requests.
 
-![start worflow 2](/public/assets/posts/aspire-three-decrypted.png)
+![start worflow 2](/assets/posts/aspire-three-decrypted.png)
 
 With that the demo is complete. I hope you've enjoyed following along.
 
