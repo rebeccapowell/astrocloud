@@ -229,10 +229,24 @@ And in `Program.cs`:
 builder.Services.AddAzureKeyVaultEmulator(vaultUri, secrets: true, keys: true, certificates: false);
 ```
 
-You can seed secrets during development:
+Keyvault is seeded (and the Redis cache) when the application starts using the KeyvaultSeeder, which runs as a container and both the API and the Worker are set to wait until the seeder has finished and exited:
 
 ```csharp
-await app.SeedTemporalKeyAsync("temporal-namespace");
+static async Task SeedAsync(SecretClient client, IConnectionMultiplexer redis)
+{
+	if (!await AnyKeyExistsAsync(client))
+	{
+		var id = CreateKeyId();
+		await SetKeyAsync(client, id);
+		Console.WriteLine($"Seeded {id}");
+	}
+	else
+	{
+		Console.WriteLine("Key vault already seeded");
+	}
+
+	await UpdateCacheAsync(client, redis);
+}
 ```
 
 This will ensure at least one active `key-id` is present on boot.
