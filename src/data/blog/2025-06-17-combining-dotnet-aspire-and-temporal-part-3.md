@@ -36,17 +36,17 @@ The code for this blog post can be found on my [Github repo `aspire-temporal-thr
 
 Temporal transmits workflow and activity data (payloads) between the client, server, and workers. These payloads are stored in Temporal's backing data store, meaning potentially sensitive data such as user details, internal state, or business logic inputs/outputs are persisted.
 
-When using Temporal Cloud, your data may be stored outside of your jurisdiction unless you explicitly select a regional deployment (currently Europe-hosted backends are supported, but the UI is still US-based). For compliance-heavy environments (especially in the EU), securing data in motion and at rest is crucial. Self-hosting doesn't exempt you either: insider risk and misconfigurations are ever-present threats. 
+When using Temporal Cloud, your data may be stored outside of your jurisdiction unless you explicitly select a regional deployment (currently Europe-hosted backends are supported, but the UI is still US-based). For compliance-heavy environments (especially in the EU), securing data in motion and at rest is crucial. Self-hosting doesn't exempt you either: insider risk and misconfigurations are ever-present threats.
 
 Encryption helps address this, especially when combined with codec servers that allow the Temporal UI to display decrypted payloads for debugging without ever giving Temporal itself access to the raw values (requests go from client-side i.e. Temporal UI, to your codec server).
 
-Note that you could work around this issue by avoiding putting Personal Identifiable Information (PII) classified under GDPR rules in workflow payloads / state. However it just takes one mistake by a developer to leak PII outside of EU jurisdiction and you have a violation. 
+Note that you could work around this issue by avoiding putting Personal Identifiable Information (PII) classified under GDPR rules in workflow payloads / state. However it just takes one mistake by a developer to leak PII outside of EU jurisdiction and you have a violation.
 
 You could also work around this by using an activity-isolated data pattern. That is to say that rather than passing data in the state / payloads, you pass references to that data in your datastores (i.e. the CustomerId rather than the customer's name), and then in your activity (which is isolated in your own workers), you first retrieve the data, process it and then give a result back to the workflow. You _can_ do this, but the same issue as above exists. It's also an _anti-pattern_, in that our activities need to be idempotent. They have to abide by what I call the **write-once-write-last** principle or **WOWL**, which addresses the **dual write problem**. As a naïve example, your activity can do this:
 
 ```csharp
-[Activity]  
-public async Task MarkAsPaid(Guid customerId)  
+[Activity]
+public async Task MarkAsPaid(Guid customerId)
 {
 	var customer = await _customerRepo.GetAsync(customerId);
 	customer.SetStatus(Status.Paid);
@@ -58,8 +58,8 @@ public async Task MarkAsPaid(Guid customerId)
 But it can't do this safely:
 
 ```csharp
-[Activity]  
-public async Task MarkAsPaid(Guid customerId, Guid userId)  
+[Activity]
+public async Task MarkAsPaid(Guid customerId, Guid userId)
 {
 	var customer = await _customerRepo.GetAsync(customerId);
 	customer.SetStatus(Status.Paid);
@@ -76,16 +76,16 @@ public async Task MarkAsPaid(Guid customerId, Guid userId)
 Simply because if the second write fails, the first one has already taken place. Also worth mentioning that at some point someone will do this:
 
 ```csharp
-[Activity]  
-public async Task<Customer> CreateCustomer(string customerName, Guid userId)  
+[Activity]
+public async Task<Customer> CreateCustomer(string customerName, Guid userId)
 {
 	var customer = new Customer(customerName);
 	await _customerRepo.CreateAsync(customer);
-	
+
 	// this could error, so the customer has been created, but no audit log
 	await _auditRepo.CreateAsync($"Customer created by {userId}");
 	// on retry, we get a duplicate customer, and we've leaked the PII
-	
+
 	return customer;
 }
 ```
@@ -97,6 +97,7 @@ Note that the workaround for these kinds of failures has typically been the outb
 The outbox pattern was a pragmatic solution for a difficult problem, but it also had it's own set of problems (stuck outbox rows, added complexity, polling loops, deduping, and eventual delivery). In durable execution state persitence and message delivery are unified. One could argue that it is in itself an abstraction of the outbox pattern, at least follows in it's footsteps, but Temporal does this under the hood as part of the paltform itself and takes that one step further with its state tracking to pick up where it last failed, with built in retry patterns for resilience for almost guaranteed durability.
 
 ---
+
 ### Payload Encryption in Temporal
 
 Temporal supports pluggable data conversion mechanisms via the `IPayloadCodec` interface [in the .NET SDK](https://docs.temporal.io/develop/dotnet/converters-and-encryption). This allows you to encrypt and decrypt payloads transparently without changing your workflows.
@@ -147,9 +148,9 @@ We prepend the IV and append the authentication tag to the ciphertext. This comp
 
 Why AES-GCM?
 
-- **Fast** and hardware-accelerated on most CPUs    
-- **Secure**, widely analyzed and trusted    
-- **Single-pass** over the data, which is important for large payloads    
+- **Fast** and hardware-accelerated on most CPUs
+- **Secure**, widely analyzed and trusted
+- **Single-pass** over the data, which is important for large payloads
 - **Built-in integrity** verification using the authentication tag
 
 The encoded result is stored in the `Payload.Data` field, and the metadata (`Payload.Metadata`) contains the `key-id` and `encoding` format.
@@ -201,8 +202,8 @@ You should monitor which keys are in use by logging the key ID during encoding/d
 
 For production:
 
-- Use **Azure Key Vault** for key material.    
-- Tag your secrets with the `namespace` used in your Temporal deployment.    
+- Use **Azure Key Vault** for key material.
+- Tag your secrets with the `namespace` used in your Temporal deployment.
 - Enable RBAC and audit logs.
 
 For local development:
@@ -275,10 +276,10 @@ This allows the Temporal UI to make cross-origin calls to your local or deployed
 
 The full encryption pipeline includes:
 
-1. **AppHost:** Boots the app with Aspire and provisions a local Key Vault emulator.    
-2. **API and Worker:** Inject the `KeyVaultEncryptionCodec` into the Temporal client registration.    
-3. **Codec Server:** Serves `/encode` and `/decode` for UI interop.    
-4. **Workflow Execution:** Encrypts all payloads before storage.    
+1. **AppHost:** Boots the app with Aspire and provisions a local Key Vault emulator.
+2. **API and Worker:** Inject the `KeyVaultEncryptionCodec` into the Temporal client registration.
+3. **Codec Server:** Serves `/encode` and `/decode` for UI interop.
+4. **Workflow Execution:** Encrypts all payloads before storage.
 5. **Temporal UI:** Transparently decrypts via the registered codec server.
 
 This ensures that sensitive data is always encrypted at rest, while still being debuggable and testable via the browser-based Temporal UI.
