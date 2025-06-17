@@ -24,6 +24,8 @@ tags:
 
 In this post, I will kick off a multi-part series on building and deploying a resilient, distributed workflow-powered example application using [.NET Aspire](https://learn.microsoft.com/en-us/dotnet/aspire/overview) and [Temporal.io](https://temporal.io/). I will cover local development with Aspire's AppHost and containerized services, move into Kubernetes deployments with autoscaling, and integrate full observability using OpenTelemetry. In part two of this series I'll cover payload and encryption codecs in Temporal and deployments of this entire application to a local k8s cluster.
 
+The code for this blog post can be found on my [Github repo `aspire-temporal-one`](https://github.com/rebeccapowell/aspire-temporal-one).
+
 ### Goals
 
 - Set up .NET Aspire
@@ -375,4 +377,4 @@ My next steps will be show you [how to deploy the Aspire distributed application
 
 If you want to provide feedback then leave a comment, or if you see a typo or error, then add a pull request via the suggest changes!
 
-Full source code is coming...
+Full source code [https://github.com/rebeccapowell/aspire-temporal-one](https://github.com/rebeccapowell/aspire-temporal-one)
