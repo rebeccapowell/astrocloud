@@ -18,7 +18,7 @@ tags:
   - powershell
   - rackspace
   - zip
-featured: true
+featured: false
 ---
 
 One of our long standing clients has just given us with the task of moving over 1.5TB of files and documents stored in Rackspace's Managed Hosting data centre to the cloud; namely [Rackspace Cloud Files](http://www.rackspace.com/cloud/files/). Using a combination of .NET and a crafty use of Powershell we managed to move those files within the allotted time.
