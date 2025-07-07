@@ -21,7 +21,7 @@ tags:
   - wcf
   - WS-I
   - wse
-featured: true
+featured: false
 ---
 
 How to use the message inspector and custom behaviors to override the contents of a SOAP message before it is sent, or before it is received, so we can implement the unsupported Password Digest security scheme under WCF.
