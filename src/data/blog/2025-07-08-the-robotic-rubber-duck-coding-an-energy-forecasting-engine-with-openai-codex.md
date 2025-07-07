@@ -1,7 +1,7 @@
 ---
 id: 10001
 title: "The Robotic Rubber duck - coding an energy forecasting engine with OpenAI Codex"
-pubDatetime: 2025-07-18T00:11:00+01:00
+pubDatetime: 2025-07-08T00:11:00+01:00
 author: rebecca
 layout: "../layouts/BlogPost.astro"
 guid: "https://rebecca-powell.com/?p=10000"
