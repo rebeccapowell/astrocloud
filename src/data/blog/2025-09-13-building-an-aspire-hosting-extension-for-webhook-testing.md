@@ -31,11 +31,13 @@ In this post, we'll walk through the process of creating a .NET Aspire Hosting E
 For this extension, we use the [`tarampampam/webhook-tester`](https://hub.docker.com/r/tarampampam/webhook-tester) Docker image, pulled from the GitHub Container Registry (`ghcr.io`). The default tag is `2`, but you can pin to a specific version if needed.
 
 **Image details:**
+
 - Registry: `ghcr.io`
 - Image: `tarampampam/webhook-tester`
 - Tag: `2`
 
 **Supported environment variables:**
+
 - `DEFAULT_SESSION_TOKEN`: Sets the default session token for the webhook endpoint.
 - `HTTP_PORT`: Sets the HTTP listen port (default: 8080).
 - `AUTO_CREATE_SESSIONS`: Enables auto-creation of sessions (default: true).
@@ -52,6 +54,7 @@ For this extension, we use the [`tarampampam/webhook-tester`](https://hub.docker
 The extension defines a `WebhookTesterResource` class, which configures the container using the image, tag, and environment variables above. Fluent builder extensions allow you to customize all supported options.
 
 Example usage:
+
 ```csharp
 builder.AddWebhookTester(
     name: "webhook",
@@ -96,6 +99,7 @@ Publishing is automated via GitHub Actions. The workflow builds, packs, and push
    - In your weather forecast endpoint, add code to send a webhook to the tester container whenever the endpoint is called.
 
 Example:
+
 ```csharp
 [HttpGet("weather-forecast")]
 public IActionResult GetWeatherForecast()
@@ -138,7 +142,7 @@ app.MapGet("/weatherforecast", async ([FromServices] IHttpClientFactory httpClie
                 summaries[Random.Shared.Next(summaries.Length)]
             ))
         .ToArray();
-    
+
     var httpClient = httpClientFactory.CreateClient("webhook-tester");
 
     var response = await httpClient.PostAsJsonAsync($"/{builder.Configuration[\"DEFAULT_SESSION_TOKEN\"]}", new
@@ -146,7 +150,7 @@ app.MapGet("/weatherforecast", async ([FromServices] IHttpClientFactory httpClie
         test = "bob"
     });
     response.EnsureSuccessStatusCode();
-    
+
     return forecast;
 })
 .WithName("GetWeatherForecast");
