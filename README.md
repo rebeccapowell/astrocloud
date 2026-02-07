@@ -152,6 +152,7 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm install`                       | Installs dependencies                                                                                                            |
 | `pnpm run dev`                       | Starts local dev server at `localhost:4321`                                                                                      |
 | `pnpm run build`                     | Build your production site to `./dist/`                                                                                          |
+| `pnpm run build:win`                 | Windows-only: Build + Pagefind copy (avoids `cp`)                                                                                |
 | `pnpm run preview`                   | Preview your build locally, before deploying                                                                                     |
 | `pnpm run format:check`              | Check code format with Prettier                                                                                                  |
 | `pnpm run format`                    | Format codes with Prettier                                                                                                       |
@@ -163,6 +164,11 @@ All commands are run from the root of the project, from a terminal:
 | `docker run -p 4321:80 astropaper`   | Run AstroPaper on Docker. The website will be accessible at `http://localhost:4321`.                                             |
 
 > **_Warning!_** Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
+
+### Windows notes
+
+- `pnpm run build` uses `cp` to copy the Pagefind index into `public/` (works on Cloudflare Pages/Linux).
+- On Windows, use `pnpm run build:win` instead.
 
 ## ✨ Feedback & Suggestions
 

@@ -1,8 +1,19 @@
-# Ignore Astro files
-*.astro
-
-# Ignore node_modules directory
+# dependencies
 node_modules/
 
-# Ignore build output
+# build output
 dist/
+
+# generated types
+.astro/
+
+# VCS / local tooling
+.git/
+.specify/
+
+# env + logs
+.env*
+*.log*
+
+# search index output
+public/pagefind/

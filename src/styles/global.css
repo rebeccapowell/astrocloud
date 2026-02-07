@@ -62,6 +62,11 @@ html[data-theme="dark"] {
   @apply underline decoration-wavy decoration-2 underline-offset-4;
 }
 
+/* astro-social-share dark mode support */
+.astro-social-share svg {
+  fill: var(--foreground);
+}
+
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
 /* Anything that has been anchored to should have extra scroll margin */
 :target {

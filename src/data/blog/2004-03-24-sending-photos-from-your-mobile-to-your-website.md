@@ -21,7 +21,7 @@ tags:
 
 With the advent of the camera appearing on mobile (cellular) phones, a whole new world has now appeared. Mobile Blogging or "Mobblogging" services are offered by a variety of websites now, and I'm going to show you how this technology works. To get this sample to work you'll need to download and install the POP3 mail component from DevMail.net. Don't worry because they offer a free version that only downloads the first 50kb of the attachment. This isn't going to matter to us for the moment, because you can set most phones to a lower resolution. To be honest, most phones won't produce JPEG files over 50kb anyway.
 
-![example of the web app in action](/assets/posts/Photo_Messaging_to_Web.jpg)
+![example of the web app in action](/assets/posts/Photo_Messaging_to_Web.png)
 
 The DevMail.Net component allows you to connect to POP3 mailboxes and process mail items that it finds there. If your mobile phone is MMS enabled then it can send MMS picture messages via your mobile provider, through a gateway and onto the internet as an email with an attachment. (You'll need to check your phone for this feature.)
 
