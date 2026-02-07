@@ -14,42 +14,51 @@ This is an **Astro 5.x** blog using the AstroPaper theme with **TailwindCSS 4**,
 ## Key Patterns
 
 ### Blog Post Frontmatter (required fields)
+
 ```yaml
 ---
 title: "Post Title"
-pubDatetime: 2024-01-20T10:00:00+01:00  # ISO 8601 with timezone
+pubDatetime: 2024-01-20T10:00:00+01:00 # ISO 8601 with timezone
 description: "Brief description for SEO"
 tags:
   - tag-name
 ---
 ```
+
 Optional: `author`, `modDatetime`, `featured`, `draft`, `ogImage`, `canonicalURL`, `hideEditPost`, `timezone`
 
 ### Path Alias
+
 Use `@/` for imports from `src/`:
+
 ```typescript
 import { SITE } from "@/config";
 import getSortedPosts from "@/utils/getSortedPosts";
 ```
 
 ### Styling (TailwindCSS 4)
+
 - Theme colors defined as CSS custom properties in `src/styles/global.css`
 - Dark mode: `data-theme="dark"` attribute on `<html>`, use `dark:` variant
 - Key colors: `--accent`, `--background`, `--foreground`, `--muted`, `--border`
 
 ### Icons
+
 SVG icons in `src/assets/icons/` imported as Astro components:
+
 ```astro
 import IconGitHub from "@/assets/icons/IconGitHub.svg";
 <IconGitHub class="h-6 w-6" />
 ```
 
 ### Dynamic Routing
+
 - Posts: `src/pages/posts/[...slug]/index.astro` with `getStaticPaths()`
 - Tags: `src/pages/tags/[tag]/[...page].astro`
 - Uses `getPath(id, filePath)` utility for URL generation
 
 ### Content Filtering
+
 - Draft posts: set `draft: true` in frontmatter
 - Scheduled posts: `pubDatetime` in future (15min margin via `SITE.scheduledPostMargin`)
 - Use `postFilter` utility for consistent filtering
@@ -91,13 +100,13 @@ These are common pitfalls that came up during a Windows dev session and how to r
 
 ## Important Utilities
 
-| Utility | Purpose |
-|---------|---------|
-| `getSortedPosts` | Filter & sort posts by date |
-| `getPath(id, filePath)` | Generate post URL from content ID |
-| `slugifyStr(str)` | Convert string to URL slug (kebab-case) |
-| `postFilter` | Filter drafts and future posts |
-| `generateOgImages.ts` | Dynamic OG image generation with Satori |
+| Utility                 | Purpose                                 |
+| ----------------------- | --------------------------------------- |
+| `getSortedPosts`        | Filter & sort posts by date             |
+| `getPath(id, filePath)` | Generate post URL from content ID       |
+| `slugifyStr(str)`       | Convert string to URL slug (kebab-case) |
+| `postFilter`            | Filter drafts and future posts          |
+| `generateOgImages.ts`   | Dynamic OG image generation with Satori |
 
 ## Adding Features
 
@@ -108,10 +117,13 @@ These are common pitfalls that came up during a Windows dev session and how to r
 **Modify OG images**: Edit templates in `src/utils/og-templates/`
 
 ## React Integration
+
 React components use `client:` directives. `Comments.tsx` uses Giscus and requires client-side hydration:
+
 ```astro
 <Comments client:only="react" />
 ```
 
 ## Node Version
+
 Requires Node.js 20.x (see `.node-version` and `engines` in `package.json`)

@@ -69,16 +69,16 @@ Based on spec.md article outline:
 
 Per constitution v1.2.0:
 
-- [ ] Opening paragraph establishes context and value
-- [ ] All code snippets syntactically correct and copy-pasteable
-- [ ] Tables used for comparisons (MCP servers, CLI commands)
-- [ ] Attribution with links for external references
-- [ ] Closing question for reader engagement
-- [ ] Frontmatter complete (title, pubDatetime, description, tags)
-- [ ] Header image placeholder included (FR-017)
-- [ ] Screenshot placeholders for VS Code interactions (FR-019)
-- [ ] .editorconfig with 7 analyzer suppressions (FR-024)
-- [ ] .editorconfig placement guidance included (FR-025)
+- [x] Opening paragraph establishes context and value
+- [x] All code snippets syntactically correct and copy-pasteable
+- [x] Tables used for comparisons (MCP servers, CLI commands)
+- [x] Attribution with links for external references
+- [x] Closing question for reader engagement
+- [x] Frontmatter complete (title, pubDatetime, description, tags)
+- [x] Header image placeholder included (FR-017)
+- [x] Screenshot placeholders for VS Code interactions (FR-019)
+- [x] .editorconfig with 7 analyzer suppressions (FR-024)
+- [x] .editorconfig placement guidance included (FR-025)
 
 ## Assumptions
 

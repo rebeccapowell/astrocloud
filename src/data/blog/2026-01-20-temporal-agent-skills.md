@@ -11,6 +11,7 @@ tags:
 ---
 
 ![Header image: Temporal + Aspire + Copilot agent skills](/assets/posts/temporal-agent-skills/temporal-agent-skills-header.png)
+
 <!-- TODO: Replace this placeholder with a real header image at src/assets/images/temporal-agent-skills-og.png -->
 
 ## 1) Introduction
@@ -28,9 +29,9 @@ So if you point a generic AI assistant at a Temporal codebase, you’ll often ge
 This post is about the setup I use during local development:
 
 - A **Temporal .NET agent library** (a small custom agent + modular skills + reusable prompts).
-- **Aspire MCP** so the agent can inspect *live* resources and OTEL logs/traces while you debug.
+- **Aspire MCP** so the agent can inspect _live_ resources and OTEL logs/traces while you debug.
 - **Temporal Docs MCP** as an authoritative backstop for API details.
-- *(Optional)* two **Temporal CLI skills**: one read-only (safe), one “dangerous” (cleanup only), restricted to localhost / local dev.
+- _(Optional)_ two **Temporal CLI skills**: one read-only (safe), one “dangerous” (cleanup only), restricted to localhost / local dev.
 
 The goal is not “let the agent run my system.” The goal is: **give the agent enough context to help you investigate** when your Aspire-based Temporal app is running locally — without accidentally suggesting nondeterministic workflow code or running risky commands against the wrong environment.
 
@@ -64,14 +65,14 @@ In plain terms: MCP is how you give an agent a controlled, inspectable toolbox.
 
 Here’s the mental model I use:
 
-| Component | Type | Purpose | Risk |
-|-----------|------|---------|------|
-| Temporal .NET Agent (router) | Agent | Always-on policy + routes to skills | Low (text-only) |
-| Temporal skills (determinism, versioning, testing…) | Skills | Task-shaped guidance loaded on demand | Low (text-only) |
-| Temporal Docs MCP | MCP Server | Authoritative backstop for API details and edge cases (all languages) | Low (read-only) |
-| Aspire Dashboard MCP | MCP Server | Live state: resources, console logs, structured logs, traces | Medium (can run commands via MCP) |
-| (Optional) Read-only Temporal CLI Skill | Skill | Safe inspection commands (`list/describe/show/query/trace/...`) | Low |
-| (Optional) Dangerous Temporal CLI Skill | Skill | Cleanup actions (`terminate/cancel/delete/reset/...`) restricted to local dev | High (if misused) |
+| Component                                           | Type       | Purpose                                                                       | Risk                              |
+| --------------------------------------------------- | ---------- | ----------------------------------------------------------------------------- | --------------------------------- |
+| Temporal .NET Agent (router)                        | Agent      | Always-on policy + routes to skills                                           | Low (text-only)                   |
+| Temporal skills (determinism, versioning, testing…) | Skills     | Task-shaped guidance loaded on demand                                         | Low (text-only)                   |
+| Temporal Docs MCP                                   | MCP Server | Authoritative backstop for API details and edge cases (all languages)         | Low (read-only)                   |
+| Aspire Dashboard MCP                                | MCP Server | Live state: resources, console logs, structured logs, traces                  | Medium (can run commands via MCP) |
+| (Optional) Read-only Temporal CLI Skill             | Skill      | Safe inspection commands (`list/describe/show/query/trace/...`)               | Low                               |
+| (Optional) Dangerous Temporal CLI Skill             | Skill      | Cleanup actions (`terminate/cancel/delete/reset/...`) restricted to local dev | High (if misused)                 |
 
 Notice what’s missing: I’m not giving the agent a general “run anything on my machine” permission. Everything is scoped to dev investigation.
 
@@ -81,22 +82,22 @@ Notice what’s missing: I’m not giving the agent a general “run anything on
 
 This is the part I wish I’d realised earlier.
 
-I started by putting *everything* into a single, opinionated “Temporal .NET skill” markdown file:
+I started by putting _everything_ into a single, opinionated “Temporal .NET skill” markdown file:
 
-- mental model + determinism rules  
-- workflow vs activity boundaries  
-- signals/queries/updates patterns  
-- testing expectations  
-- versioning guidance (`Workflow.GetVersion`, continue-as-new)  
-- Aspire integration notes  
-- observability principles  
-- payload/converter/codec notes  
+- mental model + determinism rules
+- workflow vs activity boundaries
+- signals/queries/updates patterns
+- testing expectations
+- versioning guidance (`Workflow.GetVersion`, continue-as-new)
+- Aspire integration notes
+- observability principles
+- payload/converter/codec notes
 
 It worked… but it didn’t scale. It was always loaded, always in-context, and it kept growing.
 
 Eventually I realised what I’d actually built:
 
-- not a *skill*, but a **context-stretching custom agent**
+- not a _skill_, but a **context-stretching custom agent**
 
 A real “skill” is supposed to be task-shaped and loaded only when relevant. A custom agent should stay small: identity, priorities, routing, refusal rules.
 
@@ -170,7 +171,7 @@ Even if you never touch agent skills, this is a small quality-of-life improvemen
 
 I treat documentation MCP servers as **backstops**.
 
-The agent + skills tell the assistant *how to think* about Temporal in .NET. The docs MCP tells it *exact API details* when I ask something like:
+The agent + skills tell the assistant _how to think_ about Temporal in .NET. The docs MCP tells it _exact API details_ when I ask something like:
 
 - “Is Update supported in this SDK version?”
 - “What’s the current signature of `Workflow.Now`?”
@@ -180,8 +181,8 @@ Temporal provides a hosted docs MCP endpoint (powered by Kapa) that tools like V
 
 Important distinction:
 
-- **VS Code / Cursor / Claude Code** are *clients*.
-- The **Temporal Docs MCP** is the *server*.
+- **VS Code / Cursor / Claude Code** are _clients_.
+- The **Temporal Docs MCP** is the _server_.
 - The “Add to …” buttons are just convenience flows for configuring the client with the same MCP URL.
 
 ### Example `.vscode/mcp.json` layout (Aspire + Temporal docs)
@@ -222,7 +223,7 @@ I've chosen to add them to Visual Studio Code:
 
 This is where the setup becomes truly useful.
 
-When the agent can inspect *live resources* and *live telemetry*, you can ask it questions you’d normally answer by clicking around dashboards and grepping logs.
+When the agent can inspect _live resources_ and _live telemetry_, you can ask it questions you’d normally answer by clicking around dashboards and grepping logs.
 
 ### Step 1: initialize Aspire MCP
 
@@ -252,11 +253,11 @@ Aspire MCP provides tools like:
 
 Aspire’s telemetry fundamentals are the classic three pillars:
 
-| Pillar | What it answers | What I ask the agent |
-|--------|------------------|----------------------|
-| Logs | “What happened?” | “Show me errors for the worker resource in the last minute.” |
-| Traces | “Where did time go?” | “Find the trace where this request stalls.” |
-| Metrics | “Is it healthy?” | “Is latency trending up?” (often via dashboard UI rather than MCP) |
+| Pillar  | What it answers      | What I ask the agent                                               |
+| ------- | -------------------- | ------------------------------------------------------------------ |
+| Logs    | “What happened?”     | “Show me errors for the worker resource in the last minute.”       |
+| Traces  | “Where did time go?” | “Find the trace where this request stalls.”                        |
+| Metrics | “Is it healthy?”     | “Is latency trending up?” (often via dashboard UI rather than MCP) |
 
 Under local dev, Aspire configures OpenTelemetry environment variables automatically (service name, instance id, OTLP endpoint), and the dashboard receives OTLP data.
 
@@ -293,17 +294,17 @@ The Temporal CLI is incredibly useful during development, but I want it behind a
 
 The read-only skill is for investigation:
 
-| Command | Why it matters |
-|---------|----------------|
-| `temporal workflow list` | Find running/stuck workflows |
-| `temporal workflow describe` | Current status + details |
-| `temporal workflow show` | History/events (debugging gold) |
-| `temporal workflow query` | Read-only state inspection |
-| `temporal workflow stack` | Debug stacks (when supported) |
-| `temporal workflow count` | Quick sanity checks |
-| `temporal workflow trace` | Trace a workflow execution |
-| `temporal workflow start` | Edge case: create new execution (safe-ish) |
-| `temporal workflow execute` | Edge case: run and wait (safe-ish) |
+| Command                      | Why it matters                             |
+| ---------------------------- | ------------------------------------------ |
+| `temporal workflow list`     | Find running/stuck workflows               |
+| `temporal workflow describe` | Current status + details                   |
+| `temporal workflow show`     | History/events (debugging gold)            |
+| `temporal workflow query`    | Read-only state inspection                 |
+| `temporal workflow stack`    | Debug stacks (when supported)              |
+| `temporal workflow count`    | Quick sanity checks                        |
+| `temporal workflow trace`    | Trace a workflow execution                 |
+| `temporal workflow start`    | Edge case: create new execution (safe-ish) |
+| `temporal workflow execute`  | Edge case: run and wait (safe-ish)         |
 
 “Safe-ish” means: it creates something new, but doesn’t modify existing workflows.
 
@@ -351,7 +352,7 @@ This skill exists for one reason: cleanup during investigation.
 
 If you have a workflow stuck in a replay-fail loop, or you want to wipe out noisy local executions, you need tools like `terminate` or `reset`.
 
-But those are *too dangerous* to run against anything but your local dev environment.
+But those are _too dangerous_ to run against anything but your local dev environment.
 
 ### Localhost-only rule
 
@@ -398,6 +399,7 @@ description: Mutating Temporal CLI operations for local development cleanup only
 - Require explicit confirmation.
 - After running, report the observed effect (e.g., workflow status changed).
 ```
+
 ---
 
 ## 10) Putting it all together: a debugging session (non-determinism)
@@ -417,7 +419,7 @@ var now = DateTime.UtcNow;
 
 Locally, it “works”… until a replay happens.
 
-### Step 1: Ask the agent *before* you ship the bug
+### Step 1: Ask the agent _before_ you ship the bug
 
 Because the agent library is determinism-first, it should immediately tell you:
 
@@ -464,6 +466,7 @@ If your local workflow is stuck in a replay loop and you want a clean slate, ter
 This is the whole layered approach working as intended.
 
 ![Screenshot: Agent debugging with traces and logs](/public/assets/posts/temporal-agent-skills/mcps-in-action.png)
+
 <!-- TODO: Capture a real transcript once you have a repro -->
 
 ---
@@ -480,4 +483,3 @@ It’s about giving yourself better tools during local development:
 - optional CLI skills that make investigation easy, and cleanup safe-by-default
 
 If you’re building Temporal workflows under Aspire, what’s the most painful class of bug you hit during replay: time, randomness, async, or something else? And what guardrails have you put in place to stop it happening twice?
-
