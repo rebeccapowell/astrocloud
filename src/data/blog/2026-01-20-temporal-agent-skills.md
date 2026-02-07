@@ -465,7 +465,7 @@ If your local workflow is stuck in a replay loop and you want a clean slate, ter
 
 This is the whole layered approach working as intended.
 
-![Screenshot: Agent debugging with traces and logs](/public/assets/posts/temporal-agent-skills/mcps-in-action.png)
+![Screenshot: Agent debugging with traces and logs](/assets/posts/temporal-agent-skills/mcps-in-action.png)
 
 <!-- TODO: Capture a real transcript once you have a repro -->
 
