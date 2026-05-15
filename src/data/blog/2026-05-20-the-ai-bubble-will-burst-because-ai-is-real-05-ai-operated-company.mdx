@@ -38,7 +38,7 @@ A business is not just a collection of workers. It is a system for turning goals
 
 A company finds customers, sells to them, serves them, bills them, supports them, reports on them, learns from them, hires people, manages cash, handles risk, negotiates contracts, builds tools, improves processes and tries to survive long enough to do it again tomorrow.
 
-Historically, that required people at almost every layer. 
+Historically, that required people at almost every layer.
 Some people did the work. Other people coordinated the work. Other people reported on the work. Other people managed the people coordinating the work. Other people bought software to track the work. Other people integrated that software. Other people produced decks explaining why the work was behind schedule.
 
 The coordination tax is enormous.
@@ -61,7 +61,7 @@ AI supplies the missing layer.
 
 An AI-operated company does not need to be a crypto DAO. It may not need a token. It may not need decentralization. It may be a normal GmbH, Ltd or LLC with a legal wrapper, bank account, directors, accountants, contracts and liabilities.
 
-- The difference is internal. 
+- The difference is internal.
 - The operating core is automated.
 - Humans set goals, constraints and approvals.
 - AI executes much of the company.
@@ -227,10 +227,7 @@ That is why the AI-operated company connects directly to the SaaS argument. If t
 
 The AI-operated company also changes company formation.
 
-- A founder may be able to test more ideas with less capital.
-- A venture studio may be able to launch more experiments with fewer employees.
-- A corporate innovation team may be able to generate and test internal products more quickly.
-- A holding company may be able to operate many small businesses with a shared AI operating layer.
+A founder may be able to test more ideas with less capital. A venture studio may be able to launch more experiments with fewer employees. A corporate innovation team may be able to generate and test internal products more quickly. A holding company may be able to operate many small businesses with a shared AI operating layer.
 
 This is not the same as the old dream of no-code.
 
@@ -252,11 +249,7 @@ This series is mainly about capital markets and business models.
 
 But it is impossible to discuss AI-operated companies without seeing the labour implications.
 
-- If companies can produce more output with fewer people, employment structures change.
-- If coordination layers shrink, management changes.
-- If AI can perform knowledge work tasks at scale, entry-level career ladders change.
-- If small teams can operate company-sized surfaces, competition changes.
-- If AI-operated companies can undercut human-heavy companies, wage pressure appears in affected sectors.
+If companies can produce more output with fewer people, employment structures change. If coordination layers shrink, management changes. If AI can perform knowledge work tasks at scale, entry-level career ladders change. If small teams can operate company-sized surfaces, competition changes. And if AI-operated companies can undercut human-heavy companies, wage pressure appears in affected sectors.
 
 This deserves its own essay, probably its own series. But it sits behind everything.
 
@@ -272,12 +265,12 @@ Some will.
 
 But many incumbents also have bureaucracy, legacy systems, internal politics, heavy cost structures, slow decision-making, risk aversion, vendor lock-in and processes designed for a pre-AI world.
 
-An AI-operated competitor can be structurally different. 
+An AI-operated competitor can be structurally different.
 It can start with a smaller team, a cleaner stack, generated software, automated workflows, lower overhead and a more adaptive operating model.
 
 This does not guarantee victory, but it creates pressure.
 
-The internet did not simply give existing retailers a new channel. It also created Amazon. 
+The internet did not simply give existing retailers a new channel. It also created Amazon.
 AI will not simply give existing companies better tools. It will create new company forms.
 
 That is where the deeper disruption sits.
@@ -290,11 +283,7 @@ Most companies used software. Some built software. Very few became software in a
 
 AI may make the phrase more literal. A company can become a set of encoded goals, workflows, policies, data pipelines, models, agents, approval gates, observability systems and generated interfaces.
 
-- It can inspect itself.
-- It can modify parts of itself.
-- It can run experiments on itself.
-- It can generate tools for itself.
-- It can coordinate work through software rather than through layers of meetings and management.
+It can inspect itself, modify parts of itself, run experiments on itself, generate tools for itself and coordinate work through software rather than through layers of meetings and management.
 
 This is not utopian. It may be messy, dangerous and highly unequal. It will create new risks around opacity, accountability, dependency, labour and control.
 
@@ -302,43 +291,24 @@ But as a business form, it is powerful. The market is currently focused on who s
 
 The larger question is who uses AI to become a different kind of company.
 
-## Paperclip, "claws" and agent orchestration
+## Agent orchestration makes the company form real
 
-One concrete example of the infrastructure I'm describing is [Paperclip](https://github.com/paperclipai/paperclip) (see the project site at https://paperclip.ing): an open-source control plane that treats agents as employees. Paperclip provides org charts, budgets, heartbeats, atomic execution, persistent sessions and audit logs so you can "hire" agents, assign goals, and govern work rather than babysit tabs. In that world the emerging class of "claw" adapters — lightweight, webhook- or runtime-driven agent connectors (for example, [OpenClaw](https://github.com/openclaw/openclaw)) — act as modular, networked employees you can plug into an org chart.
+One concrete example of the infrastructure I am describing is [Paperclip](https://github.com/paperclipai/paperclip), an open-source control plane that treats agents as employees. Paperclip provides org charts, budgets, heartbeats, atomic execution, persistent sessions and audit logs so you can "hire" agents, assign goals and govern work rather than babysit tabs. In that world the emerging class of claw-style adapters — lightweight, webhook- or runtime-driven agent connectors such as [OpenClaw](https://github.com/openclaw/openclaw) — act less like demos and more like modular workers you can plug into an operating system for the company.
 
-The practical effect is important. "Claws" make agents durable: scheduled heartbeats, checked-out tasks, resumable session state and cost controls turn ephemeral LLM sessions into repeatable work products (see OpenClaw docs: https://docs.openclaw.ai). Paperclip and the claw ecosystem show how orchestration, governance and tooling reduce the coordination tax between many heterogeneous agents, making continuous multi-agent workflows feasible. They also surface new failure modes and governance questions: who audits agent decisions, who owns budgets, and how do you safely rollback bad autonomous changes?
+That practical difference matters. These runtimes make agents durable. Scheduled heartbeats, checked-out tasks, resumable session state and cost controls turn ephemeral model sessions into repeatable work products. They also surface the real governance questions: who audits agent decisions, who owns budgets, how do you rollback bad changes, and what layer keeps the whole system observable enough to trust?
 
-Together, these projects illustrate how agent runtimes plus orchestration layers can accelerate the creation of AI-operated companies — and why the infrastructure layer matters for who captures the economic value.
-
-## Why this feeds the bubble burst
-
-
-## Claws, acquisitions and the agent landgrab
-
-The practical trend I want to flag is that "claw"-style runtimes and adapters are not an experimental footnote — they're the plumbing that makes autonomous businesses tractable. OpenClaw and related projects provide the primitives agents need to be durable: scheduled heartbeats, resumable session state, skill registries and simple webhook adapters that expose device-level capabilities. That durability is the difference between a toy LLM demo and a repeatable business process.
-
-The market is already reacting. In February 2026 the creator of OpenClaw, Peter Steinberger, announced he was joining OpenAI while OpenClaw itself remains an open-source project with independent stewardship; major outlets covered the move as a signal that larger model labs want to sponsor or internalize agent runtimes (see TechCrunch: https://techcrunch.com/2026/02/15/openclaw-creator-peter-steinberger-joins-openai and CNBC: https://www.cnbc.com/2026/02/15/openclaw-creator-peter-steinberger-joining-openai-altman-says.html). At the same time Anthropic's recent product roadmap and agent-focused releases (for example, Claude for Small Business and Opus model updates) show multiple providers pushing up the stack (see Anthropic: https://www.anthropic.com/news/claude-for-small-business and https://www.anthropic.com/news/claude-opus-4-7).
-
-Taken together, claw runtimes + orchestration platforms + model provider interest create a landgrab dynamic. Whoever stitches models, durable runtimes and governance together captures far more of the economic upside than a single model API or a single SaaS. That explains why incumbents buy talent, sponsor open projects, and build governance primitives: the company that controls safe, observable, auditable agent operations gets to be the platform for AI labour.
-
-Of course this raises policy and market questions: open-source runtimes can accelerate adoption, but sponsorship or acqui-hiring by large labs concentrates influence; governance, auditability, vendor lock-in and cost controls become strategic levers; and the coordination tax may reappear as platform dependency risk rather than headcount.
+The market is already reacting to that shift. In February 2026 the creator of OpenClaw, Peter Steinberger, announced he was joining OpenAI while OpenClaw itself remained open source with independent stewardship, a move widely read as evidence that larger model labs want a deeper foothold in agent runtimes. Anthropic's recent product direction points the same way. The reason is straightforward: once orchestration, governance and durable runtimes become central, the profit pool moves upward. Whoever controls safe, observable, auditable AI labour captures more value than a company that merely sells model access.
 
 The AI-operated company matters to the bubble thesis because it shifts the profit pool.
 
 If AI's most important economic effect is not simply selling model access or adding features to SaaS, but reducing the human and software cost of operating a company, then the current market story is incomplete.
 
-- The value does not necessarily accrue to the model API.
-- The value does not necessarily accrue to the SaaS vendor.
-- The value may accrue to the company that uses AI to operate with a radically lower cost structure.
+The value does not necessarily accrue to the model API. It does not necessarily accrue to the SaaS vendor. It may accrue to the company that uses AI to operate with a radically lower cost structure.
 
 That is dangerous for both model labs and SaaS incumbents.
 
-- Model labs may become suppliers.
-- SaaS vendors may become components.
-- AI-operated companies may capture the customer.
+Model labs may become suppliers. SaaS vendors may become components. AI-operated companies may capture the customer.
 
-That is the deeper convergence. The technology succeeds.
-
-The old valuation story breaks.
+That is the deeper convergence. The technology succeeds, but the old valuation story breaks under the weight of a new company form.
 
 In [Part 6](/posts/the-ai-bubble-will-burst-because-ai-is-real-06-convergence-point), I map the pressures that turn that structural mismatch into an actual market break.

@@ -58,17 +58,11 @@ The internet after dotcom became both more useful and more centralized.
 
 The early web was strange, open, personal, chaotic and independent. It was full of small sites, weird communities, hand-built pages, forums, experiments and businesses that looked nothing like the platform economy that followed.
 
-- After the crash came consolidation.
-- Search became a dominant interface.
-- Cloud became the new infrastructure layer.
-- Social networks centralized identity, attention and distribution.
-- Mobile operating systems created new app store gatekeepers.
-- Streaming platforms reshaped media.
-- Online advertising became surveillance infrastructure.
-- The consumer became the product.
-- Walled gardens replaced much of the early web's open weirdness.
-- This is the uncomfortable truth about paradigm shifts.
-- The mature form is often more useful and more extractive than the early form.
+After the crash came consolidation. Search became a dominant interface. Cloud became the new infrastructure layer. Social networks centralized identity, attention and distribution. Mobile operating systems created new app store gatekeepers.
+
+Then the next layer hardened. Streaming platforms reshaped media. Online advertising became surveillance infrastructure. The consumer became the product. Walled gardens replaced much of the early web's open weirdness.
+
+This is the uncomfortable truth about paradigm shifts. The mature form is often more useful and more extractive than the early form.
 
 The mature internet gave us convenience, scale, search, communication, ecommerce, software distribution, cloud computing, mobile apps, maps, video, payments and access to knowledge.
 
@@ -78,7 +72,7 @@ The crash did not prevent that.
 
 It helped create the conditions for it.
 
-| Bubble phase                             | Mature phase after the break                                       |
+| Bubble phase                             | Mature phase after the break                                      |
 | ---------------------------------------- | ----------------------------------------------------------------- |
 | Capital rewards exposure to the paradigm | Capital demands proof of durable capture                          |
 | Capability and narrative dominate        | Cost, governance, execution and margins dominate                  |
@@ -272,7 +266,7 @@ It may mean capturing the patterns of how people think, work, decide, write, neg
 
 That is a deeper form of extraction. This is where the social consequences begin to overwhelm the capital markets story.
 
-I do not want this series to become primarily about social impact. That deserves its own treatment. but it has to be acknowledged. 
+I do not want this series to become primarily about social impact. That deserves its own treatment, but it has to be acknowledged.
 
 The mature AI economy may be useful, profitable and deeply extractive. The dotcom precedent suggests those things can coexist.
 
@@ -315,5 +309,7 @@ That is the mature phase. The crash does not prevent it. The crash accelerates i
 That is why I keep returning to the same point. The AI bubble will burst because AI is real.
 
 And after it bursts, the real AI economy begins.
+
+The crash is not where the argument ends. It is where the underlying map becomes easier to see.
 
 In [Part 8](/posts/the-ai-bubble-will-burst-because-ai-is-real-08-new-power-map), I pull the whole series together and map the likely winners, pressured groups and control points in that mature economy.
