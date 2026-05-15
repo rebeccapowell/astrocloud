@@ -1,0 +1,42 @@
+---
+import { AI_SERIES_LIFECYCLE, getAiSeriesEntry } from "@/data/aiSeries";
+
+export interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+const currentEntry = getAiSeriesEntry(currentSlug);
+
+if (!currentEntry) {
+  throw new Error(`Unknown AI series entry: ${currentSlug}`);
+}
+
+const activeStages = currentEntry.lifecycleStages ?? [];
+---
+
+<div class="mt-4">
+  <p class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">
+    Paradigm lifecycle
+  </p>
+  <div class="mt-3 flex flex-wrap gap-2">
+    {
+      AI_SERIES_LIFECYCLE.map(stage => {
+        const isActive = activeStages.includes(stage);
+
+        return (
+          <span
+            class:list={[
+              "rounded-full border px-3 py-1.5 text-xs transition-colors",
+              isActive
+                ? "border-accent bg-accent text-background"
+                : "border-border bg-background text-foreground/70",
+            ]}
+          >
+            {stage}
+          </span>
+        );
+      })
+    }
+  </div>
+</div>

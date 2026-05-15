@@ -1,4 +1,5 @@
 import { defineConfig, envField } from "astro/config";
+import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
@@ -20,6 +21,7 @@ export default defineConfig({
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
+    mdx(),
     react(),
   ],
   markdown: {

@@ -1,10 +1,10 @@
 ---
-title: The AI Bubble Will Burst Because AI Is Real, Part 2: The AI Bubble Will Not Burst Because AI Is Fake
+title: The AI Bubble Will Burst Because AI Is Real, Part 2 - The AI Bubble Will Not Burst Because AI Is Fake
 author: Rebecca Powell
-pubDatetime: 2026-05-15T10:30:00Z
+pubDatetime: 2026-05-17T10:30:00Z
 slug: the-ai-bubble-will-burst-because-ai-is-real-02-ai-is-not-fake
 featured: false
-draft: true
+draft: false
 tags:
   - AI
   - Bubble
@@ -14,9 +14,9 @@ tags:
 description: The second part of a long-form essay series arguing that the AI bubble will not burst because AI is useless. It will burst because AI is useful in ways the market has not priced correctly.
 ---
 
-# The AI Bubble Will Burst Because AI Is Real
-
 ## Part 2: The AI Bubble Will Not Burst Because AI Is Fake
+
+Part 1 argued that markets routinely misprice real paradigm shifts by pricing the mature economy too early. This chapter asks the harder follow-up question: if AI utility is real, where does the value actually settle, and who captures it before the story breaks again in [Part 3](/posts/the-ai-bubble-will-burst-because-ai-is-real-03-false-moat)?
 
 The easiest way to misunderstand the AI bubble is to assume there are only two possible positions.
 
@@ -51,6 +51,8 @@ The most dangerous bubbles are not built on nothing.
 They are built on enough truth to make the overreach feel rational.
 
 AI has that truth.
+
+[Stanford's AI Index](https://aiindex.stanford.edu/report/) is one of the clearest high-level reminders that AI is no longer a speculative abstraction. And Microsoft now markets [Microsoft 365 Copilot](https://www.microsoft.com/en-us/microsoft-365/copilot/enterprise) as something woven directly into the everyday work surface of documents, meetings, files and chats. Those facts do not prove the current valuations are correct. They do make the bubble more convincing.
 
 A developer using a coding assistant can feel it. A student using it to understand a topic can feel it. A writer using it to structure a draft can feel it. A support team using it to summarize tickets can feel it. A manager using it to synthesize documents can feel it. A designer using it to explore visual directions can feel it. A small business owner using it to write copy, build a spreadsheet or understand a contract can feel it.
 
@@ -176,6 +178,13 @@ That is not a contradiction.
 
 It is the most likely path for a real paradigm shift.
 
+| What the signal shows                | What it genuinely proves        | What it does **not** prove                             | Where capture may still move                            |
+| ------------------------------------ | ------------------------------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| People use AI every day              | The utility is real             | That today's leaders own the durable profit pool       | Workflow, governance, devices, systems of record        |
+| Enterprises run pilots and buy seats | Budgets exist                   | That AI revenue converts cleanly into long-term margin | Integration, orchestration, trusted data layers         |
+| Model quality keeps improving        | Capability compounds            | That the scarcity premium stays centralized            | Local, hybrid, embedded, specialized deployment         |
+| Infrastructure spend is enormous     | Demand expectations are serious | That every layer earns its implied return              | Compute, execution layers, or entirely different owners |
+
 ## Why enterprise adoption will be slower and deeper than the demos suggest
 
 AI demos are seductive because they remove the mess.
@@ -223,3 +232,5 @@ It requires AI to mature.
 That is why I do not think the AI bubble will burst because AI is fake.
 
 I think it will burst because AI is real, and because reality will be more disruptive to today's market story than scepticism ever could be.
+
+In [Part 3](/posts/the-ai-bubble-will-burst-because-ai-is-real-03-false-moat), I take that question directly into the current ownership bet: the idea that intelligence as an API is itself the durable moat.

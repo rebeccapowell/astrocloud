@@ -1,10 +1,10 @@
 ---
-title: The AI Bubble Will Burst Because AI Is Real, Part 3: The False Moat of Intelligence as an API
+title: The AI Bubble Will Burst Because AI Is Real, Part 3 - The False Moat of Intelligence as an API
 author: Rebecca Powell
-pubDatetime: 2026-05-15T10:45:00Z
+pubDatetime: 2026-05-18T10:45:00Z
 slug: the-ai-bubble-will-burst-because-ai-is-real-03-false-moat
 featured: false
-draft: true
+draft: false
 tags:
   - AI
   - LLM
@@ -15,29 +15,23 @@ tags:
 description: The third part of a long-form essay series arguing that intelligence as an API is a transitional phase, not the final ownership layer of AI.
 ---
 
-# The AI Bubble Will Burst Because AI Is Real
+import AIArchitectureToggle from "@/components/AIArchitectureToggle";
 
 ## Part 3: The False Moat of Intelligence as an API
+
+Part 2 made the distinction between utility and capture. This chapter applies that distinction to the strongest current ownership claim in AI: that a few centralized model providers will remain the permanent home of intelligence. I think that story is much weaker than it looks, and it sets up the SaaS consequences explored in [Part 4](/posts/the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround).
 
 The current AI market story depends heavily on one assumption:
 
 > Intelligence will flow through a small number of centralized model providers because they have the best models and the infrastructure to run them.
 
-That sounds reasonable today.
-
-It may even be true today.
-
-But I do not think it is the final form.
+That sounds reasonable today. It may even be true today, but I do not think it is the final form.
 
 OpenAI, Anthropic and the other frontier labs are betting on a world where intelligence remains scarce, expensive, centralized and hard to reproduce. They have the models. They have the talent. They have the infrastructure relationships. They have the APIs. They have the mindshare. They have the brand.
 
-That is a powerful position.
+That is a powerful position, but it is not automatically a durable moat.
 
-But it is not automatically a durable moat.
-
-A model lead is not a moat. It is a lead.
-
-And leads decay.
+A model lead is not a moat. It is a lead, and leads decay.
 
 ## Scarcity is the current business model
 
@@ -49,19 +43,16 @@ That creates the feeling of a moat.
 
 If everyone needs intelligence and only a few companies can provide it, then those companies should capture the value.
 
-That is the simple version of the story.
+That is the simple version of the story. It is also the version I am most suspicious of.
 
-It is also the version I am most suspicious of.
-
-Technology attacks scarcity.
+**Technology attacks scarcity**.
 
 That is what it does.
 
 Every layer of the AI stack is currently under pressure to become cheaper, smaller, faster and more distributed. Model architecture improves. Inference improves. Quantization improves. Distillation improves. Hardware improves. Memory improves. Edge devices improve. Developer tooling improves. Open models improve. Specialized models improve.
 
-The question is not whether frontier models will remain impressive. They will.
-
-The question is how many tasks actually require the frontier.
+- The question is not whether frontier models will remain impressive. They will.
+- The question is how many tasks actually require the frontier.
 
 That number may be much smaller than the market currently assumes.
 
@@ -126,11 +117,15 @@ The mature AI stack is likely to be hybrid:
 - frontier cloud models for escalation;
 - orchestration layers deciding what runs where.
 
+Apple's [Apple Intelligence](https://www.apple.com/apple-intelligence/) is already explicitly framed around on-device processing with Private Cloud Compute, and Microsoft is using [Copilot+ PCs](https://www.microsoft.com/en-us/windows/copilot-plus-pcs) to push local NPU-based AI further down into the device. That does not prove the hybrid future is settled. It does show that the market is already moving beyond the fantasy that every meaningful act of intelligence stays behind one remote endpoint.
+
 That is very different from a world where every meaningful unit of intelligence flows through a handful of remote APIs.
 
 The API remains useful.
 
 It stops being the entire architecture.
+
+<AIArchitectureToggle client:visible />
 
 ## Distribution beats model purity
 
@@ -143,6 +138,13 @@ Sometimes it does.
 Often it does not.
 
 Distribution matters. Defaults matter. Workflow matters. Trust matters. Data matters. Integration matters. Switching costs matter. Procurement matters. Regulation matters. Developer ecosystems matter. Existing user behaviour matters.
+
+| Claimed moat           | Why it looks strong today                              | Why it weakens in the mature AI economy                                | What becomes more durable                             |
+| ---------------------- | ------------------------------------------------------ | --------------------------------------------------------------------- | ----------------------------------------------------- |
+| Frontier model quality | The best model is still visibly better                 | Many commercial tasks only need good-enough intelligence              | Context, workflow, permissions, user trust            |
+| Centralized API access | It is the easiest way to ship intelligence quickly     | More tasks become local, embedded, hybrid, or routed                  | Orchestration and distribution                        |
+| Brand mindshare        | Users currently go to the model destination on purpose | Mature AI becomes ambient and less model-visible                      | Default surfaces inside devices and operating systems |
+| Training scale alone   | Scarcity looks like a moat in the boom phase           | Scarcity gets attacked by diffusion, distillation, and specialization | Control of execution and customer relationship        |
 
 That is why device and platform companies are so important.
 
@@ -188,9 +190,9 @@ It made AI legible. It gave ordinary people a way to touch the new paradigm. It 
 
 That is enormous.
 
-But being the first widely understood gateway does not guarantee ownership of the adult economy.
+But being the first widely understood gateway does not guarantee ownership of the mature economy.
 
-The adult AI economy may not be a chat box.
+The mature AI economy may not be a chat box.
 
 It may be invisible.
 
@@ -364,3 +366,5 @@ It is powerful.
 It is necessary.
 
 It is not the final ownership layer.
+
+In [Part 4](/posts/the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround), I follow that logic into enterprise software and ask what happens when software itself becomes easier to generate around the business.

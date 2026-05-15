@@ -1,0 +1,159 @@
+---
+import ParadigmLifecycle from "@/components/ParadigmLifecycle.astro";
+import {
+  AI_SERIES_TITLE,
+  aiSeriesEntries,
+  getAiSeriesEntry,
+  getAiSeriesNeighbors,
+} from "@/data/aiSeries";
+
+export interface Props {
+  currentSlug: string;
+  variant?: "compact" | "full";
+}
+
+const { currentSlug, variant = "full" } = Astro.props;
+
+const currentEntry = getAiSeriesEntry(currentSlug);
+
+if (!currentEntry) {
+  throw new Error(`Unknown AI series entry: ${currentSlug}`);
+}
+
+const { previous, next } = getAiSeriesNeighbors(currentSlug);
+const totalParts = aiSeriesEntries.filter(
+  entry => entry.kind === "part"
+).length;
+const progressLabel =
+  currentEntry.kind === "preface"
+    ? "Series preface"
+    : `Part ${currentEntry.partNumber} of ${totalParts}`;
+---
+
+{
+  variant === "compact" ? (
+    <aside
+      data-pagefind-ignore
+      class="mt-6 rounded-2xl border border-border bg-muted/40 p-4"
+    >
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div class="max-w-2xl">
+          <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
+            Series guide
+          </p>
+          <div class="mt-1 text-base font-semibold text-foreground">
+            {AI_SERIES_TITLE}
+          </div>
+          <p class="mt-2 text-sm leading-6 text-foreground/80">
+            <span class="font-medium text-foreground">{progressLabel}.</span>{" "}
+            {currentEntry.summary}
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 text-sm">
+          <a
+            href={aiSeriesEntries[0].path}
+            class="rounded-full border border-border px-3 py-1.5 text-foreground transition-colors hover:border-accent hover:text-accent"
+          >
+            Open preface
+          </a>
+          {previous && (
+            <a
+              href={previous.path}
+              class="rounded-full border border-border px-3 py-1.5 text-foreground transition-colors hover:border-accent hover:text-accent"
+            >
+              Previous
+            </a>
+          )}
+          {next && (
+            <a
+              href={next.path}
+              class="rounded-full border border-accent bg-accent px-3 py-1.5 text-background transition-opacity hover:opacity-90"
+            >
+              Continue
+            </a>
+          )}
+        </div>
+      </div>
+      <ParadigmLifecycle currentSlug={currentSlug} />
+    </aside>
+  ) : (
+    <aside
+      data-pagefind-ignore
+      class="not-prose my-10 rounded-2xl border border-border bg-muted/40 p-5 sm:p-6"
+    >
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div class="max-w-2xl">
+          <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
+            Read the series
+          </p>
+          <div class="mt-1 text-xl font-semibold text-foreground">
+            {AI_SERIES_TITLE}
+          </div>
+          <p class="mt-2 text-sm leading-6 text-foreground/80">
+            {currentEntry.kind === "preface"
+              ? "Start with the preface, then move through the eight-part argument in order."
+              : `${progressLabel}. This chapter sits inside a single sequential argument, so the cards below are ordered for the intended reading flow.`}
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2 text-sm">
+          {previous && (
+            <a
+              href={previous.path}
+              class="rounded-full border border-border px-3 py-1.5 text-foreground transition-colors hover:border-accent hover:text-accent"
+            >
+              {previous.label}
+            </a>
+          )}
+          {next && (
+            <a
+              href={next.path}
+              class="rounded-full border border-accent bg-accent px-3 py-1.5 text-background transition-opacity hover:opacity-90"
+            >
+              {next.label}
+            </a>
+          )}
+        </div>
+      </div>
+
+      <ol class="mt-5 flex snap-x gap-3 overflow-x-auto pb-1">
+        {aiSeriesEntries.map(entry => {
+          const isCurrent = entry.slug === currentSlug;
+
+          return (
+            <li class="min-w-[15rem] snap-start list-none">
+              <a
+                href={entry.path}
+                aria-current={isCurrent ? "step" : undefined}
+                class:list={[
+                  "block h-full rounded-2xl border p-4 transition-colors",
+                  isCurrent
+                    ? "border-accent bg-background shadow-sm"
+                    : "border-border bg-background/70 hover:border-accent/60",
+                ]}
+              >
+                <div class="flex items-center justify-between gap-3">
+                  <span class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">
+                    {entry.label}
+                  </span>
+                  {entry.experience && (
+                    <span class="rounded-full bg-muted px-2 py-1 text-[11px] text-foreground/70">
+                      {entry.experience}
+                    </span>
+                  )}
+                </div>
+                <div class="mt-3 text-sm font-semibold text-foreground">
+                  {entry.title}
+                </div>
+                <p class="mt-2 text-sm leading-6 text-foreground/75">
+                  {entry.summary}
+                </p>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </aside>
+  )
+}

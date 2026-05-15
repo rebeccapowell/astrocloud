@@ -1,10 +1,10 @@
 ---
-title: The AI Bubble Will Burst Because AI Is Real, Part 8: The New Power Map
+title: The AI Bubble Will Burst Because AI Is Real, Part 8 - The New Power Map
 author: Rebecca Powell
-pubDatetime: 2026-05-15T12:00:00Z
+pubDatetime: 2026-05-23T12:00:00Z
 slug: the-ai-bubble-will-burst-because-ai-is-real-08-new-power-map
 featured: false
-draft: true
+draft: false
 tags:
   - AI
   - Capital Markets
@@ -14,13 +14,13 @@ tags:
 description: The final part of a long-form essay series mapping the likely winners and losers after the AI bubble breaks and the mature AI economy begins.
 ---
 
-# The AI Bubble Will Burst Because AI Is Real
+import AIPowerStack from "@/components/AIPowerStack";
 
 ## Part 8: The New Power Map
 
-The market is looking for the next software company.
+This final chapter gathers the whole series into one question: after the bubble breaks, which layers actually own the durable value? If you are arriving here first, the cleanest entry point is still the [preface](/posts/the-ai-bubble-will-burst-because-ai-is-real), followed by [Part 1](/posts/the-ai-bubble-will-burst-because-ai-is-real-01-business-cards).
 
-It should be looking for the next form of the company itself.
+The market is looking for the next software company, but it should be looking for the next form of the company itself.
 
 That is the deepest point of this series.
 
@@ -66,41 +66,40 @@ The AI-native map looks different.
 
 At the bottom are still chips, memory, power, networking and data centres. Physical compute matters. Energy matters. Supply chains matter.
 
-Then come devices and operating systems, because much intelligence moves closer to the user, the context and the workflow.
-
-Then come models, plural. Frontier models, local models, open models, specialized models, private models and embedded models.
-
-Then come identity, permissions, policy and governance, because intelligence without control is operationally dangerous.
-
-Then come data and systems of record, because AI is only useful when it can see the right context and act on trusted information.
-
-Then come orchestration layers, durable workflows, tool catalogs, API gateways, observability, evaluation and human approval gates.
-
-Then come generated workflows and generated software.
-
-Then come customer-facing services, internal operations and AI-operated companies.
+- Then come devices and operating systems, because much intelligence moves closer to the user, the context and the workflow.
+- Then come models, plural. Frontier models, local models, open models, specialized models, private models and embedded models.
+- Then come identity, permissions, policy and governance, because intelligence without control is operationally dangerous.
+- Then come data and systems of record, because AI is only useful when it can see the right context and act on trusted information.
+- Then come orchestration layers, durable workflows, tool catalogs, API gateways, observability, evaluation and human approval gates.
+- Then come generated workflows and generated software.
+- Then come customer-facing services, internal operations and AI-operated companies.
 
 In this map, the model is important, but it is not the whole system.
 
 The durable power sits where intelligence meets authority.
 
-Who can see the data?
+- Who can see the data?
+- Who can decide which model runs?
+- Who can grant permission?
+- Who can take action?
+- Who can observe the result?
+- Who can audit the decision?
+- Who owns the customer relationship?
+- Who owns the workflow?
 
-Who can decide which model runs?
+Those are the questions that define the mature AI economy.
 
-Who can grant permission?
+<AIPowerStack client:visible />
 
-Who can take action?
-
-Who can observe the result?
-
-Who can audit the decision?
-
-Who owns the customer relationship?
-
-Who owns the workflow?
-
-Those are the questions that define the adult AI economy.
+| Layer in the mature AI economy      | Why it matters                                                | What gets rewarded after the crash                                 |
+| ---------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Compute, memory, power, networking | AI still needs physical substrate                             | Efficient, well-timed capacity and supply-chain leverage           |
+| Devices and operating systems      | Intelligence moves closer to context and defaults             | Ownership of user surface, permissions and routing                 |
+| Models                             | Capability still matters, especially at the frontier          | Specialized excellence or strategic platform position              |
+| Identity, governance and policy    | Action without control is operationally dangerous             | Trusted approval, audit, policy and control planes                 |
+| Systems of record and data         | AI needs authoritative context to act safely                  | Record ownership, data trust and embedded workflow leverage        |
+| Orchestration and execution        | Real AI work needs retries, state, routing and human approval | Durable execution layers between intent and action                 |
+| AI-operated companies              | AI changes the cost structure of the firm itself              | Lower coordination cost, faster iteration, thinner operating model |
 
 ## Likely winner: chips, memory, packaging and power-efficient compute
 
@@ -141,59 +140,43 @@ If intelligence moves closer to the user, devices and operating systems become m
 
 This is why Apple, Microsoft, Google, Android, Samsung and other platform owners matter.
 
-The device has the context.
-
-The operating system has the permissions.
-
-The browser has the activity.
-
-The phone has the personal life.
-
-The laptop has the work.
+- The device has the context.
+- The operating system has the permissions.
+- The browser has the activity.
+- The phone has the personal life.
+- The laptop has the work.
 
 The calendar, inbox, files, photos, messages, contacts, identity, location and app permissions all live close to the user.
 
-A remote model API has intelligence.
+A useful mainstream signal here is [Apple Intelligence](https://www.apple.com/apple-intelligence/), which is explicitly designed around on-device processing plus Private Cloud Compute. Even if Apple's particular implementation changes, the architectural direction matters: more intelligence moves closer to the user, the operating system and the permission boundary.
 
-The device has life.
-
-That may be the more durable position.
-
-The adult AI user may not open a chatbot to ask for help. The help may already be inside the thing they are doing.
-
-That gives platform owners a strong position.
-
-They can route models. They can bundle features. They can privilege defaults. They can integrate privacy controls. They can decide which AI capabilities become part of the environment.
-
-This does not make them unbeatable.
+- A remote model API has intelligence.
+- The device has life.
+- That may be the more durable position.
+- The mature AI user may not open a chatbot to ask for help. The help may already be inside the thing they are doing.
+- That gives platform owners a strong position.
+- They can route models. They can bundle features. They can privilege defaults. They can integrate privacy controls. They can decide which AI capabilities become part of the environment.
+- This does not make them unbeatable.
 
 But it gives them a structural advantage over pure model providers.
 
 ## Likely winner: systems of record
 
-AI needs trusted context.
-
-That makes systems of record more important, not less.
+AI needs trusted context and that makes systems of record more important, not less.
 
 Finance records. Customer records. Contracts. Orders. HR records. Identity. Product data. Risk data. Compliance records. Audit trails. Inventory. Usage history. Support history. Pricing rules. Legal obligations.
 
-If AI is going to act, it needs to act on trusted data.
-
-The companies that own or govern those records have leverage.
+If AI is going to act, it needs to act on trusted data. The companies that own or govern those records have leverage.
 
 This is why not all SaaS is equally exposed.
 
 A system of record can become more valuable if it becomes the trusted source for AI-operated workflows.
 
-A generic workflow layer around a system of record is more vulnerable.
-
-The distinction matters.
+A generic workflow layer around a system of record is more vulnerable and the distinction matters.
 
 The mature AI economy may hollow out parts of SaaS while strengthening certain core platforms.
 
-The record survives.
-
-The workflow around the record becomes fluid.
+The record survives and the workflow around the record becomes fluid.
 
 ## Likely winner: identity, permissions and governance
 
@@ -201,25 +184,18 @@ AI without governance is a liability.
 
 As AI systems move from answering questions to taking actions, permissions become central.
 
-Who is the AI acting for?
+- Who is the AI acting for?
+- What data can it access?
+- What actions can it perform?
+- Which systems can it write to?
+- Which decisions require human approval?
+- How is the action audited?
+- How is responsibility assigned?
+- How are failures detected?
+- How are generated workflows tested?
+- How is sensitive data prevented from leaking into the wrong model?
 
-What data can it access?
-
-What actions can it perform?
-
-Which systems can it write to?
-
-Which decisions require human approval?
-
-How is the action audited?
-
-How is responsibility assigned?
-
-How are failures detected?
-
-How are generated workflows tested?
-
-How is sensitive data prevented from leaking into the wrong model?
+Microsoft is already productizing this layer directly through [Copilot Control System](https://www.microsoft.com/en-us/microsoft-365-copilot/copilot-control-system), which it describes as a way to secure, govern, manage and measure AI at enterprise scale. That does not prove Microsoft owns the mature AI economy. It does reinforce the broader claim that governance becomes a real product layer, not just an afterthought.
 
 This makes identity and governance strategic.
 
@@ -233,9 +209,7 @@ This is one reason I think the model API moat is weaker than people assume.
 
 The model can answer.
 
-The governance layer decides whether the answer can become action.
-
-Action is where business value lives.
+The governance layer decides whether the answer can become action and action is where business value lives.
 
 ## Likely winner: workflow orchestration and durable execution
 
@@ -247,9 +221,7 @@ This makes workflow orchestration important.
 
 An AI-operated company or AI-native enterprise does not simply ask a model to do everything. It needs processes that can survive failure, wait for external events, retry safely, call tools, involve humans, record decisions and produce auditable outcomes.
 
-That is not a chatbot problem.
-
-It is an execution problem.
+That is not a chatbot problem. It is an execution problem.
 
 The mature AI economy will need orchestration layers that sit between intent and action.
 
@@ -296,23 +268,16 @@ The model labs are important.
 
 But pure model API economics are vulnerable.
 
-If models become cheaper, smaller, local, open and specialized, then centralized API access loses some scarcity value.
+- If models become cheaper, smaller, local, open and specialized, then centralized API access loses some scarcity value.
+- If devices and operating systems absorb everyday AI tasks, model labs lose user surface.
+- If enterprises build private routing and governance layers, model labs become suppliers.
+- If frontier capability remains expensive, only the hardest tasks justify premium pricing.
 
-If devices and operating systems absorb everyday AI tasks, model labs lose user surface.
-
-If enterprises build private routing and governance layers, model labs become suppliers.
-
-If frontier capability remains expensive, only the hardest tasks justify premium pricing.
-
-The strongest model companies will try to become platforms.
-
-They will build consumer products, enterprise tooling, developer ecosystems, agent frameworks, marketplaces, infrastructure partnerships and maybe devices.
+The strongest model companies will try to become platforms and they will build consumer products, enterprise tooling, developer ecosystems, agent frameworks, marketplaces, infrastructure partnerships and maybe devices.
 
 Some will succeed.
 
-But the weaker ones, especially those without distribution, will struggle.
-
-The market currently treats model quality as if it can become durable ownership.
+But the weaker ones, especially those without distribution, will struggle. The market currently treats model quality as if it can become durable ownership.
 
 That is the questionable assumption.
 
@@ -340,13 +305,10 @@ SaaS is not dead.
 
 But generic workflow SaaS is exposed.
 
-If the product is mainly forms, dashboards, routing, approvals, notifications, lightweight records and integrations, AI-generated internal software becomes a threat.
-
-If the pricing model depends on seat expansion, AI-driven labour compression becomes a threat.
-
-If the AI features are not differentiated, they become table stakes.
-
-If the product does not own the system of record, the data, the compliance model, the ecosystem or the customer relationship, it is easier to replace.
+- If the product is mainly forms, dashboards, routing, approvals, notifications, lightweight records and integrations, AI-generated internal software becomes a threat.
+- If the pricing model depends on seat expansion, AI-driven labour compression becomes a threat.
+- If the AI features are not differentiated, they become table stakes.
+- If the product does not own the system of record, the data, the compliance model, the ecosystem or the customer relationship, it is easier to replace.
 
 The weak SaaS company of the AI era is one that sells a generic workflow and calls it a platform.
 
@@ -360,15 +322,11 @@ The AI-operated company is a direct threat to human-heavy service models.
 
 Agencies, consultancies, research shops, outsourcing firms, implementation partners, content operations, support services, sales operations, analytics services and many professional service niches will feel pressure.
 
-The pressure will not be uniform.
-
-High-trust, high-judgement, high-relationship work survives longer.
+The pressure will not be uniform. High-trust, high-judgement, high-relationship work survives longer.
 
 Routine production, analysis, reporting, coordination and execution compress faster.
 
-The dangerous competitor is not always a large incumbent with AI tools.
-
-It may be a small AI-operated company with lower costs, faster iteration and enough human expertise at the top.
+The dangerous competitor is not always a large incumbent with AI tools. It may be a small AI-operated company with lower costs, faster iteration and enough human expertise at the top.
 
 That changes market structure.
 
@@ -380,11 +338,9 @@ A company with no proprietary data, no deep workflow, no customer trust, no dist
 
 This applies to startups and incumbents.
 
-Putting AI in the pitch does not create a moat.
-
-Adding AI features does not create a moat.
-
-Using a frontier model does not create a moat.
+- Putting AI in the pitch does not create a moat.
+- Adding AI features does not create a moat.
+- Using a frontier model does not create a moat.
 
 The question is what remains when everyone has access to similar intelligence.
 
@@ -406,96 +362,64 @@ That question cuts deeper.
 
 It forces a company to examine its real moat.
 
-Do we own data?
-
-Do we own a workflow?
-
-Do we own trust?
-
-Do we own distribution?
-
-Do we own a regulated position?
-
-Do we own a system of record?
-
-Do we know something specific about our customers that others do not?
-
-Can we encode our process knowledge into software?
-
-Can we operate with fewer coordination layers?
-
-Can we build custom internal systems faster than before?
-
-Can we expose our capabilities as APIs and tools?
-
-Can we govern AI safely enough to let it act?
+- Do we own data?
+- Do we own a workflow?
+- Do we own trust?
+- Do we own distribution?
+- Do we own a regulated position?
+- Do we own a system of record?
+- Do we know something specific about our customers that others do not?
+- Can we encode our process knowledge into software?
+- Can we operate with fewer coordination layers?
+- Can we build custom internal systems faster than before?
+- Can we expose our capabilities as APIs and tools?
+- Can we govern AI safely enough to let it act?
 
 These are the questions that matter after the bubble.
 
 ## The investor question
 
-The investor version is similar.
-
-Do not ask only whether a company has AI exposure.
+The investor version is similar. Do not ask only whether a company has AI exposure.
 
 Ask whether it captures AI value.
 
-Is AI reducing cost or increasing spend?
+- Is AI reducing cost or increasing spend?
+- Is AI increasing margin or subsidizing usage?
+- Is the company selling a durable capability or a temporary wrapper?
+- Is the company protected by data, distribution, workflow, governance, compute or trust?
+- Is the company exposed to model commoditization?
+- Is the company exposed to seat compression?
+- Is the company's capex ahead of demand?
+- Is the company the owner of the workflow or a supplier to someone else's workflow?
 
-Is AI increasing margin or subsidizing usage?
-
-Is the company selling a durable capability or a temporary wrapper?
-
-Is the company protected by data, distribution, workflow, governance, compute or trust?
-
-Is the company exposed to model commoditization?
-
-Is the company exposed to seat compression?
-
-Is the company's capex ahead of demand?
-
-Is the company the owner of the workflow or a supplier to someone else's workflow?
-
-During the bubble, exposure is enough.
-
-After the bubble, capture matters.
+During the bubble, exposure is enough. After the bubble, capture matters.
 
 ## The final prediction
 
 The AI bubble will burst because AI is real.
 
-It will burst because AI is real enough to make models smaller, cheaper and more local.
+- It will burst because AI is real enough to make models smaller, cheaper and more local.
+- It will burst because AI is real enough to make custom software cheaper.
+- It will burst because AI is real enough to pressure generic SaaS.
+- It will burst because AI is real enough to create AI-operated companies with radically different cost structures.
+- It will burst because AI is real enough to force investors to ask who actually owns the future.
 
-It will burst because AI is real enough to make custom software cheaper.
+The market has correctly sensed a paradigm shift but it has not yet correctly mapped the ownership layer.
 
-It will burst because AI is real enough to pressure generic SaaS.
+That is the mistake. 
 
-It will burst because AI is real enough to create AI-operated companies with radically different cost structures.
-
-It will burst because AI is real enough to force investors to ask who actually owns the future.
-
-The market has correctly sensed a paradigm shift.
-
-It has not yet correctly mapped the ownership layer.
-
-That is the mistake.
-
-When belief changes, the bubble breaks.
-
-After that, the real AI economy begins.
+When belief changes, the bubble breaks. After that, the real AI economy begins.
 
 It will be useful. It will be profitable. It will be more centralized than many hope. It will be more distributed than some incumbents want. It will be more extractive than the early optimism suggests. It will compress labour, software and coordination. It will create new company forms. It will destroy some moats and create others.
 
-It will not look exactly like the first story.
+It will not look exactly like the first story. The first story almost never survives contact with the mature paradigm.
 
-The first story almost never survives contact with the adult paradigm.
-
-I still have those business cards from the dotcom bubble.
-
-They remind me that people can stand close to the future and still be wrong about who owns it.
+I still have those business cards from the dotcom bubble. They remind me that people can stand close to the future and still be wrong about who owns it.
 
 That is where I think we are with AI.
 
 The future is real.
 
 The current map is wrong.
+
+If you want the argument from the top again, return to the [preface](/posts/the-ai-bubble-will-burst-because-ai-is-real) and read forward through the series as one continuous thesis.

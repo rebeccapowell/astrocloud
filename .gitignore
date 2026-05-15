@@ -26,3 +26,7 @@ pnpm-debug.log*
 # pagefind
 
 public/pagefind
+
+# local MCP / browser inspection artifacts
+.mcp.json
+.playwright-mcp/
