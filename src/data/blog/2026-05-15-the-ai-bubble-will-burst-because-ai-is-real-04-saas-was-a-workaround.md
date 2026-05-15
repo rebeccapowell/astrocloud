@@ -1,0 +1,360 @@
+---
+title: The AI Bubble Will Burst Because AI Is Real, Part 4: SaaS Was a Workaround
+author: Rebecca Powell
+pubDatetime: 2026-05-15T11:00:00Z
+slug: the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround
+featured: false
+draft: true
+tags:
+  - AI
+  - SaaS
+  - Software
+  - Capital Markets
+  - Enterprise Software
+description: The fourth part of a long-form essay series arguing that SaaS is more vulnerable to AI than many people believe because SaaS won partly because custom software was too expensive.
+---
+
+# The AI Bubble Will Burst Because AI Is Real
+
+## Part 4: SaaS Was a Workaround
+
+SaaS did not win because generic software was perfect.
+
+SaaS won because custom software was too expensive.
+
+That distinction matters because AI attacks the second part of the sentence.
+
+For the last two decades, businesses have increasingly adapted themselves to software. A company buys a CRM, an ERP, a ticketing system, a project management tool, a marketing automation platform, a support platform, a finance system, a workflow tool, a reporting tool, a vertical SaaS product, and then the business bends around the assumptions inside those products.
+
+The software defines the workflow.
+
+The company configures what it can.
+
+The rest becomes process change.
+
+This was not irrational. It was the best available compromise.
+
+Building custom software was slow, expensive, risky and difficult to maintain. Buying SaaS meant accepting a generic model in exchange for speed, reliability, upgrades, integrations, compliance, support and predictable subscription pricing.
+
+That bargain created enormous companies.
+
+But the bargain depends on one assumption:
+
+> It is cheaper to adapt the business to the software than to adapt the software to the business.
+
+AI threatens that assumption.
+
+## The old software compromise
+
+Every company has a slightly different shape.
+
+Different customers. Different products. Different sales processes. Different risk models. Different pricing logic. Different compliance requirements. Different internal language. Different approval paths. Different exceptions. Different legacy systems. Different reporting needs. Different politics.
+
+But software markets prefer repeatability.
+
+A SaaS company cannot build a completely bespoke product for every customer and still enjoy SaaS economics. It needs a product model that is reusable across many customers. It needs standard objects, standard workflows, standard configuration surfaces, standard permissions, standard integrations and standard pricing.
+
+That creates a mismatch.
+
+The business is specific.
+
+The software is generic.
+
+The gap is filled by configuration, implementation partners, consultants, spreadsheets, manual workarounds, exported CSV files, integrations, process changes and people whose job is to make the tool fit reality.
+
+This is the hidden tax of SaaS.
+
+We often talk about subscription cost, but the real cost is broader:
+
+- implementation;
+- migration;
+- training;
+- process redesign;
+- integration;
+- administration;
+- customization;
+- reporting workarounds;
+- manual exception handling;
+- vendor lock-in;
+- duplicated data;
+- the mental overhead of living inside someone else's model of your business.
+
+SaaS is useful because the alternative was worse.
+
+AI changes the alternative.
+
+## Software starts adapting to the business
+
+The most important AI shift in software is not that a chatbot appears inside every application.
+
+It is that software itself becomes easier to create, change and maintain.
+
+That does not mean a non-technical person can safely prompt a complete enterprise system into existence and walk away. That is fantasy.
+
+But it does mean the cost curve changes.
+
+AI can accelerate requirements capture, prototyping, code generation, testing, documentation, migration, integration, refactoring, support, analysis and maintenance. It can help translate messy business language into working software. It can generate UI, APIs, database schemas, workflow logic, test cases, documentation and deployment scripts. It can inspect existing systems and suggest adapters. It can create internal tools that previously would have been uneconomical.
+
+When the cost of custom software falls, the boundary between buy and build moves.
+
+That is the threat to SaaS.
+
+Not that every company suddenly becomes a software company in the old sense.
+
+Rather, every company gains the ability to express more of its own operating model directly in software.
+
+The software starts adapting to the business.
+
+That is a reversal of the SaaS era.
+
+## Systems of record versus systems of workflow
+
+Not all SaaS is equally exposed.
+
+Some systems are deeply embedded, regulated, audited and structurally hard to replace. Finance cores, ledgers, payroll, tax systems, HR master data, identity systems, banking infrastructure, ERP cores and compliance-heavy systems of record have a different durability.
+
+These systems do not survive merely because they have nice interfaces. They survive because they become the legal, financial or operational memory of the company.
+
+Replacing them is not just a software decision. It is a governance decision, a compliance decision, a migration risk and an operational risk.
+
+But systems of workflow are more exposed.
+
+A large part of the SaaS market is not a system of record in the deep sense. It is workflow around records.
+
+Forms. Dashboards. Approvals. Notifications. Ticket queues. Lightweight CRMs. Internal portals. Reporting layers. Project boards. Operational trackers. Lead routing. Customer onboarding flows. Support triage. Data enrichment flows. Content calendars. Review processes. Procurement workflows. Risk review workflows. Contract handoffs.
+
+Much of this is structured CRUD plus workflow plus permissions plus reporting plus integrations.
+
+That pattern used to be expensive to build well.
+
+AI makes it more generatable.
+
+That does not make it trivial. It does make it vulnerable.
+
+## The SaaS feature becomes the AI-generated workflow
+
+A SaaS company normally packages a workflow and sells it repeatedly.
+
+AI makes it easier for a company to generate a workflow around its own exact requirements.
+
+Imagine a company that wants a customer intake process.
+
+In the SaaS world, it buys a product, configures fields, creates workflows, trains staff, integrates with existing systems and accepts the tool's assumptions.
+
+In an AI-native world, the company describes the process, feeds in examples, policies, documents, APIs, data models and exceptions, then generates a workflow that matches its operating model.
+
+The system creates the intake UI, validation logic, enrichment calls, approval flow, audit trail, customer communication, reporting dashboard and integration events.
+
+A human still reviews. Engineers still govern. Security still matters. Compliance still matters. Testing still matters. But the economics are different.
+
+What used to be a SaaS feature can become a generated internal capability.
+
+That is the phrase that should worry SaaS companies:
+
+> generated internal capability.
+
+Because that is where SaaS loses scarcity.
+
+## Seat-based pricing breaks under labour compression
+
+SaaS economics have historically loved headcount.
+
+More employees means more seats. More seats means more recurring revenue. Expansion revenue becomes a growth engine. Net revenue retention becomes a valuation story. The software company grows as the customer grows.
+
+AI complicates that.
+
+If AI reduces the number of humans required to perform a workflow, seat-based pricing comes under pressure.
+
+A customer using AI to handle support triage may need fewer support agents. A customer using AI to automate sales operations may need fewer operations seats. A customer using AI to generate reports may need fewer analysts. A customer using AI to draft, classify, review and route work may need fewer licensed users touching the system.
+
+The SaaS vendor will try to respond with usage pricing, outcome pricing or AI add-on pricing.
+
+But then the customer asks a harder question:
+
+> If the AI is doing the work, why am I paying per human seat?
+
+And then the next question:
+
+> If the workflow is now mostly automated, why am I buying a generic workflow product at all?
+
+That is the structural problem.
+
+AI is not just an upsell opportunity for SaaS.
+
+It is also a force that attacks the pricing model underneath SaaS.
+
+## AI features are not moats
+
+Every SaaS company now has an AI strategy.
+
+That is not a moat.
+
+In many cases, it is table stakes.
+
+Adding summarization, drafting, chat, classification, recommendations or natural language search to an existing product may improve the product. It may defend the product for a while. It may create short-term pricing power. It may keep customers from leaving.
+
+But if every product has AI, then AI is not the differentiator.
+
+The differentiators become:
+
+- proprietary data;
+- deep workflow ownership;
+- system-of-record status;
+- trust;
+- compliance;
+- integration depth;
+- permissions;
+- governance;
+- ecosystem;
+- distribution;
+- switching costs;
+- ability to execute real actions safely.
+
+The weak SaaS companies are the ones whose real product is a generic workflow wrapped around data they do not uniquely own.
+
+AI can replicate that more easily than investors want to admit.
+
+## Vertical SaaS is both strong and vulnerable
+
+Vertical SaaS is interesting because it cuts both ways.
+
+On one hand, vertical SaaS companies can have deep domain knowledge, specialized workflows, regulatory understanding, data models, integrations and customer trust. That gives them defensibility.
+
+On the other hand, many vertical SaaS products are highly specific workflows. That means they are exactly the kind of software AI may eventually generate more cheaply for narrow use cases.
+
+The question is whether the vertical SaaS company owns a durable system of record and network of integrations, or whether it mostly owns a configurable workflow pattern.
+
+If it owns the record, the data, the compliance model, the ecosystem and the customer relationship, it can survive and embed AI.
+
+If it owns a workflow that customers tolerate because custom software was too expensive, it is vulnerable.
+
+This is why the SaaS market will not collapse evenly.
+
+It will sort.
+
+Systems of record get defended.
+
+Systems of workflow get compressed.
+
+Thin workflow SaaS gets replaced, absorbed or forced downmarket.
+
+## The enterprise control plane becomes more important
+
+As software becomes more generatable, governance becomes more important.
+
+This may sound counterintuitive, but it is crucial.
+
+If every department can generate workflows, tools, dashboards, automations and agents, the company needs a way to control what is created, what data it can access, what actions it can take, how it is audited, how it is deployed, how it is monitored and how it is retired.
+
+The future is not random prompt-built shadow IT everywhere.
+
+That would be chaos.
+
+The future is an enterprise control plane:
+
+- identity;
+- permissions;
+- policy;
+- data access;
+- workflow orchestration;
+- observability;
+- audit;
+- evaluation;
+- deployment;
+- rollback;
+- human approval gates;
+- tool catalogs;
+- API governance;
+- model routing.
+
+This is where the value may move.
+
+Not necessarily to the SaaS application itself, but to the layer that lets a company safely generate, run and govern its own software and AI workflows.
+
+That is why the SaaS threat is not simply replacement by AI.
+
+It is replacement by an AI-native operating model.
+
+## SaaS becomes less of an application category and more of a component supplier
+
+In the mature AI economy, SaaS may not disappear.
+
+It may become more modular.
+
+A company might still use Salesforce as a customer record, Workday as an HR record, SAP as a finance and ERP core, ServiceNow as an IT service backbone, Microsoft as productivity and identity infrastructure.
+
+But around those systems, the workflow layer becomes more fluid.
+
+Instead of buying another SaaS product for every operational variation, companies generate workflows that read from and write to systems of record through governed APIs.
+
+The SaaS product becomes a component in a larger AI-operated environment.
+
+That is a smaller and less glamorous role than many SaaS valuations imply.
+
+It is still valuable.
+
+But it is not the same as owning the user's entire workflow.
+
+## The custom software renaissance
+
+For years, buying SaaS was treated as modern and building custom software was treated as dangerous, expensive and old-fashioned.
+
+That made sense in context.
+
+But AI may trigger a custom software renaissance.
+
+Not the old custom software model of huge teams, multi-year projects, brittle codebases and expensive consultants.
+
+A new model:
+
+- generated scaffolding;
+- AI-assisted engineering;
+- reusable components;
+- workflow engines;
+- API-first systems;
+- automated tests;
+- infrastructure templates;
+- continuous refactoring;
+- observability from the start;
+- human review and governance;
+- smaller teams maintaining more software.
+
+This does not eliminate engineering. It changes the leverage of engineering.
+
+A company with strong internal technical capability and clear domain knowledge may be able to build exactly what it needs at a cost that would have been impossible before.
+
+That is bad for generic SaaS.
+
+It is good for companies that understand their own business deeply.
+
+## The end of the generic workflow premium
+
+The core SaaS risk is not that software stops mattering.
+
+Software matters more.
+
+The risk is that generic workflow software loses its premium because software becomes easier to shape.
+
+That is the inversion.
+
+The SaaS era said:
+
+> Buy the best generic workflow and adapt your company around it.
+
+The AI-native era says:
+
+> Describe your company and generate the workflow around it.
+
+Not everywhere. Not instantly. Not without governance. Not without engineers.
+
+But enough to change the market.
+
+This is why SaaS is more vulnerable to AI than many people believe.
+
+The threat is not merely that AI features appear inside SaaS products.
+
+The threat is that AI changes the economics that made SaaS the default choice.
+
+SaaS was a workaround for the high cost of custom software.
+
+If that cost falls, the workaround gets repriced.
