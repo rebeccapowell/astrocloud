@@ -1,0 +1,380 @@
+---
+title: The AI Bubble Will Burst Because AI Is Real, Part 5: The AI-Operated Company
+author: Rebecca Powell
+pubDatetime: 2026-05-15T11:15:00Z
+slug: the-ai-bubble-will-burst-because-ai-is-real-05-ai-operated-company
+featured: false
+draft: true
+tags:
+  - AI
+  - Automation
+  - Startups
+  - Future of Work
+  - Software
+description: The fifth part of a long-form essay series arguing that the most disruptive AI companies may not be companies that sell AI, but companies mostly run by AI.
+---
+
+# The AI Bubble Will Burst Because AI Is Real
+
+## Part 5: The AI-Operated Company
+
+The next great AI startup may not be a company that sells AI.
+
+It may be a company that is mostly run by AI.
+
+That is the step people still underestimate.
+
+Most of the AI conversation is about tools inside existing companies. AI for customer support. AI for developers. AI for sales teams. AI for analysts. AI for marketers. AI inside CRM. AI inside office software. AI inside design tools. AI inside search. AI inside every SaaS product that can add a chat box and a sparkle icon.
+
+That is the first-order effect.
+
+The second-order effect is more important.
+
+If AI can create software, operate workflows, coordinate tasks, monitor markets, communicate with customers, generate reports, analyze data, handle exceptions, run experiments and improve processes, then the structure of the company itself changes.
+
+A company is, among other things, a coordination machine.
+
+AI attacks coordination.
+
+## The company as a control system
+
+A business is not just a collection of workers.
+
+It is a system for turning goals into repeated action.
+
+A company finds customers, sells to them, serves them, bills them, supports them, reports on them, learns from them, hires people, manages cash, handles risk, negotiates contracts, builds tools, improves processes and tries to survive long enough to do it again tomorrow.
+
+Historically, that required people at almost every layer.
+
+Some people did the work. Other people coordinated the work. Other people reported on the work. Other people managed the people coordinating the work. Other people bought software to track the work. Other people integrated that software. Other people produced decks explaining why the work was behind schedule.
+
+The coordination tax is enormous.
+
+It hides inside meetings, planning sessions, tickets, status updates, dashboards, reporting packs, approval chains, handovers, process documents, onboarding, training, vendor management and management layers.
+
+AI does not only reduce task labour.
+
+It reduces the coordination tax.
+
+That is why the AI-operated company matters.
+
+## The serious version of the DAO idea
+
+Crypto had an early version of this idea with DAOs.
+
+A DAO was supposed to be a decentralized autonomous organization. It had treasury, voting, governance proposals, smart contracts and programmatic execution.
+
+The idea was interesting.
+
+The execution was often primitive.
+
+Most DAOs did not have operational intelligence. They had governance mechanics without a brain. They could vote, allocate funds, execute simple contracts and coordinate communities, but they could not truly run a business. They could not reliably sell, support, build, negotiate, learn, adapt, inspect markets, generate software or manage complex operations.
+
+AI supplies the missing layer.
+
+An AI-operated company does not need to be a crypto DAO. It may not need a token. It may not need decentralization. It may be a normal GmbH, Ltd or LLC with a legal wrapper, bank account, directors, accountants, contracts and liabilities.
+
+The difference is internal.
+
+The operating core is automated.
+
+Humans set goals, constraints and approvals.
+
+AI executes much of the company.
+
+That is a more plausible version of the autonomous organization than most of what crypto produced.
+
+## The sequence: from code to company
+
+The path from coding assistant to AI-operated company is not magic.
+
+It is a sequence.
+
+First, AI helps write software.
+
+Then AI helps maintain software.
+
+Then AI helps integrate systems.
+
+Then AI helps generate internal tools.
+
+Then AI starts operating workflows inside those tools.
+
+Then AI monitors outcomes.
+
+Then AI suggests process changes.
+
+Then AI implements some of those changes.
+
+Then AI coordinates between functions.
+
+Then AI handles more of the customer lifecycle.
+
+Then AI runs experiments, evaluates results and adjusts operations.
+
+At each stage, humans remain involved, but the ratio changes.
+
+The company becomes less like a hierarchy of people using software and more like a set of goals, rules, workflows, data, models, tools and human approval gates.
+
+That is a different company form.
+
+## Minimal human capital
+
+I do not think the realistic version is zero humans.
+
+That is a distraction.
+
+There will be humans because law, trust, accountability, taste, relationship, judgement, liability and capital allocation still matter.
+
+But the number of humans required to operate a meaningful business may fall dramatically.
+
+A five-person company may behave like a fifty-person company.
+
+A ten-person company may behave like a two-hundred-person company.
+
+A solo founder may operate a portfolio of small AI-run businesses that would previously have required teams.
+
+Human roles shift upward:
+
+- founder;
+- goal setter;
+- domain expert;
+- capital allocator;
+- brand and trust owner;
+- compliance owner;
+- escalation point;
+- customer relationship owner;
+- auditor;
+- final approver for high-risk decisions.
+
+The work does not disappear entirely.
+
+The leverage changes.
+
+That leverage is economically explosive.
+
+## Early categories
+
+The first AI-operated companies will not be nuclear plants, airlines, hospitals or banks.
+
+They will start where the product is digital, the work is measurable and the liability is manageable.
+
+Likely early categories include:
+
+- niche research businesses;
+- market monitoring services;
+- regulatory tracking;
+- lead enrichment;
+- supplier intelligence;
+- customer intelligence;
+- small software products;
+- generated internal tools;
+- content operations;
+- localization;
+- analytics services;
+- support operations;
+- sales operations;
+- compliance screening;
+- document processing;
+- API integration services;
+- code migration;
+- dependency updating;
+- testing and documentation services.
+
+Many of these are currently human-heavy services or small SaaS categories.
+
+That makes them exposed.
+
+An AI-operated competitor does not need to look impressive from the outside. It only needs to deliver the service with a lower cost structure, faster iteration and fewer humans.
+
+That is enough to change a market.
+
+## The agency model gets compressed
+
+Agencies and consultancies are especially interesting.
+
+A lot of agency work is coordination, production and iteration. Content calendars, campaign drafts, reports, SEO pages, analytics, outreach, design variants, customer research, competitor monitoring, dashboarding, workflow automation, integration projects, documentation and project management.
+
+Historically, an agency sold access to people who could do this work.
+
+An AI-operated agency sells outcomes produced by a small human team and a large automated execution surface.
+
+That is a different margin structure.
+
+It can undercut traditional agencies.
+
+It can serve smaller niches.
+
+It can run continuously.
+
+It can test more variants.
+
+It can personalize more deeply.
+
+It can turn expertise into repeatable workflows more quickly.
+
+This does not mean every agency disappears. Trust, taste, strategy, relationships and high-end creative judgement still matter.
+
+But the middle of the market compresses.
+
+The same pattern will apply to many human-heavy service businesses.
+
+## The SaaS stack gets replaced by an operating core
+
+A normal small or medium business accumulates SaaS.
+
+CRM, email, project management, support desk, analytics, accounting, workflow tools, automation tools, document management, marketing tools, sales tools, dashboards and internal portals.
+
+The stack grows because every operational need maps to another product category.
+
+An AI-operated company may look different.
+
+It may have:
+
+- a system of record;
+- a data store;
+- identity and permissions;
+- a workflow engine;
+- a tool and API catalog;
+- model routing;
+- observability;
+- audit logs;
+- generated internal interfaces;
+- human approval gates;
+- customer-facing surfaces generated as needed.
+
+The company does not buy a separate SaaS product for every workflow.
+
+It generates and operates workflows around its own goals.
+
+That is why the AI-operated company connects directly to the SaaS argument.
+
+If the company can generate its own operating machinery, the SaaS stack becomes less central.
+
+## The startup factory becomes real
+
+The AI-operated company also changes company formation.
+
+A founder may be able to test more ideas with less capital.
+
+A venture studio may be able to launch more experiments with fewer employees.
+
+A corporate innovation team may be able to generate and test internal products more quickly.
+
+A holding company may be able to operate many small businesses with a shared AI operating layer.
+
+This is not the same as the old dream of no-code.
+
+No-code allowed people to build applications without traditional programming, but it often hit limits around complexity, integration, maintainability and customization.
+
+AI-assisted software and workflow generation goes further because it can operate across code, data, text, APIs, tests, documentation and process.
+
+The bottleneck moves from building the first version to governing the system.
+
+The winners will be people and companies that can define clear goals, constraints, quality bars, data boundaries, approval rules and operating metrics.
+
+The scarce skill becomes not just coding.
+
+It becomes knowing what should exist.
+
+## Labour is the shadow of this argument
+
+This series is mainly about capital markets and business models.
+
+But it is impossible to discuss AI-operated companies without seeing the labour implications.
+
+If companies can produce more output with fewer people, employment structures change.
+
+If coordination layers shrink, management changes.
+
+If AI can perform knowledge work tasks at scale, entry-level career ladders change.
+
+If small teams can operate company-sized surfaces, competition changes.
+
+If AI-operated companies can undercut human-heavy companies, wage pressure appears in affected sectors.
+
+This deserves its own essay, probably its own series.
+
+But it sits behind everything.
+
+The AI bubble is not just a stock market question. It is a question about the cost structure of the firm.
+
+When the cost structure of the firm changes, capital markets eventually notice.
+
+## Existing companies are not safe
+
+It is tempting to assume incumbents win because they have customers, data, brand and distribution.
+
+Some will.
+
+But many incumbents also have bureaucracy, legacy systems, internal politics, heavy cost structures, slow decision-making, risk aversion, vendor lock-in and processes designed for a pre-AI world.
+
+An AI-operated competitor can be structurally different.
+
+It can start with a smaller team, a cleaner stack, generated software, automated workflows, lower overhead and a more adaptive operating model.
+
+This does not guarantee victory.
+
+But it creates pressure.
+
+The internet did not simply give existing retailers a new channel. It also created Amazon.
+
+AI will not simply give existing companies better tools. It will create new company forms.
+
+That is where the deeper disruption sits.
+
+## The company becomes software
+
+For years people have said every company is a software company.
+
+That was only partly true.
+
+Most companies used software. Some built software. Very few became software in a deep operational sense.
+
+AI may make the phrase more literal.
+
+A company can become a set of encoded goals, workflows, policies, data pipelines, models, agents, approval gates, observability systems and generated interfaces.
+
+It can inspect itself.
+
+It can modify parts of itself.
+
+It can run experiments on itself.
+
+It can generate tools for itself.
+
+It can coordinate work through software rather than through layers of meetings and management.
+
+This is not utopian. It may be messy, dangerous and highly unequal. It will create new risks around opacity, accountability, dependency, labour and control.
+
+But as a business form, it is powerful.
+
+The market is currently focused on who sells AI.
+
+The larger question is who uses AI to become a different kind of company.
+
+## Why this feeds the bubble burst
+
+The AI-operated company matters to the bubble thesis because it shifts the profit pool.
+
+If AI's most important economic effect is not simply selling model access or adding features to SaaS, but reducing the human and software cost of operating a company, then the current market story is incomplete.
+
+The value does not necessarily accrue to the model API.
+
+The value does not necessarily accrue to the SaaS vendor.
+
+The value may accrue to the company that uses AI to operate with a radically lower cost structure.
+
+That is dangerous for both model labs and SaaS incumbents.
+
+Model labs may become suppliers.
+
+SaaS vendors may become components.
+
+AI-operated companies may capture the customer.
+
+That is the deeper convergence.
+
+The technology succeeds.
+
+The old valuation story breaks.
