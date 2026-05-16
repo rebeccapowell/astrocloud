@@ -54,17 +54,20 @@ export async function GET(context?: { site?: string }) {
             .use(remarkParse)
             .use(remarkMdx)
             .use(() => tree => {
-              visit(tree, (node, index, parent) => {
-                if (!parent || typeof index !== "number") return;
-                if (node.type === "mdxjsEsm") {
-                  parent.children.splice(index, 1);
-                  return;
-                }
+              visit(tree, node => {
                 if (
+                  node.type === "mdxjsEsm" ||
                   node.type === "mdxFlowExpression" ||
                   node.type === "mdxTextExpression"
                 ) {
-                  parent.children.splice(index, 1);
+                  const md = node as unknown as {
+                    type: string;
+                    value?: string;
+                    children?: unknown[];
+                  };
+                  md.type = "html";
+                  md.value = "";
+                  delete md.children;
                   return;
                 }
                 if (

@@ -30,10 +30,15 @@ async function listFiles(dir) {
 function removeMdxJsx(postLink) {
   const placeholder = `<div class="mdx-component-placeholder">To experience this interactive component, please <a href="${postLink}">visit this post online</a>.</div>`;
   return () => (tree) => {
-    visit(tree, (node, index, parent) => {
-      if (!parent || typeof index !== 'number') return;
-      if (node.type === 'mdxjsEsm' || node.type === 'mdxFlowExpression' || node.type === 'mdxTextExpression') {
-        parent.children.splice(index, 1);
+    visit(tree, node => {
+      if (
+        node.type === 'mdxjsEsm' ||
+        node.type === 'mdxFlowExpression' ||
+        node.type === 'mdxTextExpression'
+      ) {
+        node.type = 'html';
+        node.value = '';
+        delete node.children;
         return;
       }
       if (
