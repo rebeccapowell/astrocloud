@@ -68,7 +68,7 @@ function formatRss(items) {
     channel.push(`<description>${escapeXml(it.description || '')}</description>`);
     channel.push(`<pubDate>${new Date(it.pubDate).toUTCString()}</pubDate>`);
     channel.push('<content:encoded><![CDATA[');
-    channel.push(it.content || '');
+    channel.push(escapeCdata(it.content || ''));
     channel.push(']]></content:encoded>');
     channel.push('</item>');
   }
@@ -84,6 +84,10 @@ function escapeXml(s) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
+}
+
+function escapeCdata(s) {
+  return String(s).replace(/]]>/g, ']]]]><![CDATA[>');
 }
 
 async function main() {
