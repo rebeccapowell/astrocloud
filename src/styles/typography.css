@@ -60,4 +60,11 @@
     /* add line breaks whenever necessary for codes under table */
     @apply break-all sm:break-normal;
   }
+
+  /* Make tables scroll horizontally on small screens instead of constraining content width */
+  .prose table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
