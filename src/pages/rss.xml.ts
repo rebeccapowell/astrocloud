@@ -101,8 +101,7 @@ export async function GET(context?: { site?: string }) {
           'width',
           'height',
           'class',
-          'id',
-          'style'
+          'id'
         ]
       },
       transformTags: {
