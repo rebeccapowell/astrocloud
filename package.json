@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "dev:generate-rss": "chokidar \"src/data/blog/**/*.{md,mdx}\" -c \"node scripts/generate-rss.mjs\"",
     "build": "astro check && astro build && node scripts/generate-rss.mjs && pagefind --site dist && cp -r dist/pagefind public/",
-    "build:win": "astro check && astro build && pagefind --site dist && node scripts/copy-pagefind.mjs",
+    "build:win": "astro check && astro build && node scripts/generate-rss.mjs && pagefind --site dist && node scripts/copy-pagefind.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "format:check": "prettier --check .",
