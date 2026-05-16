@@ -12,6 +12,43 @@ import sanitizeHtml from 'sanitize-html';
 const BLOG_DIR = path.resolve(process.cwd(), 'src', 'data', 'blog');
 const OUT_DIR = path.resolve(process.cwd(), 'dist');
 const OUT_FILE = path.join(OUT_DIR, 'rss.xml');
+const DEFAULT_SITE_URL = 'https://rebecca-powell.com/';
+
+function resolveBaseUrl() {
+  const configured =
+    process.env.SITE_URL ||
+    process.env.CF_PAGES_URL ||
+    process.env.DEPLOY_URL ||
+    process.env.DEPLOY_PRIME_URL ||
+    process.env.URL ||
+    DEFAULT_SITE_URL;
+
+  return new URL(configured).origin;
+}
+
+function absolutizeUrl(value, baseUrl) {
+  if (!value || value.startsWith('#')) return value;
+  if (/^(?:[a-z]+:|\/\/)/i.test(value)) return value;
+
+  try {
+    return new URL(value, `${baseUrl}/`).toString();
+  } catch {
+    return value;
+  }
+}
+
+function absolutizeSrcset(value, baseUrl) {
+  return value
+    .split(',')
+    .map(part => part.trim())
+    .filter(Boolean)
+    .map(part => {
+      const [url, descriptor] = part.split(/\s+/, 2);
+      const absoluteUrl = absolutizeUrl(url, baseUrl);
+      return descriptor ? `${absoluteUrl} ${descriptor}` : absoluteUrl;
+    })
+    .join(', ');
+}
 
 async function listFiles(dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -68,12 +105,13 @@ async function mdxToHtml(source, { isMdx = false, postLink = '' } = {}) {
 
 function formatRss(items) {
   const now = new Date().toUTCString();
+  const baseUrl = resolveBaseUrl();
   const channel = [];
   channel.push('<?xml version="1.0" encoding="UTF-8"?>');
   channel.push('<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">');
   channel.push('<channel>');
   channel.push(`<title>${escapeXml(process.env.SITE_TITLE || 'Site')}</title>`);
-  channel.push(`<link>${escapeXml(process.env.SITE_URL || '')}</link>`);
+  channel.push(`<link>${escapeXml(`${baseUrl}/`)}</link>`);
   channel.push(`<description>${escapeXml(process.env.SITE_DESC || '')}</description>`);
   channel.push(`<lastBuildDate>${now}</lastBuildDate>`);
   for (const it of items) {
@@ -107,6 +145,7 @@ function escapeCdata(s) {
 }
 
 async function main() {
+  const baseUrl = resolveBaseUrl();
   const files = await listFiles(BLOG_DIR);
   const posts = [];
   for (const file of files) {
@@ -114,7 +153,7 @@ async function main() {
     const src = await fs.readFile(file, 'utf8');
     const { data, content } = matter(src);
     const slug = data.slug || path.basename(file).replace(/\.mdx?$/,'');
-    const link = (process.env.SITE_URL || '') + '/posts/' + slug + '/';
+    const link = new URL(`/posts/${slug}/`, `${baseUrl}/`).toString();
     let html = '';
     try {
       html = await mdxToHtml(content, { isMdx: file.endsWith('.mdx'), postLink: link });
@@ -127,10 +166,27 @@ async function main() {
         'a','p','img','ul','li','ol','strong','em','code','pre','blockquote',
         'h1','h2','h3','h4','h5','h6','br','span','div'
       ],
-      allowedAttributes: { '*': ['href','src','alt','title','class','id','width','height'] },
+      allowedAttributes: { '*': ['href','src','srcset','poster','alt','title','class','id','width','height','style'] },
       transformTags: {
         '*': (tagName, attribs) => {
           Object.keys(attribs).forEach(k => { if (k.startsWith('data-astro')) delete attribs[k]; });
+
+          if (attribs.href) {
+            attribs.href = absolutizeUrl(attribs.href, baseUrl);
+          }
+
+          if (attribs.src) {
+            attribs.src = absolutizeUrl(attribs.src, baseUrl);
+          }
+
+          if (attribs.poster) {
+            attribs.poster = absolutizeUrl(attribs.poster, baseUrl);
+          }
+
+          if (attribs.srcset) {
+            attribs.srcset = absolutizeSrcset(attribs.srcset, baseUrl);
+          }
+
           return { tagName, attribs };
         }
       }

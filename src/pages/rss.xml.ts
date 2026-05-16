@@ -17,9 +17,46 @@ import matter from "gray-matter";
 // Sanitize feed HTML so RSS clients don't choke on injected scripts/styles
 import sanitizeHtml from "sanitize-html";
 
-export async function GET(context?: { site?: string }) {
+function resolveBaseUrl(context?: { site?: string | URL; request?: Request }) {
+  if (context?.request) {
+    return new URL(context.request.url).origin;
+  }
+
+  if (context?.site) {
+    return new URL(String(context.site)).origin;
+  }
+
+  return new URL(SITE.website).origin;
+}
+
+function absolutizeUrl(value: string, baseUrl: string) {
+  if (!value || value.startsWith("#")) return value;
+  if (/^(?:[a-z]+:|\/\/)/i.test(value)) return value;
+
+  try {
+    return new URL(value, `${baseUrl}/`).toString();
+  } catch {
+    return value;
+  }
+}
+
+function absolutizeSrcset(value: string, baseUrl: string) {
+  return value
+    .split(",")
+    .map(part => part.trim())
+    .filter(Boolean)
+    .map(part => {
+      const [url, descriptor] = part.split(/\s+/, 2);
+      const absoluteUrl = absolutizeUrl(url, baseUrl);
+      return descriptor ? `${absoluteUrl} ${descriptor}` : absoluteUrl;
+    })
+    .join(", ");
+}
+
+export async function GET(context?: { site?: string | URL; request?: Request }) {
   // Generate RSS dynamically here; do not read from dist/ at runtime because build artifacts
   // are not reliably available or addressable from this endpoint across dev/build/deploy targets.
+  const baseUrl = resolveBaseUrl(context);
   const posts = await getCollection("blog");
   const sortedPosts = getSortedPosts(posts) as CollectionEntry<"blog">[];
 
@@ -30,7 +67,7 @@ export async function GET(context?: { site?: string }) {
     const data = post.data;
     const id = post.id;
     const filePath = post.filePath;
-    const postLink = getPath(id, filePath);
+    const postLink = new URL(getPath(id, filePath), `${baseUrl}/`).toString();
     let rendered = "";
 
     // We'll prefer using the raw file and compiling MDX->HTML while stripping JSX (client-only)
@@ -132,13 +169,42 @@ export async function GET(context?: { site?: string }) {
     const cleaned = sanitizeHtml(rendered, {
       allowedTags: defaultAllowedTags,
       allowedAttributes: {
-        "*": ["href", "src", "alt", "title", "width", "height", "class", "id"],
+        "*": [
+          "href",
+          "src",
+          "srcset",
+          "poster",
+          "alt",
+          "title",
+          "width",
+          "height",
+          "class",
+          "id",
+          "style",
+        ],
       },
       transformTags: {
         "*": (tagName: string, attribs: Record<string, string>) => {
           Object.keys(attribs).forEach(k => {
             if (k.startsWith("data-astro")) delete attribs[k];
           });
+
+          if (attribs.href) {
+            attribs.href = absolutizeUrl(attribs.href, baseUrl);
+          }
+
+          if (attribs.src) {
+            attribs.src = absolutizeUrl(attribs.src, baseUrl);
+          }
+
+          if (attribs.poster) {
+            attribs.poster = absolutizeUrl(attribs.poster, baseUrl);
+          }
+
+          if (attribs.srcset) {
+            attribs.srcset = absolutizeSrcset(attribs.srcset, baseUrl);
+          }
+
           return { tagName, attribs };
         },
       },
@@ -160,7 +226,7 @@ export async function GET(context?: { site?: string }) {
   return rss({
     title: SITE.title,
     description: SITE.desc,
-    site: context?.site ?? SITE.website,
+    site: `${baseUrl}/`,
     items,
   });
 }
