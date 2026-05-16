@@ -271,7 +271,7 @@ export default function BeliefBreakChart() {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => setActiveStateId(state.id)}
-                className={`rounded-full border px-3 py-1.5 transition-colors ${
+                className={`rounded-md border px-3 py-1.5 transition-colors ${
                   isActive
                     ? "border-accent bg-accent text-background"
                     : "border-border bg-background text-foreground hover:border-accent/60"

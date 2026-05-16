@@ -71,7 +71,7 @@ const layoutProps = {
   scrollSmooth: true,
 };
 
-const currentSlug = getPath(post.id, post.filePath, false);
+const currentSlug = getPath(post.id, post.filePath, false).replace(/^\/+/, "");
 const isAiSeriesPost = Boolean(getAiSeriesEntry(currentSlug));
 
 /* ========== Prev/Next Posts ========== */

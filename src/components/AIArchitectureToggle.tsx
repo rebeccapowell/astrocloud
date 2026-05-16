@@ -78,7 +78,7 @@ export default function AIArchitectureToggle() {
             key={key}
             type="button"
             onClick={() => setMode(key)}
-            className={`rounded-full border px-3 py-1.5 transition-colors ${
+            className={`rounded-md border px-3 py-1.5 transition-colors ${
               mode === key
                 ? "border-accent bg-accent text-background"
                 : "border-border bg-background text-foreground hover:border-accent hover:text-accent"

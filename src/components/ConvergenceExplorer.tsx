@@ -183,14 +183,14 @@ export default function ConvergenceExplorer() {
           <button
             type="button"
             onClick={resetSelection}
-            className="rounded-full border border-border px-3 py-1.5 text-foreground transition-colors hover:border-accent hover:text-accent"
+            className="rounded-md border border-border px-3 py-1.5 text-foreground transition-colors hover:border-accent hover:text-accent"
           >
             Reset map
           </button>
           <button
             type="button"
             onClick={selectAll}
-            className="rounded-full border border-accent bg-accent px-3 py-1.5 text-background transition-opacity hover:opacity-90"
+            className="rounded-md border border-accent bg-accent px-3 py-1.5 text-background transition-opacity hover:opacity-90"
           >
             Show full convergence
           </button>
@@ -220,7 +220,7 @@ export default function ConvergenceExplorer() {
                       {pressure.shortLabel}
                     </span>
                     <span
-                      className={`shrink-0 rounded-full px-2 py-1 text-[11px] whitespace-nowrap ${
+                      className={`shrink-0 rounded-md px-2 py-1 text-[11px] whitespace-nowrap ${
                         isActive
                           ? "bg-accent text-background"
                           : "bg-muted text-foreground/70"
@@ -275,7 +275,7 @@ export default function ConvergenceExplorer() {
             ].map(state => (
               <div
                 key={state}
-                className={`flex min-h-10 items-center justify-center rounded-full border px-2 py-1 text-center leading-tight ${
+                className={`flex min-h-10 items-center justify-center rounded-md border px-2 py-1 text-center leading-tight ${
                   state === narrativeState.label
                     ? "border-accent bg-accent text-background"
                     : "border-border bg-background text-foreground/65"
