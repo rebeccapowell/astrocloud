@@ -1,0 +1,44 @@
+---
+import { AI_SERIES_TITLE, aiSeriesEntries } from "@/data/aiSeries";
+---
+
+<section
+  class="not-prose my-10 rounded-2xl border border-border bg-muted/40 p-5 sm:p-6"
+>
+  <div class="max-w-2xl">
+    <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
+      Series journey
+    </p>
+    <div class="mt-1 text-xl font-semibold text-foreground">
+      {AI_SERIES_TITLE}
+    </div>
+    <p class="mt-2 text-sm leading-6 text-foreground/80">
+      Read this sequence in order. Each chapter advances the same argument from
+      a different angle, building from dotcom memory toward the mature AI power
+      map.
+    </p>
+  </div>
+
+  <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+    {
+      aiSeriesEntries.map(entry => (
+        <a
+          href={entry.path}
+          class="rounded-2xl border border-border bg-background p-4 transition-colors hover:border-accent/60"
+        >
+          <div>
+            <span class="text-xs font-semibold tracking-[0.18em] text-accent uppercase">
+              {entry.label}
+            </span>
+          </div>
+          <div class="mt-3 text-sm font-semibold text-foreground">
+            {entry.title}
+          </div>
+          <p class="mt-2 text-sm leading-6 text-foreground/75">
+            {entry.summary}
+          </p>
+        </a>
+      ))
+    }
+  </div>
+</section>

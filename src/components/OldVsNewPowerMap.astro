@@ -1,0 +1,130 @@
+---
+const oldMap = [
+  "Cloud infrastructure",
+  "Model provider layer",
+  "Packaged SaaS applications",
+  "Business workflows inside products",
+  "Users and customers",
+];
+
+const newMap = [
+  "Compute, memory, power and networks",
+  "Devices and operating systems",
+  "Frontier, local, open and specialized models",
+  "Identity, permissions and governance",
+  "Systems of record and trusted context",
+  "Orchestration, evaluation and execution",
+  "Generated workflows and AI-operated companies",
+];
+---
+
+<section
+  class="not-prose my-10 rounded-2xl border border-border bg-muted/40 p-5 sm:p-6"
+>
+  <div class="max-w-2xl">
+    <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
+      Editorial figure
+    </p>
+    <h3 class="mt-2 text-xl font-semibold text-foreground">
+      Paradigm shifts do not add a layer. They redraw the stack.
+    </h3>
+    <p class="mt-3 text-sm leading-6 text-foreground/80">
+      The first AI story simply inserts model providers into the old software
+      and cloud map. The mature AI economy rearranges the layers around
+      authority, context, execution and control.
+    </p>
+  </div>
+
+  <div class="mt-6 grid gap-5 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+    <div class="rounded-2xl border border-border bg-background p-5">
+      <div
+        class="text-xs font-semibold tracking-[0.18em] text-accent uppercase"
+      >
+        Old map
+      </div>
+      <p class="mt-2 text-sm leading-6 text-foreground/75">
+        Software and cloud-era logic, with AI treated as one more layer to bolt
+        onto the existing stack.
+      </p>
+      <div class="mt-4 space-y-3">
+        {
+          oldMap.map((layer, index) => (
+            <div class="rounded-2xl border border-border bg-muted/35 p-4">
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-sm font-semibold text-foreground">
+                  {layer}
+                </span>
+                <span class="text-xs font-medium text-foreground/55">
+                  {oldMap.length - index}
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="hidden justify-center lg:flex" aria-hidden="true">
+      <svg viewBox="0 0 96 96" class="h-16 w-16 text-accent">
+        <circle cx="48" cy="48" r="46" fill="currentColor" opacity="0.08"
+        ></circle>
+        <path
+          d="M 18 48 H 70 M 54 32 L 70 48 L 54 64"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="6"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </div>
+
+    <div class="rounded-2xl border border-border bg-background p-5">
+      <div
+        class="text-xs font-semibold tracking-[0.18em] text-accent uppercase"
+      >
+        New map
+      </div>
+      <p class="mt-2 text-sm leading-6 text-foreground/75">
+        AI-native logic, where intelligence becomes valuable only when it can
+        run inside trusted systems with permission to act.
+      </p>
+      <div class="mt-4 space-y-3">
+        {
+          newMap.map((layer, index) => (
+            <div class="rounded-2xl border border-accent/20 bg-accent/5 p-4">
+              <div class="flex items-center justify-between gap-3">
+                <span class="text-sm font-semibold text-foreground">
+                  {layer}
+                </span>
+                <span class="text-xs font-medium text-foreground/55">
+                  {newMap.length - index}
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 grid gap-3 sm:grid-cols-2">
+    <div class="rounded-2xl border border-border bg-background p-4">
+      <div class="text-sm font-semibold text-foreground">
+        What the first story assumes
+      </div>
+      <p class="mt-2 text-sm leading-6 text-foreground/75">
+        If the models are powerful enough, the old cloud and SaaS map can stay
+        basically intact.
+      </p>
+    </div>
+    <div class="rounded-2xl border border-border bg-background p-4">
+      <div class="text-sm font-semibold text-foreground">
+        What the mature map rewards
+      </div>
+      <p class="mt-2 text-sm leading-6 text-foreground/75">
+        Control over context, permissions, execution and trusted operating
+        surfaces, not just access to intelligence in the abstract.
+      </p>
+    </div>
+  </div>
+</section>

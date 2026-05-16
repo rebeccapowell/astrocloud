@@ -9,6 +9,8 @@ import EditPost from "@/components/EditPost.astro";
 import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
+import SeriesNav from "@/components/SeriesNav.astro";
+import { getAiSeriesEntry } from "@/data/aiSeries";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -69,6 +71,9 @@ const layoutProps = {
   scrollSmooth: true,
 };
 
+const currentSlug = getPath(post.id, post.filePath, false).replace(/^\/+/, "");
+const isAiSeriesPost = Boolean(getAiSeriesEntry(currentSlug));
+
 /* ========== Prev/Next Posts ========== */
 
 const allPosts = posts.map(({ data: { title }, id, filePath }) => ({
@@ -109,6 +114,11 @@ const nextPost =
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
       <EditPost class="max-sm:hidden" {hideEditPost} {post} />
     </div>
+    {
+      isAiSeriesPost && (
+        <SeriesNav currentSlug={currentSlug} variant="compact" />
+      )
+    }
     <article
       id="article"
       class="mx-auto prose mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
@@ -117,6 +127,8 @@ const nextPost =
     </article>
 
     <hr class="my-8 border-dashed" />
+
+    {isAiSeriesPost && <SeriesNav currentSlug={currentSlug} variant="full" />}
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
@@ -132,37 +144,36 @@ const nextPost =
 
     <hr class="my-6 border-dashed" />
 
-    <!-- Previous/Next Post Buttons -->
-    <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {
-        prevPost && (
-          <a
-            href={getPath(prevPost.id, prevPost.filePath)}
-            class="flex w-full gap-1 hover:opacity-75"
-          >
-            <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
-            <div>
-              <span>Previous Post</span>
-              <div class="text-sm text-accent/85">{prevPost.title}</div>
-            </div>
-          </a>
-        )
-      }
-      {
-        nextPost && (
-          <a
-            href={getPath(nextPost.id, nextPost.filePath)}
-            class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
-          >
-            <div>
-              <span>Next Post</span>
-              <div class="text-sm text-accent/85">{nextPost.title}</div>
-            </div>
-            <IconChevronRight class="inline-block flex-none rtl:rotate-180" />
-          </a>
-        )
-      }
-    </div>
+    {
+      !isAiSeriesPost && (
+        <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {prevPost && (
+            <a
+              href={getPath(prevPost.id, prevPost.filePath)}
+              class="flex w-full gap-1 hover:opacity-75"
+            >
+              <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
+              <div>
+                <span>Previous Post</span>
+                <div class="text-sm text-accent/85">{prevPost.title}</div>
+              </div>
+            </a>
+          )}
+          {nextPost && (
+            <a
+              href={getPath(nextPost.id, nextPost.filePath)}
+              class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
+            >
+              <div>
+                <span>Next Post</span>
+                <div class="text-sm text-accent/85">{nextPost.title}</div>
+              </div>
+              <IconChevronRight class="inline-block flex-none rtl:rotate-180" />
+            </a>
+          )}
+        </div>
+      )
+    }
   </main>
   <Footer />
 </Layout>
