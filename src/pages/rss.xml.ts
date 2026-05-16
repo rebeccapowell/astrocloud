@@ -17,17 +17,8 @@ import { visit } from "unist-util-visit";
 import sanitizeHtml from "sanitize-html";
 
 export async function GET(context?: { site?: string }) {
-  // If a static RSS was generated during build, prefer serving that so dev/build outputs match.
-  try {
-    const distPath = new URL('../../dist/rss.xml', import.meta.url).pathname;
-    const stat = await fs.stat(distPath).catch(() => null);
-    if (stat) {
-      const xml = await fs.readFile(distPath, 'utf8');
-      return new Response(xml, { headers: { 'content-type': 'application/xml' } });
-    }
-  } catch {
-    // ignore and continue to dynamic generation
-  }
+  // Generate RSS dynamically here; do not read from dist/ at runtime because build artifacts
+  // are not reliably available or addressable from this endpoint across dev/build/deploy targets.
   const posts = await getCollection("blog");
   const sortedPosts = getSortedPosts(posts) as CollectionEntry<"blog">[];
 
