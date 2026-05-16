@@ -27,23 +27,34 @@ async function listFiles(dir) {
   return files;
 }
 
-function removeMdxJsx() {
+function removeMdxJsx(postLink) {
+  const placeholder = `<div class="mdx-component-placeholder">To experience this interactive component, please <a href="${postLink}">visit this post online</a>.</div>`;
   return () => (tree) => {
     visit(tree, (node, index, parent) => {
-      if (!parent) return;
-      if (node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') {
-        // Replace component with nothing (drop it). If it has textual children you may preserve them instead.
+      if (!parent || typeof index !== 'number') return;
+      if (node.type === 'mdxjsEsm' || node.type === 'mdxFlowExpression' || node.type === 'mdxTextExpression') {
         parent.children.splice(index, 1);
+        return;
+      }
+      if (
+        node.type === 'mdxJsxFlowElement' ||
+        node.type === 'mdxJsxTextElement'
+      ) {
+        const md = node;
+        md.type = 'html';
+        md.value = placeholder;
+        delete md.children;
       }
     });
   };
 }
 
-async function mdxToHtml(source) {
-  const vfile = await unified()
-    .use(remarkParse)
-    .use(remarkMdx)
-    .use(removeMdxJsx)
+async function mdxToHtml(source, { isMdx = false, postLink = '' } = {}) {
+  const processor = unified().use(remarkParse);
+  if (isMdx) {
+    processor.use(remarkMdx).use(removeMdxJsx(postLink));
+  }
+  const vfile = await processor
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(source);
@@ -97,9 +108,11 @@ async function main() {
     if (!/\.(md|mdx)$/.test(file)) continue;
     const src = await fs.readFile(file, 'utf8');
     const { data, content } = matter(src);
+    const slug = data.slug || path.basename(file).replace(/\.mdx?$/,'');
+    const link = (process.env.SITE_URL || '') + '/posts/' + slug + '/';
     let html = '';
     try {
-      html = await mdxToHtml(content);
+      html = await mdxToHtml(content, { isMdx: file.endsWith('.mdx'), postLink: link });
     } catch (err) {
       // fallback: use raw content escaped
       html = escapeXml(content);
@@ -118,13 +131,13 @@ async function main() {
       }
     });
 
-    const slug = data.slug || path.basename(file).replace(/\.mdx?$/,'');
-    const link = (process.env.SITE_URL || '') + '/posts/' + slug + '/';
+    const normalized = cleaned.trim();
+    const hasContent = normalized && normalized !== '<div></div>';
     posts.push({
       title: data.title || slug,
       description: data.description || '',
       pubDate: data.modDatetime ?? data.pubDatetime ?? new Date().toISOString(),
-      content: cleaned,
+      content: hasContent ? cleaned : `<p>${escapeXml(data.description || '')}</p><p><a href="${escapeXml(link)}">Read this post online</a>.</p>`,
       link,
     });
   }
