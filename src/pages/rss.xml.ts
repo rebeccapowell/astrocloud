@@ -53,7 +53,10 @@ function absolutizeSrcset(value: string, baseUrl: string) {
     .join(", ");
 }
 
-export async function GET(context?: { site?: string | URL; request?: Request }) {
+export async function GET(context?: {
+  site?: string | URL;
+  request?: Request;
+}) {
   // Generate RSS dynamically here; do not read from dist/ at runtime because build artifacts
   // are not reliably available or addressable from this endpoint across dev/build/deploy targets.
   const baseUrl = resolveBaseUrl(context);
