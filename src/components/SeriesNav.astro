@@ -1,6 +1,7 @@
 ---
 import ParadigmLifecycle from "@/components/ParadigmLifecycle.astro";
 import {
+  AI_SERIES_SUBTITLE,
   AI_SERIES_TITLE,
   aiSeriesEntries,
   getAiSeriesEntry,
@@ -44,6 +45,7 @@ const progressLabel =
           <div class="mt-1 text-base font-semibold text-foreground">
             {AI_SERIES_TITLE}
           </div>
+          <p class="mt-0.5 text-xs text-foreground/70">{AI_SERIES_SUBTITLE}</p>
           <p class="mt-2 text-sm leading-6 text-foreground/80">
             <span class="font-medium text-foreground">{progressLabel}.</span>{" "}
             {currentEntry.summary}
@@ -90,6 +92,7 @@ const progressLabel =
           <div class="mt-1 text-xl font-semibold text-foreground">
             {AI_SERIES_TITLE}
           </div>
+          <p class="mt-0.5 text-sm text-foreground/70">{AI_SERIES_SUBTITLE}</p>
           <p class="mt-2 text-sm leading-6 text-foreground/80">
             {currentEntry.kind === "preface"
               ? "Start with the preface, then move through the eight-part argument in order."

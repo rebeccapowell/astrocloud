@@ -76,6 +76,13 @@ pnpm lint         # ESLint
 
 **Build process** includes: `astro check` → `astro build` → `pagefind --site dist` → copy pagefind to public
 
+## Agent Workflow
+
+- Before finishing any task that edits files, use the `prettier-before-finish` skill.
+- Run Prettier on files touched by the task before declaring the work complete.
+- Prefer `pnpm run format:check` as the final formatting verification when practical.
+- If `format:check` fails because of unrelated pre-existing formatting drift, call that out explicitly instead of silently ignoring it.
+
 ## Agent Notes (Session Gotchas)
 
 These are common pitfalls that came up during a Windows dev session and how to resolve them safely.

@@ -10,7 +10,8 @@ export type AiSeriesEntry = {
   lifecycleStages?: string[];
 };
 
-export const AI_SERIES_TITLE = "The AI Bubble Will Burst Because AI Is Real";
+export const AI_SERIES_TITLE = "Return on Intelligence";
+export const AI_SERIES_SUBTITLE = "AI and the Programmable Firm";
 export const AI_SERIES_LIFECYCLE = [
   "Invention",
   "Wonder",
@@ -25,102 +26,102 @@ export const AI_SERIES_LIFECYCLE = [
 
 export const aiSeriesEntries: AiSeriesEntry[] = [
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real",
+    slug: "return-on-intelligence-the-preface",
     label: "Preface",
-    title: AI_SERIES_TITLE,
+    title: "The Return",
     summary:
       "The thesis, the reading contract, and the journey through the full eight-part argument.",
     experience: "Series map",
     kind: "preface",
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real",
+    path: "/posts/return-on-intelligence-the-preface",
     lifecycleStages: [],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-01-business-cards",
+    slug: "return-on-intelligence-01-echoes",
     label: "Part 1",
-    title: "The Business Cards in the Drawer",
+    title: "Echoes",
     summary:
       "Dotcom memory, paradigm shifts, and why real technologies produce the most dangerous bubbles.",
     experience: "Interactive paradigm timeline",
     kind: "part",
     partNumber: 1,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-01-business-cards",
+    path: "/posts/return-on-intelligence-01-echoes",
     lifecycleStages: ["Wonder", "Speculation"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-02-ai-is-not-fake",
+    slug: "return-on-intelligence-02-prototypes",
     label: "Part 2",
-    title: "The AI Bubble Will Not Burst Because AI Is Fake",
+    title: "Prototypes",
     summary:
-      "Why obvious utility creates the most convincing overvaluation and why utility is not the same as capture.",
+      "Early companies and interfaces are prototypes of futures they may not own. A prototype can be directionally right and economically doomed.",
     experience: "Capture ladder",
     kind: "part",
     partNumber: 2,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-02-ai-is-not-fake",
+    path: "/posts/return-on-intelligence-02-prototypes",
     lifecycleStages: ["Speculation"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-03-false-moat",
+    slug: "return-on-intelligence-02-moats",
     label: "Part 3",
-    title: "The False Moat of Intelligence as an API",
+    title: "Moats",
     summary:
-      "Why centralized model APIs look powerful now but may not own the mature AI economy.",
+      "Intelligence alone is not the moat. Durable moats may be context, distribution, workflow, identity, permissions, governance, execution rights, data and systems of record.",
     experience: "Architecture toggle",
     kind: "part",
     partNumber: 3,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-03-false-moat",
+    path: "/posts/return-on-intelligence-02-moats",
     lifecycleStages: ["Overbuild"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround",
+    slug: "return-on-intelligence-04-saas-was-a-compromise",
     label: "Part 4",
-    title: "SaaS Was a Workaround",
+    title: "SaaS Was a Compromise",
     summary:
-      "How cheaper software generation threatens the economics that made generic workflow SaaS dominant.",
+      "SaaS won because custom software was too expensive. AI changes that cost curve, and the compromise gets repriced.",
     experience: "Buy-build threshold",
     kind: "part",
     partNumber: 4,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround",
+    path: "/posts/return-on-intelligence-04-saas-was-a-compromise",
     lifecycleStages: ["Overbuild"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-05-ai-operated-company",
+    slug: "return-on-intelligence-05-firmware",
     label: "Part 5",
-    title: "The AI-Operated Company",
+    title: "Firmware",
     summary:
-      "Why AI matters not only as a tool but as a new operating model for the company itself.",
+      "Firm-ware is the operating logic embedded into the company itself. AI makes that logic programmable.",
     experience: "Operating model comparison",
     kind: "part",
     partNumber: 5,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-05-ai-operated-company",
+    path: "/posts/return-on-intelligence-05-firmware",
     lifecycleStages: ["Belief break"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-06-convergence-point",
+    slug: "return-on-intelligence-05-breaking-point",
     label: "Part 6",
-    title: "The Convergence Point",
+    title: "Breaking Point",
     summary:
-      "The pressure map showing how multiple AI-market assumptions can weaken at the same time.",
+      "The market does not stop believing in AI. It starts doubting who owns it. The pressure map showing how multiple assumptions weaken at the same time.",
     experience: "Convergence and belief gauge",
     kind: "part",
     partNumber: 6,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-06-convergence-point",
+    path: "/posts/return-on-intelligence-05-breaking-point",
     lifecycleStages: ["Belief break"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-07-after-the-crash",
+    slug: "return-on-intelligence-07-after-the-crash",
     label: "Part 7",
-    title: "After the Crash Comes the Real AI Economy",
+    title: "After the Crash",
     summary:
-      "Why the crash is a repricing event and the mature AI economy begins after the first story fails.",
+      "The crash is a repricing event. The mature AI economy begins after the first ownership story fails.",
     experience: "Reset sequence",
     kind: "part",
     partNumber: 7,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-07-after-the-crash",
+    path: "/posts/return-on-intelligence-07-after-the-crash",
     lifecycleStages: ["Crash", "Consolidation", "Mature infrastructure"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-08-new-power-map",
+    slug: "return-on-intelligence-08-new-power-map",
     label: "Part 8",
     title: "The New Power Map",
     summary:
@@ -128,7 +129,7 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Interactive power stack",
     kind: "part",
     partNumber: 8,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-08-new-power-map",
+    path: "/posts/return-on-intelligence-08-new-power-map",
     lifecycleStages: ["Mature infrastructure", "Extraction"],
   },
 ];
