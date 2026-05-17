@@ -16,7 +16,7 @@ import { chromium } from "playwright";
 import { execFileSync } from "child_process";
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -66,34 +66,37 @@ async function main() {
     throw err;
   }
 
-  const page = await browser.newPage();
+  let page;
+  try {
+    page = await browser.newPage();
 
-  // Convert Windows backslashes to forward slashes for the file:// URL
-  const fileUrl = "file:///" + HTML_FILE.replace(/\\/g, "/");
-  console.log(`[generate-pdf] Loading ${fileUrl}`);
+    const fileUrl = pathToFileURL(HTML_FILE).href;
+    console.log(`[generate-pdf] Loading ${fileUrl}`);
 
-  // networkidle waits for all base64 images to decode and any fonts to load
-  await page.goto(fileUrl, { waitUntil: "networkidle", timeout: 90_000 });
+    // networkidle waits for all base64 images to decode and any fonts to load
+    await page.goto(fileUrl, { waitUntil: "networkidle", timeout: 90_000 });
 
-  console.log("[generate-pdf] Rendering PDF (this may take a moment for a large file)…");
+    console.log("[generate-pdf] Rendering PDF (this may take a moment for a large file)…");
 
-  await page.pdf({
-    path: PDF_FILE,
-    format: "A4",
-    // top margin is larger to leave room for the running header
-    margin: { top: "24mm", right: "20mm", bottom: "22mm", left: "22mm" },
-    printBackground: true,
-    // running header (series title) + footer (page number)
-    displayHeaderFooter: true,
-    headerTemplate: HEADER,
-    footerTemplate: FOOTER,
-    // embed a PDF outline (bookmarks) from the document headings
-    outline: true,
-    // produce a tagged PDF for better accessibility and PDF viewer navigation
-    tagged: true,
-  });
-
-  await browser.close();
+    await page.pdf({
+      path: PDF_FILE,
+      format: "A4",
+      // top margin is larger to leave room for the running header
+      margin: { top: "24mm", right: "20mm", bottom: "22mm", left: "22mm" },
+      printBackground: true,
+      // running header (series title) + footer (page number)
+      displayHeaderFooter: true,
+      headerTemplate: HEADER,
+      footerTemplate: FOOTER,
+      // embed a PDF outline (bookmarks) from the document headings
+      outline: true,
+      // produce a tagged PDF for better accessibility and PDF viewer navigation
+      tagged: true,
+    });
+  } finally {
+    await page?.close().catch(() => {});
+    await browser?.close().catch(() => {});
+  }
 
   const mb = (fs.statSync(PDF_FILE).size / 1024 / 1024).toFixed(1);
   console.log(`\n[generate-pdf] Written → ${PDF_FILE}  (${mb} MB)`);

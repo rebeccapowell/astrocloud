@@ -164,17 +164,20 @@ function materializeImages(documentParts) {
   const assetDir = fs.mkdtempSync(path.join(os.tmpdir(), "roi-epub-"));
 
   return {
-    ...documentParts,
-    titlePage: documentParts.titlePage
-      ? externalizeDataUriImages(documentParts.titlePage, assetDir, "title-page")
-      : documentParts.titlePage,
-    toc: documentParts.toc
-      ? externalizeDataUriImages(documentParts.toc, assetDir, "contents")
-      : documentParts.toc,
-    chapters: documentParts.chapters.map((chapter, index) => ({
-      ...chapter,
-      content: externalizeDataUriImages(chapter.content, assetDir, `chapter-${String(index + 1).padStart(2, "0")}`),
-    })),
+    assetDir,
+    documentParts: {
+      ...documentParts,
+      titlePage: documentParts.titlePage
+        ? externalizeDataUriImages(documentParts.titlePage, assetDir, "title-page")
+        : documentParts.titlePage,
+      toc: documentParts.toc
+        ? externalizeDataUriImages(documentParts.toc, assetDir, "contents")
+        : documentParts.toc,
+      chapters: documentParts.chapters.map((chapter, index) => ({
+        ...chapter,
+        content: externalizeDataUriImages(chapter.content, assetDir, `chapter-${String(index + 1).padStart(2, "0")}`),
+      })),
+    },
   };
 }
 
@@ -196,21 +199,26 @@ async function main() {
   ensureHtmlExists();
 
   const html = fs.readFileSync(HTML_FILE, "utf8");
-  const documentParts = materializeImages(extractDocumentParts(html));
-  if (!documentParts.chapters.length) {
-    throw new Error("No chapters were found in the generated ebook HTML.");
+  const { assetDir, documentParts } = materializeImages(extractDocumentParts(html));
+
+  try {
+    if (!documentParts.chapters.length) {
+      throw new Error("No chapters were found in the generated ebook HTML.");
+    }
+
+    const outputFile = version === 2 ? EPUB2_FILE : EPUB3_FILE;
+    const options = buildBookOptions(documentParts, version);
+    const { content, ...metadata } = options;
+
+    console.log(`[generate-epub] Rendering EPUB ${version}…`);
+    const buffer = await renderEpub(metadata, content, version);
+    fs.writeFileSync(outputFile, buffer);
+
+    const mb = (fs.statSync(outputFile).size / 1024 / 1024).toFixed(1);
+    console.log(`\n[generate-epub] Written → ${outputFile} (${mb} MB)`);
+  } finally {
+    fs.rmSync(assetDir, { recursive: true, force: true });
   }
-
-  const outputFile = version === 2 ? EPUB2_FILE : EPUB3_FILE;
-  const options = buildBookOptions(documentParts, version);
-  const { content, ...metadata } = options;
-
-  console.log(`[generate-epub] Rendering EPUB ${version}…`);
-  const buffer = await renderEpub(metadata, content, version);
-  fs.writeFileSync(outputFile, buffer);
-
-  const mb = (fs.statSync(outputFile).size / 1024 / 1024).toFixed(1);
-  console.log(`\n[generate-epub] Written → ${outputFile} (${mb} MB)`);
 }
 
 main().catch((err) => {

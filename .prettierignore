@@ -12,3 +12,7 @@
 !.prettierrc
 !eslint.config.js
 !README.md
+
+# Generated ebook artifacts
+public/assets/posts/ai-series/ebook/return-on-intelligence-ebook.html
+return-on-intelligence-ebook.html
