@@ -33,6 +33,12 @@ function absolutizeUrl(value, baseUrl) {
   }
 }
 
+function isUnsupportedMediaUrl(value) {
+  if (!value || value.startsWith('#')) return false;
+  if (/^(?:[a-z]+:|\/\/)/i.test(value)) return false;
+  return !value.startsWith('/');
+}
+
 function absolutizeSrcset(value, baseUrl) {
   return value
     .split(',')
@@ -163,6 +169,7 @@ async function main() {
         'h1','h2','h3','h4','h5','h6','br','span','div'
       ],
       allowedAttributes: { '*': ['href','src','srcset','poster','alt','title','class','id','width','height','style'] },
+      exclusiveFilter: frame => frame.tag === 'img' && !frame.attribs.src,
       transformTags: {
         '*': (tagName, attribs) => {
           Object.keys(attribs).forEach(k => { if (k.startsWith('data-astro')) delete attribs[k]; });
@@ -171,11 +178,17 @@ async function main() {
             attribs.href = absolutizeUrl(attribs.href, baseUrl);
           }
 
-          if (attribs.src) {
+          if (attribs.src && isUnsupportedMediaUrl(attribs.src)) {
+            delete attribs.src;
+            delete attribs.srcset;
+            delete attribs.poster;
+          } else if (attribs.src) {
             attribs.src = absolutizeUrl(attribs.src, baseUrl);
           }
 
-          if (attribs.poster) {
+          if (attribs.poster && isUnsupportedMediaUrl(attribs.poster)) {
+            delete attribs.poster;
+          } else if (attribs.poster) {
             attribs.poster = absolutizeUrl(attribs.poster, baseUrl);
           }
 
