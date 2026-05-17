@@ -40,6 +40,12 @@ function absolutizeUrl(value: string, baseUrl: string) {
   }
 }
 
+function isUnsupportedMediaUrl(value: string) {
+  if (!value || value.startsWith("#")) return false;
+  if (/^(?:[a-z]+:|\/\/)/i.test(value)) return false;
+  return !value.startsWith("/");
+}
+
 function absolutizeSrcset(value: string, baseUrl: string) {
   return value
     .split(",")
@@ -186,6 +192,7 @@ export async function GET(context?: {
           "style",
         ],
       },
+      exclusiveFilter: frame => frame.tag === "img" && !frame.attribs.src,
       transformTags: {
         "*": (tagName: string, attribs: Record<string, string>) => {
           Object.keys(attribs).forEach(k => {
@@ -196,11 +203,17 @@ export async function GET(context?: {
             attribs.href = absolutizeUrl(attribs.href, baseUrl);
           }
 
-          if (attribs.src) {
+          if (attribs.src && isUnsupportedMediaUrl(attribs.src)) {
+            delete attribs.src;
+            delete attribs.srcset;
+            delete attribs.poster;
+          } else if (attribs.src) {
             attribs.src = absolutizeUrl(attribs.src, baseUrl);
           }
 
-          if (attribs.poster) {
+          if (attribs.poster && isUnsupportedMediaUrl(attribs.poster)) {
+            delete attribs.poster;
+          } else if (attribs.poster) {
             attribs.poster = absolutizeUrl(attribs.poster, baseUrl);
           }
 
