@@ -26,18 +26,18 @@ export const AI_SERIES_LIFECYCLE = [
 
 export const aiSeriesEntries: AiSeriesEntry[] = [
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real",
+    slug: "return-on-intelligence-the-preface",
     label: "Preface",
     title: "The Return",
     summary:
       "The thesis, the reading contract, and the journey through the full eight-part argument.",
     experience: "Series map",
     kind: "preface",
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real",
+    path: "/posts/return-on-intelligence-the-preface",
     lifecycleStages: [],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-01-business-cards",
+    slug: "return-on-intelligence-01-echoes",
     label: "Part 1",
     title: "Echoes",
     summary:
@@ -45,11 +45,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Interactive paradigm timeline",
     kind: "part",
     partNumber: 1,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-01-business-cards",
+    path: "/posts/return-on-intelligence-01-echoes",
     lifecycleStages: ["Wonder", "Speculation"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-02-ai-is-not-fake",
+    slug: "return-on-intelligence-02-prototypes",
     label: "Part 2",
     title: "Prototypes",
     summary:
@@ -57,11 +57,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Capture ladder",
     kind: "part",
     partNumber: 2,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-02-ai-is-not-fake",
+    path: "/posts/return-on-intelligence-02-prototypes",
     lifecycleStages: ["Speculation"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-03-false-moat",
+    slug: "return-on-intelligence-02-moats",
     label: "Part 3",
     title: "Moats",
     summary:
@@ -69,11 +69,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Architecture toggle",
     kind: "part",
     partNumber: 3,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-03-false-moat",
+    path: "/posts/return-on-intelligence-02-moats",
     lifecycleStages: ["Overbuild"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround",
+    slug: "return-on-intelligence-04-saas-was-a-compromise",
     label: "Part 4",
     title: "SaaS Was a Compromise",
     summary:
@@ -81,11 +81,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Buy-build threshold",
     kind: "part",
     partNumber: 4,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-04-saas-was-a-workaround",
+    path: "/posts/return-on-intelligence-04-saas-was-a-compromise",
     lifecycleStages: ["Overbuild"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-05-ai-operated-company",
+    slug: "return-on-intelligence-05-firmware",
     label: "Part 5",
     title: "Firmware",
     summary:
@@ -93,11 +93,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Operating model comparison",
     kind: "part",
     partNumber: 5,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-05-ai-operated-company",
+    path: "/posts/return-on-intelligence-05-firmware",
     lifecycleStages: ["Belief break"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-06-convergence-point",
+    slug: "return-on-intelligence-05-breaking-point",
     label: "Part 6",
     title: "Breaking Point",
     summary:
@@ -105,11 +105,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Convergence and belief gauge",
     kind: "part",
     partNumber: 6,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-06-convergence-point",
+    path: "/posts/return-on-intelligence-05-breaking-point",
     lifecycleStages: ["Belief break"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-07-after-the-crash",
+    slug: "return-on-intelligence-07-after-the-crash",
     label: "Part 7",
     title: "After the Crash",
     summary:
@@ -117,11 +117,11 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Reset sequence",
     kind: "part",
     partNumber: 7,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-07-after-the-crash",
+    path: "/posts/return-on-intelligence-07-after-the-crash",
     lifecycleStages: ["Crash", "Consolidation", "Mature infrastructure"],
   },
   {
-    slug: "the-ai-bubble-will-burst-because-ai-is-real-08-new-power-map",
+    slug: "return-on-intelligence-08-new-power-map",
     label: "Part 8",
     title: "The New Power Map",
     summary:
@@ -129,7 +129,7 @@ export const aiSeriesEntries: AiSeriesEntry[] = [
     experience: "Interactive power stack",
     kind: "part",
     partNumber: 8,
-    path: "/posts/the-ai-bubble-will-burst-because-ai-is-real-08-new-power-map",
+    path: "/posts/return-on-intelligence-08-new-power-map",
     lifecycleStages: ["Mature infrastructure", "Extraction"],
   },
 ];
