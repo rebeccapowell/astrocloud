@@ -17,10 +17,6 @@ const DEFAULT_SITE_URL = 'https://rebecca-powell.com/';
 function resolveBaseUrl() {
   const configured =
     process.env.SITE_URL ||
-    process.env.CF_PAGES_URL ||
-    process.env.DEPLOY_URL ||
-    process.env.DEPLOY_PRIME_URL ||
-    process.env.URL ||
     DEFAULT_SITE_URL;
 
   return new URL(configured).origin;
