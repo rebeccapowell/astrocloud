@@ -14,6 +14,9 @@ tags:
   - architecture
 ---
 
+import DurableExecutionSimulator from "@/components/DurableExecutionSimulator";
+import WowlActivityDesigner from "@/components/WowlActivityDesigner";
+
 ![Retries are not durable execution](/assets/posts/durable-execution-wowl/01-retries-are-not-durable-execution.jpg)
 
 Retries are not durable execution.
@@ -34,6 +37,8 @@ But those tools usually sit around a **call**.
 Durable execution sits around a **process**.
 
 That is the abstraction shift.
+
+<DurableExecutionSimulator client:visible />
 
 ![The difference is the abstraction layer](/assets/posts/durable-execution-wowl/02-abstraction-layer.jpg)
 
@@ -209,6 +214,8 @@ But if your activity performs four different external writes and then crashes ha
 That is where my own shorthand comes in:
 
 > **WOWL: Write Once, Write Last**
+
+<WowlActivityDesigner client:visible />
 
 ## WOWL: Write Once, Write Last
 
