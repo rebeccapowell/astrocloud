@@ -5,7 +5,6 @@ author: rebecca
 description: "A practical explanation of durable execution, why retry libraries are not enough, and the WOWL rule: Write Once, Write Last."
 featured: false
 draft: false
-ogImage: /assets/posts/durable-execution-wowl/call-vs-process.svg
 tags:
   - temporal
   - durable-execution
@@ -15,7 +14,7 @@ tags:
   - architecture
 ---
 
-![Call-level resilience versus durable execution](/assets/posts/durable-execution-wowl/call-vs-process.svg)
+![Retries are not durable execution](/assets/posts/durable-execution-wowl/01-retries-are-not-durable-execution.jpg)
 
 Retries are not durable execution.
 
@@ -35,6 +34,8 @@ But those tools usually sit around a **call**.
 Durable execution sits around a **process**.
 
 That is the abstraction shift.
+
+![The difference is the abstraction layer](/assets/posts/durable-execution-wowl/02-abstraction-layer.jpg)
 
 ## Resilience depends on what you wrap
 
@@ -103,6 +104,8 @@ That is durable execution territory.
 
 ## A reliable call is not the same as a recoverable process
 
+![Call failure versus process failure](/assets/posts/durable-execution-wowl/05-call-failure-vs-process-failure.jpg)
+
 This is the distinction I wish more architecture diagrams made visible.
 
 Call-level resilience protects a single dependency interaction. Process-level durability protects the journey across interactions.
@@ -140,6 +143,8 @@ The developer still has to design the steps well. But the platform gives the pro
 
 ## The call-level question
 
+![Call-level resilience](/assets/posts/durable-execution-wowl/03-call-level-resilience.jpg)
+
 Call-level resilience asks:
 
 > Did this operation succeed?
@@ -164,6 +169,8 @@ But they normally live inside a running process.
 If the process is gone, the retry policy is gone with it.
 
 ## The durable-execution question
+
+![Durable execution workflow](/assets/posts/durable-execution-wowl/04-durable-execution-workflow.jpg)
 
 Durable execution asks:
 
@@ -203,9 +210,9 @@ That is where my own shorthand comes in:
 
 > **WOWL: Write Once, Write Last**
 
-![WOWL: Write once, write last activity design](/assets/posts/durable-execution-wowl/wowl-boundary.svg)
-
 ## WOWL: Write Once, Write Last
+
+![WOWL: Write once, write last activity design](/assets/posts/durable-execution-wowl/07-wowl-write-once-write-last.jpg)
 
 WOWL is a simple rule of thumb for retryable steps:
 
@@ -287,6 +294,8 @@ You can make this work. But you have to design it. If you do not, you have creat
 
 ## Better: split the flow into safe steps
 
+![Why WOWL matters: safe steps versus spray writes](/assets/posts/durable-execution-wowl/08-why-wowl-matters.jpg)
+
 A better workflow shape is often:
 
 ```text
@@ -314,8 +323,6 @@ Now the durable execution platform can show where the business process is. And w
 The question is much cleaner:
 
 > Which process step failed, and is that step safe to retry?
-
-![Unsafe activity versus WOWL design](/assets/posts/durable-execution-wowl/unsafe-vs-wowl.svg)
 
 ## Important nuance: not all writes are equal
 
@@ -391,6 +398,8 @@ WOWL gives you a practical design discipline for the side effects inside that du
 They belong together.
 
 ## How I think about the layers
+
+![You often need both: call-level resilience and durable execution](/assets/posts/durable-execution-wowl/06-you-often-need-both.jpg)
 
 The cleanest mental model is this:
 
