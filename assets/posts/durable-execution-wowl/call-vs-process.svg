@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Call resilience versus durable execution</title>
+  <desc id="desc">A comparison showing call-level resilience wrapping a single HTTP call and durable execution wrapping a multi-step business process.</desc>
+  <defs>
+    <style>
+      .bg{fill:#fbfaf7}.navy{fill:#071f4f}.muted{fill:#31466f}.blue{fill:#2468d8}.teal{fill:#0b8f87}.softBlue{fill:#e8f1ff}.softTeal{fill:#e6f7f4}.card{fill:#fff;stroke:#d7deeb;stroke-width:2}.cardBlue{fill:#fff;stroke:#9fc2ff;stroke-width:3}.cardTeal{fill:#fff;stroke:#89d6cf;stroke-width:3}.lineBlue{stroke:#2468d8;stroke-width:5;fill:none;stroke-linecap:round}.lineTeal{stroke:#0b8f87;stroke-width:5;fill:none;stroke-linecap:round}.dashBlue{stroke:#2468d8;stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:12 14}.dashTeal{stroke:#0b8f87;stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:12 14}.shadow{filter:drop-shadow(0 8px 18px rgba(7,31,79,.12))}.h1{font:800 76px Inter,Segoe UI,Arial,sans-serif}.h2{font:800 34px Inter,Segoe UI,Arial,sans-serif}.body{font:500 26px Inter,Segoe UI,Arial,sans-serif}.small{font:600 22px Inter,Segoe UI,Arial,sans-serif}.tiny{font:600 18px Inter,Segoe UI,Arial,sans-serif}.mono{font:700 20px Inter,Segoe UI,Arial,sans-serif}
+    </style>
+    <marker id="arrowBlue" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M2,2 L12,7 L2,12" fill="none" stroke="#2468d8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arrowTeal" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M2,2 L12,7 L2,12" fill="none" stroke="#0b8f87" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+  <rect width="1600" height="900" class="bg"/>
+  <text x="80" y="110" class="h1 navy">Retries are not durable execution</text>
+  <text x="82" y="160" class="body muted">The difference is the abstraction layer: one protects a call, the other protects a process.</text>
+
+  <g transform="translate(80 240)">
+    <rect width="660" height="470" rx="34" class="cardBlue shadow"/>
+    <rect x="190" y="-25" width="280" height="58" rx="29" class="softBlue"/>
+    <text x="235" y="13" class="h2 navy">Call resilience</text>
+
+    <rect x="70" y="140" width="160" height="130" rx="18" class="card shadow"/>
+    <rect x="102" y="168" width="96" height="20" rx="6" class="blue"/>
+    <rect x="102" y="198" width="96" height="20" rx="6" class="blue" opacity=".85"/>
+    <rect x="102" y="228" width="96" height="20" rx="6" class="blue" opacity=".7"/>
+    <text x="96" y="304" class="small navy">Service A</text>
+
+    <rect x="430" y="140" width="160" height="130" rx="18" class="card shadow"/>
+    <rect x="462" y="168" width="96" height="20" rx="6" class="teal"/>
+    <rect x="462" y="198" width="96" height="20" rx="6" class="teal" opacity=".85"/>
+    <rect x="462" y="228" width="96" height="20" rx="6" class="teal" opacity=".7"/>
+    <text x="456" y="304" class="small navy">Service B</text>
+
+    <path d="M245 205 H410" class="lineBlue" marker-end="url(#arrowBlue)"/>
+    <text x="276" y="185" class="small navy">HTTP / API call</text>
+    <path d="M410 255 C345 330 300 330 245 255" class="dashBlue" marker-end="url(#arrowBlue)"/>
+    <text x="315" y="340" class="small blue">retry</text>
+    <text x="78" y="410" class="body navy">Question answered:</text>
+    <text x="78" y="450" class="h2 navy">Did this operation succeed?</text>
+  </g>
+
+  <g transform="translate(860 240)">
+    <rect width="660" height="470" rx="34" class="cardTeal shadow"/>
+    <rect x="170" y="-25" width="320" height="58" rx="29" class="softTeal"/>
+    <text x="213" y="13" class="h2 navy">Durable execution</text>
+
+    <g transform="translate(55 95)">
+      <g>
+        <circle cx="45" cy="45" r="40" fill="#fff" stroke="#89d6cf" stroke-width="3"/>
+        <text x="31" y="57" class="h2 teal">1</text>
+        <text x="0" y="120" class="tiny navy">Receive</text><text x="8" y="143" class="tiny navy">order</text>
+      </g>
+      <path d="M92 45 H145" class="lineTeal" marker-end="url(#arrowTeal)"/>
+      <g transform="translate(155 0)">
+        <circle cx="45" cy="45" r="40" fill="#fff" stroke="#89d6cf" stroke-width="3"/>
+        <text x="31" y="57" class="h2 teal">2</text>
+        <text x="0" y="120" class="tiny navy">Authorize</text><text x="5" y="143" class="tiny navy">payment</text>
+      </g>
+      <path d="M247 45 H300" class="lineTeal" marker-end="url(#arrowTeal)"/>
+      <g transform="translate(310 0)">
+        <circle cx="45" cy="45" r="40" fill="#fff" stroke="#89d6cf" stroke-width="3"/>
+        <text x="31" y="57" class="h2 teal">3</text>
+        <text x="8" y="120" class="tiny navy">Create</text><text x="4" y="143" class="tiny navy">invoice</text>
+      </g>
+      <path d="M402 45 H455" class="lineTeal" marker-end="url(#arrowTeal)"/>
+      <g transform="translate(465 0)">
+        <circle cx="45" cy="45" r="40" fill="#fff" stroke="#89d6cf" stroke-width="3"/>
+        <text x="31" y="57" class="h2 teal">4</text>
+        <text x="10" y="120" class="tiny navy">Send</text><text x="-2" y="143" class="tiny navy">email</text>
+      </g>
+    </g>
+
+    <rect x="95" y="315" width="470" height="105" rx="18" fill="#fff" stroke="#89d6cf" stroke-width="3" class="shadow"/>
+    <text x="125" y="355" class="small navy">Persisted state, history, checkpoints</text>
+    <circle cx="135" cy="390" r="14" class="teal"/><text x="160" y="398" class="tiny navy">completed steps</text>
+    <circle cx="330" cy="390" r="14" fill="#fff" stroke="#0b8f87" stroke-width="4"/><text x="355" y="398" class="tiny navy">current step</text>
+    <text x="78" y="450" class="h2 navy">Can this process safely continue?</text>
+  </g>
+
+  <line x1="800" x2="800" y1="240" y2="710" stroke="#d7deeb" stroke-width="2"/>
+  <circle cx="800" cy="475" r="46" fill="#2468d8" class="shadow"/>
+  <text x="771" y="486" fill="#fff" class="h2">VS.</text>
+
+  <text x="310" y="815" class="h2 navy">A reliable call is not the same as a recoverable process.</text>
+</svg>
