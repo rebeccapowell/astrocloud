@@ -1,6 +1,6 @@
 ---
 title: "Durable Execution for Dummies: Retries Protect Calls, Workflows Protect Processes"
-pubDatetime: 2026-06-20T22:30:00+02:00
+pubDatetime: 2026-06-20T20:00:00+02:00
 author: rebecca
 description: "A practical explanation of durable execution, why retry libraries are not enough, and the WOWL rule: Write Once, Write Last."
 featured: false
