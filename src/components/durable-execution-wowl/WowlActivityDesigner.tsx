@@ -1,30 +1,16 @@
 import { useMemo, useState } from "react";
-
-type Operation = {
-  id: string;
-  label: string;
-  kind: "read" | "compute" | "write";
-  system?: string;
-};
-
-const operations: Operation[] = [
-  { id: "read-order", label: "Read order", kind: "read" },
-  { id: "read-customer", label: "Read customer", kind: "read" },
-  { id: "calculate", label: "Calculate totals", kind: "compute" },
-  { id: "charge", label: "Charge payment", kind: "write", system: "Gateway" },
-  { id: "crm", label: "Update CRM", kind: "write", system: "CRM" },
-  { id: "email", label: "Send email", kind: "write", system: "Email" },
-  { id: "event", label: "Publish event", kind: "write", system: "Broker" },
-];
-
-const safeDefault = ["read-order", "read-customer", "calculate", "charge"];
-const sprayDefault = operations.map(operation => operation.id);
+import {
+  wowlOperations,
+  wowlSafeDefault,
+  wowlSprayDefault,
+} from "./wowlActivityModel";
 
 export default function WowlActivityDesigner() {
-  const [selectedIds, setSelectedIds] = useState<string[]>(sprayDefault);
+  const [selectedIds, setSelectedIds] = useState<string[]>(wowlSprayDefault);
 
   const selectedOperations = useMemo(
-    () => operations.filter(operation => selectedIds.includes(operation.id)),
+    () =>
+      wowlOperations.filter(operation => selectedIds.includes(operation.id)),
     [selectedIds]
   );
 
@@ -62,14 +48,14 @@ export default function WowlActivityDesigner() {
         <div className="flex flex-wrap gap-2 text-sm">
           <button
             type="button"
-            onClick={() => setSelectedIds(safeDefault)}
+            onClick={() => setSelectedIds(wowlSafeDefault)}
             className="rounded-md border border-accent bg-accent px-3 py-1.5 text-background"
           >
             Show WOWL shape
           </button>
           <button
             type="button"
-            onClick={() => setSelectedIds(sprayDefault)}
+            onClick={() => setSelectedIds(wowlSprayDefault)}
             className="rounded-md border border-border px-3 py-1.5 text-foreground hover:border-accent"
           >
             Show spray writes
@@ -79,7 +65,7 @@ export default function WowlActivityDesigner() {
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_1fr]">
         <div className="grid gap-2">
-          {operations.map(operation => {
+          {wowlOperations.map(operation => {
             const isSelected = selectedIds.includes(operation.id);
             return (
               <button
