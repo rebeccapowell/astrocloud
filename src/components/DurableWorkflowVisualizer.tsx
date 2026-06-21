@@ -253,6 +253,11 @@ export default function DurableWorkflowVisualizer() {
             counters: nextCounters,
             currentFailure: failure,
             stepStates: nextStepStates,
+            stepMetrics: updateStepMetric(
+              current.stepMetrics,
+              current.currentStepIndex,
+              "failures"
+            ),
             statusMessage: `Run ${current.runId} recovered at ${step.label}: ${failure.message}. ${failure.recovery}`,
           };
         }
