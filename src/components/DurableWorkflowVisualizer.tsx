@@ -336,8 +336,8 @@ export default function DurableWorkflowVisualizer() {
       aria-labelledby="durable-workflow-title"
       className="not-prose my-10 rounded-2xl border border-border bg-muted/40 p-4 shadow-sm sm:p-6"
     >
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div className="max-w-2xl">
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_18rem] xl:items-start">
+        <div className="max-w-3xl">
           <p className="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
             Interactive workflow simulator
           </p>
@@ -350,6 +350,32 @@ export default function DurableWorkflowVisualizer() {
           <p className="mt-2 text-sm leading-6 text-foreground/80">
             {modeDescription}
           </p>
+
+          <dl
+            className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+            aria-label="Workflow run counters"
+          >
+            <CounterCard
+              label="Successful runs"
+              value={runState.counters.successfulRuns}
+              tone="text-emerald-500"
+            />
+            <CounterCard
+              label="Transient failures"
+              value={runState.counters.transientFailures}
+              tone="text-amber-500"
+            />
+            <CounterCard
+              label="Recovered failures"
+              value={runState.counters.recoveredFailures}
+              tone="text-sky-500"
+            />
+            <CounterCard
+              label="Complete failures"
+              value={runState.counters.completeFailures}
+              tone="text-rose-500"
+            />
+          </dl>
         </div>
 
         <div
@@ -439,7 +465,7 @@ export default function DurableWorkflowVisualizer() {
       </div>
 
       <div
-        className="mt-6 grid gap-3 lg:grid-cols-6"
+        className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3"
         role="list"
         aria-label="Order workflow steps"
       >
@@ -460,9 +486,9 @@ export default function DurableWorkflowVisualizer() {
               key={step.id}
               role="listitem"
               aria-current={isActive ? "step" : undefined}
-              className={`relative rounded-xl border p-4 transition-all ${stateStyles[state]}`}
+              className={`rounded-xl border p-4 transition-all sm:p-5 ${stateStyles[state]}`}
             >
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="text-xs font-semibold text-foreground/60">
                   Step {index + 1}
                 </span>
@@ -470,19 +496,13 @@ export default function DurableWorkflowVisualizer() {
                   {state}
                 </span>
               </div>
-              <h3 className="mt-2 text-base font-semibold text-foreground">
+              <h3 className="mt-2 text-base leading-snug font-semibold text-foreground">
                 {step.label}
               </h3>
               <p className="mt-2 text-xs leading-5 text-foreground/70">
                 {step.detail}
               </p>
               <StepMetricClingers metric={runState.stepMetrics[index]} />
-              {index < workflowSteps.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  className="absolute top-1/2 -right-3 hidden h-px w-3 bg-border lg:block"
-                />
-              )}
             </article>
           );
         })}
@@ -506,32 +526,6 @@ export default function DurableWorkflowVisualizer() {
           </p>
         )}
       </div>
-
-      <dl
-        className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
-        aria-label="Workflow run counters"
-      >
-        <CounterCard
-          label="Successful runs"
-          value={runState.counters.successfulRuns}
-          tone="text-emerald-500"
-        />
-        <CounterCard
-          label="Transient failures"
-          value={runState.counters.transientFailures}
-          tone="text-amber-500"
-        />
-        <CounterCard
-          label="Recovered failures"
-          value={runState.counters.recoveredFailures}
-          tone="text-sky-500"
-        />
-        <CounterCard
-          label="Complete failures"
-          value={runState.counters.completeFailures}
-          tone="text-rose-500"
-        />
-      </dl>
     </section>
   );
 }
