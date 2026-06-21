@@ -14,6 +14,8 @@ tags:
   - architecture
 ---
 
+import DurableWorkflowVisualizer from "@/components/DurableWorkflowVisualizer";
+
 ![Retries are not durable execution](/assets/posts/durable-execution-wowl/01-retries-are-not-durable-execution.jpg)
 
 Retries are not durable execution.
@@ -81,6 +83,8 @@ Create invoice
 Send confirmation
 Notify fulfilment
 ```
+
+<DurableWorkflowVisualizer client:load />
 
 A resilience library can help with the call to the invoice service.
 
