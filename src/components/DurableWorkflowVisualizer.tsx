@@ -191,6 +191,7 @@ export default function DurableWorkflowVisualizer() {
   const [mode, setMode] = useState<Mode>("durable");
   const [isRunning, setIsRunning] = useState(true);
   const [flakiness, setFlakiness] = useState(28);
+  const [stepDelay, setStepDelay] = useState(2);
   const [runState, setRunState] = useState<RunState>(() =>
     getInitialRunState()
   );
@@ -295,12 +296,12 @@ export default function DurableWorkflowVisualizer() {
           statusMessage: `Run ${current.runId}: ${step.label} succeeded. ${workflowSteps[current.currentStepIndex + 1].label} is running.`,
         };
       });
-    }, 900);
+    }, stepDelay * 1000);
 
     return () => {
       if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
     };
-  }, [failureProbability, isRunning, mode, runState]);
+  }, [failureProbability, isRunning, mode, runState, stepDelay]);
 
   useEffect(() => {
     const terminalState =
@@ -392,7 +393,7 @@ export default function DurableWorkflowVisualizer() {
             className="text-sm font-medium text-foreground"
             htmlFor="workflow-flakiness"
           >
-            Dependency flakiness: {flakiness}%
+            Dependency reliability: {flakiness}%
           </label>
           <input
             id="workflow-flakiness"
@@ -410,6 +411,29 @@ export default function DurableWorkflowVisualizer() {
           >
             Higher values make dependency errors, restarts, and long outages
             more likely.
+          </p>
+
+          <label
+            className="text-sm font-medium text-foreground"
+            htmlFor="workflow-step-delay"
+          >
+            Step delay: {stepDelay}s
+          </label>
+          <input
+            id="workflow-step-delay"
+            type="range"
+            min="1"
+            max="10"
+            value={stepDelay}
+            onChange={event => setStepDelay(Number(event.target.value))}
+            aria-describedby="workflow-step-delay-help"
+            className="accent-accent"
+          />
+          <p
+            id="workflow-step-delay-help"
+            className="text-xs text-foreground/65"
+          >
+            Time in seconds the simulator pauses between each workflow step.
           </p>
         </div>
       </div>
