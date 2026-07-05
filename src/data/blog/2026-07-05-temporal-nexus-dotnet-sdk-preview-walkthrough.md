@@ -43,8 +43,6 @@ In this sample, the checkout workflow runs in a `storefront` namespace and calls
 
 The workflow still looks like workflow code, but each cross-boundary call is modeled as a Nexus operation with Temporal durability, retries, and traceability.
 
-![Scenario A after email verification](/assets/posts/temporal-nexus-dotnet-sdk-preview-walkthrough/e2e-scenario-a-verified-ready.png)
-
 ## When Nexus is useful
 
 Nexus shines when you need:
@@ -60,7 +58,7 @@ Typical examples:
 - regulated workflows where you need durable state transitions and replay-safe behavior;
 - complex process coordination where partial failure and retries are normal.
 
-When *not* to reach for Nexus first:
+When _not_ to reach for Nexus first:
 
 - fire-and-forget event fan-out,
 - analytics-style event broadcasting,
@@ -70,13 +68,13 @@ When *not* to reach for Nexus first:
 
 Event Grid is a great mental anchor because both help connect distributed systems. But they solve different coordination shapes.
 
-| Topic | Azure Event Grid | Temporal Nexus |
-| --- | --- | --- |
-| Primary model | Event distribution / pub-sub | Durable operation invocation from workflows |
-| Coupling style | Producer publishes events to subscribers | Caller targets a typed service operation |
+| Topic              | Azure Event Grid                               | Temporal Nexus                                  |
+| ------------------ | ---------------------------------------------- | ----------------------------------------------- |
+| Primary model      | Event distribution / pub-sub                   | Durable operation invocation from workflows     |
+| Coupling style     | Producer publishes events to subscribers       | Caller targets a typed service operation        |
 | Delivery semantics | Event delivery/retry over event infrastructure | Operation execution tracked in Temporal history |
-| Process durability | External to Event Grid itself | Native to workflow orchestration model |
-| Best fit | Broad event fan-out, reactive integration | Cross-boundary business process orchestration |
+| Process durability | External to Event Grid itself                  | Native to workflow orchestration model          |
+| Best fit           | Broad event fan-out, reactive integration      | Cross-boundary business process orchestration   |
 
 The useful shortcut is:
 
@@ -105,6 +103,8 @@ public interface IInventoryNexusService
 ```
 
 ### 2) Implement a workflow-backed operation handler
+
+Note: There is a gotcha here. Mentally most dotnet developers work on the premise that the implementation class implements the interface, but it doesn't attributes are used here instead. This is one area of the Temporal .NET SDK I'd like to see change to follow established patterns.
 
 From `Inventory.Worker/Handlers/InventoryNexusService.cs`:
 
@@ -181,13 +181,13 @@ Longer term, I'd love to see fuller hosting support consolidated in the Aspire e
 Nexus in .NET preview is already promising, but there are a few areas where better developer ergonomics would have outsized impact:
 
 1. **More developer-friendly surface area**  
-   The low-level handler model is powerful, but the default happy path could be simpler and clearer for application developers.
+   The low-level handler model is powerful, but the default happy path could be simpler and clearer for application developers. The confusion around interfaces is especially something that is conceptually challenging, but I also feel that the low level API could be nicely abstracted to make it easier to use by default. MassTransit does this well. The symantics around sync verus async over Nexus are also a potential footgun.
 
 2. **OpenTelemetry propagation improvements**  
-   Cross-namespace traces currently need stronger out-of-the-box context continuity for better end-to-end observability.
+   Cross-namespace traces currently need stronger out-of-the-box context continuity for better end-to-end observability. OpenTelemetry tracing stops at the Nexus call. I would prefer to see this full end-to-end.
 
 3. **RBAC and operator ergonomics**  
-   Endpoint and operational security workflows can be made easier to reason about in day-to-day team usage.
+   Endpoint and operational security workflows can be made easier to reason about in day-to-day team usage. As far as I can tell, the only permissions are whether one namespace can access another, and that there is no more fine grained granulairty than that. For industries that apply strict least-priviledge policies within their organizations around RBAC, this might be a problem.
 
 None of these erase the value of Nexus. They are exactly the kind of polish items worth addressing before broad GA adoption.
 
