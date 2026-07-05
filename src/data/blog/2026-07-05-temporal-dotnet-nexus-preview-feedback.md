@@ -4,7 +4,7 @@ pubDatetime: 2026-07-05T13:00:00+02:00
 author: rebecca
 slug: temporal-dotnet-nexus-preview-feedback
 featured: false
-draft: false
+draft: true
 tags:
   - temporal
   - dotnet
