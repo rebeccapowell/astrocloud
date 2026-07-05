@@ -43,6 +43,8 @@ In this sample, the checkout workflow runs in a `storefront` namespace and calls
 
 The workflow still looks like workflow code, but each cross-boundary call is modeled as a Nexus operation with Temporal durability, retries, and traceability.
 
+![namespaces in temporal](/assets/posts/temporal-nexus-dotnet-sdk-preview-walkthrough/temporal-ui.png)
+
 ## When Nexus is useful
 
 Nexus shines when you need:
@@ -101,6 +103,8 @@ public interface IInventoryNexusService
     ReserveInventoryOutput ReserveInventory(ReserveInventoryInput input);
 }
 ```
+
+![temporal nexus endpoints](/assets/posts/temporal-nexus-dotnet-sdk-preview-walkthrough/nexus-endpoints.png)
 
 ### 2) Implement a workflow-backed operation handler
 
