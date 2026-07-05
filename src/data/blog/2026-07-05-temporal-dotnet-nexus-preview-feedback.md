@@ -15,7 +15,7 @@ description: "A detailed review of Temporal's .NET Nexus preview API, with sourc
 ---
 
 Date: 5 July 2026  
-Repository checked: `temporalio/sdk-dotnet` on `main`  
+Repository checked: `temporalio/sdk-dotnet` on `main` and `nexus-api-gen-signal-with-start`  
 Docs checked: Temporal .NET Nexus quickstart and feature guide  
 Scope: Public preview Nexus support in the .NET SDK
 
@@ -35,7 +35,7 @@ My short version of the feedback would be this:
 
 This report lists the issues I would raise before GA.
 
-Line links point to the `main` branch. They may drift if the repository changes.
+Line links point to the `main` branch unless noted. They may drift if the repository changes.
 
 ---
 
@@ -407,6 +407,8 @@ But there is no obvious first-class application-level propagation model for thin
 - contract version.
 
 This matters more for Nexus than for ordinary workflow starts because Nexus is explicitly a cross-team, cross-namespace boundary. If context propagation is not obvious, every team will invent its own version.
+
+The source-level nuance from the preview branch is that this path does not automatically inject W3C trace context (`traceparent`/`tracestate`) either. You can manually copy headers, but there is no built-in "adopt current Activity context" behavior at the Nexus boundary today.
 
 The fair correction to my earlier thinking is this: Nexus worker interceptors are not simply bypassed. The source creates Nexus middleware from worker interceptors.
 
@@ -1135,6 +1137,8 @@ The start helper carries inbound links into workflow options and adds an outboun
 
 Source: [NexusWorkflowStartHelper.cs lines 63-76](https://github.com/temporalio/sdk-dotnet/blob/main/src/Temporalio/Nexus/NexusWorkflowStartHelper.cs#L63-L76)
 
+Preview branch reference: [`nexus-api-gen-signal-with-start` NexusWorkflowStartHelper.cs](https://github.com/temporalio/sdk-dotnet/blob/nexus-api-gen-signal-with-start/src/Temporalio/Nexus/NexusWorkflowStartHelper.cs)
+
 ```csharp
 if (nexusStartContext.InboundLinks.Count > 0)
 {
@@ -1142,7 +1146,7 @@ if (nexusStartContext.InboundLinks.Count > 0)
     {
         try
         {
-            return link.ToProtoLink();
+            return link.ToWorkflowEvent();
         }
         catch (ArgumentException e)
         {
@@ -1194,6 +1198,8 @@ if (result.AsyncOperationToken is { } asyncOperationToken)
 }
 ```
 
+This is important and worth stating clearly: these are Temporal **workflow-event links**, not OpenTelemetry parent/span context propagation.
+
 Docs also show Nexus events in caller workflow history.
 
 Docs: [feature guide lines 628-663](https://docs.temporal.io/develop/dotnet/nexus/feature-guide)
@@ -1208,6 +1214,8 @@ Nexus events are included in the caller's Event history...
 
 This is a good foundation. It is still too low-level for cross-team operations.
 
+The practical effect is visible in real telemetry: cross-namespace Nexus activity often appears as separate trace IDs, with correlation through workflow identifiers and Nexus links rather than direct parent/span links. That behavior is consistent with the source.
+
 A production platform needs to answer these questions quickly:
 
 - Which workflows call this endpoint?
@@ -1220,6 +1228,10 @@ A production platform needs to answer these questions quickly:
 - Which backing workflow is still running after the caller exited?
 
 Workflow history and links are necessary. They are not enough.
+
+There is also a concrete branch-level gap in `nexus-api-gen-signal-with-start`: the plain `StartWorkflowExecutionAsync` client path currently does not capture `StartWorkflowExecutionResponse.Link`, while signal/signal-with-start paths do. That weakens link continuity in the one path where teams expect consistent backlink behavior.
+
+Source: [`TemporalClient.Workflow.cs` on `nexus-api-gen-signal-with-start`](https://github.com/temporalio/sdk-dotnet/blob/nexus-api-gen-signal-with-start/src/Temporalio/Client/TemporalClient.Workflow.cs)
 
 ## Ideally
 
