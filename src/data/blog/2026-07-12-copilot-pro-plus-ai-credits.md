@@ -14,7 +14,7 @@ categories:
 
 I have spent far too long trying to answer what should have been a simple question:
 
-Should I keep my grandfathered GitHub Copilot Pro plan at $100 per year, or move to Copilot Pro+ at $39 per month?
+Should I keep my grandfathered GitHub Copilot Pro plan at $100 per year that runs out in December 2026, or move to Copilot Pro+ at $39 per month?
 
 At first glance, this looks like a straightforward subscription comparison. It is not. The old and new plans use fundamentally different billing models, so the headline prices tell you very little about what the same workload will actually cost.
 
@@ -141,7 +141,7 @@ Legacy annual users do not receive access to all new models and features. The cu
 
 The model picker on my legacy plan shows the old multiplier-based economics very clearly:
 
-![GitHub Copilot CLI model picker showing Auto and model cost multipliers](@/assets/images/copilot-cli-model-picker.jpg)
+![GitHub Copilot CLI model picker showing Auto and model cost multipliers](/assets/posts/models-copilot-pro-legacy.png)
 
 _The Copilot CLI model picker on my legacy annual plan. The values shown here are Premium Request multipliers, not AI Credit prices._
 
