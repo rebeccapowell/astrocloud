@@ -16,7 +16,7 @@ I have spent far too long trying to answer what should have been a simple questi
 
 Should I keep my grandfathered GitHub Copilot Pro plan at $100 per year that runs out in December 2026, or move to Copilot Pro+ at $39 per month?
 
-At first glance, this looks like a straightforward subscription comparison. It is not. The old and new plans use fundamentally different billing models, so the headline prices tell you very little about what the same workload will actually cost. 
+At first glance, this looks like a straightforward subscription comparison. It is not. The old and new plans use fundamentally different billing models, so the headline prices tell you very little about what the same workload will actually cost.
 
 The legacy annual plan uses Premium Requests and fixed model multipliers. The newer plans use GitHub AI Credits calculated from actual token consumption. Input tokens, cached input, cache writes and output tokens are all priced separately, and the rate depends on the model.
 
