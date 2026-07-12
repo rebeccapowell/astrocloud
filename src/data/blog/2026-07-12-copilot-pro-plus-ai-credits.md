@@ -88,11 +88,11 @@ This was considerably more useful than the official billing reports.
 
 Across the data captured by the query, the totals were approximately:
 
-| Metric | Total |
-|---|---:|
-| Usage events | 3,464 |
-| Input tokens | 405 million |
-| Output tokens | 1.5 million |
+| Metric              |                Total |
+| ------------------- | -------------------: |
+| Usage events        |                3,464 |
+| Input tokens        |          405 million |
+| Output tokens       |          1.5 million |
 | Cached input tokens | Hundreds of millions |
 
 The very large input figure is not as extraordinary as it first appears. An agentic CLI repeatedly sends conversation history, repository context, tool results and instructions back to the model. Much of that context is eligible for cheaper cached-input pricing, which is why the cache columns matter so much.
@@ -137,15 +137,34 @@ It is also the wrong final conclusion.
 
 The historical calculation assumes I would migrate to Pro+ and then carry on using the same older models. That misses one of the main reasons to migrate.
 
-Legacy annual users do not receive access to all new models and features. Pro+ provides access to the newer GPT-5.6 family, including Luna, Terra and Sol. GitHub describes them as lightweight, versatile and powerful respectively, and prices them accordingly.
+Legacy annual users do not receive access to all new models and features. The current monthly plans have a broader and actively changing model catalogue. Pro+ adds access to premium models, including GPT-5.6 Sol and Claude Fable 5, while the newer Luna and Terra options are part of the current model selection available outside the legacy annual plan. GitHub's [plan comparison](https://docs.github.com/en/copilot/get-started/plans#models) is therefore not describing the model entitlement attached to my grandfathered subscription.
 
-To understand the effect of model choice, I applied the same historical token volume to each model. This deliberately ignores any reduction in tokens or agent turns, so it is a conservative comparison.
+The newer GPT-5.6 family also presents a more deliberate set of choices:
 
-| Model | Approximate AI Credits for the same token volume | Position against 7,000 included credits |
-|---|---:|---:|
-| GPT-5.6 Luna | 6,503 | 497 remaining |
-| GPT-5.6 Terra | 16,258 | 9,258 over |
-| GPT-5.6 Sol | 32,516 | 25,516 over |
+| Model         | Intended role in my usage strategy                         |
+| ------------- | ---------------------------------------------------------- |
+| GPT-5.6 Luna  | High-volume, routine work where cost and speed matter most |
+| GPT-5.6 Terra | The default for substantial implementation work            |
+| GPT-5.6 Sol   | Difficult work where stronger reasoning justifies the cost |
+
+That is not the only choice. The model picker still includes older OpenAI and Anthropic models, newer Claude models such as Fable 5, and automatic model selection. Copilot CLI also supports bringing your own provider, so some workloads can be routed to a directly billed OpenAI-compatible or other supported endpoint instead of consuming GitHub AI Credits.
+
+This creates four practical selection modes rather than one:
+
+1. **Auto selection**, where GitHub chooses the model. This is convenient, but it gives me less direct control over cost and makes comparison harder.
+2. **A deliberately selected GitHub model**, where I can choose Luna, Terra, Sol or another available model according to the task.
+3. **A small approved model set**, where I simply stop selecting older models that are poor value under token billing, even if the personal plan does not provide an account-level switch to hide each one.
+4. **BYOK**, where Copilot CLI remains the agent harness but the inference cost is billed directly by the chosen model provider.
+
+The important change is that upgrading does not merely provide access to a better model. It provides a model portfolio. The economic case for Pro+ depends on using that portfolio intentionally rather than choosing Sol or Fable for every interaction because they are the newest names in the list.
+
+To understand the effect of model choice, I applied the same historical token volume to each GPT-5.6 model. This deliberately ignores any reduction in tokens or agent turns, so it is a conservative comparison.
+
+| Model         | Approximate AI Credits for the same token volume | Position against 7,000 included credits |
+| ------------- | -----------------------------------------------: | --------------------------------------: |
+| GPT-5.6 Luna  |                                            6,503 |                           497 remaining |
+| GPT-5.6 Terra |                                           16,258 |                              9,258 over |
+| GPT-5.6 Sol   |                                           32,516 |                             25,516 over |
 
 This immediately changes the picture.
 
@@ -197,9 +216,11 @@ It becomes:
 
 > Which model is capable enough to complete this task at the lowest total cost?
 
-That is a familiar engineering problem. We do not automatically put every application on the largest virtual machine or the most expensive database tier. We choose resources according to the workload and escalate where the additional capability is justified.
+That is a familiar engineering problem. We do not automatically put every application on the largest virtual machine or the most expensive database tier. We choose resources according to the workload and use the more expensive option where the additional capability is justified.
 
-A sensible Copilot Pro+ strategy would therefore use Luna for high-volume routine work, Terra for tasks that need stronger reasoning, and Sol where the complexity genuinely warrants it.
+A sensible Copilot Pro+ strategy would therefore make Luna the high-volume workhorse, use Terra for normal serious implementation, and select Sol for work where the additional reasoning is likely to reduce enough failed attempts or repeated turns to justify its higher token price. Fable 5 and older premium models remain available for cases where their particular behaviour is valuable, but they should not become defaults merely because they appear in the picker.
+
+I would also be cautious about Auto while trying to understand the new bill. Auto may be useful for availability and convenience, but manually selecting models for the first few weeks would produce much better evidence about cost per task. Once that baseline exists, Auto can be compared against it rather than trusted blindly.
 
 The important point is not the exact routing policy. It is that indiscriminately selecting the strongest model defeats much of the economic value of moving to usage-based billing.
 
