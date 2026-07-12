@@ -139,7 +139,13 @@ The historical calculation assumes I would migrate to Pro+ and then carry on usi
 
 Legacy annual users do not receive access to all new models and features. The current monthly plans have a broader and actively changing model catalogue. Pro+ adds access to premium models, including GPT-5.6 Sol and Claude Fable 5, while the newer Luna and Terra options are part of the current model selection available outside the legacy annual plan. GitHub's [plan comparison](https://docs.github.com/en/copilot/get-started/plans#models) is therefore not describing the model entitlement attached to my grandfathered subscription.
 
-The newer GPT-5.6 family also presents a more deliberate set of choices:
+The model picker on my legacy plan shows the old multiplier-based economics very clearly:
+
+![GitHub Copilot CLI model picker showing Auto and model cost multipliers](@/assets/images/copilot-cli-model-picker.jpg)
+
+_The Copilot CLI model picker on my legacy annual plan. The values shown here are Premium Request multipliers, not AI Credit prices._
+
+The newer GPT-5.6 family presents a more deliberate set of choices:
 
 | Model         | Intended role in my usage strategy                         |
 | ------------- | ---------------------------------------------------------- |
@@ -151,9 +157,9 @@ That is not the only choice. The model picker still includes older OpenAI and An
 
 This creates four practical selection modes rather than one:
 
-1. **Auto selection**, where GitHub chooses the model. This is convenient, but it gives me less direct control over cost and makes comparison harder.
-2. **A deliberately selected GitHub model**, where I can choose Luna, Terra, Sol or another available model according to the task.
-3. **A small approved model set**, where I simply stop selecting older models that are poor value under token billing, even if the personal plan does not provide an account-level switch to hide each one.
+1. **Auto selection**, where GitHub chooses a supported model according to the task, system health and availability.
+2. **A deliberately selected GitHub model**, where I choose Luna, Terra, Sol or another available model according to the work.
+3. **A small model set selected by habit**, where I consciously avoid older or poor-value models even when they remain visible in the picker.
 4. **BYOK**, where Copilot CLI remains the agent harness but the inference cost is billed directly by the chosen model provider.
 
 The important change is that upgrading does not merely provide access to a better model. It provides a model portfolio. The economic case for Pro+ depends on using that portfolio intentionally rather than choosing Sol or Fable for every interaction because they are the newest names in the list.
@@ -188,6 +194,39 @@ It would need to complete the same work using about 21.5% of the historical toke
 
 That does not make Sol a bad choice. It means Sol is an expensive choice that needs to earn its place.
 
+## Auto selection and the 10% discount
+
+GitHub gives users on paid plans a 10% discount on model costs when Auto is used in Copilot Chat, Copilot CLI, the Copilot app or the cloud agent. Auto also attempts to match task complexity to model capability and route around models experiencing capacity problems.
+
+That sounds like an obvious cost optimisation. It is useful, but it needs to be understood correctly.
+
+The discount is applied to the cost of the model Auto selects. It does not make every model equally economical.
+
+Using the same simplified historical-volume calculation:
+
+```text
+Luna via Auto:  6,503 x 90% = 5,853 AI Credits
+Terra via Auto: 16,258 x 90% = 14,632 AI Credits
+Sol via Auto:   32,516 x 90% = 29,264 AI Credits
+```
+
+A 10% discount on Terra or Sol is still much more expensive than deliberately selecting Luna for work Luna can complete successfully. The discount cannot compensate for a model that costs two, three or five times as much for the same token volume.
+
+GitHub says Auto chooses only from models allowed by the subscription and applicable policies. Organization and enterprise administrators can exclude models through policy. Individual-plan users can disable evaluation models, but GitHub does not currently document a personal allow-list that lets a Pro+ user restrict Auto to a hand-picked set such as Luna, Terra and Sol.
+
+That distinction matters. Auto becomes a stronger cost-control mechanism when its eligible pool is carefully restricted. Without that control, it is an optimisation system whose routing decisions I can inspect after the event, but not fully constrain beforehand.
+
+GitHub does show which model handled each response, including directly in Copilot CLI. That makes Auto measurable, but it does not make it predictable.
+
+My approach after upgrading would therefore be:
+
+1. Select Luna, Terra and Sol manually for an initial measurement period.
+2. Record AI Credits, turns and successful outcomes for representative tasks.
+3. Use Auto for a comparable period and inspect which models it actually selects.
+4. Keep Auto only if its 10% discount and reduced rate limiting produce a lower cost per successful task than deliberate selection.
+
+For an organization with model policies, I would also exclude models that are both more expensive and less effective for the relevant workload. For a personal Pro+ account, where that granular restriction appears unavailable, manual selection provides the clearest cost guardrail.
+
 ## Fewer turns matter more than shorter answers
 
 Token efficiency in an agentic CLI is not simply a matter of generating a shorter response.
@@ -220,7 +259,7 @@ That is a familiar engineering problem. We do not automatically put every applic
 
 A sensible Copilot Pro+ strategy would therefore make Luna the high-volume workhorse, use Terra for normal serious implementation, and select Sol for work where the additional reasoning is likely to reduce enough failed attempts or repeated turns to justify its higher token price. Fable 5 and older premium models remain available for cases where their particular behaviour is valuable, but they should not become defaults merely because they appear in the picker.
 
-I would also be cautious about Auto while trying to understand the new bill. Auto may be useful for availability and convenience, but manually selecting models for the first few weeks would produce much better evidence about cost per task. Once that baseline exists, Auto can be compared against it rather than trusted blindly.
+Auto may eventually improve that routing further, particularly because it receives the 10% discount and can reduce rate limiting. I would still want evidence from my own workloads before delegating model choice completely, especially while an individual account cannot define a narrow Auto allow-list.
 
 The important point is not the exact routing policy. It is that indiscriminately selecting the strongest model defeats much of the economic value of moving to usage-based billing.
 
@@ -234,7 +273,7 @@ Second, the export was grouped by day and model. Some OpenAI models use higher l
 
 Third, replaying the old token volume against a new model does not account for behavioural differences. A newer model may require fewer turns and fewer tokens, or it may use more reasoning tokens on a difficult task. Only live usage after migration can provide a definitive answer.
 
-Finally, GitHub can change model prices, plan allowances and model availability. The figures in this post reflect the published pricing available on 12 July 2026.
+Finally, GitHub can change model prices, plan allowances, Auto routing and model availability. The figures in this post reflect the published pricing available on 12 July 2026.
 
 ## So, is Pro+ more economical?
 
@@ -246,6 +285,8 @@ At that point, the decision depends primarily on model selection and token effic
 
 The historical model mix would have made Pro+ considerably more expensive. A Luna-heavy workload would have fitted inside the included allowance using the same token volume. A disciplined mix of Luna, Terra and occasional Sol could plausibly remain near the $39 subscription price if the newer models reduce the number of failed turns and repeated context processing.
 
+Auto adds another potentially useful lever through its 10% discount and capacity-aware routing. It is not, however, a substitute for understanding the model pool from which it chooses. For individual users without granular model policies, manual selection remains the safer starting point for cost control.
+
 So my conclusion is not that Pro+ is automatically cheaper. It is that Pro+ can be more economical for a heavy user, but only when model selection is treated as part of the cost model rather than a preference in a dropdown.
 
 ## The migration report GitHub should provide
@@ -256,7 +297,7 @@ GitHub already has the information required to produce a useful migration compar
 
 > Based on your last 60 or 90 days of activity, your workload would have consumed approximately X AI Credits under the current pricing model. On Pro+, your estimated monthly cost would have been Y.
 
-The report could also show alternative scenarios using the currently available model families.
+The report could also show alternative scenarios using the currently available model families and Auto's actual historical routing decisions.
 
 Instead, the official legacy reports expose the old billing units, while the migration decision depends on token data hidden elsewhere. I had to ask Copilot to query its own internal SQLite database to get enough information to make a reasoned estimate.
 
