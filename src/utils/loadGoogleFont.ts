@@ -1,3 +1,15 @@
+import { readFile } from "node:fs/promises";
+
+async function loadLocalFont(weight: number): Promise<ArrayBuffer> {
+  const fontPath =
+    weight >= 700
+      ? "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
+      : "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf";
+
+  const font = await readFile(fontPath);
+  return Uint8Array.from(font).buffer;
+}
+
 async function loadGoogleFont(
   font: string,
   text: string,
@@ -5,28 +17,39 @@ async function loadGoogleFont(
 ): Promise<ArrayBuffer> {
   const API = `https://fonts.googleapis.com/css2?family=${font}:wght@${weight}&text=${encodeURIComponent(text)}`;
 
-  const css = await (
-    await fetch(API, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1",
-      },
-    })
-  ).text();
+  try {
+    const css = await (
+      await fetch(API, {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1",
+        },
+      })
+    ).text();
 
-  const resource = css.match(
-    /src: url\((.+?)\) format\('(opentype|truetype)'\)/
-  );
+    const resource = css.match(
+      /src: url\((.+?)\) format\('(opentype|truetype)'\)/
+    );
 
-  if (!resource) throw new Error("Failed to download dynamic font");
+    if (!resource) throw new Error("Failed to download dynamic font");
 
-  const res = await fetch(resource[1]);
+    const res = await fetch(resource[1]);
 
-  if (!res.ok) {
-    throw new Error("Failed to download dynamic font. Status: " + res.status);
+    if (!res.ok) {
+      throw new Error("Failed to download dynamic font. Status: " + res.status);
+    }
+
+    return res.arrayBuffer();
+  } catch (err) {
+    try {
+      return await loadLocalFont(weight);
+    } catch (localErr) {
+      throw new AggregateError(
+        [err, localErr],
+        "Failed to load font data from Google Fonts and local font fallback."
+      );
+    }
   }
-
-  return res.arrayBuffer();
 }
 
 async function loadGoogleFonts(

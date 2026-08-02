@@ -2,8 +2,10 @@ import { defineConfig, envField } from "astro/config";
 import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import rehypeKatex from "rehype-katex";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
+import remarkMath from "remark-math";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
@@ -21,11 +23,19 @@ export default defineConfig({
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
-    mdx(),
+    mdx({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKatex],
+    }),
     react(),
   ],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    remarkPlugins: [
+      remarkMath,
+      remarkToc,
+      [remarkCollapse, { test: "Table of contents" }],
+    ],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "min-light", dark: "night-owl" },
@@ -45,11 +55,6 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"],
     },
   },
-  image: {
-    // Used for all Markdown images; not configurable per-image
-    // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
-    experimentalLayout: "constrained",
-  },
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
@@ -58,9 +63,5 @@ export default defineConfig({
         optional: true,
       }),
     },
-  },
-  experimental: {
-    responsiveImages: true,
-    preserveScriptOrder: true,
   },
 });
