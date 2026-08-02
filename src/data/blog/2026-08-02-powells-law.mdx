@@ -1,8 +1,9 @@
 ---
-title: "Powell’s Law: Time, Progress and the Cost of Interruption in Resilient Systems"
+title: "Powell's Law: Time, Progress and the Cost of Interruption in Resilient Systems"
 pubDatetime: 2026-08-02T09:00:00+00:00
 author: rebecca
-description: "A long-form position paper introducing Powell’s Law and a model for interruption cost in resilient systems."
+slug: 2026-08-02-time-progress-and-the-cost-of-interruption-in-resilient-systems
+description: "A long-form position paper introducing Powell's Law and a model for interruption cost in resilient systems."
 featured: false
 draft: false
 tags:
@@ -299,7 +300,7 @@ The debt may exist even when no physical data has been lost. The order, inventor
   </figcaption>
 </figure>
 
-## 7. Derivation of Powell’s Law
+## 7. Derivation of Powell's Law
 
 The interruption-cost model leads to three observations.
 
@@ -482,7 +483,7 @@ Checkpointing records intermediate computational state so that execution can res
 
 Checkpointing and snapshots are direct mechanisms for preventing negative $\Delta P$. They provide ways to preserve computational or distributed state beyond the lifetime of a particular execution context.
 
-Powell’s Law does not replace these mechanisms. It identifies progress preservation as the architectural objective that such mechanisms help achieve.
+Powell's Law does not replace these mechanisms. It identifies progress preservation as the architectural objective that such mechanisms help achieve.
 
 ### 11.4 Sagas and compensating transactions
 
@@ -516,7 +517,7 @@ The law remains independent of any particular workflow engine. A system may pres
 
 ## 12. Scope and Limitations
 
-Powell’s Law should not be interpreted as a requirement to preserve every intermediate state indefinitely.
+Powell's Law should not be interpreted as a requirement to preserve every intermediate state indefinitely.
 
 Some progress is invalidated by changing business conditions. A price calculation may need to be repeated because its market inputs have expired. A fraud or security decision may need to be re-evaluated after policy changes. A user may cancel a process or intentionally reverse an earlier action.
 
