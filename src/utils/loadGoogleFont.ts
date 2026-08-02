@@ -40,8 +40,15 @@ async function loadGoogleFont(
     }
 
     return res.arrayBuffer();
-  } catch {
-    return loadLocalFont(weight);
+  } catch (err) {
+    try {
+      return await loadLocalFont(weight);
+    } catch (localErr) {
+      throw new AggregateError(
+        [err, localErr],
+        "Failed to load font data from Google Fonts and local font fallback."
+      );
+    }
   }
 }
 
