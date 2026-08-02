@@ -3,7 +3,7 @@ title: "Powell's Law: Time, Progress and the Cost of Interruption in Resilient S
 pubDatetime: 2026-08-02T09:00:00+00:00
 author: rebecca
 slug: 2026-08-02-time-progress-and-the-cost-of-interruption-in-resilient-systems
-description: "A long-form position paper introducing Powell's Law and a model for interruption cost in resilient systems."
+description: "A long-form position paper examining time, durable progress and recovery effort as distinct consequences of interruption in resilient systems."
 featured: false
 draft: false
 tags:
@@ -17,570 +17,592 @@ tags:
 
 ## Abstract
 
-Resilience is commonly evaluated through availability, fault tolerance, recovery time and the frequency of failure. These measures describe whether a system remains operational and how quickly service can be restored, but they do not fully describe what happens to work that was already in progress when an interruption occurred.
+Resilience is commonly evaluated through availability, fault tolerance, recovery time and the frequency of failure. These measures describe whether service remains operational and how quickly execution can be restored, but they do not fully describe the fate of work already in progress when an interruption occurs.
 
-This paper proposes that the preservation of durable progress is a fundamental property of a resilient system. An interruption will normally increase the time required to complete a process, but it should not invalidate completed work, create uncertainty about which side effects occurred, or require substantial human effort to reconstruct a safe continuation point.
+This paper proposes that preservation of valid committed progress is a fundamental property of resilient systems. It introduces an interruption profile comprising additional elapsed time, loss of valid progress and additional recovery effort. Progress is not assumed to be a universal scalar. It is treated as a domain-specific set or partial ordering of valid outcomes that remain identifiable and safely reusable after the execution context that produced them has disappeared. The paper also distinguishes a recovery knowledge deficit from the effort required to resolve it and from recovery debt that persists when recovery obligations are repeatedly externalised to operators.
 
-A conceptual model is introduced in which the cost of interruption comprises three components: additional elapsed time, signed change in durable progress and additional recovery effort. From this model, the paper derives Powell’s Law:
+The model is applied comparatively to restart, checkpointing, idempotent activities, transactional messaging, saga coordination and durable workflow execution. The comparison shows that rapid restoration of execution does not by itself preserve business outcomes or establish the next safe action. The paper further identifies limitations involving rollback, expiring outcomes, planned suspension, irreversible side effects and the ongoing cost of resilience mechanisms.
+
+From this analysis, the paper derives the following progress-preservation principle:
 
 > **In a resilient system, interruptions should cost time, not progress.**
 
-The law is intended as an architectural objective rather than a prescription for a particular technology. Durable execution, checkpointing, idempotency, transactional messaging, workflow history and explicit retry boundaries are examined as mechanisms that help systems preserve progress across interruption.
+The principle is an architectural objective rather than a claim that interruption can be made cost-free or a prescription for a particular technology.
 
-**Keywords:** resilience, durable execution, progress preservation, recovery debt, idempotency, distributed systems, workflow orchestration
+**Keywords:** resilience, durable execution, progress preservation, recovery debt, idempotency, distributed systems, workflow orchestration, interruption cost
 
 ## 1. Introduction
 
-Every non-trivial system is eventually interrupted. Processes terminate, containers restart, workers are replaced during deployment, networks become unavailable and external dependencies fail. Long-running business processes may also pause for hours or days while awaiting human decisions, regulatory checks, customer responses or events from other systems.
+Every non-trivial system is eventually interrupted. Processes terminate, containers restart, workers are replaced during deployment, networks become unavailable and external dependencies fail. Long-running business processes may also suspend for hours or days while awaiting human decisions, regulatory checks, customer responses or events from other systems.
 
-The inevitability of interruption has led software engineering to develop a broad range of resilience techniques. Retry policies address transient dependency failures. Circuit breakers reduce repeated pressure on unavailable services. Replication and failover improve availability. Monitoring and incident-response practices reduce the time required to identify and resolve operational problems.
+Software engineering offers many responses. Retry policies address transient dependency failures. Replication and failover restore execution capacity. Checkpointing limits repeated computation. Transactions constrain partial state changes. Idempotency and request identifiers make repetition safer. Sagas represent partial completion and compensation. Durable workflow systems preserve orchestration state beyond the lifetime of a worker.
 
-These techniques are necessary, but they do not answer a more fundamental question: what happens to the progress that had already been made?
+These techniques address different problems. A service can restart in seconds while the business process it was executing remains unrecoverable. A handler can be invoked again while nobody can determine whether its previous invocation completed an external write. A workflow may appear ready to retry while database records, inventory reservations, payment authorisations and downstream systems represent incompatible or uncertain outcomes.
 
-A service may restart in seconds while the business process it was executing remains unrecoverable. A message handler may be invoked again while nobody can determine whether its previous invocation completed an external write. A workflow may appear ready to retry while database records, inventory reservations, payment authorisations and downstream systems represent different versions of reality.
+Service recovery and process recovery are therefore not equivalent. Restoring execution answers the question, "Can some worker run?" Recovering progress answers different questions: "What valid outcomes survive? What is known about external effects? What may safely happen next?"
 
-In such cases, service recovery and process recovery are not equivalent. The runtime may be available again, but the work cannot safely continue.
+This paper develops a conceptual model for answering those questions. Its contribution is not a new recovery mechanism. It is a common architectural frame that:
 
-This paper argues that resilience should therefore be evaluated not only by the duration of interruption, but also by the amount of valid progress that survives it and the effort required to restore a safe continuation point.
+1. separates elapsed delay, progress loss and recovery effort;
+2. treats progress as valid committed outcomes rather than completed instructions;
+3. makes uncertainty about continuation an explicit recovery concern;
+4. distinguishes immediate recovery work from accumulated recovery debt;
+5. provides a repeatable method for reviewing interruption boundaries.
 
-## 2. Definitions
+The model is intentionally implementation-independent. Its purpose is to make differences between recovery designs visible and to expose costs that availability and restart-time measures can conceal.
+
+## 2. Definitions and Scope
 
 ### 2.1 Interruption
 
-An **interruption** is any event that prevents a process from continuing through its intended execution path without a discontinuity. It may be caused by infrastructure failure, software failure, deployment, dependency unavailability, explicit cancellation, a long wait, a human hand-off or loss of execution context.
+An **interruption** is an event that prevents a process from continuing through its current execution path without a discontinuity. Causes include process failure, infrastructure replacement, dependency unavailability, network partition, deployment, preemption and loss of execution context.
 
-An interruption does not necessarily imply that the wider system is unavailable. A single workflow instance may be interrupted while the service continues to accept other work. Equally, an entire platform may be unavailable while its persisted processes remain recoverable.
+An interruption is not necessarily a platform-wide outage. A single workflow instance may be interrupted while the service continues accepting other work. Conversely, an entire service may become unavailable while its persisted processes remain recoverable.
 
-The concept is therefore broader than outage or failure. It describes a discontinuity in execution.
+Planned suspension, human waiting and cancellation are related but distinct. A planned suspension is designed to preserve a continuation point. Cancellation intentionally changes the required terminal outcome. They are included in analysis only where they expose the same architectural question: whether the process retains enough valid state and knowledge to continue or conclude safely.
 
 ### 2.2 Execution
 
-**Execution** is the transient performance of work by a particular runtime context. It may involve a process, thread, container, worker, agent, function invocation or human operator.
+**Execution** is the transient performance of work by a runtime context, including a process, thread, container, worker, function invocation, agent or human operator. Execution state held only in memory is temporary. A resilient process cannot depend indefinitely upon the continued existence of the worker that produced its state.
 
-Software systems commonly preserve execution state in transient forms. Threads execute instructions, processes maintain memory and workers retain local context, but each of these mechanisms eventually terminates or disappears. Execution is therefore inherently temporary.
+### 2.3 Valid committed outcome
 
-The state required to continue a resilient process must not depend indefinitely upon the continued existence of the execution environment that produced it.
+A **valid committed outcome** is a result that:
 
-### 2.3 Durable progress
+1. is recognised by the relevant domain as having taken effect;
+2. satisfies the invariants applicable at the time it is considered;
+3. is sufficiently established that continuation may rely upon it;
+4. remains identifiable after the execution context is lost.
 
-For the purposes of this paper, **durable progress** is defined as:
+The term _committed_ is used in a broader sense than a database commit. A payment authorisation confirmed by a provider, a recorded human approval, a shipment accepted by a fulfilment service or a calculation stored with its input version may each be committed outcomes. Whether an outcome is valid and reusable is defined by the domain, not by persistence alone.
 
-> The accumulation of valid, externally consistent work that remains known and usable after the execution environment that produced it has been lost.
+Tentative computation is not necessarily progress. A price calculated from expired market data may have been expensive to produce but may no longer be usable. A message buffered only in volatile memory is not committed merely because an API call returned. A local record asserting success is not sufficient when an externally visible effect remains contradictory or unknown.
 
-This definition contains three important qualifications.
+### 2.4 Continuation knowledge
 
-First, the work must be **valid**. Incorrect, expired or superseded state is not progress merely because it has been persisted.
+**Continuation knowledge** is the information required to distinguish:
 
-Second, the work must be **externally consistent**. A local record that claims a process completed is not sufficient when an associated external side effect is unknown or contradictory.
+- valid completed outcomes;
+- pending work;
+- failed work;
+- effects whose outcome remains uncertain;
+- the next actions permitted by domain invariants.
 
-Third, the work must remain **known and usable**. A side effect that occurred but cannot be identified, verified or safely incorporated into continued execution does not represent useful durable progress.
+Continuation knowledge may be represented through workflow history, checkpoints, event logs, correlation identifiers, idempotency records, state machines, transaction records, acknowledgements, human-task records or queryable external operation status.
 
-Progress is therefore not equivalent to elapsed execution time, CPU effort or the number of instructions completed. A process may execute for hours without producing any durable progress. Another process may execute for seconds, establish a durable continuation point and then be safely resumed by a different worker.
+### 2.5 Safe continuation point
 
-### 2.4 Recovery effort
+A **safe continuation point** is a state from which the next permissible action can be selected without violating domain invariants, discarding a valid committed outcome or unintentionally repeating an externally visible effect.
 
-**Recovery effort** is the additional work required to establish a safe continuation point after an interruption. It may include automated reconciliation, replay, compensation and state reconstruction, but it is particularly significant when it requires human intervention.
+It need not reproduce the exact instruction or call stack at which execution stopped. Recovery can continue through a replacement worker, an alternative workflow branch, compensation or a human decision. What matters is that the system can establish which outcomes remain valid and which action is safe next.
 
-Examples include inspecting logs, comparing records across systems, determining whether an external operation succeeded, resetting database state, releasing or recreating inventory reservations, checking payment status, correcting shipment records, manually publishing events and writing one-off repair scripts.
+### 2.6 Durable progress
 
-Recovery effort is not the same as lost time. Two systems may remain interrupted for the same duration while requiring substantially different levels of operational and engineering effort.
+**Durable progress** is the accumulation of valid committed outcomes and continuation knowledge that remain identifiable and safely reusable after the execution context that produced them has been lost.
 
-## 3. A Model of Interruption Cost
+This definition distinguishes progress from elapsed time, CPU effort and physical storage. A process may run for hours without establishing durable progress. Another may run briefly, record a durable continuation point and be safely resumed by a different worker.
 
-Let $I$ represent an interruption affecting a process. The cost of that interruption may be described using three distinct quantities.
+Progress is domain-specific and need not be scalar. Two process states may be incomparable. An order with payment authorised but inventory expired is not obviously ahead of an order with inventory reserved but payment pending. A useful model must therefore avoid assuming that every state can be placed on one universal numerical scale.
+
+### 2.7 Recovery knowledge deficit, effort and debt
+
+A **recovery knowledge deficit** is the set of facts required for safe continuation that cannot be established automatically after interruption. For example, a system may know that a shipment request was sent but not whether the fulfilment provider accepted it.
+
+**Recovery effort** is the additional automated or human work required to remove that deficit and establish a safe continuation point. It may include reconciliation, replay, compensation, log inspection, external-system verification, database correction and repair scripts.
+
+**Recovery debt** is the unresolved or recurring obligation created when an architecture repeatedly fails to preserve sufficient continuation knowledge and externalises the resulting recovery work, uncertainty or risk to operators. Recovery effort is paid during an incident. Recovery debt is an architectural liability that persists across incidents until the underlying recovery capability is improved.
+
+The phrase has also been used in restoration ecology to describe accumulated shortfall during recovery [13]. The present use is domain-specific: it describes accumulated operational obligation arising from missing continuation knowledge in software-supported processes.
+
+## 3. The Interruption Profile
+
+Let $I$ represent an interruption affecting a process. Rather than immediately reducing its consequences to one cost, the model first represents them as an interruption profile:
+
+$$
+K(I)=\left(\Delta T(I),P_{\mathrm{loss}}(I),\Delta R(I)\right)
+$$
+
+The three components describe delay, loss of valid progress and additional recovery effort. They may use different units and should remain separate unless a particular domain supplies a defensible way to combine them.
 
 ### 3.1 Additional elapsed time
 
 Let:
 
 $$
-\Delta T(I) = T_I - T_0
+\Delta T(I)=T_I-T_0
 $$
 
-where $T_I$ is the completion time in the presence of the interruption and $T_0$ is the counterfactual completion time had the interruption not occurred.
+where $T_I$ is completion time in the presence of interruption and $T_0$ is the counterfactual completion time without it, for the same intended terminal outcome and comparable execution conditions.
 
-An interruption will normally cause:
+In ordinary recovery scenarios, $\Delta T>0$: detection, worker replacement, dependency recovery, reconciliation or replay takes time. The counterfactual is not directly observable, so practical use requires estimation from service objectives, historical baselines, simulations or matched executions. The model therefore treats $\Delta T$ as an analytical quantity rather than a claim of exact measurement.
 
-$$
-\Delta T(I) > 0
-$$
+The inequality is not universal. Speculative execution, faster failover infrastructure or an alternative valid outcome could produce $\Delta T\leq0$. The architectural principle does not depend upon time loss being mathematically inevitable. It accepts that interruption commonly adds time while focusing attention on consequences that architecture can prevent.
 
-Some additional interval is required for detection, worker replacement, dependency recovery, reconciliation or resumed execution. Faster failover, bounded retries and improved availability may reduce this interval, but cannot generally guarantee that it will be zero.
+### 3.2 Preservation rather than a universal progress scalar
 
-The duration of this delay is an important operational measure, but it does not reveal whether completed work survived.
-
-### 3.2 Signed change in durable progress
-
-Let:
+Let $V(s)$ denote the set of valid committed outcomes and continuation facts available in process state $s$. Define the preservation relation:
 
 $$
-\Delta P(I) = P(t_r^{+}) - P(t_i^{-})
+s_b \succeq s_a
 $$
 
-where $P(t_i^{-})$ is the valid durable progress immediately before the interruption and $P(t_r^{+})$ is the valid durable progress available when execution can safely continue.
+This relation holds when every valid reusable outcome in $V(s_a)$ remains identifiable and reusable in $V(s_b)$.
 
-The value of $\Delta P$ is a signed change. Its interpretation is therefore:
-
-$$
-\Delta P = 0
-$$
-
-when all valid progress available before the interruption remains available at safe continuation;
+If $s_i$ is the state immediately before interruption and $s_r$ is the state when safe continuation becomes possible, progress is preserved when:
 
 $$
-\Delta P < 0
+s_r \succeq s_i
 $$
 
-when valid progress has been lost and must be repeated or reconstructed; and
+This is a partial ordering. It permits alternative valid paths and does not require every state to have a single numerical score. Outcomes that expire, are superseded or are intentionally compensated are evaluated according to current domain validity rather than simply counted as lost.
+
+For a particular domain, reviewers may still define a weighted measure of lost valid outcomes:
 
 $$
-\Delta P > 0
+P_{\mathrm{loss}}(I)=\mu\left(V(s_i)\setminus V_{\mathrm{reusable}}(s_r)\right)
 $$
 
-when additional valid progress has occurred despite the interruption, perhaps because another worker, participant or independent process continued the work.
+where $\mu$ is a domain-specific measure. It might count repeated workflow milestones, compute time, financial exposure or weighted business outcomes. In qualitative reviews, $P_{\mathrm{loss}}$ may instead be classified as none, bounded, material or unrecoverable.
 
-A progress-preserving architecture should satisfy:
-
-$$
-\Delta P \geq 0
-$$
-
-The relevant property is not that execution remains continuous, but that interruption does not cause valid durable progress to regress.
-
-Where a non-negative measure of lost progress is required, it may be derived from the signed value:
+The earlier shorthand $\Delta P$ remains useful when a domain has a meaningful scalar progress measure. In that restricted case:
 
 $$
-P_{\mathrm{loss}}(I) = \max(0,-\Delta P(I))
+P_{\mathrm{loss}}(I)=\max(0,-\Delta P(I))
 $$
 
-This allows $\Delta P$ to retain its conventional mathematical meaning as a signed change while still supporting a cost model that treats progress loss as a positive cost.
+The preservation relation is primary because it remains meaningful when process states are multidimensional or incomparable.
 
 ### 3.3 Additional recovery effort
 
 Let:
 
 $$
-\Delta R(I) = R_I - R_0
+\Delta R(I)=R_I-R_0
 $$
 
-where $R_I$ is the recovery effort required in the presence of the interruption and $R_0$ is the effort that would have been required without it.
+where $R_I$ is recovery effort with the interruption and $R_0$ is the effort required without it. Measurement may use automated recovery actions, operator minutes, specialist hours, financial cost or an ordinal scale.
 
-Recovery effort includes the automated or human work needed to establish a safe continuation point. It may include state reconciliation, compensation, replay, log inspection, database correction and external-system verification.
+Recovery effort is not the same as elapsed delay. Two systems may remain paused for the same period while one resumes automatically and the other requires a developer, an operator and a domain specialist to reconstruct events. Conversely, an automated reconciliation may consume substantial computation while requiring no human intervention. Practical assessments should therefore record both human and automated effort and state the chosen unit.
 
-An interruption that preserves physical artefacts but loses knowledge about their status may produce no immediate loss of stored data while still causing:
+### 3.4 Optional scalar cost
 
-$$
-\Delta R > 0
-$$
-
-For example, a payment authorisation may remain valid while the system no longer knows whether the following shipment request succeeded. The work has not necessarily disappeared, yet it cannot be used safely until its state has been reconstructed.
-
-This distinction is central to the proposed model. The preservation of data is not sufficient when the process has lost the knowledge required to continue from that data.
-
-### 3.4 Conceptual cost function
-
-The total cost of an interruption may be represented conceptually as:
+Where an organisation has defensible conversion factors, it may calculate:
 
 $$
-C(I) =
-w_T\Delta T(I)
-+
-w_P\max(0,-\Delta P(I))
-+
-w_R\Delta R(I)
+C(I)=w_T\Delta T(I)+w_PP_{\mathrm{loss}}(I)+w_R\Delta R(I)
 $$
 
-The weighting terms $w_T$, $w_P$ and $w_R$ are domain-specific. They recognise that an hour of delay, an hour of repeated computation and an hour of specialist recovery work may carry different financial, operational and risk consequences.
+The weights convert heterogeneous quantities into a common organisational cost such as money, risk-adjusted loss or utility. Without such conversion, the vector $K(I)$ is the more honest representation.
 
-The model is not intended to imply that all three quantities can always be measured on a common numerical scale. Its purpose is to prevent the costs from being collapsed into a single measure such as downtime or mean time to recovery.
+The components can share causes and should not be interpreted as causally independent. Repeated work can simultaneously increase elapsed time, represent lost progress and require recovery effort. Keeping the profile dimensions separate exposes these consequences; it does not assert that their costs can always be added without overlap.
 
-A resilient system should pursue the following objective:
-
-$$
-\Delta T \geq 0,\qquad \Delta P \geq 0,\qquad \Delta R \rightarrow 0
-$$
-
-Additional elapsed time may be unavoidable. Regression of valid progress and substantial recovery effort should not be accepted as inevitable consequences of interruption.
+Figure 1 summarises the three dimensions of the interruption profile and shows how an optional domain-specific cost function may combine them. The diagram also distinguishes the commonly unavoidable loss of elapsed time from the architectural objectives of preserving progress and minimising recovery effort.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-01-interruption-cost-components.png"
-    alt="Conceptual diagram showing interruption cost as three components: additional elapsed time, signed change in durable progress, and additional recovery effort."
+    alt="The three components of interruption cost. The primary model treats additional elapsed time, loss of valid progress and additional recovery effort as a profile. A scalar cost is optional and domain-specific."
   />
   <figcaption>
-    Figure 1. The three components of interruption cost. The cost of
-    interruption comprises additional elapsed time, signed change in valid
-    durable progress and additional recovery effort. Resilient architecture
-    accepts that time may be lost while seeking to prevent progress regression
-    and minimise recovery debt.
+    Figure 1. The three components of interruption cost. The primary model
+    treats additional elapsed time, loss of valid progress and additional
+    recovery effort as a profile. A scalar cost is optional and domain-specific.
   </figcaption>
 </figure>
 
-## 4. Worked Example: Interruption in a Customer Order Process
+## 4. Worked Example: A Customer Order Process
 
-Consider a familiar customer order process:
+Consider a customer order process:
 
-1. The order is received.
-2. The order is validated.
-3. Inventory is reserved.
-4. Payment is authorised.
-5. A shipment is created.
-6. A confirmation is sent to the customer.
+1. the order is received;
+2. the order is validated;
+3. inventory is reserved;
+4. payment is authorised;
+5. a shipment is created;
+6. confirmation is sent.
 
-Each step may interact with a different system and create an externally visible side effect. The inventory reservation may be managed by a warehouse platform, payment may be authorised by a payment provider, shipment creation may be delegated to a fulfilment service, and confirmation may be sent through an external email platform.
+Each step may interact with a different system and create an externally observable effect. Inventory may be managed by a warehouse platform, payment by a payment provider and shipment by a fulfilment service.
 
-Suppose the process is interrupted after payment authorisation but during shipment creation. At the point of recovery, the order record and inventory reservation remain available, and the payment provider confirms that the payment was authorised. The local process, however, does not know whether the shipment request succeeded before the connection was lost.
+Suppose execution is interrupted after payment authorisation while a shipment request is in flight. The order and inventory reservation remain available, and the payment provider confirms the authorisation. The local process does not know whether the fulfilment service accepted the shipment request before the connection was lost.
 
-Several outcomes are possible. The shipment may not have been created. It may have been created successfully while the acknowledgement was lost. The fulfilment provider may still be processing the request. A repeated request may create a second shipment if the external operation is not idempotent.
+Several outcomes are possible. No shipment may exist. A shipment may have been created while its acknowledgement was lost. Processing may still be underway. A repeated request may create a second shipment if the provider cannot deduplicate it.
 
-The process cannot therefore be restarted safely from the beginning. Repeating inventory reservation may reduce available stock twice. Repeating payment authorisation may create multiple financial holds. Repeating shipment creation may dispatch duplicate goods. Sending the confirmation before the shipment state is known may provide the customer with incorrect information.
+Restarting from the beginning is unsafe. Repeating inventory reservation may reduce available stock twice. Repeating payment authorisation may create multiple holds. Repeating shipment creation may dispatch duplicate goods. Sending confirmation before shipment status is known may misinform the customer.
 
-The system has recovered execution capacity, but it has not recovered a reliable continuation point.
+At this point:
+
+- order validation, inventory reservation and payment authorisation are valid committed outcomes;
+- shipment outcome is a recovery knowledge deficit;
+- the process has no safe continuation point until the deficit is resolved;
+- an operator may incur recovery effort even though no stored record has been physically lost.
+
+Figure 2 locates the interruption at the boundary between payment authorisation and shipment creation. It distinguishes the outcomes already confirmed by the process from the shipment request whose external result remains uncertain.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-05-customer-order-process-interruption.png"
-    alt="Customer order workflow showing payment authorised before an interruption leaves shipment creation in an uncertain state."
+    alt="Interruption in a customer order process. Earlier committed outcomes remain available while the shipment result is uncertain. Safe continuation depends upon establishing whether the external operation occurred."
   />
   <figcaption>
-    Figure 5. Interruption in a customer order process. An interruption after
-    payment authorisation but during shipment creation leaves earlier side
-    effects intact while the shipment outcome remains uncertain. Safe
-    continuation depends upon determining which externally visible operations
+    Figure 2. Interruption in a customer order process. Earlier committed
+    outcomes remain available while the shipment result is uncertain. Safe
+    continuation depends upon establishing whether the external operation
     occurred.
   </figcaption>
 </figure>
 
-## 5. Why Restart Is Often Not Retriable
+## 5. Why Restart Is Not Necessarily Retry
 
-A common simplification is to describe non-durable execution as a process that restarts from the beginning after failure. This model applies only when every preceding operation is safely repeatable or when no externally visible work occurred.
+Restart describes restoration of execution. Retry describes repetition of an intended operation. Neither establishes whether previous externally observable work occurred.
 
-Distributed business processes rarely satisfy that condition automatically. Once inventory has been reserved, payment has been authorised or a shipment has been created, the process has changed the external world. Re-executing the same sequence is not equivalent to restarting a pure calculation.
+A pure calculation with deterministic inputs can often restart safely. A distributed business process usually cannot. Once inventory is reserved, payment authorised or shipment created, re-execution is not equivalent to repeating a side-effect-free calculation.
 
-A safe retry requires the system to know which operations completed, which remain pending and which have uncertain outcomes. It must also know whether completed operations are idempotent, deduplicated, compensatable or irreversible.
+A safe retry requires one or more of the following:
 
-When that knowledge is unavailable, the interruption creates an operational investigation rather than a technical restart.
+- the operation has no externally observable effect;
+- repetition is intrinsically idempotent;
+- a request identifier enables deduplication;
+- operation status can be queried;
+- a transaction makes the relevant changes atomic;
+- compensation is defined and valid;
+- workflow history records enough information to choose the next action.
 
-## 6. Recovery Debt
+Without these properties, a timeout changes a dependency failure into uncertainty about business state. Recovery becomes an investigation rather than a restart.
 
-Recovery effort deserves particular attention because it is frequently absent from discussions of resilience.
+## 6. Recovery Knowledge Deficit and Recovery Debt
 
-In the interrupted order process, an operator may need to inspect workflow logs, query the order database, verify the inventory reservation, contact or query the payment provider, check the fulfilment system and compare timestamps or correlation identifiers across several services.
+In the order example, an operator may inspect workflow logs, query the order database, verify inventory, check the payment provider, search the fulfilment platform and compare timestamps across systems. The operator may then release inventory, cancel a duplicated shipment, retry a request or select compensation.
 
-The operator may then need to reconcile inconsistent records, release or restore inventory, cancel a duplicated shipment, retry a failed request or decide that the order must be compensated rather than continued.
+The unknown shipment result is the recovery knowledge deficit. The investigation and repair are recovery effort. If this pattern recurs because the architecture provides no stable request identity or queryable operation status, the organisation carries recovery debt.
 
-This work constitutes **recovery debt**.
+This distinction matters because immediate recovery work ends when the incident is resolved. The underlying debt remains. It is paid repeatedly through on-call effort, specialist interruption, customer support, repair scripts, operational risk and delayed completion.
 
-Recovery debt is the obligation to reconstruct knowledge that the system failed to preserve. It is often paid by operators, support teams, developers and domain specialists rather than by the runtime that created it.
+Recovery debt may exist without conventional data loss. Every physical record may remain present while its relationship to the wider process and its temporal meaning cannot be established with sufficient certainty. The debt results from missing evidence, not necessarily missing bytes.
 
-The debt may exist even when no physical data has been lost. The order, inventory reservation, payment authorisation and shipment record may all still exist, but the relationship between them may no longer be known with sufficient certainty to continue automatically.
+Figure 3 represents the effect of that missing evidence on durable progress. The process has preserved its confirmed outcomes, but it cannot advance while the shipment result remains uncertain. Elapsed time continues to increase during investigation, and recovery effort is incurred even though the progress already confirmed by the system has not necessarily been lost.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-04-recovery-debt-after-interruption.png"
-    alt="Diagram showing interrupted progress blocked by recovery debt while people inspect logs, compare state, and verify side effects."
+    alt="Recovery knowledge deficit after interruption. Work cannot safely continue while operators inspect records, compare state, verify effects and select a retry or compensation strategy."
   />
   <figcaption>
-    Figure 4. Recovery debt after interruption. Progress remains unable to
-    continue while people inspect logs, compare state, verify side effects and
-    determine a safe retry or compensation strategy.
+    Figure 3. Recovery knowledge deficit after interruption. Work cannot safely
+    continue while operators inspect records, compare state, verify effects and
+    select a retry or compensation strategy.
   </figcaption>
 </figure>
+
+The interval shown in Figure 3 as manual investigation and repair is not a single recovery action. It is an operational process through which people reconstruct the continuation knowledge that the system failed to preserve. They inspect workflow history, query participating systems, verify externally observable effects, reconcile conflicting records and determine which continuation action is safe.
+
+Figure 4 expands this interval into its constituent activities. It shows how a technical interruption becomes a manual recovery path when the architecture cannot establish the next safe action automatically.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-06-manual-recovery-path.png"
-    alt="Manual recovery flow showing investigation, verification, reconciliation, and selection of a safe continuation strategy after interruption."
+    alt="Manual recovery path. When continuation knowledge is not preserved, recovery becomes an operational process involving investigation, verification, reconciliation and a manually selected continuation strategy."
   />
   <figcaption>
-    Figure 6. Manual recovery path. When continuation knowledge is not preserved
-    by the system, recovery becomes an operational process involving
-    investigation, verification, reconciliation and a manually selected
-    continuation strategy.
+    Figure 4. Manual recovery path. When continuation knowledge is not
+    preserved, recovery becomes an operational process involving investigation,
+    verification, reconciliation and a manually selected continuation strategy.
   </figcaption>
 </figure>
 
-## 7. Derivation of Powell's Law
+The two figures therefore describe complementary views of the same interruption. Figure 3 shows its effect on progress over time, while Figure 4 shows the human work required to resolve the resulting knowledge deficit. Repeated reliance on this path is what converts incident-specific recovery effort into architectural recovery debt.
 
-The interruption-cost model leads to three observations.
+## 7. Comparative Analysis of Recovery Designs
 
-First, interruption generally introduces additional elapsed time. Even a fully automated recovery process requires some interval in which the interruption is detected, a replacement execution environment becomes available or an unavailable dependency recovers.
+The interruption profile can be used to compare designs without claiming precise universal measurements. Table 1 applies six representative approaches to the same interruption during shipment creation.
 
-Second, interruption does not inherently require durable progress to regress. If the state required for continuation is represented independently of the interrupted execution environment, another execution environment can resume from the furthest valid point already reached.
+The comparison reveals three points. First, checkpointing is highly effective for deterministic computation but insufficient when a checkpoint and an external side effect do not share an atomic boundary. The process may know that it attempted shipment creation without knowing whether shipment exists.
 
-Third, substantial recovery effort is not an intrinsic property of interruption. It commonly arises because the system failed to preserve sufficient knowledge about completed work, external side effects or the next safe action.
+Second, idempotency protects the meaning of repetition but does not independently preserve the structure of a multi-step process. A deduplicated shipment request is safer to retry, yet the system still needs to know whether payment, inventory and confirmation steps are complete.
 
-The architectural objective is therefore not the elimination of interruption. It is the preservation of non-negative durable progress while minimising the effort required to continue:
+Third, durable workflow execution preserves orchestration knowledge but does not manufacture guarantees absent from dependencies. If a fulfilment API supplies neither request identity nor status enquiry, workflow history can accurately record uncertainty but cannot eliminate it.
 
-$$
-\Delta P \geq 0
-$$
+The model therefore does not rank one technique as universally superior. It identifies which element of the interruption profile each design changes and where uncertainty remains. Table 1 summarises these distinctions.
 
-$$
-\Delta R \rightarrow 0
-$$
+| Recovery design                       | Preserved continuation knowledge                              | Likely progress loss                                        | Recovery effort                                        | Principal limitation                                               |
+| ------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ |
+| Restart from beginning                | Little beyond application records                             | Potentially material; earlier work may be repeated          | High when side effects are ambiguous                   | Restored execution does not establish prior outcomes               |
+| Periodic checkpoint                   | Process position up to last checkpoint                        | Bounded to work after checkpoint, if external effects align | Low for pure computation; higher for untracked effects | A local checkpoint cannot prove an external write                  |
+| Idempotent or deduplicated activities | Identity of repeated intent                                   | Usually none for protected operations                       | Low when every uncertain operation is covered          | Does not represent overall workflow position by itself             |
+| Transactional outbox or inbox         | Committed state and durable publication or consumption intent | None within the protected local boundary                    | Low, with asynchronous relay and reconciliation        | Does not create atomicity across arbitrary external systems        |
+| Saga coordination                     | Completed steps and defined compensations                     | Valid outcomes may be retained or compensated               | Moderate; some compensations require judgement         | Compensation may be imperfect or unavailable                       |
+| Durable workflow execution            | Orchestration history, timers, retries and activity outcomes  | Usually bounded by activity semantics                       | Low when side-effect boundaries are designed safely    | Durable history cannot repair an inherently ambiguous external API |
 
-while accepting that:
+_Table 1. Comparative interruption profiles for representative recovery designs._
 
-$$
-\Delta T > 0
-$$
+## 8. Derivation of the Progress-Preservation Principle
 
-may remain unavoidable.
+The analysis supports four observations.
 
-This produces the following principle:
+First, interruption commonly introduces elapsed delay. Even automated recovery requires detection, rescheduling, dependency restoration or replay.
 
-> **Powell’s Law: In a resilient system, interruptions should cost time, not progress.**
+Second, interruption does not inherently require valid committed outcomes to disappear. If continuation knowledge and relevant outcomes outlive the worker, another execution context can proceed from a safe state.
 
-The word _progress_ encompasses more than the persistence of physical data. It includes completed work, confirmed side effects, established business decisions and sufficient knowledge to determine the next safe action. A process that preserves its artefacts but loses the information required to continue has preserved storage, but not necessarily progress.
+Third, substantial recovery effort is not intrinsic to interruption. It often arises because an architecture failed to preserve evidence about completed work, side effects or the next permissible action.
 
-Powell’s Law does not require the uninterrupted continuation of a particular process, worker or execution context. It requires that valid progress outlive that execution context and remain available to whatever continues the work.
+Fourth, progress preservation is not free. Checkpoints, durable histories, idempotency records, reconciliation and transactions impose ongoing cost. Resilience shifts cost from unpredictable loss and manual reconstruction towards deliberate preventative mechanisms.
 
-## 8. Progress Over Time
-
-A useful way to conceptualise Powell’s Law is to plot valid durable progress against elapsed time.
-
-In a progress-preserving system, an interruption causes the progress curve to flatten while execution is unavailable. Once execution resumes, the curve continues from its previous level. Time has been lost, but:
+The architectural objective is therefore:
 
 $$
-\Delta P = 0
+s_r\succeq s_i,
+\qquad
+P_{\mathrm{loss}}(I)\rightarrow0,
+\qquad
+\Delta R(I)\rightarrow0
 $$
 
-The system resumes from the furthest valid durable progress already achieved.
+while recognising that:
+
+$$
+\Delta T(I)>0
+$$
+
+will often remain.
+
+This produces the progress-preservation principle:
+
+> **In a resilient system, interruptions should cost time, not progress.**
+
+The statement is deliberately concise. _Progress_ means valid committed outcomes and continuation knowledge that remain safely reusable. It does not include tentative computation that has expired, been superseded or must be discarded to restore correctness.
+
+## 9. Progress, Rollback and Alternative Paths
+
+The original intuition can be illustrated by plotting a domain-specific measure of valid progress over time. In a progress-preserving system, execution pauses and later continues without losing reusable outcomes. Figure 5 shows this pause as a plateau rather than a regression: elapsed time is lost, but confirmed progress remains available.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-02-time-lost-progress-preserved.png"
-    alt="Progress-over-time chart where interruption pauses execution, but durable progress resumes from the same level once work continues."
+    alt="Time lost, progress preserved. The progress curve flattens during interruption and continues from the furthest valid durable point."
   />
   <figcaption>
-    Figure 2. Time lost, progress preserved. A resilient system may lose time
-    during interruption, but it resumes from the furthest valid durable progress
-    already achieved.
+    Figure 5. Time lost, progress preserved. The progress curve flattens during
+    interruption and continues from the furthest valid durable point.
   </figcaption>
 </figure>
 
-In a restart-based system, interruption causes the progress curve to fall because completed work must be repeated. Execution may recover quickly, but:
-
-$$
-\Delta P < 0
-$$
-
-The system has regressed to an earlier continuation point.
+In a restart-based system, valid work may need to be repeated because the continuation point was not preserved. Figure 6 contrasts this case with Figure 5 by showing the progress curve falling to an earlier continuation point before execution resumes.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-03-time-lost-progress-lost.png"
-    alt="Progress-over-time chart where interruption forces the system back to an earlier continuation point and completed work must be repeated."
+    alt="Time lost, progress lost. Recovery restores execution but valid work must be repeated from an earlier continuation point."
   />
   <figcaption>
-    Figure 3. Time lost, progress lost. A restart-based system may recover
-    execution while still regressing in durable progress and repeating work that
-    had already been completed.
+    Figure 6. Time lost, progress lost. Recovery restores execution but valid
+    work must be repeated from an earlier continuation point.
   </figcaption>
 </figure>
 
-An ambiguous distributed process presents a third case. The progress curve may not immediately fall because the external work may still exist, but it remains flat for an extended period while people investigate and repair state. The principal cost is then expressed through:
+These diagrams are explanatory, not universal measurement models. Several cases require more careful interpretation.
 
-$$
-\Delta R > 0
-$$
+### 9.1 Safe rollback
 
-The desired property is therefore not uninterrupted growth. It is the absence of unintended regression and avoidable uncertainty caused by interruption.
+Rollback can intentionally discard tentative or inconsistent work to restore a valid state. That is not necessarily progress loss. A resilient rollback preserves valid committed outcomes and removes work that continuation must not reuse. If rollback destroys a valid committed outcome only because the architecture cannot recover it, then it is progress loss.
 
-## 9. Architectural Implications
+### 9.2 Compensation
 
-### 9.1 Progress must outlive execution
+Compensation does not restore history. It creates a new valid business outcome that semantically offsets an earlier one. Cancelling a shipment or releasing a reservation may represent continued progress along an alternative path. The preservation relation therefore permits valid compensated states rather than assuming that every reverse-looking transition is regression.
 
-If progress is stored only in the memory of the process performing the work, then it is not durable. The state required to continue must be represented independently of the current worker, process or runtime instance.
+### 9.3 Expiry and supersession
 
-This does not mean that every local variable must be persisted. The system must preserve the information required to distinguish completed work, pending work and work whose outcome remains uncertain.
+Some outcomes cease to be valid while execution is interrupted. Market prices expire, leases lapse, inventory reservations time out and policies change. Recalculation in such cases is not caused solely by forgotten progress. Time changed the domain conditions. Reviews should record expiry risk separately from architectural loss.
 
-### 9.2 Partial completion must be explicit
+### 9.4 Irreducible uncertainty
 
-Distributed work rarely completes atomically across every participating system. Architectures should therefore represent partial completion as a normal state rather than assuming that a multi-step process is either entirely complete or entirely absent.
+External systems may provide weak guarantees. An irreversible operation with no request identifier, deduplication, status query or compensation may remain unknowable after connection loss. The principle cannot eliminate this uncertainty. It exposes the dependency as an architectural constraint and makes the associated risk explicit.
 
-A system that can explicitly represent “payment authorised, shipment creation pending” is more recoverable than one whose only states are “started” and “completed”.
+## 10. Architectural Implications
 
-### 9.3 External outcomes must be identifiable
+### 10.1 Progress must outlive execution
 
-An external request may succeed even when the initiating process does not receive a response. Correlation identifiers, idempotency keys and queryable operation status allow a replacement execution environment to distinguish a completed operation from one that must still be performed.
+State required for continuation must be represented independently of the current worker. This does not require persisting every local variable. It requires enough information to distinguish completed, pending, failed and uncertain work.
 
-Without such identifiers, a timeout converts a dependency failure into uncertainty about business state.
+### 10.2 Partial completion must be explicit
 
-### 9.4 Retry boundaries must align with side-effect boundaries
+Distributed work rarely completes atomically across every participant. "Payment authorised, shipment pending" is a recoverable state. A model containing only "started" and "completed" conceals the boundary at which recovery decisions must be made.
 
-A retryable unit should be designed so that its externally visible effects are either repeatable, deduplicated or individually identifiable.
+### 10.3 External outcomes must be identifiable
 
-My earlier shorthand for this is [**WOWL: Write Once, Write Last**](/posts/2026-06-20-durable-execution-wowl/). The rule encourages repeatable reads, validation and calculation to occur before a controlled external write at the end of the retryable unit.
+Correlation identifiers, idempotency keys, receipts and queryable status allow a replacement worker to distinguish completed intent from work still required. Without them, a lost acknowledgement becomes business uncertainty.
 
-WOWL is not a replacement for idempotency, transactions or durable workflows. It is an activity-level design discipline that reduces ambiguity when retry occurs. Powell’s Law operates at the wider system level by describing the desired outcome across all interruption boundaries.
+### 10.4 Retry boundaries must align with effect boundaries
 
-### 9.5 Recovery should be a system capability
+A retryable unit should contain externally observable effects that are repeatable, deduplicated, transactional, compensatable or individually identifiable. An activity that performs several unrelated writes before failing exposes a larger ambiguous surface than one with a controlled effect boundary.
 
-Manual recovery is sometimes unavoidable, particularly when external systems provide weak guarantees or when the business decision itself requires human judgement. Routine reconstruction of technical state, however, should not be treated as a normal operational responsibility.
+An activity-level discipline supporting this objective is [**WOWL: Write Once, Write Last**](/posts/2026-06-20-durable-execution-wowl/). WOWL places repeatable reads, validation and calculation before a controlled write at the end of a retryable activity. "Write once" means one controlled externally observable write boundary within that activity, not that the wider process writes only once. "Write last" means no fallible repeatable work should follow the write inside the same retry unit when that work can be moved before it.
 
-Repeated manual resets, database corrections, payment checks and message replays indicate that the system has externalised its recovery mechanism to people.
+For example, an activity that reads an order, creates a shipment and then performs address validation can fail after shipment creation. Retrying the activity may create another shipment. Under WOWL, address validation and other repeatable preparation occur first. Shipment creation is last and uses an idempotency key. If interruption occurs before the write, the activity is safe to repeat. If it occurs during the write, the request identity or operation-status query resolves the outcome.
 
-### 9.6 Resilience must include consistency of progress
+WOWL does not provide atomicity, idempotency or durable orchestration. It reduces the number of effect boundaries inside a retryable unit and makes the remaining boundary explicit. It complements, but cannot replace, the guarantees described elsewhere in this paper.
 
-Availability metrics may report that a service is healthy while its interrupted processes remain inconsistent or unrecoverable. Operational health and process health should therefore be measured separately.
+### 10.5 Recovery should be a system capability
 
-A resilient system should be able to answer, for each interrupted process:
+Manual judgement is sometimes legitimate. Routine reconstruction of technical state is different. Repeated database corrections, payment checks, message replays and one-off scripts indicate that recovery behaviour has been delegated to people rather than designed into the system.
 
-1. What valid progress has been preserved?
-2. Which side effects are confirmed?
-3. Which outcomes remain uncertain?
-4. What is the next safe action?
-5. Can continuation occur without human repair?
+### 10.6 Process health must be observable
 
-## 10. Techniques That Preserve Progress
+Service availability and process recoverability should be measured separately. For each interrupted process, the system should be able to report confirmed outcomes, uncertain effects, pending actions, the current safe continuation point and whether human intervention is required.
 
-Powell’s Law is implementation-independent. Existing techniques satisfy different parts of its objective.
+## 11. Techniques and Their Trade-offs
 
-Retries and failover primarily reduce the additional time required to restore execution, but they do not establish what occurred before the interruption. Checkpointing and durable execution preserve continuation state so that completed work need not be repeated. Idempotency and idempotency keys make uncertain operations safer to invoke again. Transactional outbox and inbox patterns preserve relationships between committed business state and messages that remain to be published or consumed.
+Retries and failover primarily reduce $\Delta T$. Checkpointing and message logging bound repeated computation and preserve recoverable state [3], [9]. Transactions protect local invariants. Idempotency protects repeated intent. Transactional outbox and inbox patterns preserve the relationship between committed state and messages awaiting publication or consumption [6]. Sagas represent partial completion and compensation [4]. Durable workflows persist orchestration state independently of workers [7], [8].
 
-Workflow history records which steps completed, failed, waited or retried. Sagas make partial completion and compensation explicit across service boundaries. Reconciliation detects divergence where atomic guarantees are unavailable. WOWL reduces ambiguity inside retryable units by separating repeatable work from controlled side effects.
-
-These mechanisms differ in scope and semantics. Their shared purpose is to reduce uncertainty about what has already occurred and what may safely occur next.
+Figure 7 maps the primary and secondary contributions of these techniques to the three dimensions of interruption cost. It makes explicit that restoring execution quickly addresses elapsed time, while preserving progress and reducing recovery effort require additional guarantees.
 
 <figure>
   <img
     src="/assets/posts/powells-law/figure-07-techniques-mapped-to-interruption-costs.png"
-    alt="Mapping of resilience techniques to different interruption costs, showing that fast restart mainly reduces elapsed time while other techniques preserve progress and reduce recovery effort."
+    alt="Techniques mapped to interruption costs. Fast restart primarily reduces elapsed time, while progress preservation and reduced recovery effort require additional guarantees."
   />
   <figcaption>
-    Figure 7. Techniques mapped to interruption costs. Resilience mechanisms
-    address different consequences of interruption. Fast restart primarily
+    Figure 7. Techniques mapped to interruption costs. Fast restart primarily
     reduces elapsed time, while progress preservation and reduced recovery
-    effort require additional architectural guarantees.
+    effort require additional guarantees.
   </figcaption>
 </figure>
 
-## 11. Relationship to Existing Work
+These mechanisms impose preventative cost. Checkpoint frequency trades repeated work against storage and runtime overhead. Idempotency records require retention and clear intent identity. Workflow history increases persistence and versioning complexity. Transactions can reduce concurrency or availability. Reconciliation detects divergence but consumes resources. Compensation requires domain design and may not restore the original outcome.
 
-The concepts used to implement progress preservation are well established. The proposed contribution is not a new checkpointing algorithm, transaction protocol or workflow runtime. It is a general model that separates the cost of interruption into elapsed time, signed progress change and recovery effort, together with a law describing the desired relationship between those costs.
+Resilience therefore reallocates cost rather than eliminating it. A rational design compares predictable preventative cost with expected interruption loss, recovery effort, customer harm and risk exposure.
 
-### 11.1 Recovery Time Objective and Recovery Point Objective
+## 12. Relationship to Existing Work
 
-Recovery Time Objective, or RTO, describes the permitted duration of the recovery phase before an outage adversely affects an organisation’s mission or business processes. Recovery Point Objective, or RPO, identifies the point in time to which data must be recovered following an outage.
+The mechanisms that preserve progress are well established. The proposed contribution is a synthesis: an interruption profile, a preservation relation for valid outcomes, an explicit account of continuation knowledge and a practical review method.
 
-These concepts correspond closely to parts of the interruption-cost model. RTO primarily concerns elapsed recovery time and therefore relates to $\Delta T$. RPO concerns recoverable data state and relates to one possible component of $\Delta P$.
+### 12.1 Recovery objectives
 
-Powell’s Law addresses a broader unit of analysis. A process may experience no conventional data loss while still losing valid progress or requiring extensive recovery effort. An order record, inventory reservation and payment authorisation may all remain persisted while the system cannot determine whether a shipment was created or which action is safe to perform next.
+Recovery Time Objective describes an acceptable duration of recovery, while Recovery Point Objective identifies the point in time to which data must be recovered [1]. They correspond approximately to elapsed delay and one component of progress loss. A process can nevertheless have an RPO of zero for its databases while remaining unable to determine whether an external shipment or payment occurred. Process recoverability therefore requires more than recoverable data state.
 
-RPO therefore provides an important precedent for measuring acceptable loss, but it does not by itself describe process completeness, the consistency of external side effects or the human effort required to reconstruct continuation state.
+### 12.2 Recovery-Oriented Computing and microreboots
 
-### 11.2 Recovery-Oriented Computing
+Recovery-Oriented Computing makes recovery performance, operator experience and total ownership cost primary system concerns [2]. Microreboot research separates process recovery from data recovery and shows that execution can be restarted without disturbing durable application state [10]. The present model builds on this distinction by asking whether the valid outcomes and knowledge of a particular process survive restoration of execution.
 
-Recovery-Oriented Computing proposed shifting attention from performance alone towards availability, maintainability and recovery performance. Its treatment of recovery as a primary system property, including the role of operators and total cost of ownership, is closely aligned with the motivation for distinguishing recovery effort from elapsed recovery time.
+### 12.3 Checkpointing, rollback recovery and snapshots
 
-The progress-preservation model extends this perspective by making the fate of completed work an explicit variable. A system may recover service availability without restoring the progress of individual processes. Conversely, a process may preserve all valid progress even though service restoration takes a measurable period of time.
+Checkpointing and rollback-recovery protocols preserve recoverable computational state and bound repeated work. Message logging addresses consistency between process state and messages exchanged before failure [9]. Distributed snapshots establish a consistent global state across interacting processes [3]. These mechanisms directly inform the preservation relation, although business processes often include external systems outside a shared checkpoint protocol.
 
-### 11.3 Checkpointing and distributed snapshots
+### 12.4 Atomicity, sagas and compensation
 
-Checkpointing records intermediate computational state so that execution can resume without repeating all prior work. Distributed snapshot algorithms demonstrate how a consistent global state may be determined across interacting processes.
+Atomic actions and transactions prevent observers from seeing invalid partial updates within a protected boundary [11]. Sagas extend reasoning to long-lived work through sequences of smaller transactions and compensating actions [4]. The distinction between valid committed outcomes, tentative work and compensation is necessary because resilient recovery does not always continue monotonically along one path.
 
-Checkpointing and snapshots are direct mechanisms for preventing negative $\Delta P$. They provide ways to preserve computational or distributed state beyond the lifetime of a particular execution context.
+### 12.5 Idempotency and exactly-once effects
 
-Powell's Law does not replace these mechanisms. It identifies progress preservation as the architectural objective that such mechanisms help achieve.
+Idempotent operations and caller-provided request identifiers distinguish repeated delivery from repeated business intent [5]. Data-processing systems similarly combine replay, durable state and idempotent or transactional output to approximate exactly-once effects [12]. These mechanisms reduce uncertainty at individual effect boundaries but do not independently describe the position of a larger process.
 
-### 11.4 Sagas and compensating transactions
+### 12.6 Transactional messaging
 
-The saga model decomposes a long-lived transaction into a sequence of smaller transactions and defines compensating actions that amend partial execution when the complete sequence cannot finish.
+The transactional outbox records a business change and intent to publish in one local transaction, converting an ambiguous dual write into explicit pending progress [6]. It reduces both progress loss and recovery effort, although end-to-end consumers still require deduplication, inbox state or idempotent handling.
 
-Sagas make partial completion explicit and provide a structured response to failure across transaction boundaries. They are particularly relevant when earlier work cannot simply be retained and must instead be compensated through a valid business operation.
+### 12.7 Durable workflow execution
 
-An intentional compensation should not automatically be classified as progress loss. If compensation is the correct domain action, it represents continued valid progress through an alternative path. Negative $\Delta P$ occurs when valid work is unintentionally lost because of interruption, not whenever business state legitimately moves to a previous or alternative condition.
+Durable workflow systems persist orchestration history, timers, retries and external events independently of a worker [7], [8]. They provide a contemporary implementation of progress preservation, but their guarantees end at activity boundaries. Workflow durability cannot determine the outcome of an external operation that supplies no stable identity or queryable status.
 
-### 11.5 Idempotency and safe retry
+### 12.8 Recovery debt
 
-Idempotent operations allow the same intended request to be repeated without creating additional unintended side effects. Caller-provided request identifiers can distinguish retries from new business intent.
+The phrase "recovery debt" has an established ecological use for accumulated shortfall during recovery [13]. In this paper it denotes recurring architectural obligation arising from missing continuation knowledge. The concepts share an emphasis on costs that persist beyond the initiating disturbance, but the quantities and domains are different.
 
-Idempotency reduces the risk that recovering execution will duplicate completed work. It therefore helps preserve progress across uncertain outcomes, although it does not independently record the structure or current position of a multi-step process.
+## 13. Scope, Limitations and Threats to Validity
 
-### 11.6 Transactional messaging
+This is a conceptual position paper, not an empirical theory. The interruption profile organises reasoning but does not establish universal measurement units. $T_0$ is counterfactual, progress is domain-specific and recovery effort may be recorded in incompatible units.
 
-The transactional outbox pattern addresses the dual-write problem in which business state is committed separately from an event publication. It records the business change and an outgoing event in one local transaction, then publishes the event asynchronously.
+The comparative analysis is illustrative. It is derived from documented semantics of recovery patterns rather than implemented systems subjected to controlled faults. Actual outcomes depend on checkpoint frequency, dependency guarantees, workload, organisational practice and implementation quality.
 
-The pattern converts an ambiguous outcome into explicit durable progress. The business state is committed together with a durable record that publication remains pending.
+The preservation relation depends upon explicit domain invariants. Poorly specified validity rules can cause an architecture to preserve outcomes that should expire or discard outcomes that remain valuable. Human judgement cannot always be eliminated, particularly where the next action is a business decision rather than reconstruction of technical facts.
 
-Transactional messaging therefore reduces both the likelihood of negative $\Delta P$ and the recovery effort represented by $\Delta R$.
+The model does not require preservation of every intermediate computation. It concerns valid committed outcomes and the knowledge needed to use them. Security policy, legal obligations, user cancellation or changed market conditions may intentionally invalidate earlier work.
 
-### 11.7 Durable workflow execution
+Finally, minimising incident recovery effort can increase steady-state complexity. A system that preserves extensive history may be harder to evolve, operate or audit. The model should therefore be used alongside cost, security, privacy, performance and maintainability considerations.
 
-Durable workflow systems persist orchestration state or execution history independently of the worker currently running the workflow. They manage checkpoints, retries, timers, external events and recovery so that execution can resume after worker or infrastructure failure.
+## 14. Practical Evaluation Method
 
-These systems provide a general mechanism for preserving the position and history of long-running processes. They are among the clearest contemporary implementations of the objective expressed by Powell’s Law.
+An architecture review begins by selecting a process, its domain invariants and its valid terminal outcomes. Reviewers then identify each boundary at which execution may be lost, repeated, suspended or transferred.
 
-The law remains independent of any particular workflow engine. A system may preserve progress through workflow history, checkpoints, event logs, database state machines, human task records or other mechanisms. The relevant question is whether interruption causes valid durable progress to regress or requires avoidable reconstruction before continuation.
+For every boundary, determine:
 
-## 12. Scope and Limitations
+1. Which valid committed outcomes already exist?
+2. Where is each outcome recorded?
+3. Which externally observable effects can be proven?
+4. Which effects remain uncertain?
+5. Which operations are repeatable, deduplicated, transactional or compensatable?
+6. Which outcomes may expire during interruption?
+7. What facts are required to select the next action?
+8. Can those facts be established automatically?
+9. Which work would be repeated or discarded?
+10. What human and automated recovery effort is required?
+11. What preventative mechanism currently pays for resilience?
+12. What residual uncertainty cannot be removed?
 
-Powell's Law should not be interpreted as a requirement to preserve every intermediate state indefinitely.
-
-Some progress is invalidated by changing business conditions. A price calculation may need to be repeated because its market inputs have expired. A fraud or security decision may need to be re-evaluated after policy changes. A user may cancel a process or intentionally reverse an earlier action.
-
-The relevant objective is therefore the preservation of **valid** durable progress, not the indefinite retention of all prior computation.
-
-The model also does not imply that $\Delta R$ can always reach zero. External systems may provide ambiguous outcomes, legacy components may lack idempotency, and some recovery decisions may require domain expertise. The model instead makes these costs visible and treats them as architectural concerns rather than unavoidable facts.
-
-The quantities $\Delta P$ and $\Delta R$ may also be difficult to measure consistently across different systems. Progress is domain-specific, and recovery effort may be expressed in engineer-hours, operational actions, financial cost or risk exposure. Further work would be required to define practical measurement approaches for particular domains.
-
-The cost function should therefore be understood as a conceptual model rather than a complete empirical theory. Its value lies in separating costs that are otherwise hidden inside a general description of failure or downtime.
-
-## 13. Practical Evaluation
-
-An architecture review based on Powell’s Law may begin by selecting a process and introducing an interruption at each meaningful boundary.
-
-For every interruption point, reviewers should determine:
-
-1. Which valid business outcomes have already occurred?
-2. Which outcomes are durably recorded?
-3. Which external effects can be proven to have occurred?
-4. Which operations can be safely repeated?
-5. Which work would need to be recomputed?
-6. Which state would require human investigation or repair?
-7. How much additional completion time would the interruption introduce?
-8. What architectural mechanism establishes the next safe continuation point?
-
-The review should then estimate the three interruption quantities:
+The result should record an interruption profile rather than force premature numerical precision:
 
 $$
-\Delta T,\qquad \Delta P,\qquad \Delta R
+K(I)=\left(\Delta T,P_{\mathrm{loss}},\Delta R\right)
 $$
 
-A system need not eliminate interruption to demonstrate resilience. It should demonstrate that interruption does not unintentionally erase valid work or leave the process dependent upon human reconstruction of technical state.
+For qualitative reviews, each dimension may be graded on an agreed scale and accompanied by evidence. The preservation test should be stated explicitly:
 
-A particularly useful architectural question is:
+> Do all valid committed outcomes established before interruption remain identifiable and safely reusable when continuation begins?
 
-> What is $\Delta P$ if this process is interrupted here?
+The operational companion question is:
 
-A corresponding operational question is:
+> What continuation knowledge is missing, what effort resolves it, and who repeatedly pays that cost?
 
-> What is $\Delta R$, and who is expected to pay it?
+Applying the method at every effect boundary exposes risks that service-level availability and restart-time measurements do not reveal.
 
-These questions expose risks that may remain invisible when resilience is discussed only through availability and restart time.
+## 15. Research Agenda
 
-## 14. Conclusion
+Further work should evaluate whether the interruption profile improves architecture decisions in practice. Suitable studies include:
 
-Traditional resilience measures such as availability, recovery time and recovery point remain valuable, but they do not fully describe the fate of interrupted work. A system may restart quickly while losing substantial progress, creating inconsistent side effects or requiring hours of manual recovery.
+- controlled fault injection across implementations of the same workflow;
+- case studies measuring repeated work and human recovery actions;
+- practitioner studies testing whether the review method identifies previously unknown interruption risks;
+- domain-specific definitions of valid progress and weighting functions;
+- comparison with RTO, RPO, incident duration and availability metrics;
+- analysis of how resilience cost shifts between prevention and recovery;
+- methods for representing progress as vectors, lattices or sets of commitments.
 
-Separating interruption cost into additional elapsed time, signed change in durable progress and additional recovery effort provides a clearer basis for architectural reasoning. Time loss is often unavoidable. Progress regression and recovery debt are not.
+Such work could determine whether the conceptual separation produces reliable measurement, predicts operational burden or improves design choices. Until then, the model should be treated as a structured architectural lens rather than a complete empirical law.
+
+## 16. Conclusion
+
+Availability, recovery time and recovery point remain valuable, but they do not fully describe the fate of interrupted work. Execution may restart quickly while valid business outcomes are repeated, external effects remain uncertain or people spend hours reconstructing a safe continuation point.
+
+The interruption profile separates additional elapsed time, loss of valid committed progress and additional recovery effort. The preservation relation avoids assuming that every process has one scalar measure of progress. Distinguishing recovery knowledge deficit, recovery effort and recovery debt makes visible the operational consequences of architectures that preserve records but not the knowledge required to use them.
 
 Powell’s Law summarises the resulting objective:
 
 > **In a resilient system, interruptions should cost time, not progress.**
 
-A resilient system may pause. It may wait for infrastructure, dependencies, people or external events. What it should not do is forget what has already been validly achieved or require people to reconstruct that knowledge before the work can continue.
+The statement does not require uninterrupted execution or preservation of invalid computation. It requires that valid committed outcomes and the knowledge needed to continue safely should outlive the worker that produced them. A resilient system may pause, retry, compensate or transfer execution. It should not unintentionally forget what has already been validly achieved.
 
 ## References
 
-1. Swanson, M., Bowen, P., Phillips, A. W., Gallup, D. and Lynes, D. [_Contingency Planning Guide for Federal Information Systems_](https://csrc.nist.gov/pubs/sp/800/34/r1/upd1/final). NIST Special Publication 800-34 Revision 1, 2010.
-2. Patterson, D. A., Brown, A., Broadwell, P., Candea, G., Chen, M., Cutler, J., Enriquez, P., Fox, A., Kiciman, E., Merzbacher, M., Oppenheimer, D., Sastry, N., Tetzlaff, W., Traupman, J. and Treuhaft, N. [_Recovery-Oriented Computing: Motivation, Definition, Techniques, and Case Studies_](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/CSD-02-1175.pdf). Technical Report UCB/CSD-02-1175, University of California, Berkeley, 2002.
-3. Chandy, K. M. and Lamport, L. ["Distributed Snapshots: Determining Global States of Distributed Systems."](https://doi.org/10.1145/214451.214456) _ACM Transactions on Computer Systems_, 3(1), pp. 63-75, 1985. DOI: 10.1145/214451.214456.
-4. Garcia-Molina, H. and Salem, K. ["Sagas."](https://doi.org/10.1145/38713.38742) _Proceedings of the 1987 ACM SIGMOD International Conference on Management of Data_, pp. 249-259, 1987. DOI: 10.1145/38713.38742.
-5. Featonby, M. ["Making Retries Safe with Idempotent APIs."](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) _Amazon Builders' Library_.
-6. Microsoft. ["Transactional Outbox Pattern."](https://learn.microsoft.com/en-us/azure/architecture/patterns/transactional-outbox) _Azure Architecture Center_.
-7. Microsoft. ["Durable Functions Overview: Stateful Serverless Workflows."](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview) _Microsoft Learn_.
-8. Temporal Technologies. ["Durable Execution."](https://docs.temporal.io/durable-execution) _Temporal Documentation_.
+1. M. Swanson, P. Bowen, A. W. Phillips, D. Gallup and D. Lynes, _Contingency Planning Guide for Federal Information Systems_, NIST Special Publication 800-34 Revision 1, 2010. [DOI](https://doi.org/10.6028/NIST.SP.800-34r1).
+
+2. D. A. Patterson _et al._, _Recovery-Oriented Computing: Motivation, Definition, Techniques, and Case Studies_, Technical Report UCB/CSD-02-1175, University of California, Berkeley, 2002. [Online](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2002/CSD-02-1175.pdf).
+
+3. K. M. Chandy and L. Lamport, “Distributed Snapshots: Determining Global States of Distributed Systems,” _ACM Transactions on Computer Systems_, vol. 3, no. 1, pp. 63-75, 1985. [DOI](https://doi.org/10.1145/214451.214456).
+
+4. H. Garcia-Molina and K. Salem, “Sagas,” in _Proceedings of the 1987 ACM SIGMOD International Conference on Management of Data_, pp. 249-259, 1987. [DOI](https://doi.org/10.1145/38713.38742).
+
+5. M. Featonby, “Making Retries Safe with Idempotent APIs,” _Amazon Builders' Library_. [Online](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/) (accessed 2 August 2026).
+
+6. Microsoft, “Transactional Outbox Pattern,” _Azure Architecture Center_. [Online](https://learn.microsoft.com/en-us/azure/architecture/patterns/transactional-outbox) (accessed 2 August 2026).
+
+7. Microsoft, “Durable Functions Overview: Stateful Serverless Workflows,” _Microsoft Learn_. [Online](https://learn.microsoft.com/en-us/azure/durable-task/durable-functions/durable-functions-overview) (accessed 2 August 2026).
+
+8. Temporal Technologies, “Durable Execution,” _Temporal Documentation_. [Online](https://docs.temporal.io/durable-execution) (accessed 2 August 2026).
+
+9. E. N. Elnozahy, L. Alvisi, Y.-M. Wang and D. B. Johnson, “A Survey of Rollback-Recovery Protocols in Message-Passing Systems,” _ACM Computing Surveys_, vol. 34, no. 3, pp. 375-408, 2002. [DOI](https://doi.org/10.1145/568522.568525).
+
+10. G. Candea, S. Kawamoto, Y. Fujiki, G. Friedman and A. Fox, “Microreboot: A Technique for Cheap Recovery,” in _Proceedings of the 6th Symposium on Operating Systems Design and Implementation_, pp. 31-44, 2004. [Online](https://www.usenix.org/conference/osdi-04/microreboot%E2%80%94technique-cheap-recovery).
+
+11. D. P. Reed, “Implementing Atomic Actions on Decentralized Data,” _ACM Transactions on Computer Systems_, vol. 1, no. 1, pp. 3-23, 1983. [DOI](https://doi.org/10.1145/357353.357355).
+
+12. A. Margara, G. Cugola, N. Felicioni and S. Cilloni, “A Model and Survey of Distributed Data-Intensive Systems,” _ACM Computing Surveys_, vol. 56, no. 1, pp. 1-69, 2023. [DOI](https://doi.org/10.1145/3604801).
+
+13. D. Moreno-Mateos, E. B. Barbier, P. C. Jones, H. P. Jones, J. A. Aronson, J. López-López, M. L. McCrackin, P. Meli, D. Montoya and J. M. Rey Benayas, “Anthropogenic Ecosystem Disturbance and the Recovery Debt,” _Nature Communications_, vol. 8, article 14163, 2017. [DOI](https://doi.org/10.1038/ncomms14163).
