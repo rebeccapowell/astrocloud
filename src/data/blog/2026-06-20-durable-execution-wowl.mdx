@@ -514,3 +514,36 @@ Retries make calls more reliable.
 Durable execution makes processes recoverable.
 
 WOWL keeps the side-effect boundary clean.
+
+## Update: Powell's Law
+
+Working through the ideas in this article, and in related conversations about
+durable execution and workflow design, I arrived at a broader principle that
+sits above WOWL.
+
+> **Powell's Law:** In any resilient system, interruptions should cost time,
+> not progress.
+
+WOWL is the activity-level design rule. It keeps retryable side effects safe by
+placing one controlled write at the end of a step, so that a retry does not
+silently repeat work that already happened.
+
+Powell's Law is the broader systems principle. After a crash, a restart, a
+redeployment, a dependency outage, a retry, a human hand-off, or any other
+interruption, the system should resume from the furthest correct durable point
+rather than unnecessarily repeat completed work.
+
+Execution may be disposable. Progress should be durable.
+
+The specific techniques that help satisfy the law include:
+
+- durable execution platforms that persist workflow history outside the worker
+- idempotency keys and natural business keys on side-effectful operations
+- checkpoints and explicit durable state
+- outbox and inbox patterns for reliable event and message delivery
+- safe retry boundaries that isolate one write per recoverable step
+
+None of these techniques are new. What Powell's Law tries to name is the
+common principle they all express: the system should never lose confirmed
+progress simply because the execution environment was interrupted. The only
+cost is time.
