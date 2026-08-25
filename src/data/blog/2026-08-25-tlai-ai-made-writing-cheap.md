@@ -16,6 +16,8 @@ description: "TL;AI is a recipient-first communication principle built from BLUF
 
 [PROPOSAL -> @Reader] TL;AI is a proposed way of structuring AI responses, built on several established principles of written communication. This article explores why that matters for effective human consumption, traceability and legal accountability, and presents the article itself in a TL;AI format. It also considers the tension with generative AI's underlying next-token prediction process, since these systems are designed to continue producing text rather than naturally stop, reconsider and restructure what they have already written.
 
+![Human and AI communicating through a clear signal](/assets/posts/tlai/tlai-human-ai-communication.jpg)
+
 Generative AI can produce a polished two-thousand-word memo before most people have finished explaining the problem.
 
 That sounds like a productivity improvement. Sometimes it is. But it can also create a new kind of organisational waste: the cost of writing collapses while the cost of reading, checking, routing and responding remains stubbornly human.
