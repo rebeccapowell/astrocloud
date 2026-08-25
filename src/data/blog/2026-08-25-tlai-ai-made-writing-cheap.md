@@ -14,6 +14,8 @@ tags:
 description: "TL;AI is a recipient-first communication principle built from BLUF, the Pyramid Principle, SBAR, speech-act theory, progressive disclosure and AI transparency."
 ---
 
+[PROPOSAL -> @Reader] TL;AI is a proposed way of structuring AI responses, built on several established principles of written communication. This article explores why that matters for effective human consumption, traceability and legal accountability, and presents the article itself in a TL;AI format. It also considers the tension with generative AI's underlying next-token prediction process, since these systems are designed to continue producing text rather than naturally stop, reconsider and restructure what they have already written.
+
 Generative AI can produce a polished two-thousand-word memo before most people have finished explaining the problem.
 
 That sounds like a productivity improvement. Sometimes it is. But it can also create a new kind of organisational waste: the cost of writing collapses while the cost of reading, checking, routing and responding remains stubbornly human.
@@ -343,3 +345,5 @@ That is the promise of TL;AI: not merely to help AI say more, but to help people
 - [Nielsen Norman Group, Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 - [Regulation (EU) 2024/1689, Article 50](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)
 - [European Commission, Guidelines on AI transparency obligations](https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations)
+
+Aided by Luna [AI]
