@@ -133,6 +133,42 @@ Generative AI makes it possible to produce more communication than an organisati
 
 That is where the pieces need to be recombined.
 
+## The token predictor and the communication protocol
+
+To understand why TL;AI is more than a notation scheme, it helps to look at how a generative language model produces text.
+
+A language model does not normally write a complete answer and then release it all at once. In causal language modelling, it predicts the next token in a sequence from the tokens that have already been supplied or generated. A token may be a word, part of a word or punctuation. The selected token is added to the sequence, and the model predicts the next one. This continues until a learned or externally imposed stopping condition is reached. The model can attend to the context on its left, but it cannot see future tokens that it has not yet generated. The [Hugging Face explanation of causal language modelling](https://huggingface.co/docs/transformers/en/tasks/language_modeling) provides an accessible account of this process, while the original [Transformer paper](https://arxiv.org/abs/1706.03762) describes the architecture on which many modern language models are based.
+
+That description should not be mistaken for a claim that language models cannot reason, plan or correct themselves. Their learned representations can support surprisingly complex behaviour. But the basic generation loop does not require a distinct moment at which the system stops, inspects the whole response, checks the communicative act, reconsiders the recipient's needs and then rewrites what it has already emitted.
+
+Stopping is not the same as reconsidering. An end-of-sequence token or a maximum-token limit tells the generator when to stop producing text. It does not tell it that the governing point has been found, that a reservation is material or that a sentence has accidentally implied authority.
+
+This creates an important distinction for TL;AI. A model can be instructed to produce a message such as:
+
+```text
+[PROPOSAL -> @Reader] Pause the migration until the rollback gap is resolved.
+```
+
+It may do so in a single generation call. The result may even be useful. But the visible category can still be only a surface pattern. The system may label a recommendation as a proposal, omit a reservation that would change the reader's decision or imply that the sender has authority that has not been established.
+
+TL;AI therefore pushes the communication process towards distinct stages:
+
+```text
+identify the participant, recipient and communicative act
+  -> establish the governing point
+  -> assemble reasons, evidence and material reservations
+  -> validate authority, provenance and recipient expectations
+  -> render the recipient-facing message
+```
+
+This is multi-pass in the communication sense. It does not necessarily mean five separate model calls. Some stages may be performed by one model using structured output. Others may be implemented through deterministic rules, schemas or a separate validation step. The important change is that the system creates an opportunity to reconsider the communication before presenting it to the recipient.
+
+In a more explicit implementation, one pass could produce a candidate structure, another could fill in the supporting content, and a final pass could check whether the result has preserved the intended category, reservations and provenance. The extra work may happen inside an orchestration layer rather than inside the language model itself. TL;AI does not change the underlying model architecture. It changes the composition process around it.
+
+Nor does this require exposing private chain-of-thought. The recipient does not need to see every internal intermediate step. They need the useful result of that work: a clear governing point, the relevant response semantics, material reservations, evidence and provenance.
+
+This is also where TL;AI changes the economics of generative communication. If AI has made composition cheap, it can spend some of that saving on planning, checking and restructuring before a human has to read the result. The cost is paid during generation so that less unnecessary work is imposed on the recipient.
+
 ## The synthesis: TL;AI
 
 TL;AI began as a play on TL;DR: Too Long; AI.
@@ -345,5 +381,7 @@ That is the promise of TL;AI: not merely to help AI say more, but to help people
 - [Nielsen Norman Group, Progressive Disclosure](https://www.nngroup.com/articles/progressive-disclosure/)
 - [Regulation (EU) 2024/1689, Article 50](https://eur-lex.europa.eu/eli/reg/2024/1689/oj)
 - [European Commission, Guidelines on AI transparency obligations](https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations)
+- [Hugging Face, Causal language modelling](https://huggingface.co/docs/transformers/en/tasks/language_modeling)
+- [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 
 Aided by Luna [AI]
