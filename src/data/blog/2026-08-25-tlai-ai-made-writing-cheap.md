@@ -12,6 +12,7 @@ tags:
   - Productivity
   - Writing
 description: "TL;AI is a recipient-first communication principle built from BLUF, the Pyramid Principle, SBAR, speech-act theory, progressive disclosure and AI transparency."
+ogImage: "/assets/posts/tlai/tlai-human-ai-communication-og.jpg"
 ---
 
 [PROPOSAL -> @Reader] TL;AI is a proposed way of structuring AI responses, built on several established principles of written communication. This article explores why that matters for effective human consumption, traceability and legal accountability, and presents the article itself in a TL;AI format. It also considers the tension with generative AI's underlying next-token prediction process, since these systems are designed to continue producing text rather than naturally stop, reconsider and restructure what they have already written.
