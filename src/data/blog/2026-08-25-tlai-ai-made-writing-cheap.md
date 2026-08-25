@@ -110,14 +110,14 @@ The distinction between participant transparency and message provenance therefor
 
 Each of these ideas solves a real problem:
 
-| Prior work | Problem it helps solve |
-| --- | --- |
-| BLUF | Where should the governing point appear? |
-| Minto and SCQ | How should the supporting reasoning be organised? |
-| SBAR | How should consequential information be handed over? |
-| Speech-act theory | What kind of act is the communication performing? |
+| Prior work             | Problem it helps solve                                               |
+| ---------------------- | -------------------------------------------------------------------- |
+| BLUF                   | Where should the governing point appear?                             |
+| Minto and SCQ          | How should the supporting reasoning be organised?                    |
+| SBAR                   | How should consequential information be handed over?                 |
+| Speech-act theory      | What kind of act is the communication performing?                    |
 | Progressive disclosure | How can detail be made available without overwhelming the recipient? |
-| AI transparency | How should artificial participation and provenance remain legible? |
+| AI transparency        | How should artificial participation and provenance remain legible?   |
 
 But generative AI changes the economics of the problem.
 
