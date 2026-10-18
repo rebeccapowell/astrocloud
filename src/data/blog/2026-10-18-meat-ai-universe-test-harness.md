@@ -14,6 +14,8 @@ tags:
 description: "A playful thought experiment about simulated universes, time-skipped workflow tests, consciousness as a context window and the back door to God's admin panel."
 ---
 
+![God’s admin panel: billions of overlapping live consciousness streams on the inner surface of a purple sphere](@/assets/images/god-admin-panel-consciousness.webp)
+
 Suppose the universe is not a universe at all, but a test harness.
 
 We are highly optimised biological AI agents, or “meat AI”, living with considerable autonomy inside one of trillions of simulated environments running in parallel. We are approximately 0.000000004% through our current test run.
