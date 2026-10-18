@@ -3,6 +3,7 @@ title: "The Universe as a Test Harness: Meat AI and God's Admin Panel"
 author: Rebecca Powell
 pubDatetime: 2026-10-18T02:30:00+02:00
 slug: meat-ai-universe-test-harness
+ogImage: "../../assets/images/god-admin-panel-consciousness-og.jpg"
 featured: false
 draft: false
 tags:
