@@ -91,6 +91,77 @@
   font-size: 0.8rem;
   font-variant-numeric: tabular-nums;
 }
+.convergence-counts {
+  display: flex;
+  gap: 2rem;
+  padding: 0 2rem 1rem;
+  flex-wrap: wrap;
+}
+.convergence-counts div {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.convergence-counts strong {
+  color: var(--accent);
+  font-size: 1.8rem;
+}
+.convergence-grid {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1fr) 2fr;
+  border-top: 1px solid var(--border);
+}
+.convergence-grid nav {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  align-content: start;
+  border-right: 1px solid var(--border);
+}
+.convergence-grid nav button {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.convergence-grid small {
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+.convergence-detail {
+  padding: 2rem;
+  min-width: 0;
+}
+.convergence-evidence {
+  list-style: none;
+  padding: 0;
+}
+.convergence-evidence li {
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  margin-block: 1.5rem;
+}
+.convergence-evidence time {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+@media (max-width: 700px) {
+  .convergence-grid {
+    grid-template-columns: 1fr;
+  }
+  .convergence-grid nav {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem;
+  }
+  .convergence-detail {
+    padding: 1.25rem;
+  }
+  .convergence-counts {
+    padding-inline: 1.25rem;
+    gap: 1rem;
+  }
+}
 .atlas-map-grid > div {
   padding: 2rem;
   min-width: 0;

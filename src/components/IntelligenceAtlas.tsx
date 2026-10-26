@@ -16,7 +16,7 @@ const layers = [
     now: "A pool of capabilities routed by task, cost and privacy. Frontier advantages can still command a premium.",
     evidence:
       "Commoditisation is uneven; cheaper inference does not establish profitable supply.",
-    source: "#source-github",
+    source: "#source-deepseek",
   },
   {
     name: "Identity and authority",
@@ -59,7 +59,7 @@ export function MapExplorer() {
   return (
     <section className="intelligence-atlas" aria-labelledby={`${id}-title`}>
       <header>
-        <p className="atlas-kicker">01 / The ownership map</p>
+        <p className="atlas-kicker">04 / Who keeps the value?</p>
         <h3 id={`${id}-title`}>What moved, and what needs a second look?</h3>
         <p>
           Select a layer to compare the May thesis with this revision. These are

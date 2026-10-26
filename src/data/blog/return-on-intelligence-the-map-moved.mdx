@@ -9,137 +9,220 @@ tags:
   - Software
   - Capital Markets
   - Future of Business
-description: A follow-up to the May 2026 series. Agentic software production, the struggle for authority and the financial obligations beneath the AI buildout redraw the ownership map.
+description: Several pressures in May's convergence map are now visible in AI bills, competing models, bundled features and investor reactions. What has changed, and what would still have to happen for belief to break?
 ---
 
 import EssayWide from "@/components/EssayWide.astro";
+import ConvergenceAudit from "@/components/ConvergenceAudit";
 import {
   MapExplorer,
   ExposureExplorer,
   OutcomeCalculator,
 } from "@/components/IntelligenceAtlas";
 
-_A November postscript to [Return on Intelligence](/posts/return-on-intelligence-the-preface). Research cut-off: 26 October 2026. The interactive scenarios are explanatory models, not financial forecasts._
+**The convergence described in May is now under way.** AI suppliers are making customers pay more directly for the computing their agents use. Competing models and features bundled into the main assistants are making some products harder to charge for. Investors are starting to question the spending needed to support the whole system. That strengthens the argument in [Breaking Point](/posts/return-on-intelligence-05-breaking-point), although it does not establish that a broad crash is inevitable or imminent.
 
-In May, I argued that the AI bubble could burst because the technology was real enough to undermine the market's first story about who would own it. Cheaper intelligence could make software easier to reproduce, weaken familiar business models and move value into less glamorous places: records, permissions, infrastructure, customer relationships and the machinery that turns an intention into an action.
+The tension is becoming easier to see: AI can become more useful while the businesses supplying it face harder economics. Customers want cheaper intelligence. Suppliers need enough income to cover expensive infrastructure. Software companies want to sell features that their customers increasingly find inside ChatGPT, Gemini or an internally generated application.
 
-Five months later, I still think that is the right question. I am less satisfied with the neatness of the answer I drew.
+In May, I argued that these pressures could reinforce one another until investors stopped treating AI exposure as proof of future profits. This follow-up asks how far that process has moved. The clearest changes are in **billing, competition and the market's interpretation of AI spending**. The evidence for a general collapse in SaaS revenue or a systemic financing crisis is much less conclusive.
 
-The [Breaking Point](/posts/return-on-intelligence-05-breaking-point) chapter described pressures that could converge. The [final map](/posts/return-on-intelligence-08-new-power-map) arranged the likely sources of durable power into a stack. Both were useful ways of thinking. Neither sufficiently showed how the same technology can make a customer more productive, weaken a software vendor's pricing power, increase a model supplier's workload and leave the owners of its infrastructure with a financing problem.
+_A postscript to the May 2026 [Return on Intelligence series](/posts/return-on-intelligence-the-preface). Evidence checked to 26 October 2026. The labels below are my assessments of that evidence, not a financial forecast._
 
-Those outcomes can happen together. An increase in useful intelligence does not tell us where the resulting income settles, or whether it arrives before the bills fall due.
+## The convergence map has moved beyond a thought experiment
 
-This is my revision of the map. There are three questions running through it: what can now be produced, who controls its use, and who carries the obligations that make production possible.
+The original map brought together eight pressures: cheaper models, visible token costs, disappointing enterprise returns, doubts about infrastructure spending, weaker SaaS pricing, vulnerable AI products, financing stress and a change in investor belief. None needed to be fatal on its own. Several arriving together could change how the market valued the first AI winners.
 
-## What May got right, and what it left too vague
-
-The May series already included orchestration, evaluation, durable execution, governance and generated software. It would be convenient to rename those things and announce that the prediction had come true. It would also avoid the harder work of revisiting the argument.
-
-The weakness was how much I put into the phrase “orchestration and execution”. A system that helps an agent write software, a workflow that safely completes an order and a test that establishes whether an image renderer is faithful are different pieces of machinery. They have different customers, different failure modes and different opportunities to charge for their services.
-
-I also gave the physical substrate a rather comfortable place at the bottom. Compute remained important, so compute appeared among the likely winners. But the importance of an asset does not establish the return to its owner. A busy railway can have ruined shareholders. A data centre can be essential to its tenant while the project company struggles to service its debts.
-
-The revised map makes those distinctions explicit. It is a map of potential control points rather than a league table of companies whose shares should go up.
+We can now revisit each pressure using actual announcements, price structures, product releases and market reporting. Some mechanisms are observable; some show early signs; others still have strong counter-evidence. A provider adding a competing feature, for example, establishes competitive pressure. It does not establish that a particular startup has failed.
 
 <EssayWide>
-  <MapExplorer client:load />
+  <ConvergenceAudit client:load />
 </EssayWide>
 
-## The software factory was already emerging
+The most important connection is between the first two pressures. Customers have more choices just as the cost of their own usage becomes harder to ignore. A model that was “good enough” yesterday becomes more attractive when the alternative consumes the month's budget in a few long agent sessions.
 
-One correction matters before going further. The machinery around agents did not appear after I wrote the series. OpenAI's [February account of harness engineering](#source-harness) described an experiment in which engineers shaped the environment, feedback loops and constraints around agents producing an internal application. It included isolated worktrees, access to application behaviour and agent reviews. That evidence was available before May. The authors also warned that the behaviour depended on the particular repository and tooling they had built.
+## 1. The cost of AI work is reaching the customer
 
-The question now is how much weight this operating model deserves. A coding agent needs a place to work, an intelligible codebase, ways to inspect its results and a path from proposed changes to accepted changes. More capable models help. So do environments that make mistakes easier to detect and recover from.
+**The change in billing is already real.** GitHub's move from premium requests to token-based AI Credits makes the distinction between a short question and a long agent session visible in the bill. Anthropic and OpenAI also expose usage costs through their enterprise terms, allowances and credits. These arrangements differ, but they push customers towards the same question: how much useful work do we get for the money?
 
-[GitHub's September account of coding efficiency](#source-github) offers a useful example. Its engineers describe improvements to tool output and orchestration, and explain why reducing tokens in one interaction can increase the cost of the whole task. Optimising the environment can improve the economics without making the underlying model more intelligent.
+### Copilot changed what the subscription buys
 
-My inference is that the production system deserves its own position on the map. It includes the harness, working environment, repository knowledge, tests, review process and access to running software. These elements determine how much of a model's apparent capability survives contact with a real project.
+[GitHub announced the change on 27 April, effective 1 June 2026](#source-copilot-billing). It said the old premium-request model had become unsustainable as agents ran longer sessions and consumed more compute. Monthly plans would move to credits based on input, output and cached tokens, while annual subscribers followed a separate transition. The base subscription prices were unchanged.
 
-That still leaves a commercial question. If these techniques spread through open tools and standard practice, the production layer could itself become competitive. Being necessary is not enough to make it a durable business. The operator who can repeatedly deliver dependable results may capture more value than the supplier of any single part.
+The date matters. The announcement was available when I wrote in May; the billing transition followed afterwards. This was the implementation of an announced change, rather than a prediction made before anyone saw it coming.
 
-## ArtCraft and the cost of attempting the impossible
+The commercial effect still matters. A fixed-looking subscription gives the user less certainty about how much work they can complete when consumption depends on the model, the context and the number of attempts. Planning, testing, review and rework all draw on that budget.
 
-ArtCraft is an unusually vivid example. The [October coverage](#source-lumien) describes Brandon Thomas using Claude to build a collection of Rust applications aimed at familiar Adobe workflows. Those are ambitious targets for a small operation. The headline invites an argument about whether Adobe has already been replaced. The more useful question is what has changed about the cost of making the attempt.
+### Claude and OpenAI expose the same cost in different ways
 
-The [PhotoCraft repository](#source-photocraft) still labels the product early alpha. Its documentation describes a common command surface for the interface, CLI and MCP, and testing against real document corpora. Those are the project maintainers' descriptions, not an independent certification of compatibility or quality. I have inspected the documentation; I have not benchmarked the applications.
+[Claude Enterprise's current pricing](#source-claude-billing) lists a seat charge plus usage at API rates. That differs from a consumer subscription with usage limits. Paying for access does not mean every additional task has already been paid for.
 
-For this map, the interesting combination is software that agents help construct and software that agents can operate and inspect. The application becomes part of the environment through which further work can be produced and checked.
+[OpenAI's current documentation](#source-openai-billing) describes shared Work and Codex usage, included allowances and additional credits, with token rates for credit-based plans. API-key billing remains separate. The documentation also warns against using API prices to estimate how much work is included in a subscription.
 
-A professional replacement still has to preserve someone's documents, behave reliably under pressure and fit the rest of their workflow. Existing alternatives, accumulated expertise and open-source dependencies also belong in the explanation. An impressive interface does not demonstrate that all of those obligations have been met.
+Neither page, by itself, tells us when every customer moved to those terms. Nor do these arrangements prove that all AI has become more expensive. The price of a unit of intelligence can fall while the total cost of the work attempted with it rises.
 
-But a competitor need not replace every feature to affect a market. It can serve a narrower group whose requirements are easier to satisfy. It can give dissatisfied customers another option. It can make particular prices harder to defend. This is how a falling cost of construction can erode a software rent before a complete substitute exists.
-
-The same pressure could reach the factories themselves. If software becomes easier to reproduce, the company selling tools for reproducing software also needs an answer to the question of what remains scarce.
-
-## Authority is becoming a contested market
-
-The May map said durable power sits where intelligence meets authority. I would retain that sentence and draw its consequences more clearly.
-
-An agent may be capable of offering a refund, changing a price or deploying an application. Whether it may do so depends on the organisation's actual commitments. Access to the tool is only part of the answer. Someone needs to establish whose authority is being exercised, its limits and the evidence needed before the action goes ahead.
-
-[Microsoft's October security argument](#source-microsoft) explicitly places controls outside the model and proposes permissions scoped to the task. That is evidence of a supplier building around this boundary. It does not establish that the supplier will own it, or that every advertised control already works in every setting.
-
-The attraction is understandable. A company that controls identity, access, the working surface and the record of what happened can remain important even when customers change models. The relationship can also become a new dependency: moving to a cheaper model does little for bargaining power if the surrounding permissions, history and integrations remain difficult to move.
-
-For businesses, the test is practical. Can we replace the model without losing the process? Can we move the process without losing the evidence? Can we revoke authority without breaking everything else? Those are architectural questions with commercial consequences.
-
-## The debate is about more than whether AI works
-
-[Ezra Klein's October episode](#source-klein) stages a debate between Paul Kedrosky and Azeem Azhar. Its published description sets out their disagreement: Kedrosky sees a bubble, while Azhar takes a more optimistic view. Klein is the host; those positions should not be collapsed into a single “Ezra Klein view”. The episode also puts the competition for construction resources into the discussion, extending the question beyond technology companies.
-
-There is a useful earlier statement of Azhar's argument in his [October 2025 essay on funding quality](#source-azhar). He acknowledges speculative finance while distinguishing productive capacity from the transfer of risk. That distinction deserves space here. Real demand, revenue growth and improved economics could support a buildout even while individual projects fail. The size of a spending number alone does not settle the case.
-
-[Ed Zitron's October writing](#source-zitron) presses on the other side of the equation: the concentration of exposure and the dependence on continued spending. His [critique of annualised revenue metrics](#source-runrate) is especially relevant to how we read the evidence. An extrapolated run rate is not a completed year's revenue, and reported figures need consistent definitions before they can be compared. Consumption revenue also needs to be distinguished from a contractual promise to keep paying.
-
-I find those questions persuasive without needing to adopt every conclusion in the commentary. A supplier can have enthusiastic customers and poor economics. It can also have weak current cash flow while building a viable business. We need evidence about the period, the costs, the customers and the obligations, rather than a bigger headline number.
-
-For the customer, another denominator matters: the amount of work accepted at the required quality. A cheaper model can be more expensive if it produces more retries, demands longer review or creates mistakes that emerge after approval. Conversely, a premium model can be economical if it completes valuable work reliably. Token price alone cannot answer either question.
+An agent can try more approaches, read more files and spend longer checking its result. That can be worth paying for. It also means the bill needs to be compared with the outcome, including the human time required to accept or correct it. [GitHub's September engineering account](#source-github) makes a related point: reducing tokens in one interaction can increase the cost of the task if the agent then has to recover missing information.
 
 <EssayWide>
   <OutcomeCalculator client:visible />
 </EssayWide>
 
-## The obligations beneath the stack
+This is the “token economics become visible” pressure from May. It is happening in customer billing. Whether it produces better supplier margins depends on how customers respond.
 
-Scherer and Jenkins' October report, [_Brace for Impact_](#source-report), adds the most consequential missing dimension. It examines circular financing, leases, guarantees, private credit and paths through which AI losses could reach insurers, pensions and households. It presents crisis mechanisms, while explicitly declining to predict a specific sequence or call a crisis inevitable.
+## 2. More model choice and bundled features weaken some moats
 
-Its discussion of stranded assets also complicates the easy dotcom analogy. The report questions how economically reusable specialised chips and data centres would be after a downturn. It distinguishes a shallow correction that could strengthen surviving giants from a severe shock that could damage them through their connections to weaker firms. These are scenarios to investigate, not a timetable.
+**Customers have more alternatives, while the main assistants cover more of the work for which separate products charge.** Together, these changes make it harder to defend a business that mainly sells access to a model or packages one familiar task.
 
-I would use that analysis with accounting discipline. Capital expenditure is not an annual operating expense. A purchase commitment, a guarantee and outstanding borrowing are different exposures. Mapping them requires terms, counterparties and care to avoid counting one obligation several times. Comparing infrastructure spending with product revenue can expose the scale of the challenge; it does not calculate a project's solvency. The report's aggregate estimates need checking against underlying filings before becoming precise loss claims.
+### Kimi, DeepSeek and Mistral widen the choice
 
-This changes how I read the ownership stack. It is simultaneously a network of claims on future payments. The party using the equipment may not own it. The company whose name appears on the announcement may not owe the project debt. A guarantee can move the downside again. The map needs to show those relationships before we can say who is insulated from a failure.
+These companies did not first enter the market after May. What has changed is their newer models and the range of work they attempt.
+
+[Kimi expanded its offering with K3 during July](#source-kimi); its current documentation reports released weights. Its October K3.1 Pro announcement promises weights for November, so that release is still pending at this article's cut-off. [DeepSeek's September V4.1-Flash release](#source-deepseek) links architectural efficiency with lower API prices. Its current price card also distinguishes cached input, uncached input and peak versus off-peak use.
+
+[Mistral Large 4, nicknamed “Le Chonk”, entered public API preview on 6 October](#source-mistral), with weights promised for the end of the month. That is another available API choice and a planned open-weight release. It does not establish that those weights were downloadable on 26 October.
+
+Open weights allow organisations to obtain a model for deployment under its licence, rather than relying only on its developer's service. They do not remove hardware costs, operating work or licence conditions. Some models are far too large for an ordinary laptop. Provider benchmarks also need testing against the customer's actual tasks.
+
+Even with those limits, choice changes a purchasing decision. A customer can reserve an expensive model for difficult work and use another for routine steps. A competitor need not win every benchmark to put pressure on the leading supplier's price.
+
+### ChatGPT and Gemini are absorbing product categories
+
+[OpenAI's July Work documentation](#source-platform-bundling) describes an assistant that can research, use files and connected apps, and create documents, spreadsheets, presentations and websites. A narrow product selling one of those functions now has to explain why the customer needs another tool.
+
+On [19 August, Google announced Deep Research in Gemini Live](#source-gemini-research) for all Gemini app users, with applicable limits and availability conditions. On [20 October it announced business tools](#source-gemini-business) covering brand assets, connected apps and financial insights. Those functions overlap with categories of standalone AI software.
+
+The change is the customer's default option. Before buying a specialist tool, they can try a capability in the assistant they already use. The extra product can still win on quality, privacy, integration or responsibility for the result. Its case is weaker if its main advantage was being the first interface to a useful model feature.
+
+That is evidence for the replacement mechanism in May's “thin wrappers” pressure. We can see the function being absorbed into a broader product. Establishing an actual startup failure requires evidence about customers and companies, not just a similar feature on an announcement page. Included access also does not mean unlimited free use.
+
+### Cheaper software construction creates another route to competition
+
+[ArtCraft's attempt to reproduce Adobe workflows](#source-lumien) illustrates a different threat: using agents to build an alternative. [PhotoCraft's documentation](#source-photocraft) describes an early-alpha application with command interfaces and tests against real files. I have reviewed the documentation, not independently benchmarked the application.
+
+An incomplete alternative can serve a narrower group of customers or affect their willingness to pay. But a familiar interface does not establish dependable compatibility, maintenance or professional support. Those are part of the product too.
+
+The evidence for broad SaaS decline remains mixed. [SAP's October results](#source-saas-results), for example, showed stronger cloud revenue and backlog. That is a useful check on the claim that AI has already destroyed established software economics. A replaceable feature and a deeply integrated business system face different threats.
+
+## 3. Investors are starting to question the spending
+
+**Market belief is showing strain, although investors have not settled on a single verdict.** They are asking whether infrastructure will earn enough to cover its cost. They can ask that while continuing to believe AI is useful and demand will grow.
+
+[Reuters' 23 October market report](#source-capex-market) describes concern about financing AI investment and scrutiny of future spending. Its [26 October reporting](#source-belief-market) links technology-stock selling with questions about the eventual payoff. These are signs of belief stress, rather than proof of a lasting break.
+
+Calling this “overbuild” needs care. Investors can fear that too much capacity has been committed for future profitable demand even while today's capacity is busy. [Amazon's April shareholder letter](#source-aws-demand) described shortages and unserved demand. That supplier account predates this update, but it helps distinguish present scarcity from future overinvestment.
+
+Capital spending, or capex, therefore no longer serves only as reassurance. The same announcement can prompt questions about financing, utilisation and returns. That change in interpretation is one of the convergence pressures.
+
+### Enterprise returns are part of the uncertainty
+
+[Gartner's October release](#source-roi) reports that 13% of respondents saw significant or transformational AI value. It drew on a May–July survey of 2,002 CIOs and technology executives. This is evidence of a gap between adoption and major business gains. It does not mean the remaining respondents received no benefit, or that 87% of projects failed.
+
+If customers take longer to turn AI into measurable gains, suppliers may wait longer for the income they expected. Usage-based bills also give customers a stronger reason to stop low-value work. Integration and organisational change therefore matter to the financial story.
+
+### Financing determines how a disappointment spreads
+
+The October report [_Brace for Impact_](#source-report) examines how leases, guarantees, debt and private credit connect the buildout to the wider economy. It describes possible paths to losses beyond AI suppliers, while explicitly declining to predict a particular crash sequence or call a crisis inevitable.
+
+A useful technology does not suspend payment deadlines. If expected income arrives late, some businesses may need to refinance or renegotiate before it catches up. That makes the obligations beneath AI important to the convergence argument.
+
+The report's scenarios remain distinct from observed defaults. A guarantee is not a loan, and a future purchase commitment is not an annual expense. We need the terms and counterparties before estimating who would lose money.
 
 <EssayWide>
   <ExposureExplorer client:visible />
 </EssayWide>
 
-## A useful machine can still have the wrong owners
+## The pressures reinforce one another
 
-Put ArtCraft beside the financial report and the apparent contradiction becomes interesting. Software can become easier to construct while the infrastructure supplying the intelligence becomes harder to finance. A customer can receive more capability for less money while a supplier discovers that its pricing power is weaker than its commitments assumed.
+A more visible bill encourages a customer to test cheaper models. More competing models make that move practical. Features bundled into a main assistant make another subscription harder to justify. Suppliers then have to earn their return in a market where customers have more ways to reduce spending.
 
-There are other possible outcomes. Lower prices could create enough additional paid demand to improve utilisation. Businesses could find applications whose savings comfortably cover the full cost. Suppliers could become more efficient. Those possibilities belong in the argument, and measurable evidence for them should change it.
+If infrastructure commitments keep growing at the same time, investors have reason to question who will earn enough to pay for them. That questioning can make new finance harder to obtain. Financial trouble can follow even while the technology improves.
 
-What I would retire is the certainty of the May series' ending. A broad crash is one route through these tensions. A prolonged repricing, selective failures, mergers, changes in billing and a shift of gains towards customers are others. Value can migrate without a single moment when the entire market changes its mind.
+There is also a route through the pressure. Lower prices could create enough additional paid demand to improve utilisation. Customers could find work whose gains exceed the full cost. Suppliers could reduce costs faster than prices fall. A fair assessment has to keep that possibility visible.
 
-The map therefore needs to distinguish three things that my earlier language sometimes ran together: technological usefulness, a viable business and an attractive price for ownership. None automatically establishes the next.
+The public debate reflects the tension. [Ezra Klein's October episode](#source-klein) brings Paul Kedrosky's bubble argument into discussion with Azeem Azhar's more optimistic view. Klein is the host, rather than the author of one position shared by both guests. The full transcript was inaccessible, so I use the publisher's description for that framing.
 
-It also needs people outside the transaction. A community can absorb the costs of a failed infrastructure project without having chosen to invest. Workers can face disruption whether the suppliers earn extraordinary profits or fail. The benefits of cheaper production and the burdens of financing it need not land with the same people.
+[Ed Zitron's October writing](#source-zitron) presses on concentrated exposure and continued spending. His [critique of annualised revenue figures](#source-runrate) supplies another useful discipline: an extrapolated run rate and a completed year's revenue are different measurements. [Azhar's earlier essay on funding quality](#source-azhar) distinguishes productive investment from the transfer of financial risk. Neither side is answered simply by showing that a model can do impressive work.
 
-## What would change my mind
+## The ownership map follows from the convergence
 
-I would become less concerned about the financing story if paying customers outside the AI supply chain renewed at healthy rates, suppliers disclosed comparable margins and cash flows, and projects met their obligations without repeatedly relying on new finance from interested counterparties. Better utilisation and productive reuse of older equipment would also count against a simple stranded-asset story.
+The practical question is what remains worth paying for when intelligence is easier to buy and features are easier to reproduce. The May series identified records, permissions, distribution, reliable execution and knowledge of a particular business. These remain possible advantages, rather than guarantees of profit.
 
-I would become less confident about rapid software substitution if the cost of maintaining generated systems remained stubbornly high, customers continued paying mainly for dependable integration and responsibility, or the apparent productivity gains disappeared when measured across complete workflows. A burst of code production alone cannot resolve those questions.
+An agent that can propose a refund still needs the correct customer record and authority to issue it. [Microsoft's October security approach](#source-microsoft) puts controls outside the model. In software development, [OpenAI's February harness-engineering account](#source-harness) describes the environment and feedback needed to help agents produce usable changes. That work predates May; it helps explain the mechanism rather than proving a new prediction.
 
-And I would become more concerned about concentrated power if model choice expanded while practical control over identity, distribution, records and execution narrowed. The existence of many models would then disguise a smaller number of places through which useful work must pass.
+For a customer or investor, the test is whether the company provides something that remains valuable when the model changes. A dependable record, a customer relationship or responsibility for an outcome may survive. A thin layer around one model feature may not.
 
-The strongest question from May survives: which parts of a business become more valuable when intelligence becomes cheaper, and which were valuable because production and coordination were expensive? I would now add a second question: who has promised to pay for that transition, on what terms, and out of whose future income?
+<EssayWide>
+  <MapExplorer client:visible />
+</EssayWide>
 
-That is the map I want to keep watching. It has capable machines in it, businesses trying to organise around them, customers deciding what is worth buying and obligations that continue to exist when the story changes.
+## What would change this assessment?
+
+The financing concern would weaken if customers renewed because measured gains exceeded their full costs, suppliers showed sustainable margins and cash collections, and infrastructure owners met their obligations without repeated rescue financing. Strong demand would matter most when it became dependable income.
+
+The substitution argument would weaken if customers kept paying specialists because compatibility, service and maintenance outweighed the savings from generated alternatives. The value of those obligations may be more durable than the cost of writing code suggests.
+
+My assessment is that **convergence has begun, but its eventual outcome is still open**. Token economics are visible in bills. Competition is visible in available models and bundled features. Belief stress is visible in questions about the return on AI spending. Those observations strengthen the May argument without turning the map into a crash clock.
+
+The question is becoming more urgent: who earns the benefit of cheaper intelligence, and who has already promised to pay for it?
 
 ## Sources and reading notes
 
-These links were checked on 26 October 2026. Supplier accounts document their own implementations and claims. Commentary supplies arguments to evaluate. Neither is a substitute for independent measurement. No November events are assumed in this draft.
+Evidence checked on 26 October 2026. Current price pages are snapshots, not a full billing history. Supplier claims are attributed; scenarios and status labels are editorial judgements. This structure follows the reader-first approach in [TL;AI](/posts/tlai-ai-made-writing-cheap/): conclusion first, supporting reasons underneath, material reservations alongside the evidence.
+
+<div id="source-copilot-billing" />
+
+- **GitHub, 27 April 2026:** [Moving to usage-based billing](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/). Effective 1 June, with annual-plan exceptions and transitional terms.
+
+<div id="source-claude-billing" />
+
+- **Anthropic:** [Current pricing](https://claude.com/pricing). Enterprise terms inspected on the research date; consumer subscriptions are a different arrangement.
+
+<div id="source-openai-billing" />
+
+- **OpenAI:** [Work and Codex pricing](https://learn.chatgpt.com/docs/pricing). Current included-usage, credit and API distinctions; no universal migration date is inferred.
+
+<div id="source-kimi" />
+
+- **Moonshot/Kimi:** [Dated announcement index](https://forum.moonshot.ai/c/announcement/5). See also [K3 documentation](https://platform.kimi.ai/docs/guide/kimi-k3-quickstart) and [K3.1 Pro](https://www.kimi.com/blog/kimi-k3-1-pro). July K3 developments are distinct from the promised November K3.1 weights.
+
+<div id="source-deepseek" />
+
+- **DeepSeek, 10 September 2026:** [V4.1-Flash announcement](https://api-docs.deepseek.com/news/news260910/). See the [current price card](https://api-docs.deepseek.com/quick_start/pricing/). Performance improvements are provider claims.
+
+<div id="source-mistral" />
+
+- **Mistral, 6 October 2026:** [Mistral Large 4 / Le Chonk](https://mistral.ai/news/mistral-large-4/). API preview at announcement; weights still promised at the cut-off.
+
+<div id="source-platform-bundling" />
+
+- **OpenAI, July 2026 release entries:** [What's new](https://learn.chatgpt.com/docs/whats-new). See 6–10 July. Product inclusion does not establish unlimited free usage or a competitor's failure.
+
+<div id="source-gemini-research" />
+
+- **Google, 19 August 2026:** [Gemini learning and research tools](https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/). Distinguish generally rolling-out tools from the separate student promotion and its eligibility conditions.
+
+<div id="source-gemini-business" />
+
+- **Google, 20 October 2026:** [Gemini tools for small businesses](https://blog.google/innovation-and-ai/products/gemini-app/new-tools-small-business-owners/). An announcement and rollout description, not evidence of universal access.
+
+<div id="source-roi" />
+
+- **Gartner, 19 October 2026:** [Survey on realised AI value](https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-survey-finds-only-13-percent-of-cios-say-their-enterprise-has-realized-significant-or-transformational-value-from-ai). Self-reported enterprise value; fieldwork May–July 2026.
+
+<div id="source-capex-market" />
+
+- **Reuters, 23 October 2026:** [Wall Street closes lower to end rocky week](https://www.reuters.com/business/wall-street-futures-dip-after-ai-rout-telecoms-slide-2026-10-23/). Market interpretation, not a capacity audit.
+
+<div id="source-belief-market" />
+
+- **Reuters, 26 October 2026:** [AI concerns and market selling](https://www.reuters.com/markets/wealth/trend-hedge-funds-saw-worst-week-since-2024-ai-stocks-fell-goldman-says-2026-10-26/). Evidence of market reaction, not a causal experiment.
+
+<div id="source-aws-demand" />
+
+- **Amazon, 9 April 2026:** [Jassy's 2025 shareholder letter](https://www.aboutamazon.com/news/company-news/amazon-ceo-andy-jassy-2025-letter-to-shareholders). Earlier supplier evidence, not October utilisation data.
+
+<div id="source-saas-results" />
+
+- **Reuters, 21 October 2026:** [SAP's cloud growth and outlook](https://www.reuters.com/world/europe/germanys-sap-tops-cloud-demand-forecasts-holds-yearly-operating-profit-outlook-2026-10-21/). A company-specific counterexample.
 
 <div id="source-may" />
 
@@ -183,6 +266,6 @@ These links were checked on 26 October 2026. Supplier accounts document their ow
 
 <div id="source-report" />
 
-- **Matthew U. Scherer and Maya Jenkins, October 2026:** [Brace for Impact: Protecting people and the economy when the AI bubble bursts](https://static1.squarespace.com/static/5e449c8c3ef68d752f3e70dc/t/6ad18accea1ab06edc762a93/1792117452216/Brace+for+Impact-Scherer-Jenkins-OMI-October2026-WEB+%281%29.pdf), Open Markets Institute and Americans for Financial Reform Education Fund. See printed pp. 21–25 for financing and accounting; pp. 30–40 for pressure and transmission; pp. 47–48 for stranded assets. A policy report building a downside case; neither crash timing nor precise losses are established by it.
+- **Scherer and Jenkins, October 2026:** [Brace for Impact](https://static1.squarespace.com/static/5e449c8c3ef68d752f3e70dc/t/6ad18accea1ab06edc762a93/1792117452216/Brace+for+Impact-Scherer-Jenkins-OMI-October2026-WEB+%281%29.pdf), Open Markets Institute and Americans for Financial Reform Education Fund. Financing and transmission scenarios, not measured default probabilities.
 
 Return to the [series preface](/posts/return-on-intelligence-the-preface), or revisit the original [Breaking Point](/posts/return-on-intelligence-05-breaking-point).
