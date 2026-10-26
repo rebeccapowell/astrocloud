@@ -22,7 +22,11 @@ The calculator has been removed from the article, React module and CSS. Its poin
 
 The convergence labels are two Observed, three Emerging, two Mixed and one Unconfirmed. Financing stress is Unconfirmed: scrutiny of risk and future commitments is not itself an observed financing failure. The ownership map explicitly retains May's existing argument about records and business knowledge.
 
-Anthropic's 26 October IPO filing is included directly as counter-evidence and a description of future commitments. The financial statements report Q2 revenue of about $11.6 billion and operating income of about $1 billion. Its accounting policy includes research and model development in compute and infrastructure expenses, and explains gross revenue recognition as principal in marketplace transactions. The Reddit shortlink could not be reliably resolved; no claim is made to have identified that exact thread, and its allegations about concealed costs or improper accounting are not adopted.
+Anthropic's 26 October IPO filing is included directly as counter-evidence and a description of future commitments. The financial statements report Q2 revenue of about $11.6 billion and operating income of about $1 billion. The June 30 purchase commitments of $265.6 billion and not-yet-commenced leases of $321.4 billion are future payments, not a present borrowing balance. Some lease arrangements are conditional.
+
+The Reddit post was subsequently supplied in full and checked against the filing's Notes 2, 7, 8, 9 and 13. Note 8 discloses cost of revenue separately from R&D. The $72.4 billion fair-value charge is for H1, not Q2. The $42 billion facility was undrawn at June 30. Cloud marketplaces are billing channels for end customers, and the filing explains its principal-based gross revenue policy. The post's allegations of hidden costs or improper accounting are not adopted.
+
+OpenAI announced a confidential S-1 submission on 8 June. No comparable public prospectus was identified as at 27 October. Its February AWS expansion and Amazon investment announcement are included as a public example of overlapping investor/supplier roles, with no inference of improper revenue. These arrangements predate May. Financial disclosures were checked on 27 October; the broader evidence map retains its 26 October assessment date.
 
 ## Implementation and checks
 
