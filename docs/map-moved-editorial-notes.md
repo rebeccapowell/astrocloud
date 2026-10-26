@@ -1,35 +1,31 @@
 # The Map Moved: editorial handoff
 
-The article is a standalone postscript to the eight-part May series, delivered in a draft pull request, with a proposed publication date of 1 November 2026 and a research cut-off of 26 October. Its source is `src/data/blog/return-on-intelligence-the-map-moved.mdx`. Content uses `draft: false` so the PR's hosting preview can render the direct URL for review.
+The article is a standalone follow-up to the May series. Publication is proposed for 1 November 2026, with research checked to 26 October. The article uses `draft: false` so the direct preview route renders, while the future date keeps it out of listings. PR #49 remains the publication boundary.
 
-## Publication
+## Editorial direction
+
+The article now asks what May got right, what the author would change and what remains unresolved. The clearest correction is confidence in a crash as the turning point. Local models, devices, permissions and systems of record were already part of May's argument, so the follow-up credits those calls rather than pretending they were missed. The original essays are unchanged.
+
+The main text is written for a general technology audience. Research-process comments, repeated statements about what a source does not establish, and accounting or methodology digressions have been removed. Material distinctions remain in ordinary language: a pending product is still pending, local hardware still costs money, and a survey's smaller benefits are different from no benefit. Sources retain links and dates. The Klein link is an episode listing and publisher summary; the article does not quote an unavailable transcript.
+
+The calculator has been removed from the article, React module and CSS. Its point is now a short bug-fixing example: compare the cost of completed work, including retries and review. The three remaining figures are the convergence map, financial scenarios and ownership map. Their copy has also been simplified.
+
+## Research and publication
 
 - Refresh date-sensitive sources before publication and adjust the research cut-off and publication date together.
-- Review the argument, source characterisations and assumptions in the four interactive components.
-- Merge only when publication is intended. The proposed future date filters the post from discovery until then but does not prevent its direct URL from being generated. The draft PR is the publication boundary.
-- At publication, add a short dated note linking to `/posts/return-on-intelligence-the-map-moved/` from Breaking Point and The New Power Map. Those historical articles are untouched in this PR, so there is no public link to an unavailable draft.
-- The follow-up is not Part 9 and does not change the original series order or ebook.
+- Do not infer mass departure from hyperscalers from product announcements or Dell's supplier-reported customer count.
+- Apple's March M5 Pro/Max hardware and Revolut's April UK AIR rollout predate May. Apple's October MLX demonstrations use Mac Studios.
+- Microsoft announced October laptop availability and November US Dev Box delivery. Equinix Inference Exchange is a preview; HPE's services have different rollout dates.
+- Software-factory research covers particular tasks and environments. Hosting choice and autonomy are separate decisions.
+- The report's scenarios describe possible financial harm, not observed defaults or measured loss probabilities.
+- At publication, consider a dated link from Breaking Point and The New Power Map. The follow-up is not an extra numbered chapter and does not change the ebook.
 
-## Evidence limits
+The convergence labels are two Observed, three Emerging, two Mixed and one Unconfirmed. Financing stress is Unconfirmed: scrutiny of risk and future commitments is not itself an observed financing failure. The ownership map explicitly retains May's existing argument about records and business knowledge.
 
-The revised article follows the Pyramid Principle: its conclusion comes first, supported by three grouped reasons (billing, competition and investor confidence). The opening interactive audit revisits all eight original convergence pressures. Two are labelled Observed, four Emerging and two Mixed. These are editorial evidence assessments, not a crash score. Dated evidence and qualifications live in `src/data/convergenceEvidence.ts`; the ownership map follows the convergence argument rather than replacing it. Labels assess the original mechanism: billing and questioning capex are observable, while model substitution, standalone-product failures and a sustained shift towards profit capture need more evidence than releases, feature overlap and market unease alone.
+Anthropic's 26 October IPO filing is included directly as counter-evidence and a description of future commitments. The financial statements report Q2 revenue of about $11.6 billion and operating income of about $1 billion. Its accounting policy includes research and model development in compute and infrastructure expenses, and explains gross revenue recognition as principal in marketplace transactions. The Reddit shortlink could not be reliably resolved; no claim is made to have identified that exact thread, and its allegations about concealed costs or improper accounting are not adopted.
 
-GitHub announced its billing transition on 27 April, before the May essay; implementation began on 1 June. Current Anthropic and OpenAI pricing pages do not establish universal migration dates. Kimi and DeepSeek existed before May. Mistral's Le Chonk weights and Kimi K3.1 weights were promised, not observed released at the cut-off. Platform feature absorption does not establish named startup failures. Investor concern about overbuild is distinguished from measured excess capacity; the evidence does not establish broad SaaS contraction or systemic defaults.
+## Implementation and checks
 
-The sources and access limits appear in the article. The full New York Times transcript was inaccessible; only the publisher's episode description is used. PhotoCraft's inspected README is pinned to a commit; no independent application benchmarks were performed. Supplier engineering reports describe specific environments, not general productivity. The financial report is treated as a downside analysis, without adopting its aggregate exposure figures as verified losses. No event after 26 October is presented as observed.
+`EssayWide.astro` expands only the wrapped figures, up to 72rem and bounded by the viewport. The React islands provide server-rendered content and expandable text alternatives. The ownership map includes a seventh layer for distribution and personal agents. There are no new dependencies or external data requests.
 
-The scenario explorer is qualitative, with no probabilities or company-specific contractual claims. Calculator defaults are invented assumptions. Its formula charges every attempt for inference and human review, including failed attempts, and displays no unit cost when there are no accepted outcomes.
-
-## Local models, private hosting and personal agents
-
-The extension stays within the existing three-part argument and four interactive figures. It adds local versus API economics, customer-owned colocation versus dedicated hosting, supervised versus lights-out software factories, and competition for the personal-agent interface. These are related mechanisms, not a claim that hosting determines autonomy. The ownership figure now has a seventh layer for distribution and personal agents; the original eight-pressure convergence audit and its evidence labels remain intact.
-
-Chronology: M5 Pro/Max hardware and Revolut AIR's UK rollout predate May. Apple's October MLX results use Mac Studios, not typical MacBooks. Surface Laptop Ultra availability begins 16 October; the US Surface RTX Spark Dev Box is still due to ship in November. Equinix Inference Exchange is a September preview. Dell's 6,500 customers versus 5,000 the prior quarter is supplier-reported, not audited repatriated cloud spend. HPE mixes currently available GPU features with late-2026 and 2027 services. Factory research is scoped and supplier-affiliated; neither it nor hosting announcements establishes widespread autonomous software production on private GPUs.
-
-The governing impact is workload redistribution and competition for the customer relationship. Local/private inference may change who receives AI revenue and who carries financing risk without reducing aggregate chip or power demand. Apple Intelligence is hybrid and distinct from self-hosting Qwen; Grok Bot is cloud-hosted. No population-level claim about local-model adoption, universal cost advantage or enterprise departure from hyperscalers is made. The calculator explicitly excludes owned-infrastructure costs.
-
-## Implementation
-
-`EssayWide.astro` expands only explicitly wrapped figures to at most 72rem, bounded by the viewport. The reading column and other posts retain their existing layout. The React islands render meaningful initial content on the server; expandable text alternatives expose the map and financial scenarios without using the selectors. Controls use native buttons and ranges, visible focus and labelled groups. There are no new dependencies, external scripts or data requests.
-
-For local browser review, run `pnpm dev` and inspect the route above. `node scripts/check-map-moved.mjs` starts its own local server for interaction, responsive layout and fallback checks. It requires an installed Playwright Chromium; restricted environments can supply a packaged browser via `BROWSER_MODULE`.
+`node scripts/check-map-moved.mjs` starts a local server and checks the three figures, map filters and views, financial scenarios, source anchors, no-JS alternatives and responsive layouts. It requires Playwright Chromium; `BROWSER_MODULE` can supply a packaged browser in restricted environments. Run the repository's formatting, lint and build checks before updating the PR.

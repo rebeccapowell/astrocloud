@@ -5,7 +5,13 @@ import {
 } from "@/data/convergenceEvidence";
 import "./IntelligenceAtlas.css";
 
-const statuses = ["All", "Observed", "Emerging", "Mixed"] as const;
+const statuses = [
+  "All",
+  "Observed",
+  "Emerging",
+  "Mixed",
+  "Unconfirmed",
+] as const;
 
 export default function ConvergenceAudit() {
   const [filter, setFilter] = useState<(typeof statuses)[number]>("All");
@@ -26,8 +32,8 @@ export default function ConvergenceAudit() {
         <p className="atlas-kicker">01 / Revisit the convergence map</p>
         <h3 id={`${id}-title`}>Several pressures from May are now visible</h3>
         <p>
-          Choose a pressure to see the original expectation, dated evidence and
-          what it establishes. Assessments as at 26 October 2026.
+          Choose a pressure to compare May's argument with what has happened
+          since. Last checked on 26 October 2026.
         </p>
       </header>
       <div className="convergence-counts">
@@ -78,7 +84,7 @@ export default function ConvergenceAudit() {
           <p className="atlas-kicker">{active.status}</p>
           <h4>{active.conclusion}</h4>
           <p>
-            <strong>May's expectation:</strong> {active.may}
+            <strong>In May:</strong> {active.may}
           </p>
           <ol className="convergence-evidence">
             {active.evidence.map(e => (
@@ -94,19 +100,19 @@ export default function ConvergenceAudit() {
             <strong>Why it matters:</strong> {active.meaning}
           </p>
           <p className="atlas-evidence">
-            <strong>What this does not establish:</strong> {active.reservation}
+            <strong>The open question:</strong> {active.reservation}
           </p>
         </div>
       </div>
       <footer>
-        <strong>How to read the labels:</strong> Observed means May's stated
-        mechanism is visible in the evidence. Emerging means related signs are
-        visible but the predicted change needs more evidence. Mixed means both
-        supporting evidence and limits matter. These counts are editorial
-        assessments, not a crash score or a probability.
+        <strong>Observed:</strong> the change is happening.{" "}
+        <strong>Emerging:</strong> there are early signs, but the impact is
+        still unclear. <strong>Mixed:</strong> the results point both ways.{" "}
+        <strong>Unconfirmed:</strong> still a risk to watch, rather than a
+        change we can point to.
       </footer>
       <details>
-        <summary>Read all eight assessments without using the controls</summary>
+        <summary>Read the whole convergence map</summary>
         {convergenceEvidence.map(p => (
           <div key={p.id}>
             <h4>

@@ -225,63 +225,9 @@
   padding: 0 2rem 1rem;
   font-size: 0.9rem;
 }
-.atlas-calculator {
-  padding: 1rem 2rem 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-}
-.atlas-range {
-  display: block;
-  margin-bottom: 1.25rem;
-}
-.atlas-range span {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.atlas-range output {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  color: var(--accent);
-}
-.atlas-range input {
-  display: block;
-  width: 100%;
-  margin-top: 0.5rem;
-  accent-color: var(--accent);
-}
-.atlas-result {
-  border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--accent) 6%, var(--background));
-  border-radius: 1rem;
-  padding: 1.5rem;
-  align-self: start;
-}
-.atlas-result > strong {
-  font-size: clamp(1.6rem, 4vw, 3rem);
-  line-height: 1.3;
-  display: block;
-  color: var(--accent);
-}
-.atlas-result dl {
-  margin-top: 2rem;
-}
-.atlas-result dl div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block: 0.5rem;
-  border-top: 1px solid var(--border);
-}
-.atlas-result dd {
-  margin: 0;
-  text-align: right;
-}
 @media (max-width: 700px) {
   .atlas-map-grid,
-  .atlas-comparison,
-  .atlas-calculator {
+  .atlas-comparison {
     grid-template-columns: 1fr;
   }
   .atlas-map-grid nav {
@@ -296,13 +242,9 @@
     padding: 1.25rem;
   }
   .atlas-switch,
-  .atlas-calculator,
   .intelligence-atlas details,
   .intelligence-atlas footer {
     padding: 1.25rem;
-  }
-  .atlas-calculator {
-    gap: 1.5rem;
   }
 }
 @media print {

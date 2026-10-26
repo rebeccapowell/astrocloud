@@ -1,4 +1,4 @@
-export type EvidenceStatus = "Observed" | "Emerging" | "Mixed";
+export type EvidenceStatus = "Observed" | "Emerging" | "Mixed" | "Unconfirmed";
 export type ConvergencePressure = {
   id: string;
   title: string;
@@ -49,7 +49,7 @@ export const convergenceEvidence: ConvergencePressure[] = [
     meaning:
       "A buyer can compare APIs with models on a laptop or dedicated infrastructure, using paid services for work that needs them. Some computing spend could move towards hardware and hosting rather than model-access fees.",
     reservation:
-      "More available models do not yet establish how much work has switched or how far the leaders' pricing premium has fallen. These suppliers existed before May. Provider benchmarks need independent testing, and large open models can require substantial infrastructure.",
+      "How much work will customers actually move? A cheaper model still has to do the job well enough, and running it yourself requires suitable hardware.",
   },
   {
     id: "token-economics",
@@ -75,9 +75,9 @@ export const convergenceEvidence: ConvergencePressure[] = [
       },
     ],
     meaning:
-      "A long-running agent can spend far more than a short question. Customers now have stronger reasons to choose models carefully, set budgets and count accepted outcomes.",
+      "A long-running agent can spend far more than a short question. Customers have stronger reasons to set budgets and compare the cost of getting work finished.",
     reservation:
-      "The GitHub announcement predates the May essay; its implementation followed it. Current price pages establish today's terms, not the date every customer changed plan. Metered billing does not by itself prove losses or a universal price rise.",
+      "Will customers get enough useful work for the bill, and will suppliers earn enough to cover their costs? Cheaper tokens and larger bills can happen together.",
   },
   {
     id: "enterprise-roi",
@@ -96,7 +96,7 @@ export const convergenceEvidence: ConvergencePressure[] = [
     meaning:
       "The revenue that suppliers expect from widespread transformation may arrive later than the investment made to serve it.",
     reservation:
-      "This is self-reported value, not an audited profit measure. It does not mean the other 87% received no benefit or that 87% of projects failed. Some businesses are already getting useful returns.",
+      "How quickly will smaller benefits turn into lasting business gains? The other survey respondents may already be getting useful, less dramatic results.",
   },
   {
     id: "capex",
@@ -118,14 +118,14 @@ export const convergenceEvidence: ConvergencePressure[] = [
       },
       {
         date: "21 October 2026",
-        fact: "Dell reports more than 6,500 AI Factory customers, up from 5,000 the prior quarter. This is its own customer count, not a measure of displaced cloud workloads.",
+        fact: "Dell reports more than 6,500 AI Factory customers, up from 5,000 the previous quarter.",
         source: "#source-private-adoption",
       },
     ],
     meaning:
       "Investors are asking when capacity will earn enough to justify its cost. Local and private inference also change which provider might receive the revenue, while shifting some investment risk to customers.",
     reservation:
-      "Concern about overbuild is visible; economy-wide excess capacity is not established here. Scarcity today and too much committed supply later can coexist. Announced spending is not installed capacity.",
+      "Will future capacity attract enough paying work? Today's shortages can coexist with too much investment in tomorrow's supply.",
   },
   {
     id: "saas",
@@ -142,19 +142,19 @@ export const convergenceEvidence: ConvergencePressure[] = [
       },
       {
         date: "21 October 2026",
-        fact: "Reuters reports stronger SAP cloud revenue and backlog, a counterexample to a blanket SaaS-collapse claim.",
+        fact: "SAP reported stronger cloud revenue and backlog as customers continued to buy its services.",
         source: "#source-saas-results",
       },
       {
         date: "28 September 2026",
-        fact: "A Microsoft-affiliated software-factory paper reports deployments across tens of repositories, scoped to data-system improvements with measurable objectives.",
+        fact: "Microsoft researchers and collaborators describe software-factory work across tens of repositories, focused on improving data systems.",
         source: "#source-software-factories",
       },
     ],
     meaning:
       "The threat depends on what the customer pays for: a replaceable feature, or records, integration and a dependable service.",
     reservation:
-      "Cheaper construction is not evidence that customers have cancelled subscriptions. Broad seat compression and falling retention need company-level evidence; this research does not establish them across SaaS.",
+      "Will customers replace subscriptions, or keep paying for reliable service and integration? Building an alternative is only the beginning.",
   },
   {
     id: "wrappers",
@@ -183,16 +183,21 @@ export const convergenceEvidence: ConvergencePressure[] = [
     meaning:
       "A separate product must offer enough additional value to justify another purchase when a similar function is already available in the customer's main assistant.",
     reservation:
-      "Feature overlap is observed; named company failures are not demonstrated by these releases. Included access is not unlimited free usage, and specialised products can still win on quality, trust or integration.",
+      "Which specialists offer enough extra value to keep their customers? Bundled features raise the pressure, but quality, trust and integration can still justify another purchase.",
   },
   {
     id: "financing",
     title: "Financing stress",
-    status: "Emerging",
+    status: "Unconfirmed",
     conclusion:
-      "The obligations behind the buildout are receiving more scrutiny.",
+      "There is more scrutiny of the financing, but the stress May anticipated remains an open risk.",
     may: "Leases, debt and guarantees could transmit trouble before the technology itself disappoints.",
     evidence: [
+      {
+        date: "26 October 2026",
+        fact: "Anthropic's IPO filing warns about capacity payments regardless of usage, alongside improved operating results.",
+        source: "#source-anthropic-filing",
+      },
       {
         date: "October 2026",
         fact: "Brace for Impact maps financial connections and possible transmission of losses beyond AI suppliers.",
@@ -207,7 +212,7 @@ export const convergenceEvidence: ConvergencePressure[] = [
     meaning:
       "Useful products do not remove payment deadlines. Some businesses may need to refinance before customer income covers their commitments.",
     reservation:
-      "A policy report's downside scenarios are not observed defaults. Debt, leases, guarantees and purchase commitments carry different risks and must not be added together as though all were outstanding loans.",
+      "Who has to pay if a customer or project runs out of money? That depends on the borrowing, leases and guarantees behind each deal.",
   },
   {
     id: "belief",
@@ -231,6 +236,6 @@ export const convergenceEvidence: ConvergencePressure[] = [
     meaning:
       "The change in the story has begun: spending more is no longer automatically reassuring. That is evidence of strain in belief, even while AI remains useful.",
     reservation:
-      "Concern about AI's payoff is visible; a durable shift towards rewarding profit capture over AI exposure is not yet established. A debate and a selloff can reverse. Interest rates, energy prices and other news also affect markets.",
+      "Will the doubts last, or will optimism return? A selloff can reverse, and AI is only one of the forces moving markets.",
   },
 ];

@@ -63,12 +63,12 @@ try {
   await audit.getByRole("button", { name: "Emerging", exact: true }).click();
   await page.waitForFunction(
     () =>
-      document.querySelectorAll(".convergence-audit nav button").length === 4
+      document.querySelectorAll(".convergence-audit nav button").length === 3
   );
   await audit.getByRole("button", { name: /Model scarcity/ }).click();
   assert.match(
     await audit.locator(".convergence-detail").innerText(),
-    /how much work has switched/
+    /How much work will customers actually move/
   );
   await audit.getByRole("button", { name: "Observed", exact: true }).click();
   await page.waitForFunction(
@@ -78,7 +78,18 @@ try {
   await audit.getByRole("button", { name: /Infrastructure spending/ }).click();
   assert.match(
     await audit.locator(".convergence-detail").innerText(),
-    /economy-wide excess capacity is not established/
+    /Will future capacity attract enough paying work/
+  );
+  await audit.getByRole("button", { name: "Unconfirmed", exact: true }).click();
+  await page.waitForFunction(
+    () =>
+      document.querySelectorAll(".convergence-audit nav button").length === 1
+  );
+  assert.equal(
+    await audit
+      .locator('.convergence-detail a[href="#source-anthropic-filing"]')
+      .count(),
+    1
   );
   await audit.getByRole("button", { name: "Mixed", exact: true }).click();
   await page.waitForFunction(
@@ -115,7 +126,7 @@ try {
     )
   );
   assert.equal(
-    await map.getByText("Revised judgement", { exact: true }).count(),
+    await map.getByText("Where I stand now", { exact: true }).count(),
     0
   );
   await map.getByRole("button", { name: "Revised map", exact: true }).click();
@@ -125,40 +136,14 @@ try {
       document.querySelector(".atlas-map-grid h4")?.textContent ===
       "Identity and authority"
   );
-  assert.match(await map.innerText(), /Authority crosses every layer/);
+  assert.match(await map.innerText(), /Every agent needs permission/);
   await map.getByRole("button", { name: "Compare", exact: true }).click();
-  const calculator = page.locator(
-    'astro-island[component-export="OutcomeCalculator"] .intelligence-atlas'
+  assert.equal(
+    await page
+      .locator('astro-island[component-export="OutcomeCalculator"]')
+      .count(),
+    0
   );
-  await calculator.scrollIntoViewIfNeeded();
-  await page.waitForFunction(
-    () =>
-      !document
-        .querySelector('astro-island[component-export="OutcomeCalculator"]')
-        ?.hasAttribute("ssr")
-  );
-  await calculator.getByRole("button", { name: "Reset assumptions" }).click();
-  await page.waitForFunction(
-    () =>
-      document.querySelectorAll(".atlas-result > strong")[0]?.textContent ===
-      "£8.81"
-  );
-  const acceptance = calculator.getByRole("slider", {
-    name: /Accepted outcomes/,
-  });
-  await acceptance.focus();
-  await page.keyboard.press("Home");
-  await page.waitForFunction(
-    () =>
-      document.querySelector(".atlas-result > strong")?.textContent ===
-      "No accepted outcomes"
-  );
-  await page.keyboard.press("End");
-  await page.waitForFunction(
-    () =>
-      document.querySelector(".atlas-result > strong")?.textContent === "£6.17"
-  );
-  await calculator.getByRole("button", { name: "Reset assumptions" }).click();
   const exposure = page.locator(
     'astro-island[component-export="ExposureExplorer"] .intelligence-atlas'
   );
@@ -173,7 +158,7 @@ try {
   await page.waitForFunction(() =>
     document
       .querySelector(".atlas-trigger")
-      ?.textContent?.includes("cash receipts fall short")
+      ?.textContent?.includes("payments fall short")
   );
   await exposure
     .getByRole("button", { name: "The buildout earns its keep" })
@@ -217,7 +202,6 @@ try {
       path: `/tmp/map-moved-qa/convergence-${width}.png`,
     });
   }
-  await calculator.screenshot({ path: "/tmp/map-moved-qa/calculator.png" });
   await exposure.screenshot({ path: "/tmp/map-moved-qa/exposure.png" });
   await page.evaluate(() => (document.documentElement.dataset.theme = "dark"));
   await map.screenshot({ path: "/tmp/map-moved-qa/map-dark.png" });
@@ -227,7 +211,7 @@ try {
   const fallback = await noJs.newPage();
   await fallback.goto(url);
   await fallback
-    .getByText("Read all eight assessments without using the controls", {
+    .getByText("Read the whole convergence map", {
       exact: true,
     })
     .click();
@@ -239,15 +223,15 @@ try {
     .getByText("Model scarcity: Emerging", { exact: true })
     .waitFor({ state: "visible" });
   await fallback
-    .getByText("Read every layer without using the controls", { exact: true })
+    .getByText("Read the whole ownership map", { exact: true })
     .click();
   await fallback
-    .getByText("May: The physical substrate remains strategic.", {
+    .getByText("May: Chips, memory and energy remain essential.", {
       exact: true,
     })
     .waitFor({ state: "visible" });
   console.log(
-    "PASS: eight-pressure audit, filters, evidence, map views/layers, scenarios, calculator including zero outcomes, keyboard range control, source anchors, 320/390/768/1440px overflow, wide figures, dark screenshots, no-JS fallbacks and client runtime."
+    "PASS: eight-pressure audit, filters, evidence, map views/layers, scenarios, calculator removed, source anchors, 320/390/768/1440px overflow, wide figures, dark screenshots, no-JS fallbacks and client runtime."
   );
 } finally {
   await browser?.close();
