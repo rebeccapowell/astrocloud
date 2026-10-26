@@ -106,10 +106,9 @@ const nextPost =
     >
       {title}
     </h1>
-    <SocialShare
-      description="Description of the page/post"
-      title="Page Title"
-    />
+    <div class="post-share">
+      <SocialShare {description} {title} />
+    </div>
     <div class="flex items-center gap-4">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
       <EditPost class="max-sm:hidden" {hideEditPost} {post} />
@@ -227,6 +226,13 @@ const nextPost =
       document.querySelectorAll("h2, h3, h4, h5, h6")
     );
     for (const heading of headings) {
+      // React owns island contents, including headings, during hydration.
+      if (
+        heading.closest("astro-island") ||
+        !heading.id ||
+        heading.querySelector(".heading-link")
+      )
+        continue;
       heading.classList.add("group");
       const link = document.createElement("a");
       link.className =
@@ -289,3 +295,10 @@ const nextPost =
     window.scrollTo({ left: 0, top: 0, behavior: "instant" })
   );
 </script>
+
+<style>
+  .post-share :global(.astro-social-share) {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+</style>

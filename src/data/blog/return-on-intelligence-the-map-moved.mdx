@@ -1,0 +1,188 @@
+---
+title: "Return on Intelligence: The Map Moved"
+author: Rebecca Powell
+pubDatetime: 2026-11-01T09:00:00Z
+featured: true
+draft: false
+tags:
+  - AI
+  - Software
+  - Capital Markets
+  - Future of Business
+description: A follow-up to the May 2026 series. Agentic software production, the struggle for authority and the financial obligations beneath the AI buildout redraw the ownership map.
+---
+
+import EssayWide from "@/components/EssayWide.astro";
+import {
+  MapExplorer,
+  ExposureExplorer,
+  OutcomeCalculator,
+} from "@/components/IntelligenceAtlas";
+
+_A November postscript to [Return on Intelligence](/posts/return-on-intelligence-the-preface). Research cut-off: 26 October 2026. The interactive scenarios are explanatory models, not financial forecasts._
+
+In May, I argued that the AI bubble could burst because the technology was real enough to undermine the market's first story about who would own it. Cheaper intelligence could make software easier to reproduce, weaken familiar business models and move value into less glamorous places: records, permissions, infrastructure, customer relationships and the machinery that turns an intention into an action.
+
+Five months later, I still think that is the right question. I am less satisfied with the neatness of the answer I drew.
+
+The [Breaking Point](/posts/return-on-intelligence-05-breaking-point) chapter described pressures that could converge. The [final map](/posts/return-on-intelligence-08-new-power-map) arranged the likely sources of durable power into a stack. Both were useful ways of thinking. Neither sufficiently showed how the same technology can make a customer more productive, weaken a software vendor's pricing power, increase a model supplier's workload and leave the owners of its infrastructure with a financing problem.
+
+Those outcomes can happen together. An increase in useful intelligence does not tell us where the resulting income settles, or whether it arrives before the bills fall due.
+
+This is my revision of the map. There are three questions running through it: what can now be produced, who controls its use, and who carries the obligations that make production possible.
+
+## What May got right, and what it left too vague
+
+The May series already included orchestration, evaluation, durable execution, governance and generated software. It would be convenient to rename those things and announce that the prediction had come true. It would also avoid the harder work of revisiting the argument.
+
+The weakness was how much I put into the phrase “orchestration and execution”. A system that helps an agent write software, a workflow that safely completes an order and a test that establishes whether an image renderer is faithful are different pieces of machinery. They have different customers, different failure modes and different opportunities to charge for their services.
+
+I also gave the physical substrate a rather comfortable place at the bottom. Compute remained important, so compute appeared among the likely winners. But the importance of an asset does not establish the return to its owner. A busy railway can have ruined shareholders. A data centre can be essential to its tenant while the project company struggles to service its debts.
+
+The revised map makes those distinctions explicit. It is a map of potential control points rather than a league table of companies whose shares should go up.
+
+<EssayWide>
+  <MapExplorer client:load />
+</EssayWide>
+
+## The software factory was already emerging
+
+One correction matters before going further. The machinery around agents did not appear after I wrote the series. OpenAI's [February account of harness engineering](#source-harness) described an experiment in which engineers shaped the environment, feedback loops and constraints around agents producing an internal application. It included isolated worktrees, access to application behaviour and agent reviews. That evidence was available before May. The authors also warned that the behaviour depended on the particular repository and tooling they had built.
+
+The question now is how much weight this operating model deserves. A coding agent needs a place to work, an intelligible codebase, ways to inspect its results and a path from proposed changes to accepted changes. More capable models help. So do environments that make mistakes easier to detect and recover from.
+
+[GitHub's September account of coding efficiency](#source-github) offers a useful example. Its engineers describe improvements to tool output and orchestration, and explain why reducing tokens in one interaction can increase the cost of the whole task. Optimising the environment can improve the economics without making the underlying model more intelligent.
+
+My inference is that the production system deserves its own position on the map. It includes the harness, working environment, repository knowledge, tests, review process and access to running software. These elements determine how much of a model's apparent capability survives contact with a real project.
+
+That still leaves a commercial question. If these techniques spread through open tools and standard practice, the production layer could itself become competitive. Being necessary is not enough to make it a durable business. The operator who can repeatedly deliver dependable results may capture more value than the supplier of any single part.
+
+## ArtCraft and the cost of attempting the impossible
+
+ArtCraft is an unusually vivid example. The [October coverage](#source-lumien) describes Brandon Thomas using Claude to build a collection of Rust applications aimed at familiar Adobe workflows. Those are ambitious targets for a small operation. The headline invites an argument about whether Adobe has already been replaced. The more useful question is what has changed about the cost of making the attempt.
+
+The [PhotoCraft repository](#source-photocraft) still labels the product early alpha. Its documentation describes a common command surface for the interface, CLI and MCP, and testing against real document corpora. Those are the project maintainers' descriptions, not an independent certification of compatibility or quality. I have inspected the documentation; I have not benchmarked the applications.
+
+For this map, the interesting combination is software that agents help construct and software that agents can operate and inspect. The application becomes part of the environment through which further work can be produced and checked.
+
+A professional replacement still has to preserve someone's documents, behave reliably under pressure and fit the rest of their workflow. Existing alternatives, accumulated expertise and open-source dependencies also belong in the explanation. An impressive interface does not demonstrate that all of those obligations have been met.
+
+But a competitor need not replace every feature to affect a market. It can serve a narrower group whose requirements are easier to satisfy. It can give dissatisfied customers another option. It can make particular prices harder to defend. This is how a falling cost of construction can erode a software rent before a complete substitute exists.
+
+The same pressure could reach the factories themselves. If software becomes easier to reproduce, the company selling tools for reproducing software also needs an answer to the question of what remains scarce.
+
+## Authority is becoming a contested market
+
+The May map said durable power sits where intelligence meets authority. I would retain that sentence and draw its consequences more clearly.
+
+An agent may be capable of offering a refund, changing a price or deploying an application. Whether it may do so depends on the organisation's actual commitments. Access to the tool is only part of the answer. Someone needs to establish whose authority is being exercised, its limits and the evidence needed before the action goes ahead.
+
+[Microsoft's October security argument](#source-microsoft) explicitly places controls outside the model and proposes permissions scoped to the task. That is evidence of a supplier building around this boundary. It does not establish that the supplier will own it, or that every advertised control already works in every setting.
+
+The attraction is understandable. A company that controls identity, access, the working surface and the record of what happened can remain important even when customers change models. The relationship can also become a new dependency: moving to a cheaper model does little for bargaining power if the surrounding permissions, history and integrations remain difficult to move.
+
+For businesses, the test is practical. Can we replace the model without losing the process? Can we move the process without losing the evidence? Can we revoke authority without breaking everything else? Those are architectural questions with commercial consequences.
+
+## The debate is about more than whether AI works
+
+[Ezra Klein's October episode](#source-klein) stages a debate between Paul Kedrosky and Azeem Azhar. Its published description sets out their disagreement: Kedrosky sees a bubble, while Azhar takes a more optimistic view. Klein is the host; those positions should not be collapsed into a single “Ezra Klein view”. The episode also puts the competition for construction resources into the discussion, extending the question beyond technology companies.
+
+There is a useful earlier statement of Azhar's argument in his [October 2025 essay on funding quality](#source-azhar). He acknowledges speculative finance while distinguishing productive capacity from the transfer of risk. That distinction deserves space here. Real demand, revenue growth and improved economics could support a buildout even while individual projects fail. The size of a spending number alone does not settle the case.
+
+[Ed Zitron's October writing](#source-zitron) presses on the other side of the equation: the concentration of exposure and the dependence on continued spending. His [critique of annualised revenue metrics](#source-runrate) is especially relevant to how we read the evidence. An extrapolated run rate is not a completed year's revenue, and reported figures need consistent definitions before they can be compared. Consumption revenue also needs to be distinguished from a contractual promise to keep paying.
+
+I find those questions persuasive without needing to adopt every conclusion in the commentary. A supplier can have enthusiastic customers and poor economics. It can also have weak current cash flow while building a viable business. We need evidence about the period, the costs, the customers and the obligations, rather than a bigger headline number.
+
+For the customer, another denominator matters: the amount of work accepted at the required quality. A cheaper model can be more expensive if it produces more retries, demands longer review or creates mistakes that emerge after approval. Conversely, a premium model can be economical if it completes valuable work reliably. Token price alone cannot answer either question.
+
+<EssayWide>
+  <OutcomeCalculator client:visible />
+</EssayWide>
+
+## The obligations beneath the stack
+
+Scherer and Jenkins' October report, [_Brace for Impact_](#source-report), adds the most consequential missing dimension. It examines circular financing, leases, guarantees, private credit and paths through which AI losses could reach insurers, pensions and households. It presents crisis mechanisms, while explicitly declining to predict a specific sequence or call a crisis inevitable.
+
+Its discussion of stranded assets also complicates the easy dotcom analogy. The report questions how economically reusable specialised chips and data centres would be after a downturn. It distinguishes a shallow correction that could strengthen surviving giants from a severe shock that could damage them through their connections to weaker firms. These are scenarios to investigate, not a timetable.
+
+I would use that analysis with accounting discipline. Capital expenditure is not an annual operating expense. A purchase commitment, a guarantee and outstanding borrowing are different exposures. Mapping them requires terms, counterparties and care to avoid counting one obligation several times. Comparing infrastructure spending with product revenue can expose the scale of the challenge; it does not calculate a project's solvency. The report's aggregate estimates need checking against underlying filings before becoming precise loss claims.
+
+This changes how I read the ownership stack. It is simultaneously a network of claims on future payments. The party using the equipment may not own it. The company whose name appears on the announcement may not owe the project debt. A guarantee can move the downside again. The map needs to show those relationships before we can say who is insulated from a failure.
+
+<EssayWide>
+  <ExposureExplorer client:visible />
+</EssayWide>
+
+## A useful machine can still have the wrong owners
+
+Put ArtCraft beside the financial report and the apparent contradiction becomes interesting. Software can become easier to construct while the infrastructure supplying the intelligence becomes harder to finance. A customer can receive more capability for less money while a supplier discovers that its pricing power is weaker than its commitments assumed.
+
+There are other possible outcomes. Lower prices could create enough additional paid demand to improve utilisation. Businesses could find applications whose savings comfortably cover the full cost. Suppliers could become more efficient. Those possibilities belong in the argument, and measurable evidence for them should change it.
+
+What I would retire is the certainty of the May series' ending. A broad crash is one route through these tensions. A prolonged repricing, selective failures, mergers, changes in billing and a shift of gains towards customers are others. Value can migrate without a single moment when the entire market changes its mind.
+
+The map therefore needs to distinguish three things that my earlier language sometimes ran together: technological usefulness, a viable business and an attractive price for ownership. None automatically establishes the next.
+
+It also needs people outside the transaction. A community can absorb the costs of a failed infrastructure project without having chosen to invest. Workers can face disruption whether the suppliers earn extraordinary profits or fail. The benefits of cheaper production and the burdens of financing it need not land with the same people.
+
+## What would change my mind
+
+I would become less concerned about the financing story if paying customers outside the AI supply chain renewed at healthy rates, suppliers disclosed comparable margins and cash flows, and projects met their obligations without repeatedly relying on new finance from interested counterparties. Better utilisation and productive reuse of older equipment would also count against a simple stranded-asset story.
+
+I would become less confident about rapid software substitution if the cost of maintaining generated systems remained stubbornly high, customers continued paying mainly for dependable integration and responsibility, or the apparent productivity gains disappeared when measured across complete workflows. A burst of code production alone cannot resolve those questions.
+
+And I would become more concerned about concentrated power if model choice expanded while practical control over identity, distribution, records and execution narrowed. The existence of many models would then disguise a smaller number of places through which useful work must pass.
+
+The strongest question from May survives: which parts of a business become more valuable when intelligence becomes cheaper, and which were valuable because production and coordination were expensive? I would now add a second question: who has promised to pay for that transition, on what terms, and out of whose future income?
+
+That is the map I want to keep watching. It has capable machines in it, businesses trying to organise around them, customers deciding what is worth buying and obligations that continue to exist when the story changes.
+
+## Sources and reading notes
+
+These links were checked on 26 October 2026. Supplier accounts document their own implementations and claims. Commentary supplies arguments to evaluate. Neither is a substitute for independent measurement. No November events are assumed in this draft.
+
+<div id="source-may" />
+
+- **The May baseline:** [Breaking Point](/posts/return-on-intelligence-05-breaking-point) and [The New Power Map](/posts/return-on-intelligence-08-new-power-map). The original essays remain dated records of the thesis. This postscript is a revision, not an extra numbered chapter.
+
+<div id="source-photocraft" />
+
+- **PhotoCraft:** [README at the inspected commit](https://github.com/storytold/photocraft/blob/59cb4c49bd236df04d8e37d4764253f29ca6600a/README.md). Project documentation, including early-alpha status, agent interfaces and corpus tests. Documentation review only; no independent application testing is claimed.
+
+<div id="source-lumien" />
+
+- **ArtCraft coverage:** [Lumien, 8 October 2026](https://lumienai.com/news/artcraft-open-source-adobe-clone-claude-opus-rust). Secondary reporting used for the announcement and motivation. Its “clean-room” description is the developer's claim, not a legal finding. Development-time and feature-parity claims are not used as measurements here.
+
+<div id="source-harness" />
+
+- **OpenAI, 11 February 2026:** [Harness engineering](https://openai.com/index/harness-engineering/). A supplier's account of a particular internal engineering experiment. It predates the May series and cannot be evidence that the concept first appeared afterwards.
+
+<div id="source-github" />
+
+- **GitHub, 2 September 2026:** [How we make AI coding more cost efficient without sacrificing task quality](https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/). Primary engineering account; results depend on the workflows evaluated.
+
+<div id="source-microsoft" />
+
+- **Microsoft, 19 October 2026:** [Agents are your newest insiders](https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/). Primary statement of its security approach and proposed controls, not independent evidence of adoption or commercial dominance.
+
+<div id="source-klein" />
+
+- **The Ezra Klein Show, 16 October 2026:** [Is There an A.I. Bubble? A Debate.](https://podcasts.apple.com/us/podcast/is-there-an-a-i-bubble-a-debate/id1548604447?i=1000796627225). Episode metadata and publisher's description establish the guests and framing. The full New York Times transcript was inaccessible during this research; no detailed claims or quotations are attributed to it here.
+
+<div id="source-azhar" />
+
+- **Azeem Azhar, 18 October 2025:** [The imminence of the AI bust](https://www.exponentialview.co/p/the-imminence-of-the-ai-bust-correct). An earlier counterpoint about funding quality and productive investment. The date matters: this is background to the current debate, not new October 2026 evidence.
+
+<div id="source-zitron" />
+
+- **Ed Zitron, 20 October 2026:** [AI Had Better Work Out](https://www.wheresyoured.at/ai-had-better-work-out/). Argument and linked reporting on concentration and the spending required to sustain the AI trade. This article does not reproduce its market-weight estimates.
+
+<div id="source-runrate" />
+
+- **Ed Zitron, 13 October 2026:** [Annualized Enron Rate](https://www.wheresyoured.at/annualized-enron-rate/). Critique of annualisation and inconsistent revenue definitions. Its title is the author's rhetoric; linking it does not establish fraud by any company.
+
+<div id="source-report" />
+
+- **Matthew U. Scherer and Maya Jenkins, October 2026:** [Brace for Impact: Protecting people and the economy when the AI bubble bursts](https://static1.squarespace.com/static/5e449c8c3ef68d752f3e70dc/t/6ad18accea1ab06edc762a93/1792117452216/Brace+for+Impact-Scherer-Jenkins-OMI-October2026-WEB+%281%29.pdf), Open Markets Institute and Americans for Financial Reform Education Fund. See printed pp. 21–25 for financing and accounting; pp. 30–40 for pressure and transmission; pp. 47–48 for stranded assets. A policy report building a downside case; neither crash timing nor precise losses are established by it.
+
+Return to the [series preface](/posts/return-on-intelligence-the-preface), or revisit the original [Breaking Point](/posts/return-on-intelligence-05-breaking-point).
