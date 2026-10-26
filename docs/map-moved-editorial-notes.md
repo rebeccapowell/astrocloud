@@ -26,6 +26,8 @@ Anthropic's 26 October IPO filing is included directly as counter-evidence and a
 
 The Reddit post was subsequently supplied in full and checked against the filing's Notes 2, 7, 8, 9 and 13. Note 8 discloses cost of revenue separately from R&D. The $72.4 billion fair-value charge is for H1, not Q2. The $42 billion facility was undrawn at June 30. Cloud marketplaces are billing channels for end customers, and the filing explains its principal-based gross revenue policy. The post's allegations of hidden costs or improper accounting are not adopted.
 
+The Hacker News discussion at https://news.ycombinator.com/item?id=50242939 supplied further questions rather than new financial evidence. The filing's risk factors confirm the mismatch between primarily usage-based revenue and multi-year infrastructure commitments. The article now connects that mismatch with the earlier discussion of open models and private hosting: growing AI demand can coexist with pressure on suppliers' margins. Multi-year commitments are not compared with a single year's revenue, and channel concentration is not treated as proof of concentrated end-customer demand.
+
 OpenAI announced a confidential S-1 submission on 8 June. No comparable public prospectus was identified as at 27 October. Its February AWS expansion and Amazon investment announcement are included as a public example of overlapping investor/supplier roles, with no inference of improper revenue. These arrangements predate May. Financial disclosures were checked on 27 October; the broader evidence map retains its 26 October assessment date.
 
 ## Implementation and checks
