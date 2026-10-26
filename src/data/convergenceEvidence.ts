@@ -55,13 +55,29 @@ export const convergenceEvidence: ConvergencePressure[] = [
     id: "token-economics",
     title: "Token economics",
     status: "Observed",
-    conclusion: "The cost of agent work is becoming an explicit customer bill.",
+    conclusion:
+      "The cost of agent work is more visible, even as token prices fall.",
     may: "Subsidised experimentation would give way to customers measuring the cost of useful work.",
     evidence: [
       {
         date: "27 April → 1 June 2026",
         fact: "GitHub announced AI Credits based on token consumption, replacing premium requests for migrating plans. Annual subscribers had a separate transition.",
         source: "#source-copilot-billing",
+      },
+      {
+        date: "30 July 2026",
+        fact: "OpenAI cut GPT-5.6 Luna's API prices by 80%, attributing the reduction to efficiency gains.",
+        source: "#source-openai-price-cut",
+      },
+      {
+        date: "22 September 2026",
+        fact: "Opus 5.5 launched with input and output prices 20% below Opus 5 and cached-input prices 60% lower. Anthropic says it requires less compute to serve.",
+        source: "#source-anthropic-price-cut",
+      },
+      {
+        date: "15 October 2026",
+        fact: "Vercel reports September AI Gateway spending about thirteen times December's, alongside a 47% fall in average price per token. The mix of models also changed.",
+        source: "#source-gateway-pricing",
       },
       {
         date: "26 October pricing snapshot",
@@ -75,9 +91,9 @@ export const convergenceEvidence: ConvergencePressure[] = [
       },
     ],
     meaning:
-      "A long-running agent can spend far more than a short question. Customers have stronger reasons to set budgets and compare the cost of getting work finished.",
+      "Usage can grow faster than prices fall. Buyers need to compare the cost of completed work and their subscription allowances; suppliers need enough income after computing costs to fund the rest of the business.",
     reservation:
-      "Will customers get enough useful work for the bill, and will suppliers earn enough to cover their costs? Cheaper tokens and larger bills can happen together.",
+      "How much do price cuts reflect cheaper computing, and how much is competition squeezing margins? The price alone does not tell us whether a supplier is losing money.",
   },
   {
     id: "enterprise-roi",

@@ -16,7 +16,7 @@ import EssayWide from "@/components/EssayWide.astro";
 import ConvergenceAudit from "@/components/ConvergenceAudit";
 import { MapExplorer, ExposureExplorer } from "@/components/IntelligenceAtlas";
 
-**May's argument has held up better on the pressures facing AI businesses than on the crash I expected to follow them.** Bills are making the cost of agent work harder to ignore. Customers have more choice about which models they use and where they run them. Features that once justified a separate product are appearing inside the main assistants. Those were central arguments in the [Return on Intelligence series](/posts/return-on-intelligence-the-preface).
+**May's argument has held up better on the pressures facing AI businesses than on the crash I expected to follow them.** Token prices are falling, even as bills make the cost of agent work harder to ignore. Customers have more choice about which models they use and where they run them. Features that once justified a separate product are appearing inside the main assistants. Those were central arguments in the [Return on Intelligence series](/posts/return-on-intelligence-the-preface).
 
 But I wrote too confidently about a crash as the turning point. Much of the change I described as belonging to the economy after a crash is already taking place. Companies can change their prices, customers can switch suppliers and power can move between businesses without one decisive moment when the whole market loses faith.
 
@@ -43,6 +43,8 @@ May argued that enthusiasm about usage would eventually meet a harder question: 
 Under the old premium-request system, a quick question and a lengthy agent session could consume the same allowance. The new approach charges according to the tokens used. GitHub said it could no longer keep absorbing the growing cost of agent work.
 
 [Claude Enterprise](#source-claude-billing) also separates the seat charge from usage, while [OpenAI's Work and Codex plans](#source-openai-billing) combine allowances and credits. The arrangements differ, but the purchasing decision is becoming familiar: what work can this budget actually buy?
+
+The subscription and the model price can move differently. [OpenAI's new Pro 200 terms reduce the included allowance while keeping its monthly price at \$200](#source-pro-allowance), even as its newer models become cheaper to use. A lower API price does not guarantee a more generous subscription.
 
 An agent asked to fix a bug might finish quickly, or spend much longer reading files, trying changes and rerunning tests. Someone still has to check the result. The useful comparison is the cost of getting the bug fixed, including retries and review, rather than the price of the first answer. [GitHub's own engineering work](#source-github) describes why saving tokens in one step can cost more later if the agent then has to recover missing information.
 
@@ -96,11 +98,21 @@ The pressures I described can lead to several outcomes: lower prices, slower gro
 
 This does not remove the risk of a sharp correction. It changes how much weight I would put on that one outcome. Seeing several pressures develop is a reason to revisit the valuations, not a reason to assume the ending has already been decided.
 
+### Low prices need not be a temporary subsidy
+
+May anticipated cheaper inference, but also asked what would happen when usage was “priced honestly”. I would be more careful with that phrase. A low price does not, by itself, show that a supplier is selling at a loss.
+
+[Max Woolf's October account of the price cuts](#source-woolf-pricing) makes this worth revisiting. [OpenAI cut GPT-5.6 Luna's API prices by 80% in July](#source-openai-price-cut). In September, [Anthropic launched Opus 5.5 with input and output prices 20% below Opus 5, and cached-input prices 60% lower](#source-anthropic-price-cut). Caching lets an agent reuse material it has already processed, such as files and conversation history. That discount can matter more than the headline price on a long job.
+
+Anthropic says the newer model requires less computing power to serve. Competition can push prices down while efficiency leaves room for a supplier to earn money on each task. That still has to pay for training, staff and the rest of the business.
+
+Nor do cheaper tokens guarantee a smaller market. [Vercel reports that September spending through its AI Gateway was about thirteen times December's, while the average price per token fell 47%](#source-gateway-pricing). This is one gateway's traffic, and the average changes as customers switch models. Even so, it shows why falling prices and growing revenue can happen together.
+
 ### Suppliers can improve their economics as they grow
 
-[Anthropic's IPO filing, published on 26 October](#source-anthropic-filing), gives another reason to resist a predetermined ending. It reported about $11.6 billion in revenue and $1 billion in operating profit for the second quarter. Competition and expensive computing have not prevented it from improving its operating results.
+[Anthropic's IPO filing, published on 26 October](#source-anthropic-filing), gives another reason to resist a predetermined ending. It reported about \$11.6 billion in revenue and \$1 billion in operating profit for the second quarter. Competition and expensive computing have not prevented it from improving its operating results.
 
-It also reports $265.6 billion of purchase commitments and $321.4 billion of leases not yet started at the end of June, with some lease arrangements still conditional. These are payments spread over future years. The question is whether customer income will grow fast enough to pay those bills while funding the next generation of models.
+It also reports \$265.6 billion of purchase commitments and \$321.4 billion of leases not yet started at the end of June, with some lease arrangements still conditional. These are payments spread over future years. The question is whether customer income will grow fast enough to pay those bills while funding the next generation of models.
 
 Customers can change their spending faster than Anthropic can change its bills. Much of its revenue depends on usage, while its computing agreements run for years. Cheaper open models and private hosting give customers more alternatives. Demand for AI could keep growing even as competition leaves suppliers with less money to meet their commitments.
 
@@ -144,7 +156,7 @@ The report [_Brace for Impact_](#source-report) follows the financing behind the
 
 A useful technology does not suspend payment deadlines. A business can have a promising future and still run out of money before it gets there. The size of that risk depends on who owes what, when payments fall due and who has agreed to cover a failure.
 
-OpenAI's financial picture is harder to inspect. Its [June announcement confirmed a confidential IPO submission](#source-openai-ipo), without publishing the accounts. Its partnership announcements give a partial view: [the February Amazon deal](#source-openai-amazon) expanded its AWS agreement by $100 billion over eight years, alongside Amazon's planned $50 billion investment.
+OpenAI's financial picture is harder to inspect. Its [June announcement confirmed a confidential IPO submission](#source-openai-ipo), without publishing the accounts. Its partnership announcements give a partial view: [the February Amazon deal](#source-openai-amazon) expanded its AWS agreement by \$100 billion over eight years, alongside Amazon's planned \$50 billion investment.
 
 An investor can also be a supplier and a sales channel. That makes it important to ask how much of the growth is ultimately paid for by customers outside those relationships.
 
@@ -174,7 +186,27 @@ May was right to separate the success of AI from the fortunes of the companies s
 
 ## Sources
 
-Links and publication dates. Financial disclosures checked on 27 October 2026.
+Links and publication dates. Financial disclosures and pricing checked on 27 October 2026.
+
+<div id="source-woolf-pricing" />
+
+- **Max Woolf, 25 October 2026:** [OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?](https://minimaxir.com/2026/10/cheap-llms/).
+
+<div id="source-openai-price-cut" />
+
+- **OpenAI, 30 July 2026:** [GPT-5.6 efficiency and price reductions](https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/).
+
+<div id="source-anthropic-price-cut" />
+
+- **Anthropic, 22 September 2026:** [Opus 5.5 pricing and serving efficiency](https://www.anthropic.com/claude-opus-5-5).
+
+<div id="source-pro-allowance" />
+
+- **OpenAI, terms checked 27 October 2026:** [Pro allowances and transition dates](https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers).
+
+<div id="source-gateway-pricing" />
+
+- **Vercel, 15 October 2026:** [AI Gateway Production Index](https://vercel.com/blog/ai-gateway-production-index-october-2026).
 
 <div id="source-openai-ipo" />
 

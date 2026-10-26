@@ -59,6 +59,10 @@ try {
     await audit.locator(".convergence-detail").innerText(),
     /cost of agent work/
   );
+  const initialTokenEvidenceCount = await audit
+    .locator(".convergence-evidence li")
+    .count();
+  assert.ok(initialTokenEvidenceCount > 0, "Token evidence must be visible");
   assert.equal(await audit.locator("nav button").count(), 8);
   await audit.getByRole("button", { name: "Emerging", exact: true }).click();
   await page.waitForFunction(
@@ -104,7 +108,7 @@ try {
   await audit.getByRole("button", { name: /Token economics/ }).click();
   assert.equal(
     await audit.locator(".convergence-evidence li").count(),
-    3,
+    initialTokenEvidenceCount,
     "Switching pressures must not duplicate evidence"
   );
   const map = page.locator(
