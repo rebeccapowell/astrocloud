@@ -9,7 +9,7 @@ tags:
   - Software
   - Capital Markets
   - Future of Business
-description: Several pressures in May's convergence map are now visible in AI bills, competing models, bundled features and investor reactions. What has changed, and what would still have to happen for belief to break?
+description: AI bills, local models, private GPU infrastructure and personal agents are changing who pays for intelligence and who controls it. Revisiting May's convergence map with evidence from October 2026.
 ---
 
 import EssayWide from "@/components/EssayWide.astro";
@@ -20,9 +20,9 @@ import {
   OutcomeCalculator,
 } from "@/components/IntelligenceAtlas";
 
-**The convergence described in May is now under way.** AI suppliers are making customers pay more directly for the computing their agents use. Competing models and features bundled into the main assistants are making some products harder to charge for. Investors are starting to question the spending needed to support the whole system. That strengthens the argument in [Breaking Point](/posts/return-on-intelligence-05-breaking-point), although it does not establish that a broad crash is inevitable or imminent.
+**The convergence described in May is now under way.** AI suppliers are making customers pay more directly for the computing their agents use. Customers have more ways to run models themselves, while features bundled into the main assistants make some products harder to charge for. Investors are starting to question the spending needed to support the whole system. That strengthens the argument in [Breaking Point](/posts/return-on-intelligence-05-breaking-point), although it does not establish that a broad crash is inevitable or imminent.
 
-The tension is becoming easier to see: AI can become more useful while the businesses supplying it face harder economics. Customers want cheaper intelligence. Suppliers need enough income to cover expensive infrastructure. Software companies want to sell features that their customers increasingly find inside ChatGPT, Gemini or an internally generated application.
+The tension is becoming easier to see: AI can become more useful while the businesses supplying it face harder economics. Customers want cheaper intelligence and more control over their data. Suppliers need enough income to cover expensive infrastructure. Running a model locally changes who receives the computing spend. Choosing a personal assistant can give another company control of the customer relationship.
 
 In May, I argued that these pressures could reinforce one another until investors stopped treating AI exposure as proof of future profits. This follow-up asks how far that process has moved. The clearest changes are in **billing, competition and the market's interpretation of AI spending**. The evidence for a general collapse in SaaS revenue or a systemic financing crisis is much less conclusive.
 
@@ -84,6 +84,22 @@ Open weights allow organisations to obtain a model for deployment under its lice
 
 Even with those limits, choice changes a purchasing decision. A customer can reserve an expensive model for difficult work and use another for routine steps. A competitor need not win every benchmark to put pressure on the leading supplier's price.
 
+### Local models give customers another way to pay for intelligence
+
+**Some AI work can now be bought as a machine rather than a stream of API calls.** [Downloadable Qwen models and local software](#source-qwen-local) make this practical to evaluate on a sufficiently equipped MacBook or desktop. Unified memory, shared by the CPU and GPU, helps larger models fit. The hardware is not all new since May: Apple's newer evidence includes [October MLX demonstrations on Mac Studios](#source-apple-local), while [Microsoft's October Surface announcements](#source-surface-local) include a Dev Box still due to ship in November.
+
+Hardware, power, maintenance and idle capacity replace part of the API bill. Model size and context affect what fits and how fast it runs. A hybrid can keep suitable work local and send harder tasks to a paid service. This creates competition for workloads, without establishing widespread substitution or equal quality. A Mac Studio cluster demonstration also says little about what an ordinary MacBook can run.
+
+Apple Intelligence is a separate choice from installing Qwen. [Its June architecture](#source-apple-hybrid) combines on-device models with Private Cloud Compute, including Google Cloud infrastructure. An assistant on your own device can still generate cloud demand.
+
+### Enterprises can own the GPUs without owning a data centre
+
+**Enterprises can own GPU servers in a colocation facility, paying someone else for space, power and cooling, or rent dedicated capacity from a specialist host.** Private hosting predates May. [Equinix's September Inference Exchange preview](#source-private-hosting) and [HPE's October updates](#source-private-availability) expand the options, with different delivery schedules.
+
+[Dell reports more than 6,500 AI Factory customers in October, up from 5,000 the previous quarter](#source-private-adoption). That is evidence of supplier-reported customer growth, not an audit of work leaving hyperscalers. An infrastructure vendor's “AI factory” also need not be a factory producing software.
+
+A steady workload may justify dedicated equipment; an unpredictable one can leave expensive GPUs idle. Data control and residency matter independently of price. Private capacity could redirect revenue towards hardware suppliers and specialist operators while transferring investment and operating risk to the buyer. It does not establish a general enterprise departure from public clouds.
+
 ### ChatGPT and Gemini are absorbing product categories
 
 [OpenAI's July Work documentation](#source-platform-bundling) describes an assistant that can research, use files and connected apps, and create documents, spreadsheets, presentations and websites. A narrow product selling one of those functions now has to explain why the customer needs another tool.
@@ -94,7 +110,13 @@ The change is the customer's default option. Before buying a specialist tool, th
 
 That is evidence for the replacement mechanism in May's “thin wrappers” pressure. We can see the function being absorbed into a broader product. Establishing an actual startup failure requires evidence about customers and companies, not just a similar feature on an announcement page. Included access also does not mean unlimited free use.
 
-### Cheaper software construction creates another route to competition
+### Software factories could make internal alternatives more economical
+
+**A software factory connects specifications, code changes, testing, review and operation.** A supervised or “lights-on” version retains human approval; a “dark” or “lights-out” version attempts more of the loop without human code review. These are working descriptions, not certification levels.
+
+A [September paper from Microsoft and collaborators](#source-software-factories) reports deployments across tens of repositories, scoped to measurable data-system improvements. It is stronger evidence than a coding demonstration, with narrower relevance than a claim about all software. An [October review-agent study](#source-factory-review) found continuing weaknesses on complex changes and proprietary code. Deciding whether the result is acceptable remains a constraint.
+
+My inference is that recurring agent work can make dedicated inference worth evaluating. Hosting and autonomy remain separate choices: a private cluster can run supervised agents; a dark factory can use commercial APIs. The evidence does not establish widespread success combining private GPUs and autonomous software production.
 
 [ArtCraft's attempt to reproduce Adobe workflows](#source-lumien) illustrates a different threat: using agents to build an alternative. [PhotoCraft's documentation](#source-photocraft) describes an early-alpha application with command interfaces and tests against real files. I have reviewed the documentation, not independently benchmarked the application.
 
@@ -111,6 +133,8 @@ The evidence for broad SaaS decline remains mixed. [SAP's October results](#sour
 Calling this “overbuild” needs care. Investors can fear that too much capacity has been committed for future profitable demand even while today's capacity is busy. [Amazon's April shareholder letter](#source-aws-demand) described shortages and unserved demand. That supplier account predates this update, but it helps distinguish present scarcity from future overinvestment.
 
 Capital spending, or capex, therefore no longer serves only as reassurance. The same announcement can prompt questions about financing, utilisation and returns. That change in interpretation is one of the convergence pressures.
+
+Local and privately hosted AI complicate the calculation further. Demand for intelligence could grow while a smaller share of some workloads reaches a particular cloud provider. Yet distributed inference still needs chips, electricity and facilities. The risk is a mismatch between where capacity has been financed and where profitable demand develops, not a simple assumption that local AI means less infrastructure spending everywhere.
 
 ### Enterprise returns are part of the uncertainty
 
@@ -146,6 +170,16 @@ The public debate reflects the tension. [Ezra Klein's October episode](#source-k
 
 The practical question is what remains worth paying for when intelligence is easier to buy and features are easier to reproduce. The May series identified records, permissions, distribution, reliable execution and knowledge of a particular business. These remain possible advantages, rather than guarantees of profit.
 
+### Personal agents compete to become the customer's starting point
+
+**Control of the interface can become more valuable even as customers gain more model choice.** [Revolut's AIR](#source-revolut-agent) began its UK rollout on 9 April, before May. It brings conversation into a service that already holds financial records and provides card controls. It is an example of an existing customer relationship becoming an AI interface, rather than a new general-purpose assistant appearing from nowhere.
+
+[Grok Bot's 11 August launch](#source-grok-agent) takes another route: agents work across connected apps using their own cloud computer. Its beta and enterprise waitlist are distinct from unrestricted enterprise availability. Apple's device-integrated assistant offers another route through an operating system. These services have different scopes and access conditions; “personal agent” does not mean they all run locally or can perform the same actions.
+
+The strategic prize is becoming the place where a person expresses an intention: organise a trip, manage money or get work done. That interface could influence which service gets considered, what context travels with the request and which model receives the work. This is an inference about bargaining power, not evidence that any one assistant has already won it.
+
+A portable model does not make an assistant's memory, permissions or integrations portable. Customers can gain a choice of inference suppliers while becoming more dependent on one intermediary. The question is therefore both where the computing runs and who controls the relationship, the records and the permission to act.
+
 An agent that can propose a refund still needs the correct customer record and authority to issue it. [Microsoft's October security approach](#source-microsoft) puts controls outside the model. In software development, [OpenAI's February harness-engineering account](#source-harness) describes the environment and feedback needed to help agents produce usable changes. That work predates May; it helps explain the mechanism rather than proving a new prediction.
 
 For a customer or investor, the test is whether the company provides something that remains valuable when the model changes. A dependable record, a customer relationship or responsibility for an outcome may survive. A thin layer around one model feature may not.
@@ -160,13 +194,59 @@ The financing concern would weaken if customers renewed because measured gains e
 
 The substitution argument would weaken if customers kept paying specialists because compatibility, service and maintenance outweighed the savings from generated alternatives. The value of those obligations may be more durable than the cost of writing code suggests.
 
+For local models and private hosting, I would look for repeated workloads completed at the required quality, the full cost per accepted outcome and how much paid API usage was actually displaced. For personal agents, I would watch whether customers can move their memory and permissions, choose another model, and change the services the agent selects. Hardware announcements and download counts cannot answer those questions alone.
+
 My assessment is that **convergence has begun, but its eventual outcome is still open**. Token economics are visible in bills. Competition is visible in available models and bundled features. Belief stress is visible in questions about the return on AI spending. Those observations strengthen the May argument without turning the map into a crash clock.
 
 The question is becoming more urgent: who earns the benefit of cheaper intelligence, and who has already promised to pay for it?
 
 ## Sources and reading notes
 
-Evidence checked on 26 October 2026. Current price pages are snapshots, not a full billing history. Supplier claims are attributed; scenarios and status labels are editorial judgements. This structure follows the reader-first approach in [TL;AI](/posts/tlai-ai-made-writing-cheap/): conclusion first, supporting reasons underneath, material reservations alongside the evidence.
+Evidence checked on 26 October 2026. Current price pages are snapshots, not a full billing history. Supplier claims are attributed; scenarios and status labels are editorial judgements.
+
+<div id="source-qwen-local" />
+
+- **Qwen and LM Studio:** [Qwen3.8-27B model card](https://huggingface.co/Qwen/Qwen3.8-27B) and [LM Studio's local packages](https://lmstudio.ai/models/qwen3.8). Downloadable weights and GGUF/MLX formats establish deployment options, not adoption rates or quality parity. Memory needed depends on the configuration and workload.
+
+<div id="source-apple-local" />
+
+- **Apple:** [M5 Pro and Max MacBook Pro, 3 March 2026](https://www.apple.com/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/) and [MLX local and distributed inference, 15 October](https://machinelearning.apple.com/research/mlx-distributed-inference). The hardware baseline predates May. The October benchmarks use specified Mac Studio configurations, not a typical MacBook.
+
+<div id="source-surface-local" />
+
+- **Microsoft, 7 October 2026:** [Surface Laptop Ultra and Surface RTX Spark Dev Box](https://blogs.windows.com/devices/2026/10/07/pre-order-our-most-powerful-surface-devices-ever/). Laptop availability from 16 October; the US Dev Box's November shipping remains prospective. Memory and performance claims are configuration-dependent supplier claims.
+
+<div id="source-apple-hybrid" />
+
+- **Apple, 8 June 2026:** [Foundation-model architecture](https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models) and [Private Cloud Compute expansion](https://security.apple.com/blog/expanding-pcc/). On-device and server processing are distinct parts of the service; installing an independent local model is a separate choice.
+
+<div id="source-private-hosting" />
+
+- **Equinix, 2 September 2026:** [Inference Exchange announcement and preview status](https://community.equinix.com/ai-readiness-4/announcing-equinix-inference-exchange-1184). See also its [2024 private DGX offering](https://blog.equinix.com/blog/2024/02/05/focus-on-ai-innovation-leave-the-rest-to-equinix-nvidia/). This is an expansion of an existing market, not evidence of a measured exodus from public clouds.
+
+<div id="source-private-adoption" />
+
+- **Dell, 21 October 2026:** [Enterprise agentic AI and AI Factory customer count](https://investors.delltechnologies.com/news-events/press-releases/detail/1659/dell-technologies-advances-enterprise-agentic-ai-from-the-deskside-to-data-center-with-nvidia). Supplier-reported adoption; customer counts do not measure GPUs deployed, utilisation, displaced cloud spending or realised returns.
+
+<div id="source-private-availability" />
+
+- **HPE, 21 October 2026:** [Private Cloud AI and agent infrastructure updates](https://www.hpe.com/us/en/newsroom/press-release/2026/10/hpe-teams-with-nvidia-to-advance-secure-agentic-ai-across-enterprises-and-industrial-environments.html). Distinguish generally available GPU features from later API and developer-service rollouts. A hardware “AI factory” is not itself an autonomous software-production system.
+
+<div id="source-software-factories" />
+
+- **Pavlenko and collaborators, 28 September 2026:** [Towards an AI Software Factory for Data Systems](https://arxiv.org/html/2609.36323v1). Research preprint with scoped, supplier-affiliated deployment evidence. Its measured optimisation tasks do not establish fully autonomous general software development.
+
+<div id="source-factory-review" />
+
+- **Yang and collaborators, 9 October 2026:** [(When) Should a Software Factory be Lights-off?](https://arxiv.org/html/2610.13668v1). Research preprint on bug-detection performance, including proprietary repositories. Review-agent improvements do not establish that human supervision can safely be removed from every project.
+
+<div id="source-revolut-agent" />
+
+- **Revolut, 9 April 2026:** [AIR launch](https://www.revolut.com/news/revolut_enters_new_era_of_money_intelligence_with_launch_of_ai_assistant/). UK rollout and financial-app functions predate May. This does not establish a generally available autonomous shopping service.
+
+<div id="source-grok-agent" />
+
+- **Grok Bot, 11 August 2026:** [Launch and access conditions](https://x.ai/news/introducing-grok-bot). Cloud-computer agents in beta, with a separate enterprise waitlist. Capability descriptions are supplier claims, not independent success-rate measurements.
 
 <div id="source-copilot-billing" />
 

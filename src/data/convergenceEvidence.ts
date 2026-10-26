@@ -35,9 +35,19 @@ export const convergenceEvidence: ConvergencePressure[] = [
         fact: "Mistral launched the Large 4 API preview, nicknamed Le Chonk, with weights promised for the end of October.",
         source: "#source-mistral",
       },
+      {
+        date: "7 October announcement",
+        fact: "Microsoft offered local-AI Surface hardware: laptop availability from 16 October, with the US RTX Spark Dev Box due to ship in November.",
+        source: "#source-surface-local",
+      },
+      {
+        date: "15 October 2026",
+        fact: "Apple demonstrated Qwen and other open models with MLX on Mac Studio, including multi-machine inference for larger models.",
+        source: "#source-apple-local",
+      },
     ],
     meaning:
-      "A buyer can test alternatives and route work to a cheaper model. That puts pressure on pricing even if one supplier remains best at difficult tasks.",
+      "A buyer can compare APIs with models on a laptop or dedicated infrastructure, using paid services for work that needs them. Some computing spend could move towards hardware and hosting rather than model-access fees.",
     reservation:
       "More available models do not yet establish how much work has switched or how far the leaders' pricing premium has fallen. These suppliers existed before May. Provider benchmarks need independent testing, and large open models can require substantial infrastructure.",
   },
@@ -106,9 +116,14 @@ export const convergenceEvidence: ConvergencePressure[] = [
         fact: "Amazon's shareholder letter described unserved demand and capacity constraints, a counterpoint to the overbuild argument.",
         source: "#source-aws-demand",
       },
+      {
+        date: "21 October 2026",
+        fact: "Dell reports more than 6,500 AI Factory customers, up from 5,000 the prior quarter. This is its own customer count, not a measure of displaced cloud workloads.",
+        source: "#source-private-adoption",
+      },
     ],
     meaning:
-      "Investors are asking when the capacity will earn enough to justify its cost. That is the shift in interpretation described in May.",
+      "Investors are asking when capacity will earn enough to justify its cost. Local and private inference also change which provider might receive the revenue, while shifting some investment risk to customers.",
     reservation:
       "Concern about overbuild is visible; economy-wide excess capacity is not established here. Scarcity today and too much committed supply later can coexist. Announced spending is not installed capacity.",
   },
@@ -129,6 +144,11 @@ export const convergenceEvidence: ConvergencePressure[] = [
         date: "21 October 2026",
         fact: "Reuters reports stronger SAP cloud revenue and backlog, a counterexample to a blanket SaaS-collapse claim.",
         source: "#source-saas-results",
+      },
+      {
+        date: "28 September 2026",
+        fact: "A Microsoft-affiliated software-factory paper reports deployments across tens of repositories, scoped to data-system improvements with measurable objectives.",
+        source: "#source-software-factories",
       },
     ],
     meaning:

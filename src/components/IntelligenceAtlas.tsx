@@ -5,18 +5,18 @@ const layers = [
   {
     name: "Compute and energy",
     may: "The physical substrate remains strategic.",
-    now: "Strategic importance and investor returns are separate questions. Financing, utilisation and asset life belong on the map.",
+    now: "Compute can sit on a laptop, in customer-owned servers at a colocation site, with a specialist host or in a hyperscaler. Ownership changes who bears utilisation and financing risk.",
     evidence:
-      "Infrastructure can be essential and still produce losses for its owners.",
-    source: "#source-report",
+      "Dell reports growth in its AI Factory customer count; this does not establish how much public-cloud spending was displaced.",
+    source: "#source-private-adoption",
   },
   {
     name: "Models",
     may: "Frontier, local, open and specialised intelligence.",
-    now: "A pool of capabilities routed by task, cost and privacy. Frontier advantages can still command a premium.",
+    now: "Route work across local open models, private inference and paid APIs by quality, cost and privacy. Model choice and choice of personal assistant are separate decisions.",
     evidence:
-      "Commoditisation is uneven; cheaper inference does not establish profitable supply.",
-    source: "#source-deepseek",
+      "Qwen weights and local packages are available. That does not establish adoption rates or frontier quality on every task.",
+    source: "#source-qwen-local",
   },
   {
     name: "Identity and authority",
@@ -37,10 +37,18 @@ const layers = [
   {
     name: "Production and verification",
     may: "Orchestration, evaluation and execution were grouped together.",
-    now: "Separate the agent harness, durable business execution and independent verification. Each solves a different failure mode.",
+    now: "Software factories join planning, coding, testing and operation. Hosting choice and removal of human review are separate decisions; verification remains a constraint.",
     evidence:
-      "PhotoCraft exposes commands and real-file tests; harness engineering makes applications inspectable by agents.",
-    source: "#source-photocraft",
+      "The September factory paper reports scoped deployments, while October review research finds weaknesses on complex and proprietary code.",
+    source: "#source-factory-review",
+  },
+  {
+    name: "Distribution and personal agents",
+    may: "Distribution and ownership of the workflow were possible sources of durable power.",
+    now: "The assistant can become the customer's starting point, carrying memory and permissions across services. More model choice can coexist with dependence on one intermediary.",
+    evidence:
+      "Revolut starts inside a financial relationship; Grok Bot offers agents operating across apps on cloud computers. Neither establishes a winner in personal agents.",
+    source: "#source-grok-agent",
   },
   {
     name: "Products and organisations",
@@ -447,6 +455,12 @@ export function OutcomeCalculator() {
           value or severity of errors. Fractional outcomes represent
           expectations. Compare against a human baseline at the same quality
           level.
+        </p>
+        <p>
+          A zero API bill does not make local inference free. Comparing owned
+          hardware with a hosted service also requires hardware depreciation,
+          power, hosting, support and utilisation. This illustration does not
+          calculate those costs.
         </p>
       </details>
     </section>

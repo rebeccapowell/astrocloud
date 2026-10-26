@@ -20,6 +20,14 @@ The sources and access limits appear in the article. The full New York Times tra
 
 The scenario explorer is qualitative, with no probabilities or company-specific contractual claims. Calculator defaults are invented assumptions. Its formula charges every attempt for inference and human review, including failed attempts, and displays no unit cost when there are no accepted outcomes.
 
+## Local models, private hosting and personal agents
+
+The extension stays within the existing three-part argument and four interactive figures. It adds local versus API economics, customer-owned colocation versus dedicated hosting, supervised versus lights-out software factories, and competition for the personal-agent interface. These are related mechanisms, not a claim that hosting determines autonomy. The ownership figure now has a seventh layer for distribution and personal agents; the original eight-pressure convergence audit and its evidence labels remain intact.
+
+Chronology: M5 Pro/Max hardware and Revolut AIR's UK rollout predate May. Apple's October MLX results use Mac Studios, not typical MacBooks. Surface Laptop Ultra availability begins 16 October; the US Surface RTX Spark Dev Box is still due to ship in November. Equinix Inference Exchange is a September preview. Dell's 6,500 customers versus 5,000 the prior quarter is supplier-reported, not audited repatriated cloud spend. HPE mixes currently available GPU features with late-2026 and 2027 services. Factory research is scoped and supplier-affiliated; neither it nor hosting announcements establishes widespread autonomous software production on private GPUs.
+
+The governing impact is workload redistribution and competition for the customer relationship. Local/private inference may change who receives AI revenue and who carries financing risk without reducing aggregate chip or power demand. Apple Intelligence is hybrid and distinct from self-hosting Qwen; Grok Bot is cloud-hosted. No population-level claim about local-model adoption, universal cost advantage or enterprise departure from hyperscalers is made. The calculator explicitly excludes owned-infrastructure costs.
+
 ## Implementation
 
 `EssayWide.astro` expands only explicitly wrapped figures to at most 72rem, bounded by the viewport. The reading column and other posts retain their existing layout. The React islands render meaningful initial content on the server; expandable text alternatives expose the map and financial scenarios without using the selectors. Controls use native buttons and ranges, visible focus and labelled groups. There are no new dependencies, external scripts or data requests.
