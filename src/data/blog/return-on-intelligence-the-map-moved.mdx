@@ -1,0 +1,367 @@
+---
+title: "Return on Intelligence: The Map Moved"
+author: Rebecca Powell
+pubDatetime: 2026-11-01T09:00:00Z
+featured: true
+draft: false
+tags:
+  - AI
+  - Software
+  - Capital Markets
+  - Future of Business
+description: What May's Return on Intelligence series got right, what it overstated, and how local models, changing bills and personal agents are redrawing the map.
+---
+
+import EssayWide from "@/components/EssayWide.astro";
+import ConvergenceAudit from "@/components/ConvergenceAudit";
+import { MapExplorer, ExposureExplorer } from "@/components/IntelligenceAtlas";
+
+**May's argument has held up better on the pressures facing AI businesses than on the crash I expected to follow them.** Token prices are falling, even as bills make the cost of agent work harder to ignore. Customers have more choice about which models they use and where they run them. Features that once justified a separate product are appearing inside the main assistants. Those were central arguments in the [Return on Intelligence series](/posts/return-on-intelligence-the-preface).
+
+But I wrote too confidently about a crash as the turning point. Much of the change I described as belonging to the economy after a crash is already taking place. Companies can change their prices, customers can switch suppliers and power can move between businesses without one decisive moment when the whole market loses faith.
+
+So this is a return to May's map: what has held up, what I would change and what we still don't know. The core question remains the same. If intelligence becomes cheaper and more widely available, who gets the benefit, and who can still make money selling it?
+
+_A follow-up to the May 2026 series, using developments available by 26 October._
+
+## Back to the convergence map
+
+In [Breaking Point](/posts/return-on-intelligence-05-breaking-point), I brought together eight pressures that could become dangerous in combination: cheaper models, visible token costs, slow enterprise returns, doubts about infrastructure spending, weaker software pricing, vulnerable AI products, financing stress and a change in investor belief.
+
+Several are now happening. Others are developing more slowly, or pulling in different directions.
+
+<EssayWide>
+  <ConvergenceAudit client:load />
+</EssayWide>
+
+## What May got right
+
+### The bill matters more when agents do more
+
+May argued that enthusiasm about usage would eventually meet a harder question: does the work justify its cost? [Copilot's move to token-based AI Credits](#source-copilot-billing) makes that question harder to avoid. GitHub announced the change just before the series, on 27 April, and began the transition on 1 June. Annual subscribers have separate transition terms.
+
+Under the old premium-request system, a quick question and a lengthy agent session could consume the same allowance. The new approach charges according to the tokens used. GitHub said it could no longer keep absorbing the growing cost of agent work.
+
+[Claude Enterprise](#source-claude-billing) also separates the seat charge from usage, while [OpenAI's Work and Codex plans](#source-openai-billing) combine allowances and credits. The arrangements differ, but the purchasing decision is becoming familiar: what work can this budget actually buy?
+
+The subscription and the model price can move differently. [OpenAI's new Pro 200 terms reduce the included allowance while keeping its monthly price at \$200](#source-pro-allowance), even as its newer models become cheaper to use. A lower API price does not guarantee a more generous subscription.
+
+An agent asked to fix a bug might finish quickly, or spend much longer reading files, trying changes and rerunning tests. Someone still has to check the result. The useful comparison is the cost of getting the bug fixed, including retries and review, rather than the price of the first answer. [GitHub's own engineering work](#source-github) describes why saving tokens in one step can cost more later if the agent then has to recover missing information.
+
+Cheaper tokens can therefore sit alongside a larger monthly bill. That is not necessarily a bad deal. It is a deal customers will have to judge against the work completed.
+
+### Intelligence is becoming easier to source
+
+May's [power map](/posts/return-on-intelligence-08-new-power-map) explicitly included local, private, open and specialised models. That part of the argument looks stronger.
+
+[Kimi's K3](#source-kimi), [DeepSeek's newer releases](#source-deepseek) and [Mistral Large 4, or “Le Chonk”](#source-mistral), widen the choice. They are at different stages: Mistral's October release is an API preview, with downloadable weights still promised. A customer does not need every alternative to beat the best model at everything. It may be enough to use a cheaper one for routine work and reserve the expensive model for difficult tasks.
+
+Local AI adds another option. [Qwen models and tools such as LM Studio](#source-qwen-local) let developers try that work on their own machines. Apple's unified memory lets the CPU and GPU share the same pool, helping larger models fit. Its M5 Pro and Max hardware predates May; [October's MLX work](#source-apple-local) shows further progress, including larger models spread across Mac Studios. The size and memory of the machine still matter.
+
+[Microsoft's new Surface hardware](#source-surface-local) follows the same direction. Surface Laptop Ultra became available in October; the US Surface RTX Spark Dev Box is due to ship in November. The appeal is straightforward: buy a machine and run suitable work on it, instead of paying a remote provider for every step.
+
+That replaces some API costs with hardware, electricity and maintenance. It also leaves the owner paying for a machine when it is idle. A mixture of local and cloud models may be the better fit. Even [Apple Intelligence combines on-device processing with cloud services](#source-apple-hybrid), including Google Cloud infrastructure. Running an assistant on your laptop does not mean all its work stays there.
+
+### Enterprises have more options than buying another cloud service
+
+The same choice is reaching larger organisations. They can own GPU servers in a colocation facility, paying another company for the space, power and cooling. Or they can rent dedicated capacity from a specialist host.
+
+This market existed before May. The recent change is the expanding range of offerings. [Equinix's September Inference Exchange](#source-private-hosting) is in preview, while [HPE's October announcements](#source-private-availability) add options for running and managing private AI. [Dell reports more than 6,500 AI Factory customers, up from 5,000 the previous quarter](#source-private-adoption).
+
+For a company with enough recurring work, dedicated equipment may make sense. For one with occasional bursts of demand, it may be an expensive way to keep GPUs idle. Control over sensitive data can also justify a choice that is not the cheapest.
+
+The consequence for the map is that growing AI use need not send all the revenue to the largest clouds. Some can go to equipment suppliers, specialist hosts and operators of the facilities. Some of the financial risk moves to the customers buying the machines.
+
+### A useful feature is harder to defend as a whole company
+
+May also argued that a thin layer around a model would be vulnerable when the main platforms added the same function.
+
+[OpenAI's Work tools](#source-platform-bundling) now cover research, documents, spreadsheets, presentations and websites. [Google's Gemini announcements](#source-gemini-research) extend research and [small-business tools](#source-gemini-business). Before buying a separate product, a customer can try what is already in the assistant they use.
+
+Specialists can still win on quality, privacy, integration or service. They need a better reason to exist than having been first to put a useful model behind a convenient interface.
+
+Software factories create another route to competition. They link specifications, coding, testing, review and operation into a repeatable process. A “lights-on” version keeps people approving changes. A “dark” factory attempts more of the process without human code review.
+
+A [September paper from Microsoft and collaborators](#source-software-factories) describes work across tens of repositories, focused on improving data systems. An [October study of review agents](#source-factory-review) also shows why checking the result remains difficult, particularly for complex changes and private company code.
+
+Repeated agent work could make dedicated computing worth considering. But the two choices are separate: a company can run supervised agents on its own GPUs, or use cloud APIs in a highly automated factory.
+
+[ArtCraft's attempts to reproduce Adobe workflows](#source-lumien) show why cheaper construction matters too. [PhotoCraft is still early alpha](#source-photocraft), so it has a long way to go before professionals can depend on it. Yet an alternative can put pressure on prices well before it replaces every feature.
+
+## What I would change
+
+### I was too certain about the crash
+
+May's language often treated a crash as the gateway to the mature AI economy. I would change that.
+
+The pressures I described can lead to several outcomes: lower prices, slower growth, mergers, changes in billing, some business failures and gains passed on to customers. They can arrive at different speeds. A company can lose its advantage without the entire market breaking at once.
+
+This does not remove the risk of a sharp correction. It changes how much weight I would put on that one outcome. Seeing several pressures develop is a reason to revisit the valuations, not a reason to assume the ending has already been decided.
+
+### Low prices need not be a temporary subsidy
+
+May anticipated cheaper inference, but also asked what would happen when usage was “priced honestly”. I would be more careful with that phrase. A low price does not, by itself, show that a supplier is selling at a loss.
+
+[Max Woolf's October account of the price cuts](#source-woolf-pricing) makes this worth revisiting. [OpenAI cut GPT-5.6 Luna's API prices by 80% in July](#source-openai-price-cut). In September, [Anthropic launched Opus 5.5 with input and output prices 20% below Opus 5, and cached-input prices 60% lower](#source-anthropic-price-cut). Caching lets an agent reuse material it has already processed, such as files and conversation history. That discount can matter more than the headline price on a long job.
+
+Anthropic says the newer model requires less computing power to serve. Competition can push prices down while efficiency leaves room for a supplier to earn money on each task. That still has to pay for training, staff and the rest of the business.
+
+Nor do cheaper tokens guarantee a smaller market. [Vercel reports that September spending through its AI Gateway was about thirteen times December's, while the average price per token fell 47%](#source-gateway-pricing). This is one gateway's traffic, and the average changes as customers switch models. Even so, it shows why falling prices and growing revenue can happen together.
+
+### Suppliers can improve their economics as they grow
+
+[Anthropic's IPO filing, published on 26 October](#source-anthropic-filing), gives another reason to resist a predetermined ending. It reported about \$11.6 billion in revenue and \$1 billion in operating profit for the second quarter. Competition and expensive computing have not prevented it from improving its operating results.
+
+It also reports \$265.6 billion of purchase commitments and \$321.4 billion of leases not yet started at the end of June, with some lease arrangements still conditional. These are payments spread over future years. The question is whether customer income will grow fast enough to pay those bills while funding the next generation of models.
+
+Customers can change their spending faster than Anthropic can change its bills. Much of its revenue depends on usage, while its computing agreements run for years. Cheaper open models and private hosting give customers more alternatives. Demand for AI could keep growing even as competition leaves suppliers with less money to meet their commitments.
+
+### Easier model choice does not automatically mean less concentrated power
+
+The May map recognised that devices, permissions, data and customer relationships would matter. I would now give more attention to the companies trying to bring those advantages together.
+
+[Revolut's AIR](#source-revolut-agent), which began its UK rollout before May, starts inside a banking app that already holds financial records and provides card controls. [Grok Bot's August launch](#source-grok-agent) offers agents that work across connected apps using a cloud computer. Apple's assistant starts from the operating system. Each has a different route to becoming the place where the user asks for things to happen.
+
+That position could be valuable even if the models underneath become easier to replace. The assistant can influence which service gets considered, which information it receives and which model does the work. Moving your model is also easier than moving an assistant's accumulated memory and connections.
+
+Nor are local hardware and cloud services necessarily opposing businesses. Microsoft sells both. Apple puts an interface on the device while using cloud infrastructure for some requests. More places to run AI can still leave a small number of companies controlling how people reach it.
+
+### Software businesses will change at different speeds
+
+May distinguished replaceable workflow software from systems of record such as finance, HR and ERP. That remains a useful way to read the software market.
+
+[SAP's October cloud growth](#source-saas-results) is a reminder of how much customers still pay for dependable business systems. Replacing a feature is one thing. Moving company records, integrations and responsibility for keeping the business running is another.
+
+I would be more cautious about the speed of the transition. Generating an application can become cheap long before maintaining it becomes easy. The same applies to software factories: producing more code does not remove the need to decide what to build, check it and support it.
+
+## What remains unresolved
+
+### Will the spending earn enough?
+
+[October's market reporting](#source-capex-market) shows investors questioning the financing and eventual payoff of AI spending. The [selling reported on 26 October](#source-belief-market) is one sign of that unease. It is still too early to call it a lasting change in belief.
+
+“Overbuild” is also more complicated than empty data centres today. A provider can be short of capacity now and still have committed too much money to future demand. [Amazon's April shareholder letter](#source-aws-demand) described shortages. The question is whether the capacity being financed will attract enough paying work at prices that cover its costs.
+
+Local and private AI make that harder to predict. Demand for intelligence can grow while a particular provider gets a smaller share of it. The chips and electricity are still needed, but the income may turn up somewhere other than the business that made the largest commitment.
+
+### How quickly will customers turn AI into business gains?
+
+[Gartner's October survey](#source-roi) found that 13% of the CIOs and technology executives surveyed reported significant or transformational AI value. Others may be getting smaller benefits. The finding points to the distance between trying the technology and changing how a business operates.
+
+That delay matters to companies investing in expectation of future customers. It also matters to those customers when agent bills arrive before the hoped-for savings. The software can improve faster than an organisation's data, permissions and working practices.
+
+### Who carries the losses if income arrives late?
+
+The report [_Brace for Impact_](#source-report) follows the financing behind the buildout: debt, leases, guarantees and private credit. Its central concern is how trouble at AI companies could spread to lenders, investors and people who never chose to make an AI bet.
+
+A useful technology does not suspend payment deadlines. A business can have a promising future and still run out of money before it gets there. The size of that risk depends on who owes what, when payments fall due and who has agreed to cover a failure.
+
+OpenAI's financial picture is harder to inspect. Its [June announcement confirmed a confidential IPO submission](#source-openai-ipo), without publishing the accounts. Its partnership announcements give a partial view: [the February Amazon deal](#source-openai-amazon) expanded its AWS agreement by \$100 billion over eight years, alongside Amazon's planned \$50 billion investment.
+
+An investor can also be a supplier and a sales channel. That makes it important to ask how much of the growth is ultimately paid for by customers outside those relationships.
+
+<EssayWide>
+  <ExposureExplorer client:visible />
+</EssayWide>
+
+The debate between [Paul Kedrosky and Azeem Azhar on Ezra Klein's show](#source-klein) captures the disagreement about whether the spending can be justified. [Ed Zitron's writing](#source-zitron) presses on the dependence on continued investment, while [Azhar's earlier argument](#source-azhar) gives more weight to productive capacity and the quality of its financing.
+
+One useful discipline from [Zitron's discussion of annualised revenue](#source-runrate) is simply to ask what the number measures. A run rate extrapolated from recent sales is different from money already earned over a year. Neither an impressive model nor an impressive revenue headline answers the whole business question.
+
+## Where that leaves the map
+
+I would keep the central idea from May: cheaper intelligence changes what is worth owning. I would put less certainty around the sequence of events and more attention on the businesses adapting across several parts of the market at once.
+
+An agent that can offer a refund still needs the right customer record and permission to issue it. [Microsoft's approach to agent security](#source-microsoft) puts controls around those actions. [The engineering around coding agents](#source-harness) similarly matters because a capable model still needs tools, feedback and checks to get useful work done.
+
+Those can be lasting advantages. So can the customer relationship, especially if the main assistant becomes the route through which other services are bought and used.
+
+<EssayWide>
+  <MapExplorer client:visible />
+</EssayWide>
+
+The questions I would keep asking are practical. Are customers getting enough useful work for the money? Can suppliers cover their costs? Can people change models and assistants without losing their records and working arrangements? And can the businesses financing the infrastructure afford to wait?
+
+May was right to separate the success of AI from the fortunes of the companies selling it. I would keep that argument, and let go of the certainty that it needs a crash to become visible.
+
+## Sources
+
+Links and publication dates. Financial disclosures and pricing checked on 27 October 2026.
+
+<div id="source-woolf-pricing" />
+
+- **Max Woolf, 25 October 2026:** [OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?](https://minimaxir.com/2026/10/cheap-llms/).
+
+<div id="source-openai-price-cut" />
+
+- **OpenAI, 30 July 2026:** [GPT-5.6 efficiency and price reductions](https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/).
+
+<div id="source-anthropic-price-cut" />
+
+- **Anthropic, 22 September 2026:** [Opus 5.5 pricing and serving efficiency](https://www.anthropic.com/claude-opus-5-5).
+
+<div id="source-pro-allowance" />
+
+- **OpenAI, terms checked 27 October 2026:** [Pro allowances and transition dates](https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers).
+
+<div id="source-gateway-pricing" />
+
+- **Vercel, 15 October 2026:** [AI Gateway Production Index](https://vercel.com/blog/ai-gateway-production-index-october-2026).
+
+<div id="source-openai-ipo" />
+
+- **OpenAI, 8 June 2026:** [Confidential submission of draft S-1](https://openai.com/index/openai-submits-confidential-s-1/).
+
+<div id="source-openai-amazon" />
+
+- **OpenAI and Amazon, 27 February 2026:** [Partnership and investment announcement](https://openai.com/index/amazon-partnership/).
+
+<div id="source-anthropic-filing" />
+
+- **Anthropic, 26 October 2026:** [IPO filing](https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm).
+
+<div id="source-qwen-local" />
+
+- **Qwen and LM Studio:** [Qwen3.8-27B model card](https://huggingface.co/Qwen/Qwen3.8-27B) and [LM Studio's local packages](https://lmstudio.ai/models/qwen3.8).
+
+<div id="source-apple-local" />
+
+- **Apple:** [M5 Pro and Max MacBook Pro, 3 March 2026](https://www.apple.com/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/) and [MLX local and distributed inference, 15 October](https://machinelearning.apple.com/research/mlx-distributed-inference).
+
+<div id="source-surface-local" />
+
+- **Microsoft, 7 October 2026:** [Surface Laptop Ultra and Surface RTX Spark Dev Box](https://blogs.windows.com/devices/2026/10/07/pre-order-our-most-powerful-surface-devices-ever/).
+
+<div id="source-apple-hybrid" />
+
+- **Apple, 8 June 2026:** [Foundation-model architecture](https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models) and [Private Cloud Compute expansion](https://security.apple.com/blog/expanding-pcc/).
+
+<div id="source-private-hosting" />
+
+- **Equinix, 2 September 2026:** [Inference Exchange announcement and preview status](https://community.equinix.com/ai-readiness-4/announcing-equinix-inference-exchange-1184). See also its [2024 private DGX offering](https://blog.equinix.com/blog/2024/02/05/focus-on-ai-innovation-leave-the-rest-to-equinix-nvidia/).
+
+<div id="source-private-adoption" />
+
+- **Dell, 21 October 2026:** [Enterprise agentic AI and AI Factory customer count](https://investors.delltechnologies.com/news-events/press-releases/detail/1659/dell-technologies-advances-enterprise-agentic-ai-from-the-deskside-to-data-center-with-nvidia).
+
+<div id="source-private-availability" />
+
+- **HPE, 21 October 2026:** [Private Cloud AI and agent infrastructure updates](https://www.hpe.com/us/en/newsroom/press-release/2026/10/hpe-teams-with-nvidia-to-advance-secure-agentic-ai-across-enterprises-and-industrial-environments.html).
+
+<div id="source-software-factories" />
+
+- **Pavlenko and collaborators, 28 September 2026:** [Towards an AI Software Factory for Data Systems](https://arxiv.org/html/2609.36323v1).
+
+<div id="source-factory-review" />
+
+- **Yang and collaborators, 9 October 2026:** [(When) Should a Software Factory be Lights-off?](https://arxiv.org/html/2610.13668v1).
+
+<div id="source-revolut-agent" />
+
+- **Revolut, 9 April 2026:** [AIR launch](https://www.revolut.com/news/revolut_enters_new_era_of_money_intelligence_with_launch_of_ai_assistant/).
+
+<div id="source-grok-agent" />
+
+- **Grok Bot, 11 August 2026:** [Launch and access conditions](https://x.ai/news/introducing-grok-bot).
+
+<div id="source-copilot-billing" />
+
+- **GitHub, 27 April 2026:** [Moving to usage-based billing](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/).
+
+<div id="source-claude-billing" />
+
+- **Anthropic:** [Current pricing](https://claude.com/pricing).
+
+<div id="source-openai-billing" />
+
+- **OpenAI:** [Work and Codex pricing](https://learn.chatgpt.com/docs/pricing).
+
+<div id="source-kimi" />
+
+- **Moonshot/Kimi:** [Dated announcement index](https://forum.moonshot.ai/c/announcement/5). See also [K3 documentation](https://platform.kimi.ai/docs/guide/kimi-k3-quickstart) and [K3.1 Pro](https://www.kimi.com/blog/kimi-k3-1-pro).
+
+<div id="source-deepseek" />
+
+- **DeepSeek, 10 September 2026:** [V4.1-Flash announcement](https://api-docs.deepseek.com/news/news260910/). See the [current price card](https://api-docs.deepseek.com/quick_start/pricing/).
+
+<div id="source-mistral" />
+
+- **Mistral, 6 October 2026:** [Mistral Large 4 / Le Chonk](https://mistral.ai/news/mistral-large-4/).
+
+<div id="source-platform-bundling" />
+
+- **OpenAI, July 2026 release entries:** [What's new](https://learn.chatgpt.com/docs/whats-new).
+
+<div id="source-gemini-research" />
+
+- **Google, 19 August 2026:** [Gemini learning and research tools](https://blog.google/innovation-and-ai/products/gemini-app/student-offer-google-ai/).
+
+<div id="source-gemini-business" />
+
+- **Google, 20 October 2026:** [Gemini tools for small businesses](https://blog.google/innovation-and-ai/products/gemini-app/new-tools-small-business-owners/).
+
+<div id="source-roi" />
+
+- **Gartner, 19 October 2026:** [Survey on realised AI value](https://www.gartner.com/en/newsroom/press-releases/2026-10-19-gartner-survey-finds-only-13-percent-of-cios-say-their-enterprise-has-realized-significant-or-transformational-value-from-ai).
+
+<div id="source-capex-market" />
+
+- **Reuters, 23 October 2026:** [Wall Street closes lower to end rocky week](https://www.reuters.com/business/wall-street-futures-dip-after-ai-rout-telecoms-slide-2026-10-23/).
+
+<div id="source-belief-market" />
+
+- **Reuters, 26 October 2026:** [AI concerns and market selling](https://www.reuters.com/markets/wealth/trend-hedge-funds-saw-worst-week-since-2024-ai-stocks-fell-goldman-says-2026-10-26/).
+
+<div id="source-aws-demand" />
+
+- **Amazon, 9 April 2026:** [Jassy's 2025 shareholder letter](https://www.aboutamazon.com/news/company-news/amazon-ceo-andy-jassy-2025-letter-to-shareholders).
+
+<div id="source-saas-results" />
+
+- **Reuters, 21 October 2026:** [SAP's cloud growth and outlook](https://www.reuters.com/world/europe/germanys-sap-tops-cloud-demand-forecasts-holds-yearly-operating-profit-outlook-2026-10-21/).
+
+<div id="source-may" />
+
+- **The May baseline:** [Breaking Point](/posts/return-on-intelligence-05-breaking-point) and [The New Power Map](/posts/return-on-intelligence-08-new-power-map).
+
+<div id="source-photocraft" />
+
+- **PhotoCraft:** [README at the inspected commit](https://github.com/storytold/photocraft/blob/59cb4c49bd236df04d8e37d4764253f29ca6600a/README.md).
+
+<div id="source-lumien" />
+
+- **ArtCraft coverage:** [Lumien, 8 October 2026](https://lumienai.com/news/artcraft-open-source-adobe-clone-claude-opus-rust).
+
+<div id="source-harness" />
+
+- **OpenAI, 11 February 2026:** [Harness engineering](https://openai.com/index/harness-engineering/).
+
+<div id="source-github" />
+
+- **GitHub, 2 September 2026:** [How we make AI coding more cost efficient without sacrificing task quality](https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality/).
+
+<div id="source-microsoft" />
+
+- **Microsoft, 19 October 2026:** [Agents are your newest insiders](https://www.microsoft.com/en-us/security/blog/2026/10/19/agents-are-your-newest-insiders-security-must-move-at-their-speed/).
+
+<div id="source-klein" />
+
+- **The Ezra Klein Show, 16 October 2026:** [Is There an A.I. Bubble? A Debate.](https://podcasts.apple.com/us/podcast/is-there-an-a-i-bubble-a-debate/id1548604447?i=1000796627225). Episode listing and publisher summary.
+
+<div id="source-azhar" />
+
+- **Azeem Azhar, 18 October 2025:** [The imminence of the AI bust](https://www.exponentialview.co/p/the-imminence-of-the-ai-bust-correct).
+
+<div id="source-zitron" />
+
+- **Ed Zitron, 20 October 2026:** [AI Had Better Work Out](https://www.wheresyoured.at/ai-had-better-work-out/).
+
+<div id="source-runrate" />
+
+- **Ed Zitron, 13 October 2026:** [Annualized Enron Rate](https://www.wheresyoured.at/annualized-enron-rate/).
+
+<div id="source-report" />
+
+- **Scherer and Jenkins, October 2026:** [Brace for Impact](https://static1.squarespace.com/static/5e449c8c3ef68d752f3e70dc/t/6ad18accea1ab06edc762a93/1792117452216/Brace+for+Impact-Scherer-Jenkins-OMI-October2026-WEB+%281%29.pdf).
+
+Return to the [series preface](/posts/return-on-intelligence-the-preface).
